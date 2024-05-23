@@ -1,4 +1,3 @@
-import "react-vertical-timeline-component/style.min.css";
 import Skill from "@/components/about/Skill";
 import Experience from "@/components/about/Experience";
 import Introduce from "@/components/about/Introduce";

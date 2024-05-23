@@ -9,6 +9,7 @@ import {
 
 import Image from "next/image";
 import Link from "next/link";
+import "react-vertical-timeline-component/style.min.css";
 
 const Experience = () => {
   return (
@@ -33,7 +34,7 @@ const Experience = () => {
                 icon={
                   <Link
                     href={experience?.company_link}
-                    className="flex justify-center items-center w-full h-full"
+                    className="flex justify-center items-center w-full h-full cursor-pointer"
                     target={
                       experience?.company_link === "#" ? "_self" : "_blank"
                     }
@@ -58,12 +59,19 @@ const Experience = () => {
                   <h3 className="text-black text-xl font-poppins font-semibold">
                     {experience?.title}
                   </h3>
-                  <p
-                    className="text-black-500 font-medium text-base"
-                    style={{ margin: 0 }}
-                  >
-                    {experience?.company_name}
-                  </p>
+                  <Link
+                    href={experience?.company_link}
+                    className={`cursor-pointer hover:underline hover:underline-offset-2`}
+                    target={
+                      experience?.company_link === "#" ? "_self" : "_blank"
+                    }
+                  ><p
+                  className="text-black-500 font-medium text-base"
+                  style={{ margin: 0 }}
+                >
+                  {experience?.company_name}
+                </p></Link>
+                  
                 </div>
 
                 <ul className="my-5 list-disc ml-5 space-y-2">
