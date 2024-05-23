@@ -1,0 +1,5 @@
+export { Bird } from './Bird'
+export { Plane } from "./Plane";
+export { IslandSea } from "./IslandSea"
+export { Fox } from "./Fox"
+export { Drone } from "./Drone"
