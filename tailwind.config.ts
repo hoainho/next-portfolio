@@ -38,14 +38,6 @@ module.exports = {
         'tertiary': 'var(--color-tertiary)',
         'hover': 'var(--color-hover)',
         'active': 'var(--color-active)',
-        'basics-gray-1': 'var(--color-basics-gray-1)',
-        'basics-gray-2': 'var(--color-basics-gray-2)',
-        'basics-gray-3': 'var(--color-basics-gray-3)',
-        'basics-gray-4': 'var(--color-basics-gray-4)',
-        'basics-gray-98': 'var(--color-basics-gray-98)',
-        'basics-gray-border': 'var(--color-basics-gray-border)',
-        'basics-gray-border-2': 'var(--color-basics-gray-border-2)',
-        'basics-gray-border-3': 'var(--color-basics-gray-border-3)',
         'basics-background-default': 'var(--color-basics-background-default)',
         'basics-background-dark': 'var(--color-basics-background-dark)',
         'brand-gold': 'var(--color-brand-gold)',
@@ -53,20 +45,6 @@ module.exports = {
         'brown': 'var(--color-brown)',
         'neutral-background-1': 'var(--color-neutral-background-1)',
         'neutral-background-2': 'var(--color-neutral-background-2)',
-        'interface-background-amber': 'var(--color-interface-background-amber)',
-        'interface-background-green': 'var(--color-interface-background-green)',
-        'interface-background-red': 'var(--color-interface-background-red)',
-        'interface-input-idle': 'var(--color-interface-input-idle)',
-        'interface-input-active': 'var(--color-interface-input-active)',
-        'interface-input-disabled': 'var(--color-interface-input-disabled)',
-        'interface-input-error': 'var(--color-interface-input-error)',
-        'button-idle': 'var(--color-button-idle)',
-        'button-hover': 'var(--color-button-hover)',
-        'button-gold-idle': 'var(--color-button-gold-idle)',
-        'button-gold-hover': 'var(--color-button-gold-hover)',
-        'button-line-idle': 'var(--color-button-line-idle)',
-        'button-line-hover': 'var(--color-button-line-hover)',
-        'button-disabled': 'var(--color-button-disabled)',
         'input-error': 'var(--color-input-error)',
         'input-focus': 'var(--color-input-focus)',
         'line-button-idle': 'var(--color-line-button-idle)',
@@ -83,22 +61,9 @@ module.exports = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
-      keyframes: {
-        'accordion-down': {
-          from: { height: 0 },
-          to: { height: 'var(--radix-accordion-content-height)' },
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: 0 },
-        },
-      },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-      },
-      cursor: {
-        'special': 'url(/images/Special-Pointer.svg), auto'
       },
       boxShadow: {
         'inner-border': '0px 0px 0px 2px var(--color-basics-gray-border) inset'

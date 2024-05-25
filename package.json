@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.3.3",
     "@plaiceholder/next": "^3.0.0",
     "@react-three/drei": "^9.105.6",
     "@react-three/fiber": "^8.16.6",
     "clsx": "^2.1.1",
+    "envsafe": "^2.0.3",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",

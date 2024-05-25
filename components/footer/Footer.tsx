@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const pathname = usePathname();
-  const GAEventTracker = useGAEventTracker("User Interaction");
+  const GAEventTracker = useGAEventTracker({ category: "User Interaction" });
   const handleTracking = (link: string) => {
     GAEventTracker("Direct To Link", link);
   };

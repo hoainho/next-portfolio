@@ -1,6 +1,9 @@
 import ReactGA from 'react-ga4';
 
-const useGAEventTracker = (category = 'General') => {
+interface GAEventProps{
+  category: string
+}
+const useGAEventTracker = ({ category = 'General' }: GAEventProps) => {
   const trackEvent = (action = 'action', label = 'label') => {
     ReactGA.event({
       category,

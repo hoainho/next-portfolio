@@ -396,46 +396,68 @@ export const projects = [
     icon_url: "/images/companies/earthbrain.png",
     theme: "btn-back-blue",
     name: "Earthbrain - Smart Construction",
-    description:
-      "My primary responsibilities encompassed a comprehensive focus on accountability, issue resolution, support provision, and adept time management. I dedicated myself to ensuring the highest standards of responsibility in every task undertaken, guaranteeing that all aspects of the project were executed with precision and diligence. My role was pivotal in identifying and resolving complex issues promptly, thereby maintaining project momentum and ensuring seamless progression. I provided unwavering support to both my team and stakeholders, facilitating a collaborative and productive working environment. Moreover, my effective time management skills were crucial in optimizing project workflows, meeting deadlines, and achieving project objectives efficiently",
+    descriptions: [
+      'My primary responsibilities encompassed a comprehensive focus on accountability, issue resolution, support provision, and adept time management.',
+      'I dedicated myself to ensuring the highest standards of responsibility in every task undertaken, guaranteeing that all aspects of the project were executed with precision and diligence.',
+      'My role was pivotal in identifying and resolving complex issues promptly, thereby maintaining project momentum and ensuring seamless progression.',
+      'I provided unwavering support to both my team and stakeholders, facilitating a collaborative and productive working environment.',
+      'Moreover, my effective time management skills were crucial in optimizing project workflows, meeting deadlines, and achieving project objectives efficiently'
+    ],
     link: "https://www.earthbrain.com/",
   },
   {
     icon_url: "/images/companies/eyewa.png",
     theme: "btn-back-green",
     name: "Eyewa",
-    description:
-      "I played a pivotal role in developing a comprehensive e-commerce application specializing in eyewear products catering to the international market. The platform was designed to facilitate seamless transactions across multiple countries, including UAE, Saudi Arabia, Kuwait, Qatar, Oman, and Bahrain. Leveraging the React framework, I led the frontend development efforts, ensuring an intuitive and responsive user interface that catered to the diverse needs of our global customer base",
+    descriptions: ["I played a pivotal role in developing a comprehensive e-commerce application specializing in eyewear products catering to the international market.",
+      "The platform was designed to facilitate seamless transactions across multiple countries, including UAE, Saudi Arabia, Kuwait, Qatar, Oman, and Bahrain.",
+      'Leveraging the React framework, I led the frontend development efforts, ensuring an intuitive and responsive user interface that catered to the diverse needs of our global customer base',
+    ],
     link: "https://eyewa.com/",
   },
   {
-    icon_url: "/images/companies/fountain.png",
+    icon_url: "/images/companies/fountain.svg",
     theme: "btn-back-red",
     name: "Fountain Gifts",
-    description:
-      "I have developed an application service catering to e-commerce needs, utilizing Next.js 14 and custom hooks to incorporate multiple intricate features. Emphasis has been placed on optimizing UI performance to ensure smooth and user-friendly interactions. Furthermore, I have enhanced the system with meticulous attention to perfect pixel implementation, thereby enhancing the overall customer experience to the highest standard.",
+    descriptions:
+      ["I have developed an application service catering to e-commerce needs, utilizing Next.js 14 and custom hooks to incorporate multiple intricate features.",
+      "Emphasis has been placed on optimizing UI performance to ensure smooth and user-friendly interactions.",
+      "Furthermore, I have enhanced the system with meticulous attention to perfect pixel implementation, thereby enhancing the overall customer experience to the highest standard.",],
     link: "https://www.fountaingifts.com/",
   },
   {
     icon_url: "/images/companies/ringo.png",
     theme: "btn-back-pink",
     name: "Ringo App",
-    description: `My primary focus revolved around refining the administrative tools essential for overseeing worker activities effectively. Although my direct involvement didn't extend to crafting the landing page, my contributions played a vital role in ensuring a fluid and intuitive user experience within the administrative interface.`,
+    descriptions: [
+      `My primary focus revolved around refining the administrative tools essential for overseeing worker activities effectively.`,
+      `Although my direct involvement didn't extend to crafting the landing page, my contributions played a vital role in ensuring a fluid and intuitive user experience within the administrative interface.`,
+    ],
     link: "https://ringoapp.com.au/",
   },
   {
     icon_url: "/images/companies/maqro.png",
     theme: "btn-back-black",
     name: "Maqro",
-    description: `I spearheaded a pivotal project aimed at revolutionizing the stock market landscape for investors. At its core, this project entailed the development of a dynamic server tailored specifically for mobile platforms. Leveraging my expertise in frameworks such as AdonisJS, along with implementing cutting-edge technologies like Socket.io and Bull for background job management and queueing, I engineered a robust and scalable infrastructure to meet the demands of real-time stock data processing. Utilizing AWS for seamless deployment, I orchestrated the creation of a responsive and intuitive UI, complete with dynamic, real-time charting capabilities. Furthermore, I engineered intricate functionalities including payment processing, stock trading, and data optimization, enabling smooth interactions through APIs even with large datasets. This project not only showcased my technical prociency but also my ability to innovate and deliver solutions that elevate user experiences in the financial domain.`,
+    descriptions: [
+      `I spearheaded a pivotal project aimed at revolutionizing the stock market landscape for investors.`,
+    `At its core, this project entailed the development of a dynamic server tailored specifically for mobile platforms.` ,
+    "Leveraging my expertise in frameworks such as AdonisJS, along with implementing cutting-edge technologies like Socket.io and Bull for background job management and queueing, I engineered a robust and scalable infrastructure to meet the demands of real-time stock data processing.",
+    "Utilizing AWS for seamless deployment, I orchestrated the creation of a responsive and intuitive UI, complete with dynamic, real-time charting capabilities. ",
+    "Furthermore, I engineered intricate functionalities including payment processing, stock trading, and data optimization, enabling smooth interactions through APIs even with large datasets. ",
+    `This project not only showcased my technical prociency but also my ability to innovate and deliver solutions that elevate user experiences in the financial domain.`,
+    ],
     link: "https://maqro.com.au/",
   },
   {
     icon_url: "/images/companies/trp.png",
     theme: "btn-back-yellow",
     name: "ThirdRockPix",
-    description:
-      "I took on a multifaceted role, embracing accountability, issue resolution, support provision, and efficient time management as my primary responsibilities. At the heart of this platform lies a revolutionary file upload feature, empowering travelers to share their experiences in stunning detail with files of up to 50GB per upload. From breathtaking landscapes to unforgettable moments, no memory is too grand to be captured and shared.",
+    descriptions: [
+      "I took on a multifaceted role, embracing accountability, issue resolution, support provision, and efficient time management as my primary responsibilities.",
+      "At the heart of this platform lies a revolutionary file upload feature, empowering travelers to share their experiences in stunning detail with files of up to 50GB per upload.",
+      "From breathtaking landscapes to unforgettable moments, no memory is too grand to be captured and shared.",
+    ],
     link: "https://thirdrockpix.com/",
   },
 ];

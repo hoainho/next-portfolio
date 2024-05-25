@@ -93,16 +93,8 @@
 }
 
 @layer base {
-  * {
-  }
-
   body {
     @apply bg-white font-[400] text-primary;
-  }
-
-  a,
-  button {
-    @apply cursor-special;
   }
 }
 

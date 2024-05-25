@@ -1,13 +1,20 @@
 import { useState } from 'react';
 
-const useAlert = () => {
-    const [alert, setAlert] = useState<{
-        show: boolean;
-        text: string;
-        type: string;
-    }>({ show: false, text: '', type: 'danger' });
+type AlertType = {
+    show?: boolean;
+    text: string;
+    type: string;
+}
 
-    const showAlert = ({ text, type = 'danger' }: { text: string, type: string}) => setAlert({ show: true, text, type });
+interface AlertHookResponse {
+    alert: AlertType
+    showAlert: ({show, text, type}: AlertType) => void
+    hideAlert: () => void
+}
+const useAlert = () : AlertHookResponse => {
+    const [alert, setAlert] = useState<AlertType>({ show: false, text: '', type: 'danger' });
+
+    const showAlert = ({ text, type = 'danger' }: AlertType) => setAlert({ show: true, text, type });
     const hideAlert = () => setAlert({ show: false, text: '', type: 'danger' });
 
     return { alert, showAlert, hideAlert };
