@@ -32,3 +32,11 @@ export type ExperienceType  = {
   date: string;
   points: string[];
 }
+
+export type ProjectType = {
+  icon_url: string;
+  theme: string;
+  name: string;
+  descriptions: string[];
+  link: string;
+}

@@ -2,14 +2,21 @@
 
 import emailjs from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
-import { ChangeEventHandler, FocusEvent, FocusEventHandler, LegacyRef, Suspense, useRef, useState } from "react";
+import { FocusEvent, LegacyRef, Suspense, useRef, useState } from "react";
 
 import { Bird, Drone, Fox } from "@/components/models";
 import useAlert from "@/hooks/useAlert";
 import Loader from "@/components/loader/Loader";
 import Alert from "@/components/alert/Alert";
 import ReactGA from "react-ga4";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title:
+    "Hoai Nho - Portfolio | Deep Javascript & TypeScript | Software Engineer | Solution Architect",
+  description:
+    "I'm Software Engineer from Viet Nam with over 4 year of experience. I'm passionate about developing and maintaining high quality software. I love my work and I'm always looking for new challenges. I'm open for any collaboration. Let's work together!",
+  keywords: `Earthbrain - Smart Construction, , Eyewa, Ringo App, Maqro, ThirdRockPix, Human Information Security Management, Multinational Security Systems, Construction Machinery Management, and E-commerce`,
+};
 const Contact = () => {
   const formRef = useRef() as unknown as LegacyRef<HTMLFormElement> | undefined;
   const [form, setForm] = useState({ name: "", email: "", message: "" });

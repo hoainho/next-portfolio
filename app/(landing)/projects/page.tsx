@@ -1,16 +1,17 @@
-
-'use client'
-
 import CTA from "@/components/cta/CTA";
 import { projects } from "@/lib/constants";
-import useGAEventTracker from "@/hooks/useGAEventTracker";
-import Link from "next/link";
+import { Metadata } from "next";
+import ViewMoreLink from "@/components/project/ViewMoreLink";
+
+export const metadata: Metadata = {
+  title:
+    "Hoai Nho - Portfolio | Deep Javascript & TypeScript | Software Engineer | Solution Architect",
+  description:
+    "I'm Software Engineer from Viet Nam with over 4 year of experience. I'm passionate about developing and maintaining high quality software. I love my work and I'm always looking for new challenges. I'm open for any collaboration. Let's work together!",
+  keywords: `Earthbrain - Smart Construction, , Eyewa, Ringo App, Maqro, ThirdRockPix, Human Information Security Management, Multinational Security Systems, Construction Machinery Management, and E-commerce`,
+};
 
 const Projects = () => {
-  const GAEventTracker = useGAEventTracker({category: 'User Interaction'});
-  const handleTracking = (link: string) => {
-    GAEventTracker('Direct To Link', link);
-  };
   return (
     <section className="max-container">
       <h1 className="head-text">
@@ -60,22 +61,7 @@ const Projects = () => {
                   </li>
                 ))}
               </ul>
-              <div className="mt-5 flex items-center gap-2 font-poppins">
-                <Link
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-blue-600"
-                  onClick={() => handleTracking(project.name)}
-                >
-                  Live Link
-                </Link>
-                <img
-                  src={'/icons/arrow.svg'}
-                  alt="arrow"
-                  className="w-4 h-4 object-contain"
-                />
-              </div>
+              <ViewMoreLink project={project} />
             </div>
           </div>
         ))}

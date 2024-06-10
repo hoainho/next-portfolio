@@ -2,8 +2,7 @@ import { ReactNode } from "react";
 import type { Metadata } from "next";
 import "./globals.scss";
 import localFont from "next/font/local";
-import Navbar from "@/components/navbar/Navbar";
-import Footer from "@/components/footer/Footer";
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 
 const fontPublicSans = localFont({
   src: [
@@ -44,20 +43,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full">
-      <body className={`${fontPublicSans.variable} font-public-sans`}>
-        <main className="bg-basics-background-default">
-          <Navbar />
-          <div className="min-h-[calc(100dvh-var(--primary-navbar-height)-var(--footer-height))]">
-            {children}
-          </div>
-          {modal}
-        </main>
-        <footer>
-          <Footer />
-        </footer>
+      <body className={`${fontPublicSans.variable} font-public-sans bg-basics-background-default`}>
+        {children}
       </body>
-      {/*<GoogleTagManager gtmId="GTM-53CDSQQ" />*/}
-      {/*<GoogleAnalytics gaId="G-TB5XXJRTQR" />*/}
+      <GoogleTagManager gtmId="GTM-KSW24XS4" />
+      <GoogleAnalytics gaId="G-R2SSW6FQ6V" />
     </html>
   );
 }

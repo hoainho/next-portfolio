@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 
 import Link from "next/link";
 import clsx from "clsx";
-import getColorByDay from "@/utils/getColorByDay";
 
 const Navbar = () => {
   const pathname = usePathname();
+  
   const isLightTheme = !["/"].includes(pathname);
   const defaultTextColor: string = isLightTheme ? "text-primary" : "text-white";
 
