@@ -53,7 +53,7 @@ const LayoutIsland = (props: Props) => {
     setSeaPosition(seaPosition);
   }, []);
   return (
-    <div>
+    <div className="w-full h-screen relative">
       <div className={`absolute left-0 right-0 z-10 flex items-center justify-center top-28`}>
         {currentStage !== null && <HomeInfo currentStage={currentStage} />}
       </div>
