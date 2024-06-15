@@ -347,6 +347,10 @@
   background: linear-gradient(135deg, #0a1647 -20%, #e4e7e4 120%);
 }
 
+.bg-linear-black-to-white {
+  background: linear-gradient(0deg, #0a1647 -100%, transparent 100%);
+}
+
 .block-container .btn-front {
   position: absolute;
   inset: 0;
