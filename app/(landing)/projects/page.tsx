@@ -21,7 +21,7 @@ const Projects = () => {
         </span>
       </h1>
 
-      <p className="text-slate-500 mt-2 leading-relaxed">
+      <p className="text-black mt-2 leading-relaxed">
         Throughout my career, I have worked on a diverse range of projects,
         including notable categories such as Travel, Stock Trading, Mapping,
         Financial Management, Human Information Security Management,
@@ -48,13 +48,13 @@ const Projects = () => {
             </div>
 
             <div className="mt-5 flex flex-col">
-              <h4 className="text-2xl font-poppins font-semibold">
+              <h2 className="text-2xl font-poppins font-semibold">
                 {project.name}
-              </h4>
+              </h2>
               <ul>
                 {project.descriptions.map((description) => (
                   <li
-                    className="text-slate-500 mt-2 leading-relaxed"
+                    className="text-black mt-2 leading-relaxed"
                     key={description}
                   >
                     {description}

@@ -12,7 +12,7 @@ const Introduce = () => {
         👋
       </h1>
       <div className="mt-5 flex flex-col gap-3 text-slate-500">
-        <p>
+        <p className="text-black">
           I'm a software engineer from Vietnam. With over 4 years of experience
           in the field. Throughout my career, I have demonstrated proficiency in
           utilizing technologies such as React and Vue for frontend development,
