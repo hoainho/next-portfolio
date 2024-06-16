@@ -3,14 +3,13 @@
 import React from "react";
 
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 import HomeInfo from "@/components/home/HomeInfo";
-import Loader from "@/components/loader/Loader";
-import { soundoff, soundon } from "@/public/icons";
 import { Bird, Plane, IslandSea, Drone } from "@/components/models";
 import Image from "next/image";
 type Props = {};
+import CanvasLoader from "@/components/loader/LoaderWithProgressPercent";
 
 const LayoutIsland = (props: Props) => {
   const [currentStage, setCurrentStage] = useState<number | null>(0);
@@ -59,7 +58,7 @@ const LayoutIsland = (props: Props) => {
       </div>
 
       <Canvas className={`w-full h-screen bg-transparent ${isRotating ? "cursor-grabbing" : "cursor-grab"}`} camera={{ near: 0.1, far: 1000 }}>
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<CanvasLoader />}>
           <directionalLight position={[1, 1, 1]} intensity={2} />
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 5, 10]} intensity={2} />

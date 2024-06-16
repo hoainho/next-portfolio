@@ -8,7 +8,7 @@ const Certifications = (props: Props) => {
     <div className="py-10 flex flex-col">
       <h3 className="subhead-text">My Awards & Certifications</h3>
 
-      <div className="relative bg-linear-black-to-white py-8 flex-center flex-row flex-wrap gap-[20px]">
+      <div className="relative bg-linear-black-to-white py-8 flex-center flex-row flex-wrap gap-[20px] mt-16">
         <div className="bg-linear-back"></div>
         {certsAndAwards.map((cert, index) => (
           <div className="w-full max-w-[400px] flex-center flex-col" key={cert.name}>

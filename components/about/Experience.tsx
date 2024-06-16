@@ -16,7 +16,7 @@ const Experience = () => {
     <div className="py-16">
       <h3 className="subhead-text">Work Experience</h3>
       <div className="mt-5 flex flex-col gap-3 text-slate-500">
-        <p>
+        <p className="text-black">
           I have gained experience working with several firms, enhancing my
           abilities and collaborating with talented individuals. Here's the
           rundown:

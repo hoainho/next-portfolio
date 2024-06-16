@@ -360,7 +360,7 @@ export const experiences: ExperienceType[] = [
     title: "Frontend Developer",
     company_name: "Freelancer",
     company_link: "#",
-    icon: "/images/companies/Freelancer.png",
+    icon: "/images/companies/freelancer.png",
     icon_bg: "#b7e4c7",
     date: "2019 - December 2020",
     points: [
