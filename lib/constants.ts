@@ -461,3 +461,36 @@ export const projects = [
     link: "https://thirdrockpix.com/",
   },
 ];
+
+export const certsAndAwards = [
+  {
+    name: "AWS Knowledge: Architecting",
+    badge: "/certifications/aws-knowledge-architecture.png",
+    link: "https://www.credly.com/badges/8325e1ac-4361-4ab1-9f07-3bb3bfdb1263/public_url",
+  },
+  {
+    name: "AWS Cloud Quest: Cloud Practitioner",
+    badge: "/certifications/aws-cloud-practitioner.png",
+    link: "https://www.credly.com/badges/98330a0d-24db-4f5d-b017-d22a420b317a/public_url",
+  },
+  {
+    name: "IBM Python for Data Science",
+    badge: "/certifications/python-for-data-science.png",
+    link: "https://www.credly.com/badges/d2eeb542-4ead-489a-8a32-5e72438eb725/public_url",
+  },
+  {
+    name: "IBM Data Analysis Using Python",
+    badge: "/certifications/data-analysis-using-python.png",
+    link: "https://www.credly.com/badges/51faf712-e528-499e-bc14-8d8c8d0e289f/public_url",
+  },
+  {
+    name: "TOP 3 - Hutech Innovative software 2021",
+    badge: "/certifications/logo-hutech.png",
+    link: "https://www.hutech.edu.vn/homepage/tin-tuc/hoat-dong-sinh-vien/14598488-vong-chung-ket-phan-mem-sang-tao-2021-kich-tinh-va-gay-can-voi-loat-de-tai-thu-vi",
+  },
+  {
+    name: "TOP 10 - Hutech IT Got talent 2021",
+    badge: "/certifications/logo-hutech.png",
+    link: "#",
+  },
+];
