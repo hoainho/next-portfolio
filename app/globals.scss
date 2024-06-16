@@ -295,7 +295,8 @@
 .logo {
   border-radius: 8.889px;
   background: #fff;
-  box-shadow: 0px 10px 35px -4px rgba(67, 83, 255, 0.15),
+  box-shadow:
+    0px 10px 35px -4px rgba(67, 83, 255, 0.15),
     0px 1.5px 4px -1px rgba(67, 83, 255, 0.2);
 }
 
@@ -347,8 +348,34 @@
   background: linear-gradient(135deg, #0a1647 -20%, #e4e7e4 120%);
 }
 
+.bg-linear-back {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: inherit;
+  height: inherit;
+  transition: 250ms;
+  transform-style: preserve-3d;
+  will-change: transform;
+  box-shadow: 16px 0 40px #000000;
+  transform: rotateZ(10deg);
+  transform-origin: bottom right;
+  background: linear-gradient(135deg, #000000 0%, transparent 120%);
+}
+
 .bg-linear-black-to-white {
-  background: linear-gradient(0deg, #0a1647 -100%, transparent 100%);
+  background: linear-gradient(0deg, #000000 -100%, transparent 80%);
+  inset: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  transition: 250ms;
+  transform-style: preserve-3d;
+  transform-origin: top left;
+  overflow: hidden;
+  border-radius: 30px;
 }
 
 .block-container .btn-front {
@@ -366,14 +393,13 @@
   overflow: hidden;
 }
 
-.block-container:hover>.btn-back {
+.block-container:hover > .btn-back {
   transform: translateZ(20px) rotateZ(15deg) rotateX(-20deg) rotateY(-20deg);
 }
 
-.block-container:hover>.btn-front {
+.block-container:hover > .btn-front {
   transform: translateZ(80px) translateY(-5px) rotateX(15deg) rotateY(15deg);
 }
-
 
 /* Neo Brutalism */
 .neo-brutalism-blue {

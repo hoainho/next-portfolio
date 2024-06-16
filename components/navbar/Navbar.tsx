@@ -8,7 +8,7 @@ import clsx from "clsx";
 
 const Navbar = () => {
   const pathname = usePathname();
-  
+
   const isLightTheme = !["/"].includes(pathname);
   const defaultTextColor: string = isLightTheme ? "text-primary" : "text-white";
 
@@ -39,32 +39,33 @@ const Navbar = () => {
 
   const navbar = [
     {
-      name: 'About',
-      link: '/about',
+      name: "About",
+      link: "/about",
     },
     {
-      name: 'Projects',
-      link: '/projects',
-    }
-  ]
+      name: "Projects",
+      link: "/projects",
+    },
+  ];
   return (
     <header
       className={clsx(
-        "header",
         !isLightTheme ? "header-primary" : "header-secondary",
-        (show && isLightTheme) ? "bg-[rgba(250,250,252,0.4)] backdrop-saturate-[180%] backdrop-blur-[4px]" : 'bg-basics-background-default'
+        show && isLightTheme
+          ? "bg-[rgba(250,250,252,0.4)] backdrop-saturate-[180%] backdrop-blur-[30px]"
+          : "bg-basics-background-default"
       )}
     >
-      <Link href="/" className="cursor-pointer">
-        <img
-          src={"/icons/logo.jpeg"}
-          alt="Hoai-Nho-Logo"
-          className="h-20 w-20 object-cover rounded-full "
-        />
-      </Link>
-      <nav className="flex items-center text-sm gap-4 font-medium uppercase">
-        {
-          navbar.map(nav => {
+      <div className="header">
+        <Link href="/" className="cursor-pointer">
+          <img
+            src={"/icons/logo.jpeg"}
+            alt="Hoai-Nho-Logo"
+            className="h-20 w-20 object-cover rounded-full "
+          />
+        </Link>
+        <nav className="flex items-center text-sm gap-4 font-medium uppercase">
+          {navbar.map((nav) => {
             return (
               <Link
                 key={nav.name}
@@ -75,10 +76,10 @@ const Navbar = () => {
               >
                 {nav.name}
               </Link>
-            )
-          })
-        }
-      </nav>
+            );
+          })}
+        </nav>
+      </div>
     </header>
   );
 };

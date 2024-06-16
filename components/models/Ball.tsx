@@ -25,7 +25,7 @@ const GlassBlock = ({ imageUrl }: GlassBlockProps) => {
   const aspectRatio = texture.image.width / texture.image.height;
 
   return (
-    <Float speed={3} rotationIntensity={2} floatIntensity={2}>
+    <Float speed={4} rotationIntensity={2} floatIntensity={2}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[2, 2, 5]} intensity={1} />
       <mesh castShadow receiveShadow scale={2.5}>
@@ -34,7 +34,7 @@ const GlassBlock = ({ imageUrl }: GlassBlockProps) => {
           color="rgba(255, 255, 255, 0.1)" // RGBA color with 50% opacity for the block
           roughness={0.1} // Low roughness for smoother reflections
           metalness={0.5} // High metalness for more reflective surface
-          envMapIntensity={1} // Adjust intensity of environment map reflections
+          envMapIntensity={2} // Adjust intensity of environment map reflections
           map={texture}
           transparent // Enable transparency
           side={DoubleSide} // Render both sides of the block
