@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.scss";
 import localFont from "next/font/local";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
+import { GA_TRACKING_ID, GTM_TRACKING_ID } from "@/lib/gtag";
 
 const fontPublicSans = localFont({
   src: [
@@ -61,8 +62,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         {children}
       </body>
-      <GoogleTagManager gtmId="GTM-KSW24XS4" />
-      <GoogleAnalytics gaId="G-R2SSW6FQ6V" />
+      <GoogleTagManager gtmId={GTM_TRACKING_ID} />
+      <GoogleAnalytics gaId={GA_TRACKING_ID} />
     </html>
   );
 }

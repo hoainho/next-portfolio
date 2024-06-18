@@ -1,15 +1,8 @@
-import ReactGA from 'react-ga4';
+import { sendGAEvent } from '@next/third-parties/google';
 
-interface GAEventProps{
-  category: string
-}
-const useGAEventTracker = ({ category = 'General' }: GAEventProps) => {
-  const trackEvent = (action = 'action', label = 'label') => {
-    ReactGA.event({
-      category,
-      action,
-      label,
-    });
+const useGAEventTracker = () => {
+  const trackEvent = (label = 'label') => {
+    sendGAEvent({event: label })
   };
 
   return trackEvent;

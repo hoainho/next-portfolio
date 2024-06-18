@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 import Link from "next/link";
 import clsx from "clsx";
+import { pageview } from "@/lib/gtag";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -36,6 +37,10 @@ const Navbar = () => {
       window.removeEventListener("scroll", controlNavbar);
     };
   }, [lastScrollY]);
+
+  useEffect(() => {
+    pageview(pathname);
+  }, [pathname])
 
   const navbar = [
     {
