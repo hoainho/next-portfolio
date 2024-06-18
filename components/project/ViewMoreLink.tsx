@@ -9,9 +9,10 @@ type ViewMoreLinkProps = {
 };
 
 const ViewMoreLink = ({ project }: ViewMoreLinkProps) => {
-  const GAEventTracker = useGAEventTracker({ category: "User Interaction" });
+  
+  const GAEventTracker = useGAEventTracker();
   const handleTracking = (link: string) => {
-    GAEventTracker("Direct To Link", link);
+    GAEventTracker(link);
   };
   return (
     <div className="mt-5 flex items-center gap-2 font-poppins">

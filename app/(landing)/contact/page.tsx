@@ -4,11 +4,11 @@ import emailjs from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
 import { FocusEvent, LegacyRef, Suspense, useRef, useState } from "react";
 
-import { Bird, Drone, Fox } from "@/components/models";
+import { Fox } from "@/components/models";
 import useAlert from "@/hooks/useAlert";
 import Loader from "@/components/loader/Loader";
 import Alert from "@/components/alert/Alert";
-import ReactGA from "react-ga4";
+import { sendGAEvent } from "@next/third-parties/google";
 const Contact = () => {
   const formRef = useRef() as unknown as LegacyRef<HTMLFormElement> | undefined;
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -34,11 +34,8 @@ const Contact = () => {
     setLoading(true);
     setCurrentAnimation("hit");
     // Track button click event
-    ReactGA.event({
-      category: "User Interaction",
-      action: "Submit Contact",
-      label: "Send message by email",
-    });
+    sendGAEvent({ event: 'Send message by email' })
+
     emailjs
       .send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
