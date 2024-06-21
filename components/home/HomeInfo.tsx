@@ -1,5 +1,3 @@
-
-import { arrow, swipe } from "@/public/icons";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -27,7 +25,7 @@ const HomeInfo = ({ currentStage }: StageProps) => {
         <br />
         Let's swipe or drag left/right on the screen to explore my work
         <div className="bg-white p-2 rounded-full animate-bounce">
-          <Image src={swipe} alt="swipe" className=" w-10 h-10 object-contain" />
+          <Image src={'/icons/swipe.png'} alt="swipe" className=" w-10 h-10 object-contain" />
         </div>
       </h1>
     );
@@ -42,7 +40,7 @@ const HomeInfo = ({ currentStage }: StageProps) => {
 
         <Link href="/about" className="neo-brutalism-white neo-btn">
           Explore further
-          <Image src={arrow} alt="arrow" className="w-4 h-4 object-contain" />
+          <Image src={'/icons/arrow.svg'} alt="arrow" className="w-4 h-4 object-contain" />
         </Link>
       </div>
     );
@@ -58,7 +56,7 @@ const HomeInfo = ({ currentStage }: StageProps) => {
 
         <Link href="/projects" className="neo-brutalism-white neo-btn">
           Visit my portfolio
-          <img src={arrow} alt="arrow" className="w-4 h-4 object-contain" />
+          <img src={'/icons/arrow.svg'} alt="explore-new-space" className="w-4 h-4 object-contain" />
         </Link>
       </div>
     );
@@ -73,7 +71,7 @@ const HomeInfo = ({ currentStage }: StageProps) => {
         </p>
         <Link href="/contact" className="neo-brutalism-white neo-btn">
           Let's discuss
-          <img src={arrow} alt="arrow" className="w-4 h-4 object-contain" />
+          <img src={'/icons/arrow.svg'} alt="explore-new-space" className="w-4 h-4 object-contain" />
         </Link>
       </div>
     );

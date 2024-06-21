@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 
@@ -16,9 +16,13 @@ const LayoutIsland = (props: Props) => {
   const [isRotating, setIsRotating] = useState(false);
 
   const [droneScale, setDroneScale] = useState(1);
-  const [dronePosition, setDronePosition] = useState<[number, number, number]>([0, -1.5, 0]);
+  const [dronePosition, setDronePosition] = useState<[number, number, number]>([
+    0, -1.5, 0,
+  ]);
   const [seaScale, setSeaScale] = useState(-0.09);
-  const [seaPosition, setSeaPosition] = useState<[number, number, number]>([0, -10, -50]);
+  const [seaPosition, setSeaPosition] = useState<[number, number, number]>([
+    0, -10, -50,
+  ]);
 
   useEffect(() => {
     const adjustDroneForScreenSize = (): [number, [number, number, number]] => {
@@ -29,14 +33,14 @@ const LayoutIsland = (props: Props) => {
       }
     };
 
-    const adjustIslandForScreenSize = (scale: number | null, position: number | null): [number, [number, number, number]] => {
+    const adjustIslandForScreenSize = (): [number, [number, number, number]] => {
       let screenScale, screenPosition: [number, number, number];
 
       if (window.innerWidth < 768) {
-        screenScale = scale ?? -0.13;
+        screenScale = -0.13;
         screenPosition = [0, -4.25, -55];
       } else {
-        screenScale = scale ?? -0.09;
+        screenScale = -0.09;
         screenPosition = [0, -10, -50];
       }
 
@@ -44,7 +48,7 @@ const LayoutIsland = (props: Props) => {
     };
 
     const [droneScale, dronePosition] = adjustDroneForScreenSize();
-    const [seaScale, seaPosition] = adjustIslandForScreenSize(null, null);
+    const [seaScale, seaPosition] = adjustIslandForScreenSize();
 
     setDroneScale(droneScale);
     setDronePosition(dronePosition);
@@ -53,19 +57,35 @@ const LayoutIsland = (props: Props) => {
   }, []);
   return (
     <div className="w-full h-screen relative">
-      <div className={`absolute left-0 right-0 z-10 flex items-center justify-center top-28`}>
+      <div
+        className={`absolute left-0 right-0 z-10 flex items-center justify-center top-28`}
+      >
         {currentStage !== null && <HomeInfo currentStage={currentStage} />}
       </div>
 
-      <Canvas className={`w-full h-screen bg-transparent ${isRotating ? "cursor-grabbing" : "cursor-grab"}`} camera={{ near: 0.1, far: 1000 }}>
+      <Canvas
+        className={`w-full h-screen bg-transparent ${
+          isRotating ? "cursor-grabbing" : "cursor-grab"
+        }`}
+        camera={{ near: 0.1, far: 1000 }}
+      >
+        <directionalLight position={[1, 1, 1]} intensity={2} />
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 5, 10]} intensity={2} />
+        <spotLight
+          position={[0, 50, 10]}
+          angle={0.15}
+          penumbra={1}
+          intensity={1}
+        />
+        <hemisphereLight groundColor="#000000" intensity={1} />
         <Suspense fallback={<CanvasLoader />}>
-          <directionalLight position={[1, 1, 1]} intensity={2} />
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 5, 10]} intensity={2} />
-          <spotLight position={[0, 50, 10]} angle={0.15} penumbra={1} intensity={1} />
-          <hemisphereLight groundColor="#000000" intensity={1} />
           <Bird setCurrentStage={setCurrentStage} />
+        </Suspense>
+        <Suspense fallback={<CanvasLoader />}>
           <Plane />
+        </Suspense>
+        <Suspense fallback={<CanvasLoader />}>
           <IslandSea
             isRotating={isRotating}
             setIsRotating={setIsRotating}
@@ -74,6 +94,8 @@ const LayoutIsland = (props: Props) => {
             rotation={[0.5, Math.PI, Math.PI]}
             scale={seaScale}
           />
+        </Suspense>
+        <Suspense fallback={<CanvasLoader />}>
           <Drone
             isRotating={isRotating}
             scale={droneScale}
