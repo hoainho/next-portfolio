@@ -145,6 +145,7 @@ const Contact = () => {
             className="btn"
             onFocus={handleFocus}
             onBlur={handleBlur}
+            aria-label="Send Message"
           >
             {loading ? "Sending..." : "Send Message"}
           </button>
