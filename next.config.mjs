@@ -21,7 +21,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-  assetPrefix: isProd ? 'https://dzcz40u3myt1m.cloudfront.net' : undefined
+  assetPrefix: isProd ? 'https://d25ajqv6ijzi49.cloudfront.net' : undefined
 };
 
 export default withPlaiceholder(nextConfig);
