@@ -6,10 +6,9 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-
-import Image from "next/image";
 import Link from "next/link";
 import "react-vertical-timeline-component/style.min.css";
+import ImageLoader from "../loader/ImageLoader";
 
 const Experience = () => {
   return (
@@ -39,7 +38,7 @@ const Experience = () => {
                       experience?.company_link === "#" ? "_self" : "_blank"
                     }
                   >
-                    <Image
+                    <ImageLoader
                       src={experience?.icon}
                       alt={experience?.company_name}
                       width={20}

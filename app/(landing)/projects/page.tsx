@@ -2,12 +2,17 @@ import CTA from "@/components/cta/CTA";
 import { projects } from "@/lib/constants";
 import { Metadata } from "next";
 import ViewMoreLink from "@/components/project/ViewMoreLink";
+import ImageLoader from "@/components/loader/ImageLoader";
 
 export const metadata: Metadata = {
   title:
-    "Hoai Nho - Portfolio | Deep Javascript & TypeScript | Software Engineer | Solution Architect",
+    "Projects | Hoai Nho",
   description:
-    "I'm Software Engineer from Viet Nam with over 4 year of experience. I'm passionate about developing and maintaining high quality software. I love my work and I'm always looking for new challenges. I'm open for any collaboration. Let's work together!",
+    `Throughout my career, I have worked on a diverse range of projects,
+        including notable categories such as Travel, Stock Trading, Mapping,
+        Financial Management, Human Information Security Management,
+        Multinational Security Systems, Construction Machinery Management, and
+        E-commerce`,
   keywords: `Earthbrain - Smart Construction, , Eyewa, Ringo App, Maqro, ThirdRockPix, Human Information Security Management, Multinational Security Systems, Construction Machinery Management, and E-commerce`,
 };
 
@@ -39,7 +44,9 @@ const Projects = () => {
             <div className="block-container w-12 h-12">
               <div className={`btn-back rounded-xl ${project.theme}`} />
               <div className="btn-front rounded-xl flex justify-center items-center">
-                <img
+                <ImageLoader
+                  width={80}
+                  height={80}
                   src={project.icon_url}
                   alt="threads"
                   className="w-[80%] h-[80%] object-contain"

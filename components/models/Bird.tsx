@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { useAnimations, useGLTF } from "@react-three/drei";
@@ -6,15 +8,12 @@ import { Mesh } from "three";
 import { Globals } from "@react-spring/shared";
 import { ActionModelType } from "@/app/types";
 
-type BirdModelProps = {
-  setCurrentStage: (number: number) => void;
-};
 
 Globals.assign({
   frameLoop: "demand",
 });
 // 3D Model from: https://sketchfab.com/3d-models/phoenix-bird-844ba0cf144a413ea92c779f18912042
-export function Bird({ setCurrentStage }: BirdModelProps) {
+export function Bird() {
   const birdRef = useRef<Mesh>(null)
 
   // Load the 3D model and animations from the provided GLTF file
@@ -64,7 +63,6 @@ export function Bird({ setCurrentStage }: BirdModelProps) {
       ref={birdRef}
       position={[-5, 2, 1]}
       scale={[0.003, 0.003, 0.003]}
-      onClick={() => setCurrentStage(5)}
     >
       <primitive object={scene} />
     </mesh>

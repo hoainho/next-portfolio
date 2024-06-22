@@ -1,14 +1,14 @@
 'use client'
 
+import { FocusEvent, LegacyRef, Suspense, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
-import { FocusEvent, LegacyRef, Suspense, useRef, useState } from "react";
 
 import { Fox } from "@/components/models";
 import useAlert from "@/hooks/useAlert";
-import Loader from "@/components/loader/Loader";
 import Alert from "@/components/alert/Alert";
 import { sendGAEvent } from "@next/third-parties/google";
+import CanvasLoader from "@/components/loader/LoaderWithProgressPercent";
 const Contact = () => {
   const formRef = useRef() as unknown as LegacyRef<HTMLFormElement> | undefined;
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -171,7 +171,7 @@ const Contact = () => {
             intensity={2}
           />
 
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<CanvasLoader />}>
             <Fox
               currentAnimation={currentAnimation}
               position={[0.5, 0.35, 0]}

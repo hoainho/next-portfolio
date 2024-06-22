@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import clsx from "clsx";
 import { pageview } from "@/lib/gtag";
+import ImageLoader from "@/components/loader/ImageLoader";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -63,7 +64,9 @@ const Navbar = () => {
     >
       <div className="header">
         <Link href="/" className="cursor-pointer">
-          <img
+          <ImageLoader
+            width={40}
+            height={40}
             src={"/icons/logo.jpeg"}
             alt="Hoai-Nho-Logo"
             className="h-20 w-20 object-cover rounded-full "

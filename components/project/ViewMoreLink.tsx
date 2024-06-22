@@ -1,8 +1,9 @@
 'use client'
 import { ProjectType } from "@/app/types";
-import useGAEventTracker from "@/hooks/useGAEventTracker";
+import trackEvent from "@/hooks/useGAEventTracker";
 import Link from "next/link";
 import React from "react";
+import ImageLoader from "@/components/loader/ImageLoader";
 
 type ViewMoreLinkProps = {
   project: ProjectType;
@@ -10,9 +11,8 @@ type ViewMoreLinkProps = {
 
 const ViewMoreLink = ({ project }: ViewMoreLinkProps) => {
   
-  const GAEventTracker = useGAEventTracker();
   const handleTracking = (link: string) => {
-    GAEventTracker(link);
+    trackEvent(link);
   };
   return (
     <div className="mt-5 flex items-center gap-2 font-poppins">
@@ -25,7 +25,9 @@ const ViewMoreLink = ({ project }: ViewMoreLinkProps) => {
       >
         Live Link
       </Link>
-      <img
+      <ImageLoader
+        width={20}
+        height={20}
         src={"/icons/arrow.svg"}
         alt="arrow"
         className="w-4 h-4 object-contain"

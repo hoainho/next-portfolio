@@ -2,6 +2,7 @@ import React from "react";
 import { SKILL_TYPE, skills } from "@/lib/constants";
 import clsx from "clsx";
 import getColorByDay from "@/utils/getColorByDay";
+import ImageLoader from "@/components/loader/ImageLoader";
 
 const SkillWithType = ({ type = SKILL_TYPE.BACKEND }) => {
   return (
@@ -44,9 +45,11 @@ const SkillWithType = ({ type = SKILL_TYPE.BACKEND }) => {
               </p>
             </div>
             <div className="btn-front rounded-xl flex justify-center items-center">
-              <img
+              <ImageLoader
                 src={skill.image_url}
                 alt={skill.name}
+                width={100}
+                height={100}
                 className="w-1/2 h-1/2 object-contain"
               />
             </div>

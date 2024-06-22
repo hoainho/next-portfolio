@@ -4,11 +4,11 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    "Hoai Nho - Portfolio | Deep Javascript & TypeScript | Software Engineer | Open Source Contributor",
+    "Overview | Hoai Nho - Portfolio",
   description:
     "I'm Software Engineer from Viet Nam with over 4 year of experience. I'm passionate about developing and maintaining high quality software. I love my work and I'm always looking for new challenges. I'm open for any collaboration. Let's work together!",
   keywords:
-    "A Software Engineer from VietNam, Hoài Nhớ, Nguyễn Hoài Nhớ, Nhớ Nguyễn, portfolio, full stack developer, software engineer, open source contributor, javascript, fullstack developer",
+    "Software Engineer, VietNam, Hoài Nhớ, Nguyễn Hoài Nhớ, Nhớ Nguyễn, portfolio, full stack developer, software engineer, open source contributor, javascript, fullstack developer",
 };
 
 const Home = () => {

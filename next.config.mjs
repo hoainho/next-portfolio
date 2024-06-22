@@ -1,27 +1,24 @@
 /** @type {import('next').NextConfig} */
 
-import path from 'path';
+import path from "path";
 import withPlaiceholder from "@plaiceholder/next";
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig = {
   sassOptions: {
-    includePaths: [path.join(process.env.PWD, 'styles')],
+    includePaths: [path.join(process.env.PWD, "styles")],
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**'
-      }
-    ]
+    loaderFile: './lib/cloudfront-loader.ts',
+    domains: ['d25ajqv6ijzi49.cloudfront.net'],
   },
   logging: {
     fetches: {
       fullUrl: true,
     },
   },
-  assetPrefix: isProd ? 'https://d25ajqv6ijzi49.cloudfront.net' : undefined
+  assetPrefix: isProd ? process.env.NEXT_PUBLIC_CLOUDFRONT_URL : undefined,
+  productionBrowserSourceMaps: true
 };
 
 export default withPlaiceholder(nextConfig);

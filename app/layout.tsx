@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 import type { Metadata } from "next";
 import "./globals.scss";
 import localFont from "next/font/local";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { GA_TRACKING_ID, GTM_TRACKING_ID } from "@/lib/gtag";
-
+import { GlobalProvider } from "@/context/GlobalContext";
 const fontPublicSans = localFont({
   src: [
     {
@@ -54,14 +54,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactElement }) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en">
       <body
         className={`${fontPublicSans.variable} font-public-sans bg-basics-background-default`}
+        cz-shortcut-listen="false"
       >
-        {children}
+        <GlobalProvider>{children}</GlobalProvider>
       </body>
+
       <GoogleTagManager gtmId={GTM_TRACKING_ID} />
       <GoogleAnalytics gaId={GA_TRACKING_ID} />
     </html>
