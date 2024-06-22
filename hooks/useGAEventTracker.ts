@@ -1,11 +1,7 @@
 import { sendGAEvent } from '@next/third-parties/google';
 
-const useGAEventTracker = () => {
-  const trackEvent = (label = 'label') => {
-    sendGAEvent({event: label })
-  };
-
-  return trackEvent;
+const trackEvent = (label = 'label') => {
+  sendGAEvent({event: label })
 };
 
-export default useGAEventTracker;
+export default trackEvent

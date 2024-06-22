@@ -1,10 +1,12 @@
-import Image from "next/image";
-import Link from "next/link";
+'use client'
 
-type StageProps = {
-    currentStage: number
-}
-const HomeInfo = ({ currentStage }: StageProps) => {
+import cloudfrontLoader from "@/lib/cloudfront-loader";
+import Link from "next/link";
+import ImageLoader from "../loader/ImageLoader";
+import { useGlobalContext } from "@/context/GlobalContext";
+
+const HomeInfo = () => {
+  const { state: {currentStage}} = useGlobalContext()
   if (currentStage === 0)
     return (
       <h1 className="sm:text-xl sm:leading-snug text-center neo-brutalism-blue py-4 px-8 text-white mx-5">
@@ -25,7 +27,11 @@ const HomeInfo = ({ currentStage }: StageProps) => {
         <br />
         Let's swipe or drag left/right on the screen to explore my work
         <div className="bg-white p-2 rounded-full animate-bounce">
-          <Image src={'/icons/swipe.png'} alt="swipe" className=" w-10 h-10 object-contain" />
+          <ImageLoader
+            src={"/icons/swipe.png"}
+            alt="swipe"
+            className=" w-10 h-10 object-contain"
+          />
         </div>
       </h1>
     );
@@ -40,7 +46,13 @@ const HomeInfo = ({ currentStage }: StageProps) => {
 
         <Link href="/about" className="neo-brutalism-white neo-btn">
           Explore further
-          <Image src={'/icons/arrow.svg'} alt="arrow" className="w-4 h-4 object-contain" />
+          <ImageLoader
+            width={20}
+            height={20}
+            src={"/icons/arrow.svg"}
+            alt="arrow"
+            className="w-4 h-4 object-contain"
+          />
         </Link>
       </div>
     );
@@ -56,7 +68,13 @@ const HomeInfo = ({ currentStage }: StageProps) => {
 
         <Link href="/projects" className="neo-brutalism-white neo-btn">
           Visit my portfolio
-          <img src={'/icons/arrow.svg'} alt="explore-new-space" className="w-4 h-4 object-contain" />
+          <ImageLoader
+            width={24}
+            height={24}
+            src={"/icons/arrow.svg"}
+            alt="explore-new-space"
+            className="w-4 h-4 object-contain"
+          />
         </Link>
       </div>
     );
@@ -71,7 +89,13 @@ const HomeInfo = ({ currentStage }: StageProps) => {
         </p>
         <Link href="/contact" className="neo-brutalism-white neo-btn">
           Let's discuss
-          <img src={'/icons/arrow.svg'} alt="explore-new-space" className="w-4 h-4 object-contain" />
+          <ImageLoader
+            width={24}
+            height={24}
+            src={"/icons/arrow.svg"}
+            alt="explore-new-space"
+            className="w-4 h-4 object-contain"
+          />
         </Link>
       </div>
     );

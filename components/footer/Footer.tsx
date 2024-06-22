@@ -1,16 +1,15 @@
 "use client";
 
-import useGAEventTracker from "@/hooks/useGAEventTracker";
+import trackEvent from "@/hooks/useGAEventTracker";
 import { socialLinks } from "@/lib/constants";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ImageLoader from "../loader/ImageLoader";
 
 const Footer = () => {
   const pathname = usePathname();
-  const GAEventTracker = useGAEventTracker();
   const handleTracking = (link: string) => {
-    GAEventTracker(link);
+    trackEvent(link);
   };
   let FooterComp: JSX.Element;
   switch (pathname) {
@@ -38,7 +37,7 @@ const Footer = () => {
                   onClick={() => handleTracking(link.name)}
                   className="cursor-pointer"
                 >
-                  <Image
+                  <ImageLoader
                     src={link.icon_url}
                     alt={link.name}
                     width={20}

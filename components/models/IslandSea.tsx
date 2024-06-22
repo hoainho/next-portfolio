@@ -5,8 +5,8 @@ License: CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
 Source: https://sketchfab.com/3d-models/sea-keep-lonely-watcher-09a15a0c14cb4accaf060a92bc70413d
 Title: Sea Keep "Lonely Watcher"
 */
+'use client'
 
-// import { a } from "@react-spring/three";
 import { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GroupProps, useFrame, useThree } from "@react-three/fiber";
@@ -14,6 +14,7 @@ import { Group, Mesh, Material } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 import { Globals } from "@react-spring/shared";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 Globals.assign({
   frameLoop: "demand",
@@ -39,16 +40,15 @@ interface ExtendedGLTF extends GLTF {
 interface IslandSeaModelProps extends GroupProps {
   isRotating: boolean;
   setIsRotating: (status: boolean) => void;
-  setCurrentStage: (index: number | null) => void;
 }
 
 export function IslandSea({
   isRotating,
   setIsRotating,
-  setCurrentStage,
   ...props
 }: IslandSeaModelProps) {
   const islandRef = useRef<Group>(null);
+  const { state, setCurrentStage } = useGlobalContext()
   // Get access to the Three.js renderer and viewport
   const { gl, viewport } = useThree();
   const { nodes, materials } = useGLTF('/3d/sea.glb') as unknown as ExtendedGLTF;

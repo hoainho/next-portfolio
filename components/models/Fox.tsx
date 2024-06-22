@@ -8,6 +8,7 @@
  * And get the code. And then add the rest of the things.
  * YOU DON'T HAVE TO WRITE EVERYTHING FROM SCRATCH
  */
+'use client'
 
 import React, { useRef, useEffect } from "react";
 
