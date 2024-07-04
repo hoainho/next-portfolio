@@ -34,6 +34,13 @@ export const skills = [
     order: 1,
   },
   {
+    image_url: "/icons/three-js.svg",
+    name: "Three.js",
+    yoe: 1,
+    type: "Frontend",
+    order: 1,
+  },
+  {
     image_url: "/icons/redux.svg",
     name: "Redux",
     yoe: 3,

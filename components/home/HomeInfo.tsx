@@ -1,6 +1,5 @@
 'use client'
 
-import cloudfrontLoader from "@/lib/cloudfront-loader";
 import Link from "next/link";
 import ImageLoader from "../loader/ImageLoader";
 import { useGlobalContext } from "@/context/GlobalContext";
