@@ -1,31 +1,33 @@
-'use client'
+"use client";
 
 import { useEffect, useRef } from "react";
-import { useFrame, useLoader } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { Mesh } from "three";
 
 import { Globals } from "@react-spring/shared";
 import { ActionModelType } from "@/app/types";
 
-
 Globals.assign({
   frameLoop: "demand",
 });
 // 3D Model from: https://sketchfab.com/3d-models/phoenix-bird-844ba0cf144a413ea92c779f18912042
 export function Bird() {
-  const birdRef = useRef<Mesh>(null)
+  const birdRef = useRef<Mesh>(null);
 
   // Load the 3D model and animations from the provided GLTF file
   const { scene, animations } = useGLTF("/3d/bird.glb");
 
   // Get access to the animations for the bird
-  const { actions }: { actions: ActionModelType } = useAnimations(animations, birdRef);
+  const { actions }: { actions: ActionModelType } = useAnimations(
+    animations,
+    birdRef
+  );
 
   // Play the "Take 001" animation when the component mounts
   // Note: Animation names can be found on the Sketchfab website where the 3D model is hosted.
   useEffect(() => {
-    if(actions?.["Take 001"]){
+    if (actions?.["Take 001"]) {
       actions?.["Take 001"]?.play();
     }
   }, []);
@@ -59,12 +61,8 @@ export function Bird() {
 
   return (
     // to create and display 3D objects
-    <mesh
-      ref={birdRef}
-      position={[-5, 2, 1]}
-      scale={[0.003, 0.003, 0.003]}
-    >
-      <primitive object={scene} />
+    <mesh ref={birdRef} position={[-5, 2, 1]} scale={[0.003, 0.003, 0.003]}>
+        <primitive object={scene} />
     </mesh>
   );
 }

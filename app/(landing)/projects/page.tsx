@@ -14,6 +14,26 @@ export const metadata: Metadata = {
         Multinational Security Systems, Construction Machinery Management, and
         E-commerce`,
   keywords: `Earthbrain - Smart Construction, , Eyewa, Ringo App, Maqro, ThirdRockPix, Human Information Security Management, Multinational Security Systems, Construction Machinery Management, and E-commerce`,
+  openGraph: {
+    title: "Hoai-Nho | Portfolio",
+    description:
+      "Deep Javascript & TypeScript | Software Engineer | Open Source Contributor",
+    url: `https://hoainho.info/projects`,
+    siteName: "Projects | Hoai-Nho | Portfolio",
+    images: [
+      {
+        url:
+          process.env.NEXT_PUBLIC_LOGO ||
+          "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+        alt: "Hoai-Nho | Portfolio",
+        width: 200,
+        height: 200,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
 };
 
 const Projects = () => {
