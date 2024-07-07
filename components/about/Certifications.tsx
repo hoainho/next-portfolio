@@ -1,5 +1,5 @@
 import { certsAndAwards } from "@/lib/constants";
-import BallCanvas from "../models/Ball";
+import BallCanvas from "@/components/models/Ball";
 
 type Props = {};
 

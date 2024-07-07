@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 const Home = () => {
   return (
-    <section className="w-full h-[100dvh] relative">
+    <section className="bg-black w-full h-[100dvh] relative">
       <LayoutIsland />
       <Audio />
     </section>

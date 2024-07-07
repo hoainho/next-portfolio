@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
 import { FocusEvent, LegacyRef, Suspense, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
 
-import { Fox } from "@/components/models";
+import { Fox } from "@/components/models/Fox";
 import useAlert from "@/hooks/useAlert";
 import Alert from "@/components/alert/Alert";
 import { sendGAEvent } from "@next/third-parties/google";
@@ -16,15 +16,24 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState("idle");
 
-  const handleChange = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = ({
+    target: { name, value },
+  }:
+    | React.ChangeEvent<HTMLInputElement>
+    | React.ChangeEvent<HTMLTextAreaElement>) => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleFocus = (event: FocusEvent<HTMLInputElement> | FocusEvent<HTMLTextAreaElement> |  FocusEvent<HTMLButtonElement>) => {
-    if(event?.target?.name === "email"){
-        setCurrentAnimation("walk.left")
-    }else{
-        setCurrentAnimation("walk");
+  const handleFocus = (
+    event:
+      | FocusEvent<HTMLInputElement>
+      | FocusEvent<HTMLTextAreaElement>
+      | FocusEvent<HTMLButtonElement>
+  ) => {
+    if (event?.target?.name === "email") {
+      setCurrentAnimation("walk.left");
+    } else {
+      setCurrentAnimation("walk");
     }
   };
   const handleBlur = () => setCurrentAnimation("idle");
@@ -34,12 +43,12 @@ const Contact = () => {
     setLoading(true);
     setCurrentAnimation("hit");
     // Track button click event
-    sendGAEvent({ event: 'Send message by email' })
+    sendGAEvent({ event: "Send message by email" });
 
     emailjs
       .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
         {
           from_name: form.name,
           to_name: "Hoài Nhớ",
@@ -47,7 +56,7 @@ const Contact = () => {
           to_email: "hoainho.work@gmail.com",
           message: form.message,
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ''
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ""
       )
       .then(
         () => {
@@ -71,10 +80,8 @@ const Contact = () => {
         (error) => {
           setLoading(false);
           setCurrentAnimation("idle");
-          console.log(
-            'Error mailer:', error
-          );
-          
+          console.log("Error mailer:", error);
+
           showAlert({
             show: true,
             text: "Regrettably, I have not yet received your message. Please try again 😢",
