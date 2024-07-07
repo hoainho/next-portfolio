@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import { Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import CanvasLoader from "@/components/loader/LoaderWithProgressPercent";
-import { Island } from "@/components/models/Island";
+import { Desk } from "@/components/models/Desk";
 type Props = {};
 
 const ThreeProvider = (props: Props) => {
@@ -14,7 +14,6 @@ const ThreeProvider = (props: Props) => {
       camera={{ near: 1, far: 100000 }}
       shadows
     >
-      <>
         <directionalLight
           position={[-0.1, 0.08, 0]}
           intensity={6}
@@ -79,10 +78,9 @@ const ThreeProvider = (props: Props) => {
           intensity={100}
           color={"#50a327"}
         />
-        <Suspense fallback={<CanvasLoader />}>
-          <Island />
-        </Suspense>
-      </>
+      <Suspense fallback={<CanvasLoader />}>
+        <Desk />
+      </Suspense>
     </Canvas>
   );
 };

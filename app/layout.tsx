@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { GA_TRACKING_ID, GTM_TRACKING_ID } from "@/lib/gtag";
 import { GlobalProvider } from "@/context/GlobalContext";
-import Script from "next/script";
+
 const fontPublicSans = localFont({
   src: [
     {
@@ -71,7 +71,6 @@ export default function RootLayout({ children }: { children: ReactElement }) {
       <GoogleTagManager gtmId={GTM_TRACKING_ID} />
       <GoogleAnalytics gaId={GA_TRACKING_ID} />
 
-      <Script type="text/javascript" src="https://unpkg.com/default-passive-events"/>
     </html>
   );
 }
