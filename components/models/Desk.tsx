@@ -1,11 +1,10 @@
 import * as THREE from "three";
-import React, { Suspense, useEffect, useRef } from "react";
-import { Plane, useAnimations, useGLTF } from "@react-three/drei";
+import React, { useEffect, useRef } from "react";
+import { useAnimations, useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { useGlobalContext } from "@/context/GlobalContext";
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { DoubleSide, TextureLoader } from "three";
-import CanvasLoader from "../loader/LoaderWithProgressPercent";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -72,37 +71,48 @@ type GLTFResult = GLTF & {
 
 export function Desk() {
   const deskRef = useRef<THREE.Group>(null);
+  const cachedUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.NEXT_PUBLIC_CLOUDFRONT_URL
+      : "";
   const { nodes, materials, animations } = useGLTF(
-    "/3d/claw_gaming_laptop_setup.glb"
+    `${cachedUrl}/3d/claw_gaming_laptop_setup.glb`
   ) as GLTFResult;
-  const texture = useLoader(TextureLoader, "/images/terminal.png");
+
+  // Preload the GLTF model to start loading immediately
+  useGLTF.preload(`${cachedUrl}/3d/claw_gaming_laptop_setup.glb`);
+
+  const texture = useLoader(TextureLoader, `${cachedUrl}/images/terminal.png`);
   const aspectRatio = texture.image.width / texture.image.height;
 
-  const calendarTexture = useLoader(TextureLoader, "/images/code.png");
+  const calendarTexture = useLoader(
+    TextureLoader,
+    `${cachedUrl}/images/code.png`
+  );
   const calendarAspectRatio = texture.image.width / texture.image.height;
 
   const AWS_Solution_texture = useLoader(
     TextureLoader,
-    "/certifications/aws-knowledge-architecture.png"
+    `${cachedUrl}/certifications/aws-knowledge-architecture.png`
   );
   const AWS_Solution_aspectRatio = texture.image.width / texture.image.height;
 
   const AWS_CloudQuest_texture = useLoader(
     TextureLoader,
-    "/certifications/aws-cloud-practitioner.png"
+    `${cachedUrl}/certifications/aws-cloud-practitioner.png`
   );
   const AWS_CloudQuest_aspectRatio = texture.image.width / texture.image.height;
 
   const AWS_Data_Analysis_texture = useLoader(
     TextureLoader,
-    "/certifications/data-analysis-using-python.png"
+    `${cachedUrl}/certifications/data-analysis-using-python.png`
   );
   const AWS_Data_Analysis_aspectRatio =
     texture.image.width / texture.image.height;
 
   const AWS_Data_Science_texture = useLoader(
     TextureLoader,
-    "/certifications/python-for-data-science.png"
+    `${cachedUrl}/certifications/python-for-data-science.png`
   );
   const AWS_Data_Science_aspectRatio =
     texture.image.width / texture.image.height;

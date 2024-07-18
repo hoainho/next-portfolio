@@ -6,7 +6,6 @@ module.exports = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-    './node_modules/@premieroctet/next-admin/dist/**/*.{ts,tsx}',
 	],
   theme: {
     screens: {
@@ -74,5 +73,4 @@ module.exports = {
       }
     },
   },
-  presets: [require("@premieroctet/next-admin/dist/preset")],
 }
