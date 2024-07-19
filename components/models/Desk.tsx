@@ -191,13 +191,11 @@ export function Desk() {
         deskRef.current.rotation.y -= spaceBase;
         rotationSpeed.current = -0.009;
       } else if (event.key === "ArrowUp") {
-        console.log("Go straight", deskRef.current.scale);
         deskRef.current.scale.x -= spaceBase;
         deskRef.current.scale.y -= spaceBase;
         deskRef.current.scale.z -= spaceBase;
         // scaleSpeed.current = 0.003;
       } else if (event.key === "ArrowDown") {
-        console.log("Go back", deskRef.current.scale);
         deskRef.current.scale.x += spaceBase;
         deskRef.current.scale.y += spaceBase;
         deskRef.current.scale.z += spaceBase;
@@ -312,7 +310,6 @@ export function Desk() {
         const normalizedRotation =
           ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
         // Set the current stage based on the desk's orientation
-        console.log(normalizedRotation);
 
         switch (true) {
           case normalizedRotation >= 0 && normalizedRotation <= 0.5:
