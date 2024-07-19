@@ -99,6 +99,17 @@
 }
 
 @layer components {
+  .bg-linear-wave {
+    background: rgb(199, 175, 255);
+    background: linear-gradient(
+      90deg,
+      rgba(199, 175, 255, 1) 0%,
+      rgba(64, 193, 212, 1) 33%,
+      rgba(0, 155, 255, 1) 72%,
+      rgba(224, 228, 238, 1) 100%
+    );
+  }
+
   .flex-center {
     @apply flex justify-center items-center;
   }
