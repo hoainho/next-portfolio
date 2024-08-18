@@ -78,7 +78,7 @@ const Navbar = () => {
               <Link
                 key={nav.name}
                 href={nav.link}
-                className={`min-w-[110px] text-center cursor-pointer !focus:outline-none hover:btn  hover:text-white ${
+                className={`transition-all min-w-[110px] max-w-[110px] text-center cursor-pointer !focus:outline-none hover:btn  hover:text-white ${
                   pathname === nav.link ? `btn text-white` : defaultTextColor
                 }`}
               >
