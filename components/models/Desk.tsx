@@ -97,6 +97,18 @@ export function Desk() {
   );
   const AWS_Solution_aspectRatio = texture.image.width / texture.image.height;
 
+  const AWS_Essentials_texture = useLoader(
+    TextureLoader,
+    `${cachedUrl}/certifications/aws-knowledge-cloud-essentials.png`
+  );
+  const AWS_Essentials_aspectRatio = texture.image.width / texture.image.height;
+
+  const AWS_EKS_texture = useLoader(
+    TextureLoader,
+    `${cachedUrl}/certifications/aws-knowledge-amazon-eks.png`
+  );
+  const AWS_EKS_aspectRatio = texture.image.width / texture.image.height;
+
   const AWS_CloudQuest_texture = useLoader(
     TextureLoader,
     `${cachedUrl}/certifications/aws-cloud-practitioner.png`
@@ -465,24 +477,58 @@ export function Desk() {
                   />
                 </group>
                 <group
-                  name="Poster02"
-                  position={[-10.753, 76.428, -15.405]}
-                  scale={0.436}
+                  name="Poster01"
+                  position={[0.381, 74.881, -15.405]}
+                  scale={[0.522, 0.552, 0.436]}
                 >
+                  {/* Certificate AWS EKS */}
                   <mesh
-                    name="Poster02_Poster02_Mat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Poster02_Poster02_Mat_0.geometry}
-                    material={materials.Poster02_Mat}
-                  />
-                </group>
-                <group
-                  name="Poster01"
-                  position={[-40.381, 75.781, -15.405]}
-                  scale={[0.562, 0.592, 0.436]}
-                >
-                  {/* Certificate */}
+                    scale={[0.65, 1.2, 1.7]}
+                    rotation={[0, 0, 0]}
+                    position={[-37, -26, 0]}
+                  >
+                    <mesh scale={10}>
+                      <boxGeometry
+                        args={[AWS_EKS_aspectRatio * 2, 2, 0.1]}
+                      />
+                      <meshPhysicalMaterial
+                        color="rgba(255, 255, 255, 0.9)"
+                        roughness={0.1}
+                        metalness={0.5}
+                        envMapIntensity={2}
+                        map={AWS_EKS_texture}
+                        transparent
+                        side={DoubleSide}
+                      />
+                    </mesh>
+                  </mesh>
+
+                  {/* Certificate AWS Essentials */}
+                  <mesh
+                    castShadow
+                    receiveShadow
+                    scale={[0.65, 1.2, 1.7]}
+                    rotation={[0, 0, 0]}
+                    position={[-37, 2, 0]}
+                  >
+                    <mesh scale={10}>
+                      <boxGeometry
+                        args={[AWS_Essentials_aspectRatio * 2, 2, 0.1]}
+                      />
+                      <meshPhysicalMaterial
+                        color="rgba(255, 255, 255, 0.9)"
+                        roughness={0.1}
+                        metalness={0.5}
+                        envMapIntensity={2}
+                        map={AWS_Essentials_texture}
+                        transparent
+                        side={DoubleSide}
+                      />
+                    </mesh>
+                  </mesh>
+                  {/* Certificate AWS Solution Architect */}
                   <mesh
                     castShadow
                     receiveShadow
@@ -578,9 +624,24 @@ export function Desk() {
                     </mesh>
                   </mesh>
                 </group>
+
+                {/* Poster centre */}
+                <group
+                  name="Poster02"
+                  position={[-50.753, 76.428, -15.405]}
+                  scale={0.436}
+                >
+                  <mesh
+                    name="Poster02_Poster02_Mat_0"
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Poster02_Poster02_Mat_0.geometry}
+                    material={materials.Poster02_Mat}
+                  />
+                </group>
                 <group
                   name="Poster04"
-                  position={[-10.753, 60.519, -15.405]}
+                  position={[-50.753, 60.519, -15.405]}
                   scale={0.436}
                 >
                   <mesh
@@ -593,7 +654,7 @@ export function Desk() {
                 </group>
                 <group
                   name="Poster05"
-                  position={[5.761, 60.519, -15.405]}
+                  position={[-35.761, 60.519, -15.405]}
                   scale={0.436}
                 >
                   <mesh
@@ -606,7 +667,7 @@ export function Desk() {
                 </group>
                 <group
                   name="Poster03"
-                  position={[5.761, 76.428, -15.405]}
+                  position={[-35.761, 76.428, -15.405]}
                   scale={0.436}
                 >
                   <mesh
