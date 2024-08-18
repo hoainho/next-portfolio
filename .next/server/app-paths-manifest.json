@@ -1,8 +1,8 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/robots.txt/route": "app/robots.txt/route.js",
-  "/(landing)/about/page": "app/(landing)/about/page.js",
-  "/(landing)/page": "app/(landing)/page.js",
+  "/(landing)/contact/page": "app/(landing)/contact/page.js",
   "/(landing)/projects/page": "app/(landing)/projects/page.js",
-  "/(landing)/contact/page": "app/(landing)/contact/page.js"
+  "/(landing)/about/page": "app/(landing)/about/page.js",
+  "/(landing)/page": "app/(landing)/page.js"
 }
