@@ -84,7 +84,7 @@ const Projects = () => {
                     className="text-black mt-2 leading-relaxed"
                     key={description}
                   >
-                    {description}
+                    <div dangerouslySetInnerHTML={{ __html: description }} />
                   </li>
                 ))}
               </ul>
