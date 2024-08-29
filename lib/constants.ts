@@ -411,10 +411,10 @@ export const projects = [
               <strong>The Application:</strong> A robust real-time location tracking system designed specifically for ride matching. It utilizes <em>WebSockets</em> for seamless bi-directional communication, allowing for live updates of user positions on a map.
           </p>
           
-          <h3 style="color: #34495e; margin-bottom: 15px;">Key Features:</h3>
+          <h3 style="color: #34495e; margin-bottom: 15px;">Responsibilities:</h3>
           <ul style="font-size: 16px; list-style-type: disc; margin-left: 20px; margin-bottom: 20px;">
-              <li><em>Real-Time Position Tracking</em></li>
-              <li><em>Ride Matching</em></li>
+              <li>Real-Time Position Tracking</li>
+              <li>Ride Matching</li>
               <li>Client Management</li>
               <li>Logging and Monitoring</li>
               <li>User Management</li>
@@ -444,7 +444,7 @@ export const projects = [
             <strong>The Application:</strong> A microservices-based platform designed to build multilingual sites with seamless performance. It incorporates <em>Golang</em> and <em>Node.js</em> for robust back-end operations and integrates Docker for efficient project setup and deployment.
         </p>
         
-        <h3 style="color: #34495e; margin-bottom: 15px;">Key Features:</h3>
+        <h3 style="color: #34495e; margin-bottom: 15px;">Responsibilities:</h3>
         <ul style="font-size: 16px; list-style-type: disc; margin-left: 20px; margin-bottom: 20px;">
             <li>Multilingual Site Construction</li>
             <li>Task Management and Team Collaboration</li>
@@ -470,13 +470,7 @@ export const projects = [
       `<div style="font-family: Arial, sans-serif; line-height: 1.6;">
         <h2 style="color: #2c3e50; margin-bottom: 20px;">Leading omnichannel multi-brand eyewear hub</h2>
           <p style="font-size: 16px; margin-bottom: 15px;">
-              <strong>April 2022 - July 2022</strong><br>
-              <strong>Team size:</strong> 20+<br>
-          </p>
-
-          <h3 style="color: #34495e; margin-bottom: 15px;">Role: Frontend Developer</h3>
-          <p style="font-size: 16px; margin-bottom: 15px;">
-              As a Frontend Developer, I played a pivotal role in developing a comprehensive e-commerce application specializing in eyewear products catering to the international market. The platform was designed to facilitate seamless transactions across multiple countries, including UAE, Saudi Arabia, Kuwait, Qatar, Oman, and Bahrain. Leveraging the React framework, I led the frontend development efforts, ensuring an intuitive and responsive user interface that catered to the diverse needs of our global customer base.
+              <strong>The Application:</strong> The platform was designed to facilitate seamless transactions across multiple countries, including UAE, Saudi Arabia, Kuwait, Qatar, Oman, and Bahrain. Leveraging the React framework, I led the frontend development efforts, ensuring an intuitive and responsive user interface that catered to the diverse needs of our global customer base.
           </p>
           
           <h3 style="color: #34495e; margin-bottom: 15px;">Technologies Used:</h3>
@@ -484,7 +478,7 @@ export const projects = [
               <strong>ReactJS</strong>, <strong>Jest</strong>, <strong>PM2</strong>, <strong>Lerna</strong>, <strong>GitHub pipeline</strong>
           </p>
 
-          <h3 style="color: #34495e; margin-bottom: 15px;">Responsibilities:</h3>
+          <h3 style="color: #34495e; margin-bottom: 15px; margin-top: 15px;">Responsibilities:</h3>
           <ul style="font-size: 16px; list-style-type: disc; margin-left: 20px; margin-bottom: 20px;">
               <li><strong>React Framework Implementation:</strong>
                   <ul style="list-style-type: circle; margin-left: 20px;">
@@ -524,20 +518,13 @@ export const projects = [
       `<div style="font-family: Arial, sans-serif; line-height: 1.6;">
           <h2 style="color: #2c3e50; margin-bottom: 20px;">The Best Greeting and Gifting Experience for Senders and Receivers</h2>
           <p style="font-size: 16px; margin-bottom: 15px;">
-              <strong>Dates: To be added</strong><br>
+              <strong>The Application:</strong> As a Senior Frontend Engineer for Fountain Gifts, I crafted a sophisticated e-commerce platform using Next.js 14 and TailwindCSS. I focused on delivering a seamless user experience with pixel-perfect design and effective SEO. My responsibilities included optimizing UI performance, integrating advanced features, and leveraging CloudFront and CloudFlare for enhanced content delivery and security.
           </p>
-
-          <h3 style="color: #34495e; margin-bottom: 15px;">Role: Senior Frontend Engineer</h3>  
-          <p style="font-size: 16px; margin-bottom: 15px;">
-              As a Senior Frontend Engineer for Fountain Gifts, I crafted a sophisticated e-commerce platform using Next.js 14 and TailwindCSS. I focused on delivering a seamless user experience with pixel-perfect design and effective SEO. My responsibilities included optimizing UI performance, integrating advanced features, and leveraging CloudFront and CloudFlare for enhanced content delivery and security.
-          </p>
-          
           <h3 style="color: #34495e; margin-bottom: 15px;">Technologies Used:</h3>
           <p style="font-size: 16px;">
               <strong>Next.js 14</strong>, <strong>TailwindCSS</strong>, <strong>Custom Hooks</strong>, <strong>CloudFront</strong>, <strong>CloudFlare</strong>, <strong>SEO</strong>
           </p>
-
-          <h3 style="color: #34495e; margin-bottom: 15px;">Responsibilities:</h3>
+          <h3 style="color: #34495e; margin-bottom: 15px; margin-top: 15px;">Responsibilities:</h3>
           <ul style="font-size: 16px; list-style-type: disc; margin-left: 20px; margin-bottom: 20px;">
               <li><strong>Advanced UI Development:</strong>
                   <ul style="list-style-type: circle; margin-left: 20px;">
@@ -579,13 +566,7 @@ export const projects = [
       `<div style="font-family: Arial, sans-serif; line-height: 1.6;">
         <h2 style="color: #2c3e50; margin-bottom: 20px;">Manage and control risks</h2>
         <p style="font-size: 16px; margin-bottom: 15px;">
-            <strong>June 2022 - September 2022</strong><br>
-            <strong>Team size:</strong> 7<br>
-        </p>
-
-        <h3 style="color: #34495e; margin-bottom: 15px;">Role: Fullstack Developer</h3>
-        <p style="font-size: 16px; margin-bottom: 15px;">
-            As a Fullstack Developer for RingoApp, I focused on enhancing administrative tools for workforce management. This involved developing features to track employee working hours, integrating voice tracking systems for activity monitoring, and implementing real-time notifications for task assignments. My role also included improving security measures and optimizing data access and API connections.
+            <strong>The Application:</strong> As a Fullstack Developer for RingoApp, I focused on enhancing administrative tools for workforce management. This involved developing features to track employee working hours, integrating voice tracking systems for activity monitoring, and implementing real-time notifications for task assignments. My role also included improving security measures and optimizing data access and API connections.
         </p>
         
         <h3 style="color: #34495e; margin-bottom: 15px;">Technologies Used:</h3>
@@ -593,7 +574,7 @@ export const projects = [
             <strong>ReactJS</strong>, <strong>ExpressJS</strong>, <strong>Sequelize</strong>, <strong>MaterialUI</strong>, <strong>Twilio</strong>, <strong>GitHub CICD</strong>, <strong>Docker</strong>
         </p>
 
-        <h3 style="color: #34495e; margin-bottom: 15px;">Responsibilities:</h3>
+        <h3 style="color: #34495e; margin-bottom: 15px; margin-top: 15px;">Responsibilities:</h3>
         <ul style="font-size: 16px; list-style-type: disc; margin-left: 20px; margin-bottom: 20px;">
             <li><strong>Time Tracking:</strong>
                 <ul style="list-style-type: circle; margin-left: 20px;">
@@ -643,13 +624,7 @@ export const projects = [
       `<div style="font-family: Arial, sans-serif; line-height: 1.6;">
         <h2 style="color: #2c3e50; margin-bottom: 20px;">Diversified financial services</h2>
         <p style="font-size: 16px; margin-bottom: 15px;">
-            <strong>December 2021 - March 2022</strong><br>
-            <strong>Team size:</strong> 9<br>
-        </p>
-
-        <h3 style="color: #34495e; margin-bottom: 15px;">Role: Backend Developer</h3>
-        <p style="font-size: 16px; margin-bottom: 15px;">
-            As a Backend Developer, I spearheaded a pivotal project aimed at revolutionizing the stock market landscape for investors. The project involved developing a dynamic server tailored specifically for mobile platforms. Leveraging frameworks like AdonisJS and implementing technologies such as Socker and Bull, I engineered a scalable infrastructure for real-time stock data processing. The project also included creating a responsive UI with real-time charting capabilities and functionalities like payment processing and stock trading.
+            <strong>The Application:</strong> As a Backend Developer, I spearheaded a pivotal project aimed at revolutionizing the stock market landscape for investors. The project involved developing a dynamic server tailored specifically for mobile platforms. Leveraging frameworks like AdonisJS and implementing technologies such as Socker and Bull, I engineered a scalable infrastructure for real-time stock data processing. The project also included creating a responsive UI with real-time charting capabilities and functionalities like payment processing and stock trading.
         </p>
         
         <h3 style="color: #34495e; margin-bottom: 15px;">Technologies Used:</h3>
@@ -657,7 +632,7 @@ export const projects = [
             <strong>AWS</strong>, <strong>ReactJS</strong>, <strong>Adonis</strong>, <strong>AntDesign</strong>, <strong>MySQL</strong>, <strong>Adonis-bull</strong>, <strong>Twilio</strong>, <strong>Cloudinary</strong>, <strong>Socket</strong>, <strong>Docker</strong>, <strong>Firebase</strong>, <strong>CICD</strong>
         </p>
 
-        <h3 style="color: #34495e; margin-bottom: 15px;">Responsibilities:</h3>
+        <h3 style="color: #34495e; margin-bottom: 15px; margin-top: 15px;">Responsibilities:</h3>
         <ul style="font-size: 16px; list-style-type: disc; margin-left: 20px; margin-bottom: 20px;">
             <li><strong>Server Development:</strong>
                 <ul style="list-style-type: circle; margin-left: 20px;">
@@ -699,13 +674,12 @@ export const projects = [
     name: 'ThirdRockPix',
     descriptions: [
       `<div style="font-family: Arial, sans-serif; line-height: 1.6;">
-        <h2 style="color: #2c3e50; margin-bottom: 20px;">Memories from your trips</h2>
-        
+        <h2 style="color: #2c3e50; margin-bottom: 20px;">Memories from your trips</h2>  
         <p style="font-size: 16px; margin-bottom: 15px;">
             <strong>The Application:</strong> A highly complex platform focused on large-scale image processing and seamless integration with payment systems. It handles everything from background job processing to S3 uploads and CloudFront integration, ensuring optimal performance.
         </p>
         
-        <h3 style="color: #34495e; margin-bottom: 15px;">Key Features:</h3>
+        <h3 style="color: #34495e; margin-bottom: 15px; margin-top: 15px;">Responsibilities:</h3>
         <ul style="font-size: 16px; list-style-type: disc; margin-left: 20px; margin-bottom: 20px;">
             <li>Large-Scale Image Processing</li>
             <li>S3 Uploads with Background Processing</li>
@@ -716,7 +690,7 @@ export const projects = [
             <li>Notification System with Background Jobs</li>
         </ul>
         
-        <h3 style="color: #34495e; margin-bottom: 15px;">Technologies Used:</h3>
+        <h3 style="color: #34495e; margin-bottom: 15px;margin-top: 15px;">Technologies Used:</h3>
         <p style="font-size: 16px;">
             <strong><em>Node.js (AdonisJS, Bull)</em></strong>, <strong><em>ReactJS (Redux)</em></strong>, <strong><em>MySQL</em></strong>, <strong><em>Redis</em></strong>, <strong><em>Docker</em></strong>, <strong><em>AWS (CloudFront, Lambda, EC2, Nginx)</em></strong>
         </p>
