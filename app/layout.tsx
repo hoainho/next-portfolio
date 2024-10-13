@@ -49,7 +49,7 @@ export const metadata: Metadata = {
       {
         url:
           process.env.NEXT_PUBLIC_LOGO ||
-          "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/favicon.png",
+          "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
         alt: "Hoai-Nho | Portfolio",
         width: 200,
         height: 200,

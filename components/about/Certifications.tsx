@@ -1,5 +1,6 @@
 import { certsAndAwards } from "@/lib/constants";
 import BallCanvas from "@/components/models/Ball";
+import Link from 'next/link';
 
 type Props = {};
 
@@ -13,11 +14,11 @@ const Certifications = (props: Props) => {
         {certsAndAwards.map((cert, index) => (
           <div className="w-full max-w-[400px] flex-center flex-col" key={cert.name}>
             <BallCanvas icon={cert.badge} />
-            <a href={cert.link} target="_blank" className="cursor-pointer">
+            <Link href={cert.link} target="_blank" className="cursor-pointer">
               <h3 className="text-white text-center text-[16px] font-bold capitalize leading-tight tracking-wider hover:text-[#60efff]">
                 {cert.name}
               </h3>
-            </a>
+            </Link>
           </div>
         ))}
       </div>
