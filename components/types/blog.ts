@@ -1,8 +1,7 @@
-import { ReadTimeResults } from 'reading-time';
 
 export type BlogFrontmatter = {
   wordCount: number;
-  readingTime: ReadTimeResults;
+  readingTime: string;
   slug: string;
   englishOnly?: boolean;
   title: string;
@@ -27,7 +26,7 @@ export type InjectedMeta = { views?: number; likes?: number };
 export type LibraryFrontmatter = {
   slug: string;
   title: string;
-  readingTime: ReadTimeResults;
+  readingTime: string;
   description: string;
   tags: string;
 };
