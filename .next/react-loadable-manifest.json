@@ -1,5 +1,5 @@
 {
-  "node_modules/@react-three/drei/core/useVideoTexture.js -> hls.js": {
+  "node_modules/@react-three/drei/core/VideoTexture.js -> hls.js": {
     "id": null,
     "files": []
   },
