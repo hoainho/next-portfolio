@@ -70,19 +70,21 @@ const BlogFilter = ({ categories, posts }: BlogFilterProps) => {
     if (search.includes(tag)) {
       setSearch((s) =>
         s
-          .split(' ')
+          .split('  ')
           .filter((t) => t !== tag)
-          ?.join(' ')
+          ?.join('  ')
       );
     } else {
       // append tag
-      setSearch((s) => (s !== '' ? `${s.trim()} ${tag}` : tag));
+      setSearch((s) => (s !== '' ? `${s.trim()}  ${tag}` : tag));
     }
   };
 
   /** Show accent if not disabled and selected  */
   const checkTagged = (category: string) => {
-    return categories.some((ct) => ct.name === category) && search.toLowerCase().split(' ').includes(category.toLowerCase());
+    return (
+      categories.some((ct) => ct.name.replaceAll('&amp;', '&') === category) && search.toLowerCase().split('  ').includes(category.toLowerCase())
+    );
   };
   return (
     <div className='mt-2 flex flex-wrap items-baseline gap-2'>
@@ -103,23 +105,26 @@ const BlogFilter = ({ categories, posts }: BlogFilterProps) => {
           </div>
         </div>
       </div>
-      <div className='flex mt-2'>
+      <div className='flex mt-2 flex-wrap gap-y-3'>
         <span className='font-medium'>Choose keyword:</span>
         <SkipNavTag>
-          {categories.map((category) => (
-            <Tag
-              key={category.id}
-              onClick={() => toggleTag(category.name)}
-              disabled={!categories.includes(category)}
-              className='block-container'
-            >
-              {checkTagged(category.name) ? (
-                <Accent isActive>{category.name}</Accent>
-              ) : (
-                <Accent>{category.name}</Accent>
-              )}
-            </Tag>
-          ))}
+          {categories.map((category) => {
+            const formatCategoryName = category.name.replaceAll('&amp;', '&')
+            return (
+              <Tag
+                key={category.id}
+                onClick={() => toggleTag(formatCategoryName)}
+                disabled={!categories.includes(category)}
+                className='block-container'
+              >
+                {checkTagged(formatCategoryName) ? (
+                  <Accent isActive>{formatCategoryName}</Accent>
+                ) : (
+                  <Accent>{formatCategoryName}</Accent>
+                )}
+              </Tag>
+            );
+          })}
         </SkipNavTag>
       </div>
 

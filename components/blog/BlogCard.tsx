@@ -1,22 +1,20 @@
 import clsx from 'clsx';
 import { format } from 'date-fns';
 import * as React from 'react';
-// import { HiOutlineClock, HiOutlineEye } from 'react-icons/hi';
-
-import Accent from '@/components/blog/Accent';
-import Tag from '@/components/blog/Tag';
-
-import { HiOutlineClock, HiOutlineEye } from 'react-icons/hi';
+import { HiOutlineClock } from 'react-icons/hi';
 import { BlogType } from '@/app/types';
 import Image from 'next/image';
 import UnstyledLink from './UnstyledLink';
-import getColorByDay from '@/utils/getColorByDay';
+import dynamic from 'next/dynamic';
+
+const Tag = dynamic(() => import('./Tag'), { ssr: false});
 
 type BlogCardProps = {
   post: BlogType;
 } & React.ComponentPropsWithoutRef<'li'>;
 
 export default function BlogCard({ post, className, onClick }: BlogCardProps) {
+  const tags = post.yoast_head_json.schema?.['@graph']?.[0].articleSection;
   return (
     <li
       className={clsx(
@@ -43,6 +41,7 @@ export default function BlogCard({ post, className, onClick }: BlogCardProps) {
               alt={post.yoast_head_json?.og_image?.[0].type ?? post.yoast_head_json.title}
               title={post.yoast_head_json?.og_title}
               className='aspect-[4/2.4]'
+              onError={(e) => { e.currentTarget.src = '/icons/logo.jpeg'; }}
             />
           </div>
           <div
@@ -50,11 +49,38 @@ export default function BlogCard({ post, className, onClick }: BlogCardProps) {
               'block-container w-full px-4 py-2 mt-2 flex flex-wrap justify-end gap-x-2 gap-y-1 text-sm text-black dark:text-gray-100'
             }
           >
-            {post.yoast_head_json.schema?.['@graph']?.[0].articleSection?.map((category: string, index: number) => (
-              <Tag tabIndex={-1} className={`btn-back-blue bg-opacity-80 dark:!bg-opacity-60`} key={`${category}-${index}`}>
+            {tags?.slice(0, 2)?.map((category: string, index: number) => (
+              <Tag
+                tabIndex={-1}
+                className={`btn-back-blue bg-opacity-80 dark:!bg-opacity-60`}
+                key={`${category}-${index}`}
+              >
                 {category}
               </Tag>
             ))}
+            {tags?.slice(2)?.length ? (
+              <>
+                <Tag tabIndex={-1} className={`relative group btn-back-blue bg-opacity-80`}>
+                  +{tags.length - 2}
+                  <div
+                    className={`absolute right-0 flex flex-col mt-2 gap-y-1 
+                        transition-all duration-500 delay-200 ease-in-out 
+                        opacity-0 translate-x-24
+                        group-hover:opacity-100 group-hover:translate-x-0`}
+                  >
+                    {tags?.slice(2)?.map((category: string, index: number) => (
+                      <Tag
+                        tabIndex={-1}
+                        className={`btn-back-blue`}
+                        key={`${category}-${index}`}
+                      >
+                        {category}
+                      </Tag>
+                    ))}
+                  </div>
+                </Tag>
+              </>
+            ) : null}
           </div>
         </div>
         <div className='p-4 flex flex-col justify-between'>

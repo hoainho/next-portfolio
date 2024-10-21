@@ -1,5 +1,7 @@
 import { ExperienceType } from '@/app/types';
 
+export const REVALIDATE_POSTS = 3600
+
 export const SKILL_TYPE = {
   FRONTEND: 'Frontend',
   BACKEND: 'Backend',
