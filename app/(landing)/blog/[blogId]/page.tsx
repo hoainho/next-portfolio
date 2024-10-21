@@ -20,7 +20,9 @@ type BlogDetailProps = {
 const BlogDetail = async ({ params }: BlogDetailProps) => {
   const url = process.env.NEXT_PUBLIC_BLOG_API;
 
-  const getBlogDetail = await fetch(`${url}/posts/${params.blogId}?author=3`);
+  const getBlogDetail = await fetch(`${url}/posts/${params.blogId}?author=3`, {
+    next: { revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600) },
+  });
 
   if (getBlogDetail.status === 404) {
     return (
@@ -41,10 +43,10 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
     url: post.yoast_head_json.og_url,
     tags: post.yoast_head_json.schema?.['@graph']?.[0].keywords?.join(', '),
     isBlog: true,
-  }
+  };
   return (
     <div className='blog my-10'>
-      <Seo {...metaOG}/>
+      <Seo {...metaOG} />
       <div className='max-container-blog'>
         <h1 className='font-extrabold text-3xl'>{post.title.rendered}</h1>
         <div className='py-5 border-y flex justify-between items-start mb-2 mt-4 text-sm text-gray-600 dark:text-gray-300'>
@@ -65,8 +67,8 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
           </div>
         </div>
         <div className='flex gap-3'>
-        <BlogHTML post={post} />
-        <GenerateTableOfContent />
+          <BlogHTML post={post} />
+          <GenerateTableOfContent />
         </div>
       </div>
       <ScrollToTop />
