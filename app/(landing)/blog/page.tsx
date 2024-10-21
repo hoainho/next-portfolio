@@ -1,7 +1,6 @@
 import Seo from '@/components/blog/Seo';
 import { BlogCategoryI, BlogType } from '@/app/types';
 import BlogFilter from '@/components/blog/BlogFilter';
-import { REVALIDATE_POSTS } from '@/lib/constants';
 
 export default async function BlogPage() {
   const url = process.env.NEXT_PUBLIC_BLOG_API;

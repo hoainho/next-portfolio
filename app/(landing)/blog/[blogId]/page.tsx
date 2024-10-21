@@ -36,12 +36,12 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
   const post: BlogType = await getBlogDetail.json();
 
   const metaOG = {
-    templateTitle: post.title.rendered,
-    title: post.yoast_head_json.og_title,
-    description: post.yoast_head_json.og_description,
-    image: post.yoast_head_json.og_image[0].url,
-    url: post.yoast_head_json.og_url,
-    tags: post.yoast_head_json.schema?.['@graph']?.[0].keywords?.join(', '),
+    templateTitle: post?.title?.rendered,
+    title: post?.yoast_head_json?.og_title,
+    description: post?.yoast_head_json?.og_description,
+    image: post?.yoast_head_json?.og_image[0]?.url,
+    url: post?.yoast_head_json?.og_url,
+    tags: post?.yoast_head_json?.schema?.['@graph']?.[0].keywords?.join(', '),
     isBlog: true,
   };
   return (
