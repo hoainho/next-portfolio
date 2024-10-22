@@ -5,8 +5,10 @@ import { format } from 'date-fns';
 import BlogHTML from '@/components/blog/BlogHTML';
 import ScrollToTop from '@/components/buttons/ButtonScrollToTop';
 import GenerateTableOfContent from '@/components/blog/GenerateTableOfContent';
-import Seo from '@/components/blog/Seo';
+import { Metadata } from 'next';
 import './style.scss';
+import BackButton from '@/components/buttons/ButtonBack';
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb';
 
 type BlogDetailProps = {
   params: {
@@ -17,9 +19,38 @@ type BlogDetailProps = {
   };
 };
 
-const BlogDetail = async ({ params }: BlogDetailProps) => {
-  const url = process.env.NEXT_PUBLIC_BLOG_API;
+const url = process.env.NEXT_PUBLIC_BLOG_API;
 
+export async function generateMetadata({ params }: BlogDetailProps): Promise<Metadata> {
+  try {
+    const res = await fetch(`${url}/posts/${params.blogId}`);
+    if (res.status === 404) {
+      return { title: 'Post Not Found' };
+    }
+
+    const post: BlogType = await res.json();
+    return {
+      title: `${post.yoast_head_json?.og_title || post.title.rendered} | Nick's Blog`,
+      description: post.yoast_head_json?.og_description || '',
+      openGraph: {
+        title: post.yoast_head_json?.og_title,
+        description: post.yoast_head_json?.og_description,
+        url: post.yoast_head_json?.og_url,
+        images: [{ url: post.yoast_head_json?.og_image[0]?.url }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: post.yoast_head_json?.og_title,
+        description: post.yoast_head_json?.og_description,
+        images: post.yoast_head_json?.og_image[0]?.url,
+      },
+    };
+  } catch (error) {
+    return { title: `Error fetching post data | Nick's Blog` };
+  }
+}
+
+const BlogDetail = async ({ params }: BlogDetailProps) => {
   const getBlogDetail = await fetch(`${url}/posts/${params.blogId}?author=3`, {
     next: { revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600) },
   });
@@ -35,19 +66,17 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
 
   const post: BlogType = await getBlogDetail.json();
 
-  const metaOG = {
-    templateTitle: post?.title?.rendered,
-    title: post?.yoast_head_json?.og_title,
-    description: post?.yoast_head_json?.og_description,
-    image: post?.yoast_head_json?.og_image[0]?.url,
-    url: post?.yoast_head_json?.og_url,
-    tags: post?.yoast_head_json?.schema?.['@graph']?.[0].keywords?.join(', '),
-    isBlog: true,
-  };
+  let breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Blog', href: '/blog' },
+  ];
+
+  breadcrumbItems = breadcrumbItems.concat({ label: post.title.rendered, href: `/blog/${post.id}` });
+
   return (
     <div className='blog my-10'>
-      <Seo {...metaOG} />
       <div className='max-container-blog'>
+        <Breadcrumb items={breadcrumbItems} />
         <h1 className='font-extrabold text-3xl'>{post.title.rendered}</h1>
         <div className='py-5 border-y flex justify-between items-start mb-2 mt-4 text-sm text-gray-600 dark:text-gray-300'>
           <div className='flex items-center gap-1'>
