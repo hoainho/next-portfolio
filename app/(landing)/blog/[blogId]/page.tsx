@@ -2,11 +2,11 @@ import { BlogType } from '@/app/types';
 import React from 'react';
 import { HiCalendar, HiOutlineClock, HiUserCircle } from 'react-icons/hi';
 import { format } from 'date-fns';
-import './style.scss';
 import BlogHTML from '@/components/blog/BlogHTML';
 import ScrollToTop from '@/components/buttons/ButtonScrollToTop';
 import GenerateTableOfContent from '@/components/blog/GenerateTableOfContent';
 import Seo from '@/components/blog/Seo';
+import './style.scss';
 
 type BlogDetailProps = {
   params: {
