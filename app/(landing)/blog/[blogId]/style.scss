@@ -159,6 +159,11 @@ blockquote cite {
     margin-top: 1.5rem;
 }
 
+.blog-html *:not(.table-of-content) {
+    box-sizing: border-box;
+    width: 100%;
+}
+
 //Heading
 .wp-block-heading {
     font-size: 26px;
@@ -168,7 +173,6 @@ blockquote cite {
 
 // Image
 .wp-block-image {
-    flex: 1 1 100%;
     display: flex;
     justify-content: center;
     align-items: center;

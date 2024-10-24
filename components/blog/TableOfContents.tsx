@@ -37,8 +37,7 @@ export default function TableOfContents({ headings }: Props) {
 
   return (
     <aside
-      className='hidden xl:block sticky top-[112px] h-[calc(100vh-40px)] w-64 overflow-y-auto p-2 rounded-lg shadow-lg 
-                 bg-gradient-to-br from-pink-100 via-blue-100 to-purple-200'
+      className='table-of-content hidden xl:block sticky top-[112px] h-[calc(100vh-40px)] w-64 overflow-y-auto p-2 rounded-lg bg-gradient-to-br from-indigo-100 via-indigo-50 to-transparent shadow-lg'
     >
       <h3 className='text-xl font-bold text-indigo-700 mb-4'>Table of Contents</h3>
       <ul className='space-y-3'>

@@ -7,8 +7,8 @@ import ScrollToTop from '@/components/buttons/ButtonScrollToTop';
 import GenerateTableOfContent from '@/components/blog/GenerateTableOfContent';
 import { Metadata } from 'next';
 import './style.scss';
-import BackButton from '@/components/buttons/ButtonBack';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb';
+import Image from 'next/image';
 
 type BlogDetailProps = {
   params: {
@@ -77,8 +77,16 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
     <div className='blog my-10'>
       <div className='max-container-blog'>
         <Breadcrumb items={breadcrumbItems} />
-        <h1 className='font-extrabold text-3xl'>{post.title.rendered}</h1>
-        <div className='py-5 border-y flex justify-between items-start mb-2 mt-4 text-sm text-gray-600 dark:text-gray-300'>
+        <Image
+          width={post.yoast_head_json?.og_image?.[0]?.width ?? 1200}
+          height={Math.max(post.yoast_head_json?.og_image?.[0]?.height ?? 480)}
+          src={post.yoast_head_json?.og_image?.[0].url}
+          alt={post.yoast_head_json?.og_image?.[0].type ?? post.yoast_head_json.title}
+          title={post.yoast_head_json?.og_title}
+          className='aspect-[4/2.4] rounded-xl my-5'
+        />
+        <h1 className='font-extrabold text-4xl my-10'>{post.title.rendered}</h1>
+        <div className='py-5 border-y flex justify-between items-start mt-4 mb-8 text-sm text-gray-600 dark:text-gray-300'>
           <div className='flex items-center gap-1'>
             <HiUserCircle className='inline-block text-base' />
             <span className='text-primary'>{post.yoast_head_json.author}</span>
