@@ -2,12 +2,15 @@
 import { useHeadings } from '@/hooks/useHeading';
 import React from 'react';
 import TableOfContents from './TableOfContents';
+import { BlogType } from '@/app/types';
 
-type Props = {};
+type Props = {
+  referencePosts: BlogType[];
+};
 
-const GenerateTableOfContent = (props: Props) => {
+const GenerateTableOfContent = ({ referencePosts }: Props) => {
   const headings = useHeadings();
-  return <TableOfContents headings={headings} />;
+  return <TableOfContents headings={headings} referencePosts={referencePosts} />;
 };
 
 export default GenerateTableOfContent;

@@ -2,6 +2,26 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import * as React from 'react';
 
+export function TagDetail({
+  children,
+  className,
+  ...rest
+}: React.ComponentPropsWithoutRef<'a'>) {
+  return (
+    <Link
+      href={`/blog/tags/${children}`}
+      className={clsx(
+        className,
+        'border rounded-full px-4 text-center text-[14px] text-fg-default font-medium font-mono',
+        'without-style w-fit text-primary hover:text-active'
+      )}
+      {...rest}
+    >
+      {children}
+    </Link>
+  );
+}
+
 export default function Tag({
   children,
   className,

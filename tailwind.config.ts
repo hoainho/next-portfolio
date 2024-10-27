@@ -54,7 +54,14 @@ module.exports = {
         'skeleton': 'var(--color-skeleton)',
         'overlay': 'var(--color-overlay)',
         'overlay-black': 'var(--color-overlay-black)',
-        'floral-white': 'var(--color-floral-white)'
+        'floral-white': 'var(--color-floral-white)',
+        'fg-default': 'var(--color-fg-default)',
+        'fg-subtle': 'var(--color-fg-subtle)',
+        'fg-muted': 'var(--color-fg-muted)',
+        'fg-on-emphasis': 'var(--color-fg-on-emphasis)',
+        'bg-default': 'var(--color-bg-default)',
+        'wp--preset--gradient--luminous-dusk': 'var(--wp--preset--gradient--luminous-dusk)',
+        'blog-divider': 'var(--blog-divider)'
       },
       borderRadius: {
         lg: 'var(--radius)',
