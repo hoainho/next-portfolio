@@ -40,7 +40,7 @@ export default function TableOfContents({ headings, referencePosts }: Props) {
   }, [headings]);
 
   return (
-    <aside className='table-of-content hidden xl:block sticky top-5 h-fit w-56 overflow-y-auto'>
+    <aside className='table-of-content sticky top-5 h-fit w-56 overflow-y-auto'>
       <h3 className='text-xl font-bold text-primary mb-4'>Table of Contents</h3>
       <ul className='space-y-2'>
         {headings.map((heading) => (

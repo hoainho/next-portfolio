@@ -78,7 +78,7 @@ const Navbar = () => {
             className='h-20 w-20 object-cover rounded-full '
           />
         </Link>
-        <nav className='flex items-center text-sm gap-4 font-medium uppercase'>
+        <nav className='hidden sm:flex items-center text-sm gap-4 font-medium uppercase'>
           {navbar.map((nav) => {
             return (
               <Link

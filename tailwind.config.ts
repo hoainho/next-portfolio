@@ -9,6 +9,7 @@ module.exports = {
 	],
   theme: {
     screens: {
+      'xs': '361px',
       'sm': '481px',
       'md': '769px',
       'lg': '961px',
@@ -29,6 +30,7 @@ module.exports = {
         'sharp-grotesk': ['var(--font-sharp-grotesk)'],
       },
       maxWidth: {
+        'xs': '360px',
         'xl': '1200px',
         '2xl': '1360px'
       },
