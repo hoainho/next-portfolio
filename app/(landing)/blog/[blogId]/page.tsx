@@ -196,7 +196,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
         <div className='bg-gradient-purple-coral p-[0.5px] rounded-lg'>
           <div className='bg-bg-default flex justify-between items-center border p-5 lg:p-8 xl:p-10 rounded-lg flex-col xl:flex-row gap-2'>
             <div className='flex flex-col gap-y-5 items-start justify-center'>
-              <h2 className='text-3xl font-bold text-fg-default'>Subscribe to our newsletter</h2>
+              <h3 className='text-3xl font-bold text-fg-default'>Subscribe to our newsletter</h3>
               <p className='text-fg-muted text-xl'>Get the latest posts delivered right to your inbox</p>
             </div>
             <form
