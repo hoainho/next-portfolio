@@ -1,24 +1,27 @@
 import { BlogCategoryI, BlogType } from '@/app/types';
 import BlogFilter from '@/components/blog/BlogFilter';
 import { Metadata } from 'next';
+import { gql } from '@apollo/client';
+import client from '@/lib/apolloClient';
 
 export const metadata: Metadata = {
   title: "Nick's Blog | Latest Posts",
-  description: "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
+  description:
+    "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
   keywords: "blog, articles, insights, technology, lifestyle, trends, tips, Nick's Blog, latest posts",
   openGraph: {
     title: "Nick's Blog | Latest Posts",
-    description: "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
-    url: "https://hoainho.info/blog",
-    images: [{ url: process.env.NEXT_PUBLIC_LOGO ||
-      "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg" }],
+    description:
+      "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
+    url: 'https://hoainho.info/blog',
+    images: [{ url: process.env.NEXT_PUBLIC_LOGO || 'https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: "Nick's Blog | Latest Posts",
-    description: "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
-    images: process.env.NEXT_PUBLIC_LOGO ||
-    "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+    description:
+      "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
+    images: process.env.NEXT_PUBLIC_LOGO || 'https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg',
   },
 };
 
