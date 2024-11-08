@@ -1,4 +1,7 @@
-import Link from 'next/link';
+'use client';
+
+import Button from '@/components/buttons/Button';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 type NotFoundProps = {
@@ -6,6 +9,7 @@ type NotFoundProps = {
 };
 
 const NotFoundPage = ({ isPost = false }: NotFoundProps) => {
+  const router = useRouter();
   return (
     <div className='w-full h-fit flex flex-col justify-center items-center'>
       <div className='main_wrapper'>
@@ -79,9 +83,9 @@ const NotFoundPage = ({ isPost = false }: NotFoundProps) => {
 
       {!isPost ? (
         <div className='block-container'>
-          <Link className='btn btn-back-black cursor-pointer' href='/'>
+          <Button className='btn btn-back-black cursor-pointer' onClick={() => router.back()}>
             Return Home
-          </Link>
+          </Button>
         </div>
       ) : null}
     </div>
