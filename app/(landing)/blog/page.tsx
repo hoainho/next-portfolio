@@ -1,8 +1,18 @@
-import { BlogCategoryI, BlogType } from '@/app/types';
-import BlogFilter from '@/components/blog/BlogFilter';
+import { PostItem } from '@/app/types';
 import { Metadata } from 'next';
-import { gql } from '@apollo/client';
 import client from '@/lib/apolloClient';
+import BlogItem from '@/components/blog/BlogItem';
+import BlogFeatured from '@/components/blog/BlogFeatured';
+import BlogSubscribers from '@/components/blog/BlogSubscribers';
+import BlogByRating from '@/components/blog/BlogByRating';
+import BlogByCategory from '@/components/blog/BlogByCategory';
+import {
+  POSTS_QUERY,
+  GET_CATEGORIES_QUERY,
+  GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
+} from '@/graphql/queries/post.query';
+import BlogPlatform from '@/components/blog/BlogPlatform';
+import BlogCategorySticky from '@/components/blog/BlogCategorySticky';
 
 export const metadata: Metadata = {
   title: "Nick's Blog | Latest Posts",
@@ -26,39 +36,50 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const url = process.env.NEXT_PUBLIC_BLOG_API;
-
-  const getPosts = await fetch(`${url}/posts?author=3`, {
-    next: { revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS ?? 3600) },
+  const { data } = await client.query({
+    query: GET_CATEGORIES_QUERY,
   });
 
-  const posts: BlogType[] = await getPosts.json();
+  const postsResponse = await client.query({
+    query: POSTS_QUERY,
+    variables: {
+      author: 3,
+      first: 20,
+    },
+  });
 
-  const getAllCategories = await fetch(`${url}/categories`);
+  const postsByCategoryID = await client.query({
+    query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
+    variables: { category: 'javascript-typescript', author: 3, first: 10 },
+  });
 
-  const categories: BlogCategoryI[] = await getAllCategories.json();
+  const categoriesFilter = data.categories.nodes;
+
+  const posts: PostItem[] = postsResponse.data.posts.nodes;
+
+  const postsByCategory = postsByCategoryID.data.posts.nodes;
 
   return (
-    <div className='fade-in-start max-container'>
-      <div className='layout pt-6 pb-12'>
-        <h1 className='head-text'>
-          My <span className='blue-gradient_text drop-shadow font-semibold'>Blog</span>
-        </h1>
-
-        <p className='text-white-600 dark:text-gray-400 mt-4 mb-6 leading-relaxed block-container'>
-          Welcome to{' '}
-          <span className='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-primary relative inline-block'>
-            <span className='relative text-white'>
-              <strong>Nick's Blog</strong>
-            </span>
-          </span>
-          , a space where ideas, insights, and innovations come to life! Whether you’re a tech enthusiast, a curious
-          learner, or someone looking for practical tips on development, we have something for you. Explore expert
-          advice on modern web technologies, the latest in coding trends, and best practices to elevate your projects.
-        </p>
-
-        <BlogFilter categories={categories} posts={posts} />
+    <div className='relative'>
+      <BlogCategorySticky post={posts[0]} categoriesFilter={categoriesFilter} isDark />
+      <div className='bg-dark text-white min-h-screen overflow-hidden'>
+        <div className='fade-in-start max-container-centre py-2 px-5 lg:py-10'>
+          <div className='relative blog-hero flex flex-col'>
+            <div className='flex flex-col lg:flex-row w-full gap-x-10'>
+              <BlogFeatured post={posts[0]} />
+              <div className='flex flex-col w-full lg:w-1/2 gap-5'>
+                {posts.slice(1, 4).map((post, index) => (
+                  <BlogItem post={post} key={index} isDark />
+                ))}
+              </div>
+            </div>
+            <BlogSubscribers isDark />
+          </div>
+        </div>
       </div>
+      <BlogByRating posts={posts} />
+      <BlogByCategory posts={postsByCategory} category='Javascript' />
+      <BlogPlatform />
     </div>
   );
 }

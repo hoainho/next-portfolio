@@ -1,4 +1,4 @@
-import { ReactElement, useContext } from "react";
+import { ReactElement } from "react";
 import type { Metadata, Viewport } from "next";
 import "./globals.scss";
 import localFont from "next/font/local";

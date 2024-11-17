@@ -2,10 +2,10 @@
 import { useHeadings } from '@/hooks/useHeading';
 import React from 'react';
 import TableOfContents from './TableOfContents';
-import { BlogType } from '@/app/types';
+import { PostItem } from '@/app/types';
 
 type Props = {
-  referencePosts: BlogType[];
+  referencePosts: PostItem[];
 };
 
 const GenerateTableOfContent = ({ referencePosts }: Props) => {

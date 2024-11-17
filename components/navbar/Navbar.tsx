@@ -13,8 +13,8 @@ const Navbar = () => {
   const pathname = usePathname();
   const { setHiddenScrollBar } = useGlobalContext();
 
-  const isLightTheme = !['/'].includes(pathname);
-  const defaultTextColor: string = isLightTheme ? 'text-primary' : 'text-white';
+  const isLightTheme = ['/'].includes(pathname);
+  const defaultTextColor: string = !isLightTheme ? 'text-primary' : 'text-white';
 
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -82,19 +82,26 @@ const Navbar = () => {
   }, [isOpenNavbarMobile]);
 
   const isDetailPost = pathname.includes('blog/');
+  const isCentrePost = !isDetailPost && pathname.includes('blog');
   return (
     <header
       className={clsx(
-        !isLightTheme ? 'header-primary' : 'header-secondary',
-        isDetailPost
-          ? '!relative bg-bg-default'
-          : show && isLightTheme
+        isLightTheme ? 'header-primary' : 'header-secondary',
+        isDetailPost ? '!relative bg-bg-default' : '',
+        isCentrePost ? '!relative bg-dark' : '',
+        show && isLightTheme
           ? 'bg-[rgba(250,250,252,0.4)] backdrop-saturate-[180%] backdrop-blur-[30px]'
           : 'bg-basics-background-default'
       )}
     >
-      <div className={`header h-fit ${isDetailPost ? '!px-10 !mx-0 !min-w-full' : ''}`}>
-        {isDetailPost ? (
+      <div
+        className={clsx(
+          'header h-fit',
+          isDetailPost ? '!px-10 !mx-0 !min-w-full' : '',
+          isCentrePost ? '!max-w-7xl w-full !px-3 !mx-auto' : ''
+        )}
+      >
+        {isDetailPost || isCentrePost ? (
           <div className='flex items-center gap-2 !min-h-fit !py-3 !px-0'>
             <Link href='/' className='cursor-pointer'>
               <ImageLoader
@@ -127,7 +134,13 @@ const Navbar = () => {
                 key={nav.name}
                 href={nav.link}
                 className={`transition-all min-w-[110px] max-w-[110px] text-center cursor-pointer !focus:outline-none hover:btn hover:text-white
-                 ${pathname === nav.link ? `btn text-white` : isDetailPost ? 'text-white' : defaultTextColor}`}
+                 ${
+                   pathname === nav.link
+                     ? `btn text-white`
+                     : isDetailPost || isCentrePost
+                     ? 'text-white'
+                     : defaultTextColor
+                 }`}
               >
                 {nav.name}
               </Link>
@@ -136,7 +149,13 @@ const Navbar = () => {
         </nav>
         <label className='size-fit block md:hidden relative z-40 cursor-pointer px-3 py-6' htmlFor='mobile-menu'>
           <input className='peer hidden' type='checkbox' id='mobile-menu' onClick={handleNavbarMobile} />
-          <div className="w-7 relative z-50 block h-[1px] bg-black bg-transparent content-[''] before:absolute before:top-[-0.35rem] before:z-50 before:block before:h-full before:w-full before:bg-black before:transition-all before:duration-200 before:ease-out before:content-[''] after:absolute after:right-0 after:bottom-[-0.35rem] after:block after:h-full after:w-full after:bg-black after:transition-all after:duration-200 after:ease-out after:content-[''] peer-checked:bg-transparent before:peer-checked:top-0 before:peer-checked:w-full before:peer-checked:rotate-45 before:peer-checked:transform after:peer-checked:bottom-0 after:peer-checked:w-full after:peer-checked:-rotate-45 after:peer-checked:transform"></div>
+          <div
+            className={clsx(
+              `w-7 relative z-50 block h-[1px] bg-black bg-transparent content-[''] before:absolute before:top-[-0.35rem] before:z-50 before:block before:h-full before:w-full before:bg-black before:transition-all before:duration-200 before:ease-out `,
+              `before:content-[''] after:absolute after:right-0 after:bottom-[-0.35rem] after:block after:h-full after:w-full after:bg-black after:transition-all after:duration-200 after:ease-out after:content-[''] `,
+              `peer-checked:bg-transparent before:peer-checked:top-0 before:peer-checked:w-full before:peer-checked:rotate-45 before:peer-checked:transform after:peer-checked:bottom-0 after:peer-checked:w-full after:peer-checked:-rotate-45 after:peer-checked:transform`
+            )}
+          ></div>
           <div className={`w-fit fixed inset-0 z-40 hidden h-fit bg-black/50 backdrop-blur-sm peer-checked:block`}>
             &nbsp;
           </div>

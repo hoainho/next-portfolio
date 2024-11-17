@@ -290,3 +290,98 @@ interface AvatarUrls {
   '48': string;
   '96': string;
 }
+
+export type PostsGraphqlType = {
+  data: Data;
+  extensions: Extensions;
+}
+
+interface Extensions {
+  debug: any[];
+  queryAnalyzer: QueryAnalyzer;
+}
+
+interface QueryAnalyzer {
+  keys: string;
+  keysLength: number;
+  keysCount: number;
+  skippedKeys: string;
+  skippedKeysSize: number;
+  skippedKeysCount: number;
+  skippedTypes: any[];
+}
+
+interface Data {
+  posts: Posts;
+}
+
+interface Posts {
+  nodes: PostItem[];
+}
+
+export interface PostItem {
+  author: Author;
+  content: string;
+  categories: Categories;
+  date: string;
+  modified: string;
+  desiredSlug: null;
+  excerpt: string;
+  featuredImage: FeaturedImage;
+  link: string;
+  postId: number;
+  slug: string;
+  tags: Tags;
+  title: string;
+  uri: string;
+}
+
+interface Tags {
+  nodes: TagItem[];
+}
+
+export interface TagItem {
+  description: null;
+  id: string;
+  name: string;
+}
+
+interface FeaturedImage {
+  node: FeaturedImageDetail;
+}
+
+interface FeaturedImageDetail {
+  altText: string;
+  srcSet: string;
+  width?: number;
+  height?: number;
+}
+
+interface Categories {
+  nodes: PostCategory[];
+}
+
+export interface PostCategory {
+  id: string;
+  name: string;
+  slug: string;
+  uri: string;
+}
+
+interface Author {
+  node: AuthorInfo;
+}
+
+export interface AuthorInfo {
+  avatar: Avatar;
+  firstName: string;
+  lastName: null;
+  name: string;
+}
+
+interface Avatar {
+  url: string;
+  width: number;
+  extraAttr: null;
+  height: number;
+}

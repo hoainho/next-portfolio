@@ -76,8 +76,11 @@
     --color-fg-default: #ffffff;
     --color-fg-muted: #768390;
     --color-fg-subtle: #636e7b;
+    --color-fg-border: #21262d;
     --color-fg-on-emphasis: #cdd9e5;
-    --color-bg-default: #22272E;
+    --color-bg-default: #22272e;
+    --color-bg-dark: #0d1117;
+    --color-link-hover: #79c0ff;
 
     --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(
       135deg,
@@ -270,6 +273,10 @@
 
   .max-container-blog {
     @apply max-w-6xl mx-auto pb-12 px-8 min-h-[calc(100vh-80px)];
+  }
+
+  .max-container-centre {
+    @apply max-w-7xl mx-auto pb-12 min-h-[calc(100vh-80px)];
   }
 
   .head-text {
@@ -901,4 +908,58 @@
 }
 .text_4043 {
   transform: scaleY(24.5) scaleX(9);
+}
+
+.text-gradient-purple-coral {
+  background: -webkit-linear-gradient(-70deg, #8250df, #d42a32);
+  transition: all 1s ease-in-out;
+  transition-duration: 2s;
+  transition-delay: 0.5s;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #0000;
+  -webkit-box-decoration-break: clone;
+  &:hover {
+    transition: all 1s ease-in-out 0.5s;
+    transition-duration: 2s;
+    transition-delay: 0.5s;
+    background: -webkit-linear-gradient(-70deg, #f40915, #380d88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #0000;
+    -webkit-box-decoration-break: clone;
+  }
+}
+
+.text-gradient-purple-coral-dark {
+  background-image: linear-gradient(140deg, #d2a8ff 12.09%, #f778ba 42.58%, #ff7b72 84.96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: #0000;
+  -webkit-box-decoration-break: clone;
+  color: rgb(121, 192, 255);
+}
+
+.text-gradient-purple-light {
+  background: linear-gradient(92.05deg, #d2a8ff 12.09%, #f778ba 42.58%, #ff7b72 84.96%);
+  transition: all 1s ease-in-out;
+  transition-duration: 2s;
+  transition-delay: 0.5s;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #0000;
+}
+
+.bg-gradient-purple-coral {
+  background: linear-gradient(92.05deg, #d2a8ff 12.09%, #f778ba 42.58%, #ff7b72 84.96%);
+}
+
+.blog-hero::before {
+  content: "";
+  position: absolute;
+  bottom: -106px;
+  left: -11%;
+  right: -11%;
+  height: 360px;
+  width: 100%;
+  background: linear-gradient(93.23deg, #f778ba 2.35%, #79c0ff 76.99%);
+  filter: blur(120px);
+  opacity: 0.6;
 }

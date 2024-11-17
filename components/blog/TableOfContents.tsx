@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import BlogReferences from './BlogReferences';
-import { BlogType } from '@/app/types';
+import { PostItem } from '@/app/types';
 import Link from 'next/link';
 
 interface TOCItem {
@@ -12,7 +12,7 @@ interface TOCItem {
 
 interface Props {
   headings: TOCItem[];
-  referencePosts: BlogType[];
+  referencePosts: PostItem[];
 }
 
 export default function TableOfContents({ headings, referencePosts }: Props) {
