@@ -57,13 +57,13 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
         title: post.title,
         description: post.excerpt,
         url: post.uri,
-        images: [{ url: post.featuredImage.node.srcSet }],
+        images: [{ url: decodeURIComponent(post.featuredImage.node.srcSet) }],
       },
       twitter: {
         card: 'summary_large_image',
         title: post.title,
         description: post.excerpt,
-        images: [{ url: post.featuredImage.node.srcSet }],
+        images: [{ url: decodeURIComponent(post.featuredImage.node.srcSet) }],
       },
     };
   } catch (error) {
@@ -122,10 +122,10 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
           <h1 className='font-bold text-5xl mb-4 text-fg-default'>{post.title}</h1>
           <div className='text-[#ADBAA7] text-base mb-10' dangerouslySetInnerHTML={{ __html: post.excerpt }} />
           <div className='relative min-h-[180px] xs:min-h-[250px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[550px] xl:min-h-[600px] h-full w-full z-10'>
-            <Image
+            <img 
               width={1200}
               height={480}
-              src={post.featuredImage.node.srcSet}
+              src={decodeURIComponent(post.featuredImage.node.srcSet)}
               alt={post.featuredImage.node.altText ?? post.title}
               title={post.title}
               className='aspect-[4/2.4] rounded-md h-fit w-full absolute top-0 left-0 right-0 z-1'

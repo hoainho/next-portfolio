@@ -17,7 +17,7 @@ const BlogRelated = ({ posts }: Props) => {
             <Image
               width={380}
               height={200}
-              src={post.featuredImage.node.srcSet}
+              src={decodeURIComponent(post.featuredImage.node.srcSet)}
               alt={post.featuredImage.node.altText ?? post.title}
               title={post.title}
               className='rounded-md max-h-[200px] max-w-[400px] w-full group-hover:scale-[1.02] transition-all duration-300 ease-in-out'
