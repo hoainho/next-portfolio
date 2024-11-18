@@ -353,6 +353,7 @@ interface FeaturedImage {
 interface FeaturedImageDetail {
   altText: string;
   srcSet: string;
+  sourceUrl: string;
   width?: number;
   height?: number;
 }

@@ -31,6 +31,7 @@ export const POSTS_QUERY = gql`
           node {
             altText
             srcSet
+            sourceUrl
           }
         }
         link
@@ -82,6 +83,7 @@ export const POST_DETAIL_QUERY = gql`
         node {
           altText
           srcSet
+          sourceUrl
         }
       }
       link
@@ -148,6 +150,7 @@ export const GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY = gql`
           node {
             altText
             srcSet
+            sourceUrl
           }
         }
         link
@@ -199,6 +202,7 @@ export const GET_POSTS_BY_TAGS_QUERY = gql`
           node {
             altText
             srcSet
+            sourceUrl
           }
         }
         link

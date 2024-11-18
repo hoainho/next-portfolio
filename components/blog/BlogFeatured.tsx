@@ -20,7 +20,7 @@ const BlogFeatured = ({ post }: BlogFeaturedProps) => {
     >
       <div className='w-full h-fit overflow-hidden rounded-sm'>
         <Image
-          src={decodeURIComponent(post.featuredImage.node.srcSet)}
+          src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
           width={48}
           height={48}
           className='w-full h-fit object-cover scale-100 group-hover:scale-105 duration-500 transition-all ease-in-out'

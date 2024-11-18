@@ -67,7 +67,7 @@ const BlogCategorySticky = ({ post, categoriesFilter, isDark = false }: Props) =
                     <Image
                       width={250}
                       height={200}
-                      src={decodeURIComponent(post.featuredImage.node.srcSet)}
+                      src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
                       alt={post.featuredImage.node.altText}
                       title={post.title}
                       className='aspect-[4/2.4] rounded-md z-1'

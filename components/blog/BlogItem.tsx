@@ -27,7 +27,7 @@ const BlogItem = ({ post, isDark = false, isReverse = false }: PostItemType) => 
         )}
       >
         <Image
-          src={decodeURIComponent(post.featuredImage.node.srcSet)}
+          src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
           alt={post.featuredImage.node.altText}
           title={post.title}
           width={24}

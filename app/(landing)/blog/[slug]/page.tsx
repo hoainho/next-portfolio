@@ -1,4 +1,4 @@
-import { AuthorType, BlogType, PostCategory, PostItem, TagItem } from '@/app/types';
+import { PostCategory, PostItem, TagItem } from '@/app/types';
 import React from 'react';
 import { HiCalendar, HiOutlineClock } from 'react-icons/hi';
 import { format } from 'date-fns';
@@ -10,7 +10,6 @@ import GenerateTableOfContent from '@/components/blog/GenerateTableOfContent';
 import { Metadata } from 'next';
 import './style.scss';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb';
-import Image from 'next/image';
 import Link from 'next/link';
 import { TagDetail } from '@/components/blog/Tag';
 import BlogAuthor from '@/components/blog/BlogAuthor';
@@ -24,6 +23,7 @@ import {
   GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
   POST_DETAIL_QUERY,
 } from '@/graphql/queries/post.query';
+import Image from 'next/image';
 
 type BlogDetailProps = {
   params: {
@@ -57,13 +57,13 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
         title: post.title,
         description: post.excerpt,
         url: post.uri,
-        images: [{ url: decodeURIComponent(post.featuredImage.node.srcSet) }],
+        images: [{ url: decodeURIComponent(post.featuredImage.node.sourceUrl) }],
       },
       twitter: {
         card: 'summary_large_image',
         title: post.title,
         description: post.excerpt,
-        images: [{ url: decodeURIComponent(post.featuredImage.node.srcSet) }],
+        images: [{ url: decodeURIComponent(post.featuredImage.node.sourceUrl) }],
       },
     };
   } catch (error) {
@@ -122,10 +122,10 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
           <h1 className='font-bold text-5xl mb-4 text-fg-default'>{post.title}</h1>
           <div className='text-[#ADBAA7] text-base mb-10' dangerouslySetInnerHTML={{ __html: post.excerpt }} />
           <div className='relative min-h-[180px] xs:min-h-[250px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[550px] xl:min-h-[600px] h-full w-full z-10'>
-            <img 
+            <Image 
               width={1200}
               height={480}
-              src={decodeURIComponent(post.featuredImage.node.srcSet)}
+              src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
               alt={post.featuredImage.node.altText ?? post.title}
               title={post.title}
               className='aspect-[4/2.4] rounded-md h-fit w-full absolute top-0 left-0 right-0 z-1'
