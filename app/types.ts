@@ -367,6 +367,7 @@ export interface PostCategory {
   name: string;
   slug: string;
   uri: string;
+  description: string;
 }
 
 interface Author {
@@ -378,6 +379,8 @@ export interface AuthorInfo {
   firstName: string;
   lastName: null;
   name: string;
+  slug: string;
+  url: string;
 }
 
 interface Avatar {

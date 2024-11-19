@@ -115,7 +115,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
 
   return (
     <div className='blog'>
-      <BlogCategorySticky post={post} categoriesFilter={categoriesFilter} />
+      <BlogCategorySticky categoriesFilter={categoriesFilter} />
       <div className='blog-title relative bg-bg-default'>
         <div className='max-container-blog pt-10 px-6 !pb-0'>
           <Breadcrumb items={breadcrumbItems} />

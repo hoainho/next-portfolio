@@ -46,6 +46,11 @@ export default async function BlogPage() {
       author: 3,
       first: 20,
     },
+    context: {
+      fetchOptions: {
+        next: { revalidate: 60 },
+      },
+    },
   });
 
   const postsByCategoryID = await client.query({
@@ -61,7 +66,7 @@ export default async function BlogPage() {
 
   return (
     <div className='relative'>
-      <BlogCategorySticky post={posts[0]} categoriesFilter={categoriesFilter} isDark />
+      <BlogCategorySticky categoriesFilter={categoriesFilter} isDark />
       <div className='bg-dark text-white min-h-screen overflow-hidden'>
         <div className='fade-in-start max-container-centre py-2 px-5 lg:py-10'>
           <div className='relative blog-hero flex flex-col'>

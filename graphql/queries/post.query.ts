@@ -110,10 +110,12 @@ export const GET_CATEGORIES_QUERY = gql`
           nodes {
             name
             description
+            slug
           }
         }
         name
         description
+        slug
       }
     }
   }

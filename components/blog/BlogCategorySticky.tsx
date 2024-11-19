@@ -1,17 +1,35 @@
 import { PostItem } from '@/app/types';
+import { GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY } from '@/graphql/queries/post.query';
+import client from '@/lib/apolloClient';
 import clsx from 'clsx';
 import Image from 'next/image';
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import ImageLoader from '../loader/ImageLoader';
 
 type Props = {
-  post: PostItem;
+  post?: PostItem;
   categoriesFilter: any[];
   isDark?: boolean;
 };
 
-const BlogCategorySticky = ({ post, categoriesFilter, isDark = false }: Props) => {
+const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) => {
+  const categoriesReq = categoriesFilter.map(async (category) => {
+    if (category.children.nodes.length) {
+      const fetchPost = await client.query({
+        query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
+        variables: { category: category.slug, author: 3, first: 1 },
+      });
+    
+      const post: PostItem = fetchPost.data.posts.nodes[0];
+      return { ...category, post };
+    }
+    return category;
+  });
+
+  const categories = await Promise.all(categoriesReq);
+
   return (
     <div
       className={clsx(
@@ -26,7 +44,7 @@ const BlogCategorySticky = ({ post, categoriesFilter, isDark = false }: Props) =
           isDark ? 'bg-dark max-w-7xl px-0' : 'max-w-[1200px] px-12 bg-bg-default'
         )}
       >
-        {categoriesFilter?.slice(0, 7)?.map((category: any) => (
+        {categories?.slice(0, 7)?.map((category: any) => (
           <div key={category.name} className='group p-2 py-4 flex gap-2'>
             <div className='w-full h-full'>
               <p className='text-white flex gap-2 cursor-pointer hover:underline'>
@@ -64,20 +82,19 @@ const BlogCategorySticky = ({ post, categoriesFilter, isDark = false }: Props) =
                     </div>
                   </div>
                   <div className='max-w-[300px] w-fit p-5 flex flex-col gap-y-2 items-center justify-center'>
-                    <Image
+                    <ImageLoader
                       width={250}
                       height={200}
-                      src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
-                      alt={post.featuredImage.node.altText}
-                      title={post.title}
+                      src={category.post.featuredImage.node.sourceUrl}
+                      alt={category.post.featuredImage.node.altText}
                       className='aspect-[4/2.4] rounded-md z-1'
                     />
                     <h3 className='text-primary font-bold text-md cursor-pointer hover:underline'>
-                      {post.title}
+                      {category.post.title}
                     </h3>
                     <div
                       className='text-sm text-fg-subtle'
-                      dangerouslySetInnerHTML={{ __html: post.excerpt }}
+                      dangerouslySetInnerHTML={{ __html: category.post.excerpt }}
                     />
                   </div>
                 </div>

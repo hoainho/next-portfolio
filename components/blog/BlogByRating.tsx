@@ -31,7 +31,7 @@ const BlogByRating = async ({ posts }: Props) => {
             >
               <h3 className='text-2xl font-bold'>Latest</h3>
               <div className='flex gap-x-2 items-center justify-center'>
-                <Link href={'#'} className=''>
+                <Link href={'/blog/category/latest'} className=''>
                   View all
                 </Link>
                 <FaArrowRight className='text-black ' />
@@ -39,7 +39,7 @@ const BlogByRating = async ({ posts }: Props) => {
             </div>
             <div className='flex flex-col gap-5 w-full'>
               {posts.slice(0,3).map((post, index) => (
-                <BlogItem post={post} key={index} />
+                <BlogItem post={post} key={index} isLight />
               ))}
             </div>
           </div>
@@ -52,7 +52,7 @@ const BlogByRating = async ({ posts }: Props) => {
             >
               <h3 className='text-2xl font-bold'>Popular</h3>
               <div className='flex gap-x-2 items-center justify-center'>
-                <Link href={'#'} className=''>
+                <Link href={'/blog/category/popular'} className=''>
                   View all
                 </Link>
                 <FaArrowRight className='text-black ' />
@@ -60,7 +60,7 @@ const BlogByRating = async ({ posts }: Props) => {
             </div>
             <div className='flex flex-col gap-5 w-full'>
               {popularPosts.map((post, index) => (
-                <BlogItem post={post} key={index} />
+                <BlogItem post={post} key={index} isLight />
               ))}
             </div>
           </div>

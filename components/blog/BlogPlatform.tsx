@@ -35,8 +35,8 @@ const BlogPlatform = (props: Props) => {
     },
   ];
   return (
-    <div className='bg-dark text-white overflow-hidden py-32'>
-      <div className='max-container-centre px-5 md:px-0 flex flex-col items-center gap-y-3'>
+    <div className='bg-dark text-white overflow-hidden pt-16 pb-5'>
+      <div className='max-container-centre px-5 md:px-0 flex flex-col items-center gap-y-3 !min-h-fit'>
         <h3 className='text-5xl font-bold'>The world's largest developer platform</h3>
         <p className='text-sm text-fg-subtle mt-2'>
           Get the latest news, resources, and insights from the world's largest developer platform.
