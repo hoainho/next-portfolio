@@ -8,16 +8,17 @@ import BlogFeatured from './BlogFeatured';
 interface Props {
   posts: PostItem[];
   category: string;
+  categorySlug: string;
 }
 
-const BlogByCategory = ({ posts, category = 'Javascript' }: Props) => {
+const BlogByCategory = ({ posts, category = 'Javascript', categorySlug }: Props) => {
   return (
     <div className='bg-dark text-white min-h-screen overflow-hidden'>
       <div className='fade-in-start max-container-centre py-14 px-5 lg:py-10'>
         <div className='flex items-center justify-between py-3 border-t-4 border-t-white border-b border-b-fg-border mb-5'>
           <h3 className='text-2xl font-bold'>{category}</h3>
           <div className='flex gap-x-2 items-center justify-center'>
-            <Link href={'#'} className=''>
+            <Link href={`/blog/category/${categorySlug}`} className=''>
               More {category} articles
             </Link>
             <FaArrowRight className='text-white' />

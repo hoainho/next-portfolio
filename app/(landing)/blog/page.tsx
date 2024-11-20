@@ -53,9 +53,10 @@ export default async function BlogPage() {
     },
   });
 
+  const category = 'javascript-typescript';
   const postsByCategoryID = await client.query({
     query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-    variables: { category: 'javascript-typescript', author: 3, first: 10 },
+    variables: { category, author: 3, first: 10 },
   });
 
   const categoriesFilter = data.categories.nodes;
@@ -83,7 +84,7 @@ export default async function BlogPage() {
         </div>
       </div>
       <BlogByRating posts={posts} />
-      <BlogByCategory posts={postsByCategory} category='Javascript' />
+      <BlogByCategory posts={postsByCategory} category='Javascript' categorySlug={category} />
       <BlogPlatform />
     </div>
   );
