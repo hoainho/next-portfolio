@@ -49,7 +49,9 @@ const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) =
           <div key={category.name} className='group p-2 py-4 flex gap-2'>
             <div className='w-full h-full'>
               <p className='text-white flex gap-2 cursor-pointer hover:underline'>
-                <Link href={`/blog/category/${category.slug}`}>{category.name}</Link>
+                <Link className='without-style no-underline' href={`/blog/category/${category.slug}`}>
+                  {category.name}
+                </Link>
                 {category.children.nodes.length ? <MdKeyboardArrowDown className='inline-block' /> : null}
               </p>
               {category.children.nodes.length ? (
@@ -62,7 +64,7 @@ const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) =
                   <div className='w-full flex flex-col gap-y-2 items-center justify-center'>
                     <div className='w-full flex flex-col gap-y-2 items-start justify-center px-2'>
                       <div className='flex gap-x-2 items-center cursor-pointer'>
-                        <Link href={`/blog/category/${category.slug}`} className='text-md font-semibold hover:underline'>
+                        <Link href={`/blog/category/${category.slug}`} className='without-style no-underline text-md font-semibold hover:underline'>
                           {category.name}
                         </Link>
                         <FaArrowRight className='inline-block size-3' />
@@ -75,7 +77,7 @@ const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) =
                     <div className='grid grid-cols-2 grid-flow-row gap-4'>
                       {category.children.nodes.map((child: any) => (
                         <div key={child.name} className='p-2 cursor-pointer'>
-                          <Link href={`/blog/category/${child.slug}`} className='hover:underline text-md font-semibold'>
+                          <Link href={`/blog/category/${child.slug}`} className='without-style no-underline hover:underline text-md font-semibold'>
                             {child.name}
                           </Link>
                           <div

@@ -48,7 +48,7 @@ export default async function BlogPage() {
     },
     context: {
       fetchOptions: {
-        next: { revalidate: 60 },
+        next: { revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600) },
       },
     },
   });

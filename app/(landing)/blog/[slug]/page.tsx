@@ -104,7 +104,19 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
 
   const postRefFilter = await Promise.all(getPostsByCategory);
 
-  const referencePosts = postRefFilter.flatMap((p) => p.data.posts.nodes);
+  const referencePosts = Object.values(
+    postRefFilter
+      .flatMap((p) => p.data.posts.nodes)
+      .reduce((acc: PostItem[], post) => {
+        const exists = acc.some((p) => p.postId === post.postId);
+        if (!exists && post.postId !== params.slug) {
+          acc.push(post);
+        }
+        return acc;
+      }, [])
+  );
+
+  console.log(referencePosts.length);
 
   let breadcrumbItems = [
     { label: 'Home', href: '/' },
@@ -122,7 +134,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
           <h1 className='font-bold text-5xl mb-4 text-fg-default'>{post.title}</h1>
           <div className='text-[#ADBAA7] text-base mb-10' dangerouslySetInnerHTML={{ __html: post.excerpt }} />
           <div className='relative min-h-[180px] xs:min-h-[250px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[550px] xl:min-h-[600px] h-full w-full z-10'>
-            <Image 
+            <Image
               width={1200}
               height={480}
               src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
@@ -141,10 +153,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
               <div className='flex items-center gap-1'>
                 <span className='text-primary font-bold'>{post.author.node.name}</span>
                 <LuDot className='inline-block text-base' />
-                <Link
-                  href={`/blog/author/${post.author.node.slug}`}
-                  className='text-fg-default font-normal'
-                >
+                <Link href={`/blog/author/${post.author.node.slug}`} className='text-fg-default font-normal'>
                   @{post.author.node.slug}
                 </Link>
               </div>
@@ -206,9 +215,11 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
           </div>
         </div>
       </div>
-      <div className='bg-white flex justify-center items-center gap-3'>
-        <BlogRelated posts={referencePosts} />
-      </div>
+      {referencePosts.length > 0 && (
+        <div className='bg-white flex justify-center items-center gap-3'>
+          <BlogRelated posts={referencePosts} />
+        </div>
+      )}
       <BlogSubscribers />
       <ScrollToTop />
     </div>
