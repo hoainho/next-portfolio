@@ -12,9 +12,11 @@ export const POSTS_QUERY = gql`
               width
               height
             }
+            description
             firstName
             lastName
             name
+            slug
           }
         }
         content
@@ -220,6 +222,73 @@ export const GET_POSTS_BY_TAGS_QUERY = gql`
         title
         uri
         modified
+      }
+    }
+  }
+`;
+
+export const GET_POSTS_BY_AUTHOR_QUERY = gql`
+  query GetPostsByAuthor($author: ID!, $first: Int!) {
+    user(id: $author, idType: SLUG) {
+      description
+      name
+      firstName
+      lastName
+      slug
+      email
+      avatar {
+        height
+        url
+        width
+        extraAttr
+      }
+      posts(first: $first) {
+        nodes {
+          author {
+            node {
+              avatar {
+                url
+                extraAttr
+                width
+                height
+              }
+              description
+              firstName
+              lastName
+              name
+              slug
+            }
+          }
+          content
+          categories {
+            nodes {
+              id
+              name
+            }
+          }
+          date
+          desiredSlug
+          excerpt
+          featuredImage {
+            node {
+              altText
+              srcSet
+              sourceUrl
+            }
+          }
+          link
+          postId
+          slug
+          tags {
+            nodes {
+              description
+              id
+              name
+            }
+          }
+          title
+          uri
+        }
       }
     }
   }

@@ -142,11 +142,10 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
                 <span className='text-primary font-bold'>{post.author.node.name}</span>
                 <LuDot className='inline-block text-base' />
                 <Link
-                  target='_blank'
-                  href={'https://blogs.thnkandgrow.com/author/hoainho/'}
+                  href={`/blog/author/${post.author.node.slug}`}
                   className='text-fg-default font-normal'
                 >
-                  @hoainho
+                  @{post.author.node.slug}
                 </Link>
               </div>
               <div className='flex items-start gap-1 flex-col sm:flex-row sm:items-center '>

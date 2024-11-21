@@ -283,7 +283,7 @@ export type AuthorType = {
   link: string;
   slug: string;
   avatar_urls: AvatarUrls;
-}
+};
 
 interface AvatarUrls {
   '24': string;
@@ -294,7 +294,7 @@ interface AvatarUrls {
 export type PostsGraphqlType = {
   data: Data;
   extensions: Extensions;
-}
+};
 
 interface Extensions {
   debug: any[];
@@ -378,9 +378,11 @@ export interface AuthorInfo {
   avatar: Avatar;
   firstName: string;
   lastName: null;
+  username: string;
   name: string;
   slug: string;
   url: string;
+  description: string;
 }
 
 interface Avatar {
@@ -388,4 +390,21 @@ interface Avatar {
   width: number;
   extraAttr: null;
   height: number;
+}
+
+export interface GetPostsByAuthorVariables {
+  author: string;
+}
+
+export interface GetPostsByAuthorResponse {
+  user: {
+    avatar: Avatar;
+    description: string;
+    name: string;
+    firstName: string;
+    lastName: string;
+    slug: string;
+    email: string;
+    posts: Posts;
+  };
 }

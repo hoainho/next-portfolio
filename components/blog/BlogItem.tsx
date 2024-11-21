@@ -61,7 +61,7 @@ const BlogItem = ({ post, isDark = false, isReverse = false, isLight = false }: 
         <div className='text-sm text-fg-subtle line-clamp-4' dangerouslySetInnerHTML={{ __html: post.excerpt }} />
         <div className='flex gap-x-2 items-center'>
           <Link
-            href={`https://blogs.thnkandgrow.com/author/${post.author.node.slug}`}
+            href={`/blog/author/${post.author.node.slug}`}
             className='font-mono font-semibold text-sm hover:underline hover:text-active duration-200 transition-all ease-in-out'
           >
             {post.author.node.name}

@@ -17,7 +17,7 @@ const BlogAuthor = ({ author }: AuthorProps) => {
         <div className='flex flex-col gap-2 items-start justify-center'>
           <h6 className='text-primary font-bold'>{author.name}</h6>
           <p className='text-gray-600 dark:text-gray-300 font-mono text-sm'>{author.name}</p>
-          <Link href={`https://twitter.com/${author.name}`} target='_blank' rel='noreferrer' className='text-primary font-mono'>
+          <Link href={`/blog/author/${author.slug}`} target='_blank' rel='noreferrer' className='text-primary font-mono'>
             @{author.name}
           </Link>
         </div>

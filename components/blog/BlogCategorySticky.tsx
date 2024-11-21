@@ -7,6 +7,7 @@ import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import ImageLoader from '../loader/ImageLoader';
+import Link from 'next/link';
 
 type Props = {
   post?: PostItem;
@@ -21,7 +22,7 @@ const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) =
         query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
         variables: { category: category.slug, author: 3, first: 1 },
       });
-    
+
       const post: PostItem = fetchPost.data.posts.nodes[0];
       return { ...category, post };
     }
@@ -48,7 +49,7 @@ const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) =
           <div key={category.name} className='group p-2 py-4 flex gap-2'>
             <div className='w-full h-full'>
               <p className='text-white flex gap-2 cursor-pointer hover:underline'>
-                {category.name}
+                <Link href={`/blog/category/${category.slug}`}>{category.name}</Link>
                 {category.children.nodes.length ? <MdKeyboardArrowDown className='inline-block' /> : null}
               </p>
               {category.children.nodes.length ? (
@@ -61,10 +62,12 @@ const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) =
                   <div className='w-full flex flex-col gap-y-2 items-center justify-center'>
                     <div className='w-full flex flex-col gap-y-2 items-start justify-center px-2'>
                       <div className='flex gap-x-2 items-center cursor-pointer'>
-                        <p className='text-md font-semibold hover:underline'>{category.name}</p>
+                        <Link href={`/blog/category/${category.slug}`} className='text-md font-semibold hover:underline'>
+                          {category.name}
+                        </Link>
                         <FaArrowRight className='inline-block size-3' />
                       </div>
-                      <p
+                      <div
                         className='flex gap-2 text-sm text-fg-subtle [&>img]:w-[70px] [&>img]:h-[70px]'
                         dangerouslySetInnerHTML={{ __html: category.description }}
                       />
@@ -72,7 +75,9 @@ const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) =
                     <div className='grid grid-cols-2 grid-flow-row gap-4'>
                       {category.children.nodes.map((child: any) => (
                         <div key={child.name} className='p-2 cursor-pointer'>
-                          <p className='hover:underline text-md font-semibold'>{child.name}</p>
+                          <Link href={`/blog/category/${child.slug}`} className='hover:underline text-md font-semibold'>
+                            {child.name}
+                          </Link>
                           <div
                             className='text-sm text-fg-subtle'
                             dangerouslySetInnerHTML={{ __html: child.description }}
@@ -82,16 +87,19 @@ const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) =
                     </div>
                   </div>
                   <div className='max-w-[300px] w-fit p-5 flex flex-col gap-y-2 items-center justify-center'>
-                    <ImageLoader
-                      width={250}
-                      height={200}
-                      src={category.post.featuredImage.node.sourceUrl}
-                      alt={category.post.featuredImage.node.altText}
-                      className='aspect-[4/2.4] rounded-md z-1'
-                    />
-                    <h3 className='text-primary font-bold text-md cursor-pointer hover:underline'>
-                      {category.post.title}
-                    </h3>
+                    <Link href={`/blog/${category.post.slug}`}>
+                      <ImageLoader
+                        width={250}
+                        height={200}
+                        src={category.post.featuredImage.node.sourceUrl}
+                        alt={category.post.featuredImage.node.altText}
+                        className='aspect-[4/2.4] rounded-md z-1'
+                      />
+
+                      <h3 className='text-primary font-bold text-md cursor-pointer hover:underline'>
+                        {category.post.title}
+                      </h3>
+                    </Link>
                     <div
                       className='text-sm text-fg-subtle'
                       dangerouslySetInnerHTML={{ __html: category.post.excerpt }}

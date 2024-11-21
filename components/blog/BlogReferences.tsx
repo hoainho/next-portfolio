@@ -14,7 +14,9 @@ const BlogReferences = ({ posts }: BlogReferenceProps) => {
         <div key={post.postId} className='flex flex-col items-start justify-start gap-2 border-t border-blog-divider py-2'>
           <Link href={`/blog/${post.slug}`} className='text-gradient-purple-coral font-bold text-md mt-5'>{post.title}</Link>
           <div className='text-fg-muted text-sm' dangerouslySetInnerHTML={{ __html: post.excerpt }} />
-          <p className='text-primary font-mono font-semibold text-sm'>{post.author?.node?.name}</p>
+          <Link href={`/blog/author/${post.author.node.slug}`} className='text-primary font-mono font-semibold text-sm'>
+            {post.author.node.name}
+          </Link>
         </div>
       ))}
     </div>

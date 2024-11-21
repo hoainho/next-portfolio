@@ -1,5 +1,6 @@
 import { PostItem, TagItem } from '@/app/types';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 type Props = {
@@ -35,7 +36,9 @@ const BlogRelated = ({ posts }: Props) => {
             </div>
             <h3 className='text-primary font-bold text-lg group-hover:underline group-hover:text-active'>{post.title}</h3>
             <div className='text-gray-600 dark:text-gray-300 font-public-sans text-sm' dangerouslySetInnerHTML={{ __html: post.excerpt }} />
-            <p className='text-primary font-public-sans text-sm font-bold'> {post.author.node.name}</p>
+            <Link href={`/blog/author/${post.author.node.slug}`} className='text-primary font-public-sans text-sm font-bold'>
+              {post.author.node.name}
+            </Link>
           </div>
         ))}
       </div>

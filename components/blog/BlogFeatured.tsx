@@ -42,7 +42,10 @@ const BlogFeatured = ({ post, isFullWidth = false }: BlogFeaturedProps) => {
           alt='avatar'
           className='rounded-full object-cover w-6 h-6 '
         />
-        <p className='font-mono font-semibold text-sm'>{post.author.node.name}</p> •
+        <Link href={`/blog/author/${post.author.node.slug}`} className='font-mono font-semibold text-sm'>
+          {post.author.node.name}
+        </Link>
+        •
         <p className='font-mono font-normal text-sm'> {formatDate(post.date)}</p>
       </div>
     </Link>
@@ -50,10 +53,10 @@ const BlogFeatured = ({ post, isFullWidth = false }: BlogFeaturedProps) => {
     <div className='py-5'>
       <div
         className={clsx(
-          'group w-full flex flex-row-reverse gap-x-5 gap-3 cursor-pointer py-5 [&:not(:last-child)]:border-b lg:first:pt-0'
+          'group w-full flex flex-col md:flex-row-reverse gap-x-5 gap-3 cursor-pointer py-5 [&:not(:last-child)]:border-b lg:first:pt-0'
         )}
       >
-        <span className={clsx('flex h-fit overflow-hidden rounded-sm', 'w-[60%] lg:max-w-[60%] lg:min-w-[60%]')}>
+        <span className={clsx('flex h-fit overflow-hidden rounded-sm', 'w-full md:w-[60%] lg:max-w-[60%] lg:min-w-[60%]')}>
           <Link href={`/blog/${post.slug}`}>
             <ImageLoader
               src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
@@ -84,7 +87,7 @@ const BlogFeatured = ({ post, isFullWidth = false }: BlogFeaturedProps) => {
               className='rounded-full object-cover w-6 h-6 '
             />
             <Link
-              href={`https://blogs.thnkandgrow.com/author/${post.author.node.slug}`}
+              href={`/blog/author/${post.author.node.slug}`}
               className='font-mono font-semibold text-sm hover:underline hover:text-active duration-200 transition-all ease-in-out peer'
             >
               {post.author.node.name}

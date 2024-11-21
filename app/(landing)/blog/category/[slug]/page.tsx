@@ -13,10 +13,7 @@ import {
   POSTS_QUERY,
 } from '@/graphql/queries/post.query';
 import client from '@/lib/apolloClient';
-import { formatDate } from '@/utils/formatDate';
-import clsx from 'clsx';
-import Link from 'next/link';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 interface Props {
   params: {
@@ -25,7 +22,6 @@ interface Props {
 }
 
 const BlogCategory = async ({ params }: Props) => {
-  console.log(params);
   const categoriesResponse = await client.query({
     query: GET_CATEGORIES_QUERY,
   });
@@ -87,7 +83,10 @@ const BlogCategory = async ({ params }: Props) => {
             {category?.name || params.slug.charAt(0).toUpperCase() + params.slug.slice(1)}
           </h1>
           <p className='text-fg-muted text-base max-w-[600px] pb-5'>
-            {category?.description}
+            <div
+              className='text-fg-muted'
+              dangerouslySetInnerHTML={{ __html: category?.description || '' }}
+            />
             {latestSlug &&
               'Explore the latest blogs from Th?nkAndGrow on all things software development from the newest capabilities on the Th?nkAndGrow platform to research and insights—and guides to help you level up your engineering skills.'}
             {popularSlug &&
