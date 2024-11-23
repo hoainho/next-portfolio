@@ -104,7 +104,9 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
         }
         return acc;
       }, [])
-  ).slice(0, 6);
+  )
+    .filter((p) => p.postId !== post.postId)
+    .slice(0, 6);
 
   let breadcrumbItems = [
     { label: 'Home', href: '/' },
