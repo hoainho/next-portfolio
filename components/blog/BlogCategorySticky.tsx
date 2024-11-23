@@ -1,40 +1,25 @@
-import { PostItem } from '@/app/types';
-import { GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY } from '@/graphql/queries/post.query';
-import client from '@/lib/apolloClient';
+'use client';
+
 import clsx from 'clsx';
-import Image from 'next/image';
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import ImageLoader from '../loader/ImageLoader';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 type Props = {
-  post?: PostItem;
-  categoriesFilter: any[];
-  isDark?: boolean;
+  categories: any[];
 };
 
-const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) => {
-  const categoriesReq = categoriesFilter.map(async (category) => {
-    if (category.children.nodes.length) {
-      const fetchPost = await client.query({
-        query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-        variables: { category: category.slug, author: 3, first: 1 },
-      });
+const BlogCategorySticky = ({ categories }: Props) => {
+  const pathname = usePathname();
 
-      const post: PostItem = fetchPost.data.posts.nodes[0];
-      return { ...category, post };
-    }
-    return category;
-  });
-
-  const categories = await Promise.all(categoriesReq);
-
+  const isDark = pathname === '/blog';
   return (
     <div
       className={clsx(
-        'hidden sticky top-0 w-full h-fit xl:flex justify-center items-center',
+        'z-[100] hidden sticky top-0 w-full h-fit xl:flex justify-center items-center',
         'border-b border-separate border-fg-border z-20',
         isDark ? 'bg-dark border-fg-border' : 'bg-bg-default border-overlay'
       )}
@@ -61,23 +46,32 @@ const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) =
                                 group-hover:flex group-hover:opacity-100 group-hover:select-none group-hover:visible group-hover:translate-y-[56px] group-hover:transition-all group-hover:delay-100 group-hover:duration-200 group-hover:ease-in-out
                               `}
                 >
-                  <div className='w-full flex flex-col gap-y-2 items-center justify-center'>
+                  <div className='w-full flex flex-col gap-y-2 items-center'>
                     <div className='w-full flex flex-col gap-y-2 items-start justify-center px-2'>
                       <div className='flex gap-x-2 items-center cursor-pointer'>
-                        <Link href={`/blog/category/${category.slug}`} className='without-style no-underline text-md font-semibold hover:underline'>
+                        <Link
+                          href={`/blog/category/${category.slug}`}
+                          className='without-style no-underline text-md font-semibold hover:underline'
+                        >
                           {category.name}
                         </Link>
                         <FaArrowRight className='inline-block size-3' />
                       </div>
                       <div
-                        className='flex gap-2 text-sm text-fg-subtle [&>img]:w-[70px] [&>img]:h-[70px]'
+                        className={clsx(
+                          'flex gap-5 text-sm text-fg-subtle',
+                          '[&>img]:w-fit [&>img]:max-w-[100px] [&>img]:h-[90px] [&>img]:rounded-md [&>img]:object-contain'
+                        )}
                         dangerouslySetInnerHTML={{ __html: category.description }}
                       />
                     </div>
                     <div className='grid grid-cols-2 grid-flow-row gap-4'>
                       {category.children.nodes.map((child: any) => (
                         <div key={child.name} className='p-2 cursor-pointer'>
-                          <Link href={`/blog/category/${child.slug}`} className='without-style no-underline hover:underline text-md font-semibold'>
+                          <Link
+                            href={`/blog/category/${child.slug}`}
+                            className='without-style no-underline hover:underline text-md font-semibold'
+                          >
                             {child.name}
                           </Link>
                           <div
@@ -98,12 +92,12 @@ const BlogCategorySticky = async ({ categoriesFilter, isDark = false }: Props) =
                         className='aspect-[4/2.4] rounded-md z-1'
                       />
 
-                      <h3 className='text-primary font-bold text-md cursor-pointer hover:underline'>
+                      <h3 className='text-primary font-bold text-md cursor-pointer line-clamp-2 hover:underline'>
                         {category.post.title}
                       </h3>
                     </Link>
                     <div
-                      className='text-sm text-fg-subtle'
+                      className='text-sm text-fg-subtle line-clamp-4'
                       dangerouslySetInnerHTML={{ __html: category.post.excerpt }}
                     />
                   </div>

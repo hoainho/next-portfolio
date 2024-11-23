@@ -8,11 +8,9 @@ import BlogByRating from '@/components/blog/BlogByRating';
 import BlogByCategory from '@/components/blog/BlogByCategory';
 import {
   POSTS_QUERY,
-  GET_CATEGORIES_QUERY,
   GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
 } from '@/graphql/queries/post.query';
 import BlogPlatform from '@/components/blog/BlogPlatform';
-import BlogCategorySticky from '@/components/blog/BlogCategorySticky';
 
 export const metadata: Metadata = {
   title: "Nick's Blog | Latest Posts",
@@ -36,10 +34,6 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const { data } = await client.query({
-    query: GET_CATEGORIES_QUERY,
-  });
-
   const postsResponse = await client.query({
     query: POSTS_QUERY,
     variables: {
@@ -59,15 +53,12 @@ export default async function BlogPage() {
     variables: { category, author: 3, first: 20 },
   });
 
-  const categoriesFilter = data.categories.nodes;
-
   const posts: PostItem[] = postsResponse.data.posts.nodes;
 
   const postsByCategory = postsByCategoryID.data.posts.nodes;
 
   return (
     <div className='relative'>
-      <BlogCategorySticky categoriesFilter={categoriesFilter} isDark />
       <div className='bg-dark text-white min-h-screen overflow-hidden'>
         <div className='fade-in-start max-container-centre py-2 px-5 lg:py-10'>
           <div className='relative blog-hero flex flex-col'>

@@ -12,26 +12,35 @@ type BlogFeaturedProps = {
 
 const BlogFeatured = ({ post, isFullWidth = false }: BlogFeaturedProps) => {
   return !isFullWidth ? (
-    <Link
-      href={`/blog/${post.slug}`}
+    <div
       className={clsx(
         'group w-full flex flex-col gap-3 cursor-pointer border-b border-fg-border py-4',
         'lg:w-1/2 lg:border-none lg:py-0'
       )}
     >
       <div className='w-full h-fit overflow-hidden rounded-sm'>
-        <ImageLoader
-          width={48}
-          height={48}
-          src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
-          alt={post.title}
-          className='w-full h-fit object-cover scale-100 group-hover:scale-105 duration-500 transition-all ease-in-out'
-        />
+        <Link href={`/blog/${post.slug}`}>
+          <ImageLoader
+            width={48}
+            height={48}
+            src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
+            alt={post.title}
+            className='w-full h-fit object-cover scale-100 group-hover:scale-105 duration-500 transition-all ease-in-out'
+          />
+        </Link>
       </div>
-      <h3 className='text-sm text-gradient-purple-coral-dark w-fit'>{post.categories.nodes[0].name}</h3>
-      <h2 className='text-4xl font-bold text-white group-hover:underline group-hover:text-link duration-200 transition-all ease-in-out'>
+      <Link
+        href={`/blog/category/${post.categories.nodes[0].slug}`}
+        className='text-sm text-gradient-purple-coral-dark w-fit'
+      >
+        {post.categories.nodes[0].name}
+      </Link>
+      <Link
+        href={`/blog/${post.slug}`}
+        className='text-4xl font-bold text-white group-hover:underline group-hover:text-link duration-200 transition-all ease-in-out'
+      >
         {post.title}
-      </h2>
+      </Link>
       <div className='text-sm text-fg-subtle' dangerouslySetInnerHTML={{ __html: post.excerpt }} />
 
       <div className='flex gap-x-2 items-center'>
@@ -45,10 +54,9 @@ const BlogFeatured = ({ post, isFullWidth = false }: BlogFeaturedProps) => {
         <Link href={`/blog/author/${post.author.node.slug}`} className='font-mono font-semibold text-sm'>
           {post.author.node.name}
         </Link>
-        •
-        <p className='font-mono font-normal text-sm'> {formatDate(post.date)}</p>
+        •<p className='font-mono font-normal text-sm'> {formatDate(post.date)}</p>
       </div>
-    </Link>
+    </div>
   ) : (
     <div className='py-5'>
       <div
@@ -56,7 +64,9 @@ const BlogFeatured = ({ post, isFullWidth = false }: BlogFeaturedProps) => {
           'group w-full flex flex-col md:flex-row-reverse gap-x-5 gap-3 cursor-pointer py-5 [&:not(:last-child)]:border-b lg:first:pt-0'
         )}
       >
-        <span className={clsx('flex h-fit overflow-hidden rounded-sm', 'w-full md:w-[60%] lg:max-w-[60%] lg:min-w-[60%]')}>
+        <span
+          className={clsx('flex h-fit overflow-hidden rounded-sm', 'w-full md:w-[60%] lg:max-w-[60%] lg:min-w-[60%]')}
+        >
           <Link href={`/blog/${post.slug}`}>
             <ImageLoader
               src={decodeURIComponent(post.featuredImage.node.sourceUrl)}

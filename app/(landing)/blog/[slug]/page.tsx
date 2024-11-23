@@ -1,29 +1,26 @@
-import { PostCategory, PostItem, TagItem } from '@/app/types';
 import React from 'react';
-import { HiCalendar, HiOutlineClock } from 'react-icons/hi';
+import { Metadata } from 'next';
+import Link from 'next/link';
+import readingDuration from 'reading-duration';
+import './style.scss';
 import { format } from 'date-fns';
+import { HiCalendar, HiOutlineClock } from 'react-icons/hi';
 import { LuDot, LuGithub, LuLinkedin } from 'react-icons/lu';
 import { FaMediumM } from 'react-icons/fa';
+import { PostCategory, PostItem, TagItem } from '@/app/types';
 import BlogHTML from '@/components/blog/BlogHTML';
 import ScrollToTop from '@/components/buttons/ButtonScrollToTop';
 import GenerateTableOfContent from '@/components/blog/GenerateTableOfContent';
-import { Metadata } from 'next';
-import './style.scss';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb';
-import Link from 'next/link';
 import { TagDetail } from '@/components/blog/Tag';
 import BlogAuthor from '@/components/blog/BlogAuthor';
 import BlogBottomCategories from '@/components/blog/BlogCategories';
 import BlogRelated from '@/components/blog/BlogRelated';
 import client from '@/lib/apolloClient';
-import BlogCategorySticky from '@/components/blog/BlogCategorySticky';
 import BlogSubscribers from '@/components/blog/BlogSubscribers';
-import {
-  GET_CATEGORIES_QUERY,
-  GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-  POST_DETAIL_QUERY,
-} from '@/graphql/queries/post.query';
-import Image from 'next/image';
+import { GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY, POST_DETAIL_QUERY } from '@/graphql/queries/post.query';
+import ImageLoader from '@/components/loader/ImageLoader';
+import NotFoundPage from '@/app/not-found';
 
 type BlogDetailProps = {
   params: {
@@ -44,12 +41,14 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
 
     const post: PostItem = fetchPost.data.post;
 
-    // const res = await fetch(`${url}/posts/${params.slug}`);
     if (!post) {
-      return { title: 'Post Not Found' };
+      return {
+        title: 'Post Not Found',
+        description: 'Post not found',
+        openGraph: { title: 'Post Not Found', description: 'Post not found', url: '/blog' },
+      };
     }
 
-    // const post: BlogType = await res.json();
     return {
       title: `${post.title || 'The latest blog posts'} | Nick's Blog`,
       description: post.excerpt,
@@ -72,12 +71,6 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
 }
 
 const BlogDetail = async ({ params }: BlogDetailProps) => {
-  const categoriesResponse = await client.query({
-    query: GET_CATEGORIES_QUERY,
-  });
-
-  const categoriesFilter = categoriesResponse.data.categories.nodes;
-
   const fetchPost = await client.query({
     query: POST_DETAIL_QUERY,
     variables: { slug: params.slug },
@@ -86,13 +79,10 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
   const post: PostItem = fetchPost.data.post;
 
   if (!post) {
-    return (
-      <div className='absolute top-1/2 right-1/2 translate-x-1/2 flex flex-col justify-center items-center gap-x-5'>
-        <span className='font-bold text-[60px]'>404</span>
-        <h1 className='flex justify-center items-center text-xl'>Post not found</h1>
-      </div>
-    );
+    return <NotFoundPage />;
   }
+
+  const readingTime = readingDuration(post.content, { wordsPerMinute: 250, emoji: false });
 
   const getPostsByCategory = post.categories.nodes.map((p: PostCategory) => {
     const postsByCategoryID = client.query({
@@ -114,9 +104,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
         }
         return acc;
       }, [])
-  );
-
-  console.log(referencePosts.length);
+  ).slice(0, 6);
 
   let breadcrumbItems = [
     { label: 'Home', href: '/' },
@@ -127,19 +115,17 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
 
   return (
     <div className='blog'>
-      <BlogCategorySticky categoriesFilter={categoriesFilter} />
       <div className='blog-title relative bg-bg-default'>
-        <div className='max-container-blog pt-10 px-6 !pb-0'>
+        <div className='max-container-blog pt-10 !pb-0'>
           <Breadcrumb items={breadcrumbItems} />
           <h1 className='font-bold text-5xl mb-4 text-fg-default'>{post.title}</h1>
           <div className='text-[#ADBAA7] text-base mb-10' dangerouslySetInnerHTML={{ __html: post.excerpt }} />
           <div className='relative min-h-[180px] xs:min-h-[250px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[550px] xl:min-h-[600px] h-full w-full z-10'>
-            <Image
+            <ImageLoader
               width={1200}
               height={480}
               src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
               alt={post.featuredImage.node.altText ?? post.title}
-              title={post.title}
               className='aspect-[4/2.4] rounded-md h-fit w-full absolute top-0 left-0 right-0 z-1'
             />
           </div>
@@ -167,7 +153,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
                 <span className='hidden sm:block px-5'>|</span>
                 <div className='flex items-center gap-1'>
                   <HiOutlineClock className='inline-block text-base mr-2' />
-                  <p className='text-fg-muted tracking-wide font-thin'>{post.date}</p>
+                  <p className='text-fg-muted tracking-wide font-thin'>{readingTime}</p>
                 </div>
               </div>
             </div>
@@ -199,18 +185,18 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
             </div>
           </div>
           <div className='flex gap-10'>
-            <div className='flex flex-col gap-y-5 w-full'>
+            <div className='xl:max-w-[calc(100%-224px)] flex flex-col gap-y-5 w-full'>
               <BlogHTML content={post.content} />
               <BlogBottomCategories tags={post.tags.nodes.map((t) => t.name)} />
               <BlogAuthor author={post.author.node} />
             </div>
-            <div className='hidden xl:block flex flex-col gap-5'>
-              <div className='max-w-56 flex flex-wrap gap-1'>
+            <div className='hidden xl:flex flex-col gap-5 max-w-56'>
+              <div className='w-full flex flex-wrap gap-1'>
                 {post.tags.nodes.map((tag: TagItem) => (
                   <TagDetail key={tag.id}>{tag.name}</TagDetail>
                 ))}
               </div>
-              <GenerateTableOfContent referencePosts={referencePosts} />
+              <GenerateTableOfContent referencePosts={referencePosts.slice(0, 3)} />
             </div>
           </div>
         </div>

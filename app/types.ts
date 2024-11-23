@@ -368,8 +368,18 @@ export interface PostCategory {
   slug: string;
   uri: string;
   description: string;
+  children: Children;
+  parent: Parent;
 }
 
+interface Children {
+  nodes: Omit<PostCategory, 'children'>[];
+}
+interface Parent {
+  node: {
+    name: string;
+  };
+}
 interface Author {
   node: AuthorInfo;
 }

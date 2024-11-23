@@ -1,7 +1,6 @@
 import { PostItem } from '@/app/types';
 import { formatDate } from '@/utils/formatDate';
 import clsx from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import ImageLoader from '../loader/ImageLoader';
@@ -17,26 +16,25 @@ const BlogItem = ({ post, isDark = false, isReverse = false, isLight = false }: 
   return (
     <div
       className={clsx(
-        'group w-full flex flex-col gap-x-5 gap-3 cursor-pointer py-5 [&:not(:last-child)]:border-b lg:first:pt-0',
+        'group w-full flex flex-col gap-x-5 gap-3 cursor-pointer py-2 md:py-5 [&:not(:last-child)]:border-b lg:first:pt-0',
         !isReverse ? 'sm:flex-row md:first:pt-10' : 'first:pt-10',
         isDark ? 'border-fg-border' : 'border-tertiary'
       )}
     >
       <div
         className={clsx(
-          'flex h-fit overflow-hidden rounded-sm',
-          'w-full lg:max-w-fit lg:min-w-fit',
+          'flex w-full h-fit max-h-[350px] sm:min-h-[350px] md:min-h-[200px] sm:max-h-[350px] md:max-h-[200px] lg:max-h-[170px] lg:min-h-[170px] xl:max-h-[200px] xl:min-h-[200px] overflow-hidden rounded-sm',
           !isReverse ? 'min-w-48 max-w-48' : ''
         )}
       >
-        <Link href={`/blog/${post.slug}`}>
+        <Link href={`/blog/${post.slug}`} className='w-full h-full'>
           <ImageLoader
             src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
             alt={post.featuredImage.node.altText}
             width={24}
             height={24}
             className={clsx(
-              'rounded-sm w-full h-fit object-contain scale-100 group-hover:scale-105 duration-500 transition-all ease-in-out',
+              'rounded-sm w-full h-full object-cover object-center scale-100 group-hover:scale-105 duration-500 transition-all ease-in-out',
               !isReverse ? 'lg:max-w-48' : ''
             )}
           />

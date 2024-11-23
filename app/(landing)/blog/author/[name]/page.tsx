@@ -1,9 +1,7 @@
-import { AuthorInfo, GetPostsByAuthorResponse, PostCategory, PostItem, TagItem } from '@/app/types';
-import BlogCategorySticky from '@/components/blog/BlogCategorySticky';
-import { GET_CATEGORIES_QUERY, GET_POSTS_BY_AUTHOR_QUERY, POSTS_QUERY } from '@/graphql/queries/post.query';
+import { GetPostsByAuthorResponse, PostItem, TagItem } from '@/app/types';
+import { GET_POSTS_BY_AUTHOR_QUERY } from '@/graphql/queries/post.query';
 import client from '@/lib/apolloClient';
 import React from 'react';
-import Image from 'next/image';
 import BlogFeatured from '@/components/blog/BlogFeatured';
 import BlogItem from '@/components/blog/BlogItem';
 import BlogSubscribers from '@/components/blog/BlogSubscribers';
@@ -17,12 +15,6 @@ interface AuthorProps {
 }
 
 const page = async ({ params }: AuthorProps) => {
-  const categoriesResponse = await client.query({
-    query: GET_CATEGORIES_QUERY,
-  });
-
-  const categoriesFilter: PostCategory[] = categoriesResponse.data.categories.nodes;
-
   const postsResponse = await client.query({
     query: GET_POSTS_BY_AUTHOR_QUERY,
     variables: {
@@ -46,7 +38,6 @@ const page = async ({ params }: AuthorProps) => {
   const postsWithoutFeatured = posts.filter((post: PostItem) => post.postId !== featuredPost?.postId);
   return (
     <div>
-      <BlogCategorySticky categoriesFilter={categoriesFilter} />
       <div className='pt-10 px-6 !pb-0 bg-bg-default'>
         <div className='max-container-blog !min-h-fit flex justify-center items-center gap-x-3'>
           <ImageLoader

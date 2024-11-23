@@ -37,6 +37,7 @@ const ImageLoader = ({
       id={id}
       priority={priority}
       onClick={onClick}
+      onError={(e) => { e.currentTarget.src = '/icons/logo.jpeg'; }}
       unoptimized
     />
   );

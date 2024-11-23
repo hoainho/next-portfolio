@@ -91,7 +91,7 @@ const Navbar = () => {
         isCentrePost ? '!relative bg-dark' : '',
         show && isLightTheme
           ? 'bg-[rgba(250,250,252,0.4)] backdrop-saturate-[180%] backdrop-blur-[30px]'
-          : 'bg-basics-background-default'
+          : 'bg-basics-background-default',
       )}
     >
       <div

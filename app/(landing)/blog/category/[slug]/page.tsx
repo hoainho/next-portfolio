@@ -1,11 +1,10 @@
+import NotFoundPage from '@/app/not-found';
 import { PostCategory, PostItem, TagItem } from '@/app/types';
-import BlogCategorySticky from '@/components/blog/BlogCategorySticky';
 import BlogFeatured from '@/components/blog/BlogFeatured';
 import BlogItem from '@/components/blog/BlogItem';
 import BlogPlatform from '@/components/blog/BlogPlatform';
 import BlogSubscribers from '@/components/blog/BlogSubscribers';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb';
-import ImageLoader from '@/components/loader/ImageLoader';
 import {
   GET_CATEGORIES_QUERY,
   GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
@@ -41,10 +40,6 @@ const BlogCategory = async ({ params }: Props) => {
   const latestSlug = params.slug === 'latest';
   const popularSlug = params.slug === 'popular';
 
-  if (!category && !latestSlug && !popularSlug) {
-    return <div>Category not found</div>;
-  }
-
   let query = POSTS_QUERY;
   let variables: any = { author: 3, first: 20 };
   if (latestSlug) {
@@ -55,7 +50,7 @@ const BlogCategory = async ({ params }: Props) => {
     variables = { tag: 'Popular', first: 20, author: 3 };
   } else {
     query = GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY;
-    variables = { category: category!.slug, author: 3, first: 20 };
+    variables = { category: category?.slug || params.slug, author: 3, first: 20 };
   }
   const postsByCategoryID = await client.query({
     query,
@@ -75,26 +70,27 @@ const BlogCategory = async ({ params }: Props) => {
 
   return (
     <div>
-      <BlogCategorySticky categoriesFilter={categoriesFilter} />
       <div className='pt-10 px-6 !pb-0 bg-bg-default'>
         <div className='max-container-blog !min-h-fit flex flex-col gap-y-3'>
           <Breadcrumb items={breadcrumb} />
           <h1 className='font-extrabold font-sans text-5xl mt-3 text-fg-default'>
             {category?.name || params.slug.charAt(0).toUpperCase() + params.slug.slice(1)}
           </h1>
-          <p className='text-fg-muted text-base max-w-[600px] pb-5'>
+          <div className='max-w-[600px] pb-5'>
             <div
-              className='text-fg-muted'
+              className='text-fg-muted flex flex-col gap-2'
               dangerouslySetInnerHTML={{ __html: category?.description || '' }}
             />
-            {latestSlug &&
-              'Explore the latest blogs from Th?nkAndGrow on all things software development from the newest capabilities on the Th?nkAndGrow platform to research and insights—and guides to help you level up your engineering skills.'}
-            {popularSlug &&
-              'Explore the most popular blogs from Th?nkAndGrow on all things software development from the newest capabilities on the Th?nkAndGrow platform to research and insights—and guides to help you level up your engineering skills.'}
-          </p>
+            <p className='text-fg-muted text-base'>
+              {latestSlug &&
+                'Explore the latest blogs from Th?nkAndGrow on all things software development from the newest capabilities on the Th?nkAndGrow platform to research and insights—and guides to help you level up your engineering skills.'}
+              {popularSlug &&
+                'Explore the most popular blogs from Th?nkAndGrow on all things software development from the newest capabilities on the Th?nkAndGrow platform to research and insights—and guides to help you level up your engineering skills.'}
+            </p>
+          </div>
         </div>
       </div>
-      {!(latestSlug || popularSlug) && (
+      {!(latestSlug || popularSlug) && featuredPost && (
         <div>
           <div className='max-container-blog py-5'>
             <div className='flex flex-col gap-y-5'>
@@ -124,13 +120,17 @@ const BlogCategory = async ({ params }: Props) => {
             <div className='flex items-center justify-between py-5 border-b border-gray-border mb-5'>
               <h2 className='text-2xl font-bold text-default'>Latest</h2>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4'>
-              {postsByCategory.map((post: PostItem, index: number) => (
-                <div className='col-span-1 pt-5' key={index}>
-                  <BlogItem post={post} key={index} isReverse />
-                </div>
-              ))}
-            </div>
+            {postsByCategory.length ? (
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4'>
+                {postsByCategory.map((post: PostItem, index: number) => (
+                  <div className='col-span-1 pt-0 md:pt-5' key={index}>
+                    <BlogItem post={post} key={index} isReverse />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <NotFoundPage />
+            )}
           </div>
         </div>
       </div>

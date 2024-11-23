@@ -204,6 +204,9 @@ blockquote cite {
     box-sizing: border-box;
     width: 100%;
 }
+.blog-html *:has(.table-of-content, .wp-block-table *) {
+    overflow-x: scroll;
+}
 
 //Heading
 .wp-block-heading {
@@ -233,6 +236,7 @@ blockquote cite {
 }
 
 .wp-block-table {
+    overflow-x: auto;
     .has-fixed-layout {
         width: 100%;
         border-collapse: collapse;

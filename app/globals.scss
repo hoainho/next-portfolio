@@ -272,7 +272,7 @@
   }
 
   .max-container-blog {
-    @apply max-w-6xl mx-auto pb-12 px-8 min-h-[calc(100vh-80px)];
+    @apply max-w-6xl mx-auto pb-12 px-4 sm:px-12 md:px-8 min-h-[calc(100vh-80px)];
   }
 
   .max-container-centre {

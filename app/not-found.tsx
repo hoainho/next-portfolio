@@ -84,7 +84,7 @@ const NotFoundPage = ({ isPost = false }: NotFoundProps) => {
       {!isPost ? (
         <div className='block-container'>
           <Button className='btn btn-back-black cursor-pointer' onClick={() => router.back()}>
-            Return Home
+            Back
           </Button>
         </div>
       ) : null}

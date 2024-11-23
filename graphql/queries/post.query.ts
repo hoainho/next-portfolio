@@ -24,6 +24,7 @@ export const POSTS_QUERY = gql`
           nodes {
             id
             name
+            slug
           }
         }
         date
@@ -64,9 +65,11 @@ export const POST_DETAIL_QUERY = gql`
             height
             width
           }
+          description
           firstName
           lastName
           name
+          slug
         }
       }
       content
@@ -105,8 +108,8 @@ export const POST_DETAIL_QUERY = gql`
 `;
 
 export const GET_CATEGORIES_QUERY = gql`
-  query {
-    categories {
+  query GetCategories {
+    categories(where: { hideEmpty: true }, first: 15) {
       nodes {
         children {
           nodes {
@@ -118,6 +121,11 @@ export const GET_CATEGORIES_QUERY = gql`
         name
         description
         slug
+        parent {
+          node {
+            name
+          }
+        }
       }
     }
   }
