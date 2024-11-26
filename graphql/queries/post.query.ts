@@ -103,6 +103,9 @@ export const POST_DETAIL_QUERY = gql`
       }
       title
       uri
+      postViews {
+        total
+      }
     }
   }
 `;

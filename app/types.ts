@@ -328,6 +328,7 @@ export interface PostItem {
   desiredSlug: null;
   excerpt: string;
   featuredImage: FeaturedImage;
+  postViews: PostViews;
   link: string;
   postId: number;
   slug: string;
@@ -356,6 +357,10 @@ interface FeaturedImageDetail {
   sourceUrl: string;
   width?: number;
   height?: number;
+}
+
+interface PostViews {
+  total: number;
 }
 
 interface Categories {

@@ -21,6 +21,7 @@ import BlogSubscribers from '@/components/blog/BlogSubscribers';
 import { GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY, POST_DETAIL_QUERY } from '@/graphql/queries/post.query';
 import ImageLoader from '@/components/loader/ImageLoader';
 import NotFoundPage from '@/app/not-found';
+import BlogCounterView from '@/components/blog/BlogCounterView';
 
 type BlogDetailProps = {
   params: {
@@ -145,7 +146,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
                   @{post.author.node.slug}
                 </Link>
               </div>
-              <div className='flex items-start gap-1 flex-col sm:flex-row sm:items-center '>
+              <div className='flex items-start flex-wrap gap-1 flex-col sm:flex-row sm:items-center '>
                 <div className='flex items-center gap-1'>
                   <HiCalendar className='inline-block text-base mr-2' />
                   <span className='text-fg-muted tracking-wide font-thin'>
@@ -157,6 +158,8 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
                   <HiOutlineClock className='inline-block text-base mr-2' />
                   <p className='text-fg-muted tracking-wide font-thin'>{readingTime}</p>
                 </div>
+                <span className='hidden sm:block px-5'>|</span>
+                <BlogCounterView postId={post.postId} viewCount={post.postViews.total} />
               </div>
             </div>
             <div className='flex justify-center items-center gap-3 flex-col sm:flex-row'>
