@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 import { HiCalendar, HiOutlineClock } from 'react-icons/hi';
 import { LuDot, LuGithub, LuLinkedin } from 'react-icons/lu';
 import { FaMediumM } from 'react-icons/fa';
-import { PostCategory, PostItem, TagItem } from '@/app/types';
+import { PostCategory, PostItem, PostSEO, TagItem } from '@/app/types';
 import BlogHTML from '@/components/blog/BlogHTML';
 import ScrollToTop from '@/components/buttons/ButtonScrollToTop';
 import GenerateTableOfContent from '@/components/blog/GenerateTableOfContent';
@@ -18,7 +18,11 @@ import BlogBottomCategories from '@/components/blog/BlogCategories';
 import BlogRelated from '@/components/blog/BlogRelated';
 import client from '@/lib/apolloClient';
 import BlogSubscribers from '@/components/blog/BlogSubscribers';
-import { GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY, POST_DETAIL_QUERY } from '@/graphql/queries/post.query';
+import {
+  GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
+  POST_DETAIL_QUERY,
+  POST_DETAIL_SEO_QUERY,
+} from '@/graphql/queries/post.query';
 import ImageLoader from '@/components/loader/ImageLoader';
 import NotFoundPage from '@/app/not-found';
 import BlogCounterView from '@/components/blog/BlogCounterView';
@@ -36,34 +40,66 @@ type BlogDetailProps = {
 export async function generateMetadata({ params }: BlogDetailProps): Promise<Metadata> {
   try {
     const fetchPost = await client.query({
-      query: POST_DETAIL_QUERY,
+      query: POST_DETAIL_SEO_QUERY,
       variables: { slug: params.slug },
     });
 
-    const post: PostItem = fetchPost.data.post;
+    const post: PostSEO = fetchPost.data.post;
 
     if (!post) {
       return {
         title: 'Post Not Found',
         description: 'Post not found',
-        openGraph: { title: 'Post Not Found', description: 'Post not found', url: '/blog' },
+        openGraph: {
+          title: 'Post Not Found',
+          description: 'Post not found',
+          url: '/blog',
+          images: [],
+        },
+        twitter: { title: 'Post Not Found', description: 'Post not found', images: [] },
       };
     }
 
     return {
       title: `${post.title || 'The latest blog posts'} | Nick's Blog`,
-      description: post.excerpt,
+      description: post.seo.metaDesc,
+      robots: { 
+        index: true, 
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+        },
+      },
       openGraph: {
         title: post.title,
-        description: post.excerpt,
-        url: post.uri,
-        images: [{ url: decodeURIComponent(post.featuredImage.node.sourceUrl) }],
+        description: post.seo.metaDesc,
+        url: post.seo.canonical,
+        images: [
+          {
+            url: decodeURIComponent(post.seo.opengraphImage.sourceUrl),
+            width: 1280,
+            height: 720,
+            alt: post.seo.opengraphImage.altText,
+            type: 'image/png',
+          },
+        ],
+        locale: 'en_US',
       },
       twitter: {
         card: 'summary_large_image',
         title: post.title,
-        description: post.excerpt,
-        images: [{ url: decodeURIComponent(post.featuredImage.node.sourceUrl) }],
+        description: post.seo.metaDesc,
+        images: [
+          {
+            url: decodeURIComponent(post.seo.opengraphImage.sourceUrl),
+            width: 1280,
+            height: 720,
+            alt: post.seo.opengraphImage.altText,
+            type: 'image/png',
+          },
+        ],
+        site: 'Hoài Nhớ' || post.seo.opengraphSiteName,
       },
     };
   } catch (error) {

@@ -337,6 +337,40 @@ export interface PostItem {
   uri: string;
 }
 
+export interface PostSEO {
+  author: Author;
+  title: string;
+  seo: SEO;
+}
+
+export interface SEO {
+  canonical: string;
+  cornerstone: string;
+  focuskw: string;
+  fullHead: string;
+  metaDesc: string;
+  metaKeywords: string;
+  metaRobotsNofollow: string;
+  metaRobotsNoindex: string;
+  opengraphAuthor: string;
+  opengraphDescription: string;
+  opengraphModifiedTime: string;
+  opengraphPublishedTime: string;
+  opengraphPublisher: string;
+  opengraphSiteName: string;
+  opengraphTitle: string;
+  opengraphType: string;
+  opengraphUrl: string;
+  opengraphImage: {
+    sourceUrl: string;
+    altText: string;
+  };
+  readingTime: string;
+  title: string;
+  twitterDescription: string;
+  twitterTitle: string;
+}
+
 interface Tags {
   nodes: TagItem[];
 }
