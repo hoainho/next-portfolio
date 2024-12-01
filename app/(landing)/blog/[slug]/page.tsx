@@ -46,6 +46,8 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
 
     const post: PostSEO = fetchPost.data.post;
 
+    console.log('post', post.seo.opengraphImage);
+
     if (!post) {
       return {
         title: 'Post Not Found',
@@ -63,8 +65,8 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
     return {
       title: `${post.title || 'The latest blog posts'} | Nick's Blog`,
       description: post.seo.metaDesc,
-      robots: { 
-        index: true, 
+      robots: {
+        index: true,
         follow: true,
         googleBot: {
           index: true,
@@ -103,7 +105,18 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
       },
     };
   } catch (error) {
-    return { title: `Error fetching post data | Nick's Blog` };
+    console.log('error', error);
+    return {
+      title: 'Post Not Found',
+      description: 'Post not found',
+      openGraph: {
+        title: 'Post Not Found',
+        description: 'Post not found',
+        url: '/blog',
+        images: [],
+      },
+      twitter: { title: 'Post Not Found', description: 'Post not found', images: [] },
+    };
   }
 }
 

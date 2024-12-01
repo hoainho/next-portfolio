@@ -155,6 +155,10 @@ export const POST_DETAIL_SEO_QUERY = gql`
         opengraphTitle
         opengraphType
         opengraphUrl
+        opengraphImage {
+          sourceUrl
+          altText
+        }
         readingTime
         title
         twitterDescription
