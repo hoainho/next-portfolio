@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     const pathToRevalidate = searchParams.get('path');
 
     // Validate the secret token
-    if (secret !== process.env.REVALIDATION_SECRET) {
+    if (secret !== process.env.NEXT_PUBLIC_REVALIDATION_SECRET) {
       return NextResponse.json({ message: 'Invalid secret token' }, { status: 401 });
     }
 
