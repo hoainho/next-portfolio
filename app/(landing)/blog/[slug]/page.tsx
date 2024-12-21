@@ -46,8 +46,6 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
 
     const post: PostSEO = fetchPost.data.post;
 
-    console.log('post', post.seo.opengraphImage);
-
     if (!post) {
       return {
         title: 'Post Not Found',

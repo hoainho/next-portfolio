@@ -50,7 +50,7 @@ export default async function BlogPage() {
   const category = 'javascript-typescript';
   const postsByCategoryID = await client.query({
     query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-    variables: { category, author: 3, first: 20 },
+    variables: { category, author: 3, first: 5 },
   });
 
   const posts: PostItem[] = postsResponse.data.posts.nodes;
