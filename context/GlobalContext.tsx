@@ -5,23 +5,27 @@ import React, { createContext, useContext, useState } from "react"
 type InitialStateType = {
     currentStage: number | null;
     isRotating: boolean
+    isHiddenScrollBar: boolean
 }
 
 type GlobalStateProps = {
   state: InitialStateType
   setCurrentStage: (_newStage: number | null) => void
   setIsRotating: (_newStatus: boolean) => void
+  setHiddenScrollBar: (_newStatus: boolean) => void
 }
 
 const initialState: InitialStateType = {
   currentStage: 0,
-  isRotating: false
+  isRotating: false,
+  isHiddenScrollBar: false
 }
 
 export const GlobalContext = createContext<GlobalStateProps>({
   state: initialState,
   setCurrentStage: (_newStage: number | null) => {},
-  setIsRotating: (_newStatus: boolean) => {}
+  setIsRotating: (_newStatus: boolean) => {},
+  setHiddenScrollBar: (_newStatus: boolean) => {}
 })
 
 export const GlobalProvider = ({
@@ -45,6 +49,12 @@ export const GlobalProvider = ({
     })
   }
 
+  const setHiddenScrollBar = (status: boolean) => {
+    setGlobalState({
+      ...globalState,
+      isHiddenScrollBar: status
+    })
+  }
 
   return (
     <GlobalContext.Provider
@@ -52,6 +62,7 @@ export const GlobalProvider = ({
         state: globalState,
         setCurrentStage,
         setIsRotating,
+        setHiddenScrollBar,
       }}
     >
       {children}

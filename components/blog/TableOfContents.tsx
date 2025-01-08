@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import BlogReferences from './BlogReferences';
+import { PostItem } from '@/app/types';
+import Link from 'next/link';
 
 interface TOCItem {
   id: string;
@@ -9,9 +12,10 @@ interface TOCItem {
 
 interface Props {
   headings: TOCItem[];
+  referencePosts: PostItem[];
 }
 
-export default function TableOfContents({ headings }: Props) {
+export default function TableOfContents({ headings, referencePosts }: Props) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -36,26 +40,26 @@ export default function TableOfContents({ headings }: Props) {
   }, [headings]);
 
   return (
-    <aside
-      className='table-of-content hidden xl:block sticky top-[112px] h-[calc(100vh-40px)] w-64 overflow-y-auto p-2 rounded-lg bg-gradient-to-br from-indigo-100 via-indigo-50 to-transparent shadow-lg'
-    >
-      <h3 className='text-xl font-bold text-indigo-700 mb-4'>Table of Contents</h3>
-      <ul className='space-y-3'>
+    <aside className='table-of-content sticky top-20 h-fit w-56 overflow-y-auto mt-5'>
+      <h3 className='text-xl font-bold text-primary mb-4'>Table of Contents</h3>
+      <ul className='space-y-2'>
         {headings.map((heading) => (
-          <li key={heading.id}>
-            <a
+          <li
+            key={heading.id}
+            className={`py-2 px-4 ${
+              activeId === heading.id ? 'font-bold rounded-xl bg-[#eff2ff]' : 'font-normal hover:text-indigo-700'
+            }`}
+          >
+            <Link
               href={`#${heading.id}`}
-              className={`block p-2 rounded-md transition-all duration-300 ${
-                activeId === heading.id
-                  ? 'bg-indigo-700 !text-white font-semibold shadow-lg'
-                  : 'text-indigo-600 hover:bg-indigo-700 hover:text-white hover:shadow-md'
-              }`}
+              className={`without-style rounded-[8px] transition-all duration-300 text-primary line-clamp-1`}
             >
               {heading.text}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
+      {referencePosts?.length ? <BlogReferences posts={referencePosts} /> : null}
     </aside>
   );
 }

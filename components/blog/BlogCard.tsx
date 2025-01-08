@@ -6,6 +6,7 @@ import { BlogType } from '@/app/types';
 import Image from 'next/image';
 import UnstyledLink from './UnstyledLink';
 import dynamic from 'next/dynamic';
+import ImageLoader from '../loader/ImageLoader';
 
 const Tag = dynamic(() => import('./Tag'), { ssr: false});
 
@@ -33,15 +34,12 @@ export default function BlogCard({ post, className, onClick }: BlogCardProps) {
       >
         <div className='relative'>
           <div className=''>
-            <Image
+            <ImageLoader
               width={post.yoast_head_json?.og_image?.[0]?.width ?? 1200}
               height={Math.max(post.yoast_head_json?.og_image?.[0]?.height ?? 480)}
-              unoptimized
               src={post.yoast_head_json?.og_image?.[0].url}
               alt={post.yoast_head_json?.og_image?.[0].type ?? post.yoast_head_json.title}
-              title={post.yoast_head_json?.og_title}
               className='aspect-[4/2.4]'
-              onError={(e) => { e.currentTarget.src = '/icons/logo.jpeg'; }}
             />
           </div>
           <div

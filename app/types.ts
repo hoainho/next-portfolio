@@ -274,3 +274,186 @@ export interface BlogCategoryI {
 }
 
 export interface BlogTagI extends BlogCategoryI {}
+
+export type AuthorType = {
+  id: number;
+  name: string;
+  url: string;
+  description: string;
+  link: string;
+  slug: string;
+  avatar_urls: AvatarUrls;
+};
+
+interface AvatarUrls {
+  '24': string;
+  '48': string;
+  '96': string;
+}
+
+export type PostsGraphqlType = {
+  data: Data;
+  extensions: Extensions;
+};
+
+interface Extensions {
+  debug: any[];
+  queryAnalyzer: QueryAnalyzer;
+}
+
+interface QueryAnalyzer {
+  keys: string;
+  keysLength: number;
+  keysCount: number;
+  skippedKeys: string;
+  skippedKeysSize: number;
+  skippedKeysCount: number;
+  skippedTypes: any[];
+}
+
+interface Data {
+  posts: Posts;
+}
+
+interface Posts {
+  nodes: PostItem[];
+}
+
+export interface PostItem {
+  author: Author;
+  content: string;
+  categories: Categories;
+  date: string;
+  modified: string;
+  desiredSlug: null;
+  excerpt: string;
+  featuredImage: FeaturedImage;
+  postViews: PostViews;
+  link: string;
+  postId: number;
+  slug: string;
+  tags: Tags;
+  title: string;
+  uri: string;
+}
+
+export interface PostSEO {
+  author: Author;
+  title: string;
+  seo: SEO;
+}
+
+export interface SEO {
+  canonical: string;
+  cornerstone: string;
+  focuskw: string;
+  fullHead: string;
+  metaDesc: string;
+  metaKeywords: string;
+  metaRobotsNofollow: string;
+  metaRobotsNoindex: string;
+  opengraphAuthor: string;
+  opengraphDescription: string;
+  opengraphModifiedTime: string;
+  opengraphPublishedTime: string;
+  opengraphPublisher: string;
+  opengraphSiteName: string;
+  opengraphTitle: string;
+  opengraphType: string;
+  opengraphUrl: string;
+  opengraphImage: {
+    sourceUrl: string;
+    altText: string;
+  };
+  readingTime: string;
+  title: string;
+  twitterDescription: string;
+  twitterTitle: string;
+}
+
+interface Tags {
+  nodes: TagItem[];
+}
+
+export interface TagItem {
+  description: null;
+  id: string;
+  name: string;
+}
+
+interface FeaturedImage {
+  node: FeaturedImageDetail;
+}
+
+interface FeaturedImageDetail {
+  altText: string;
+  srcSet: string;
+  sourceUrl: string;
+  width?: number;
+  height?: number;
+}
+
+interface PostViews {
+  total: number;
+}
+
+interface Categories {
+  nodes: PostCategory[];
+}
+
+export interface PostCategory {
+  id: string;
+  name: string;
+  slug: string;
+  uri: string;
+  description: string;
+  children: Children;
+  parent: Parent;
+}
+
+interface Children {
+  nodes: Omit<PostCategory, 'children'>[];
+}
+interface Parent {
+  node: {
+    name: string;
+  };
+}
+interface Author {
+  node: AuthorInfo;
+}
+
+export interface AuthorInfo {
+  avatar: Avatar;
+  firstName: string;
+  lastName: null;
+  username: string;
+  name: string;
+  slug: string;
+  url: string;
+  description: string;
+}
+
+interface Avatar {
+  url: string;
+  width: number;
+  extraAttr: null;
+  height: number;
+}
+
+export interface GetPostsByAuthorVariables {
+  author: string;
+}
+
+export interface GetPostsByAuthorResponse {
+  user: {
+    avatar: Avatar;
+    description: string;
+    name: string;
+    firstName: string;
+    lastName: string;
+    slug: string;
+    email: string;
+    posts: Posts;
+  };
+}

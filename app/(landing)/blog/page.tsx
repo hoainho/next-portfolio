@@ -1,61 +1,95 @@
-import { BlogCategoryI, BlogType } from '@/app/types';
-import BlogFilter from '@/components/blog/BlogFilter';
+import { PostItem } from '@/app/types';
 import { Metadata } from 'next';
+import client from '@/lib/apolloClient';
+import BlogItem from '@/components/blog/BlogItem';
+import BlogFeatured from '@/components/blog/BlogFeatured';
+import BlogSubscribers from '@/components/blog/BlogSubscribers';
+import BlogByRating from '@/components/blog/BlogByRating';
+import BlogByCategory from '@/components/blog/BlogByCategory';
+import {
+  POSTS_QUERY,
+  GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
+} from '@/graphql/queries/post.query';
+import BlogPlatform from '@/components/blog/BlogPlatform';
+
+export const revalidate = +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600);
 
 export const metadata: Metadata = {
   title: "Nick's Blog | Latest Posts",
-  description: "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
+  description:
+    "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
   keywords: "blog, articles, insights, technology, lifestyle, trends, tips, Nick's Blog, latest posts",
   openGraph: {
     title: "Nick's Blog | Latest Posts",
-    description: "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
-    url: "https://hoainho.info/blog",
-    images: [{ url: process.env.NEXT_PUBLIC_LOGO ||
-      "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg" }],
+    description:
+      "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
+    url: 'https://hoainho.info/blog',
+    images: [{ url: process.env.NEXT_PUBLIC_LOGO || 'https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: "Nick's Blog | Latest Posts",
-    description: "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
-    images: process.env.NEXT_PUBLIC_LOGO ||
-    "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+    description:
+      "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
+    images: process.env.NEXT_PUBLIC_LOGO || 'https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg',
   },
 };
 
 export default async function BlogPage() {
-  const url = process.env.NEXT_PUBLIC_BLOG_API;
-
-  const getPosts = await fetch(`${url}/posts?author=3`, {
-    next: { revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS ?? 3600) },
+  const postsResponse = await client.query({
+    query: POSTS_QUERY,
+    variables: {
+      author: 3,
+      first: 20,
+    },
+    context: {
+      fetchOptions: {
+        next: { 
+          tags: ['posts', 'all-posts'],
+          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600)
+        },
+      },
+    },
   });
 
-  const posts: BlogType[] = await getPosts.json();
+  const category = 'javascript-typescript';
+  const postsByCategoryID = await client.query({
+    query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
+    variables: { category, author: 3, first: 5 },
+    context: {
+      fetchOptions: {
+        next: { 
+          tags: ['posts', `category-${category}`, 'category-posts'],
+          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600)
+        },
+      },
+    },
+  });
 
-  const getAllCategories = await fetch(`${url}/categories`);
+  const posts: PostItem[] = postsResponse.data.posts.nodes;
 
-  const categories: BlogCategoryI[] = await getAllCategories.json();
+  const postsByCategory = postsByCategoryID.data.posts.nodes;
 
   return (
-    <div className='fade-in-start max-container'>
-      <div className='layout pt-6 pb-12'>
-        <h1 className='head-text'>
-          My <span className='blue-gradient_text drop-shadow font-semibold'>Blog</span>
-        </h1>
-
-        <p className='text-white-600 dark:text-gray-400 mt-4 mb-6 leading-relaxed block-container'>
-          Welcome to{' '}
-          <span className='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-primary relative inline-block'>
-            <span className='relative text-white'>
-              <strong>Nick's Blog</strong>
-            </span>
-          </span>
-          , a space where ideas, insights, and innovations come to life! Whether you’re a tech enthusiast, a curious
-          learner, or someone looking for practical tips on development, we have something for you. Explore expert
-          advice on modern web technologies, the latest in coding trends, and best practices to elevate your projects.
-        </p>
-
-        <BlogFilter categories={categories} posts={posts} />
+    <div className='relative'>
+      <div className='bg-dark text-white min-h-screen overflow-hidden'>
+        <div className='fade-in-start max-container-centre py-2 px-5 lg:py-10'>
+          <div className='relative blog-hero flex flex-col'>
+            <div className='flex flex-col lg:flex-row w-full gap-x-10'>
+              <BlogFeatured post={posts[0]} />
+              <div className='flex flex-col w-full lg:w-1/2 gap-5'>
+                {posts.slice(1, 4).map((post, index) => (
+                  <BlogItem post={post} key={index} isDark />
+                ))}
+              </div>
+            </div>
+            <BlogSubscribers isDark />
+          </div>
+        </div>
       </div>
+      <BlogByRating posts={posts} />
+      <BlogByCategory posts={postsByCategory} category='Javascript' categorySlug={category} />
+      <BlogPlatform />
     </div>
   );
 }

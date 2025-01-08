@@ -4,7 +4,7 @@ import "./globals.scss";
 import localFont from "next/font/local";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { GA_TRACKING_ID, GTM_TRACKING_ID } from "@/lib/gtag";
-import { GlobalProvider } from "@/context/GlobalContext";
+import { GlobalContext, GlobalProvider } from "@/context/GlobalContext";
 import Script from "next/script";
 const fontPublicSans = localFont({
   src: [

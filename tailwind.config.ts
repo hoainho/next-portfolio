@@ -9,6 +9,7 @@ module.exports = {
 	],
   theme: {
     screens: {
+      'xs': '361px',
       'sm': '481px',
       'md': '769px',
       'lg': '961px',
@@ -24,11 +25,15 @@ module.exports = {
       padding: '2rem'
     },
     extend: {
+      backgroundImage: {
+        'gradient-purple-coral': 'linear-gradient(92.05deg, #d2a8ff 12.09%, #f778ba 42.58%, #ff7b72 84.96%)',
+      },
       fontFamily: {
         'public-sans': ['var(--font-public-sans)'],
         'sharp-grotesk': ['var(--font-sharp-grotesk)'],
       },
       maxWidth: {
+        'xs': '360px',
         'xl': '1200px',
         '2xl': '1360px'
       },
@@ -54,7 +59,17 @@ module.exports = {
         'skeleton': 'var(--color-skeleton)',
         'overlay': 'var(--color-overlay)',
         'overlay-black': 'var(--color-overlay-black)',
-        'floral-white': 'var(--color-floral-white)'
+        'floral-white': 'var(--color-floral-white)',
+        'fg-default': 'var(--color-fg-default)',
+        'fg-subtle': 'var(--color-fg-subtle)',
+        'fg-muted': 'var(--color-fg-muted)',
+        'fg-border': 'var(--color-fg-border)',
+        'fg-on-emphasis': 'var(--color-fg-on-emphasis)',
+        'bg-default': 'var(--color-bg-default)',
+        'dark': 'var(--color-bg-dark)',
+        'link': 'var(--color-link-hover)',
+        'wp--preset--gradient--luminous-dusk': 'var(--wp--preset--gradient--luminous-dusk)',
+        'blog-divider': 'var(--blog-divider)'
       },
       borderRadius: {
         lg: 'var(--radius)',

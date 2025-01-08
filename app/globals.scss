@@ -71,6 +71,47 @@
     --color-brown: #eed5ca;
 
     --color-floral-white: #edfcfb;
+
+    //Blog
+    --color-fg-default: #ffffff;
+    --color-fg-muted: #768390;
+    --color-fg-subtle: #636e7b;
+    --color-fg-border: #21262d;
+    --color-fg-on-emphasis: #cdd9e5;
+    --color-bg-default: #22272e;
+    --color-bg-dark: #0d1117;
+    --color-link-hover: #79c0ff;
+
+    --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(
+      135deg,
+      rgb(74, 234, 220) 0%,
+      rgb(151, 120, 209) 20%,
+      rgb(207, 42, 186) 40%,
+      rgb(238, 44, 130) 60%,
+      rgb(251, 105, 98) 80%,
+      rgb(254, 248, 76) 100%
+    );
+    -wp--preset--gradient--blush-light-purple: linear-gradient(135deg, rgb(255, 206, 236) 0%, rgb(152, 150, 240) 100%);
+    --wp--preset--gradient--blush-bordeaux: linear-gradient(
+      135deg,
+      rgb(254, 205, 165) 0%,
+      rgb(254, 45, 45) 50%,
+      rgb(107, 0, 62) 100%
+    );
+    --wp--preset--gradient--luminous-dusk: linear-gradient(
+      135deg,
+      rgb(255, 203, 112) 0%,
+      rgb(199, 81, 192) 50%,
+      rgb(65, 88, 208) 100%
+    );
+    --wp--preset--gradient--pale-ocean: linear-gradient(
+      135deg,
+      rgb(255, 245, 203) 0%,
+      rgb(182, 227, 212) 50%,
+      rgb(51, 167, 181) 100%
+    );
+    --wp--preset--gradient--electric-grass: linear-gradient(135deg, rgb(202, 248, 128) 0%, rgb(113, 206, 126) 100%);
+    --wp--preset--gradient--midnight: linear-gradient(135deg, rgb(2, 3, 129) 0%, rgb(40, 116, 252) 100%);
   }
 
   ::-webkit-scrollbar {
@@ -231,7 +272,11 @@
   }
 
   .max-container-blog {
-    @apply max-w-6xl mx-auto pb-12 px-8 min-h-[calc(100vh-80px)];
+    @apply max-w-6xl mx-auto pb-12 px-4 sm:px-12 md:px-8 min-h-[calc(100vh-80px)];
+  }
+
+  .max-container-centre {
+    @apply max-w-7xl mx-auto pb-12 min-h-[calc(100vh-80px)];
   }
 
   .head-text {
@@ -251,7 +296,7 @@
   }
 
   .input {
-    @apply bg-white border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2.5 font-normal shadow-card;
+    @apply bg-white border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full h-fit p-2.5 mt-2.5 font-normal shadow-card;
   }
 
   .textarea {
@@ -431,7 +476,7 @@
 }
 
 // Not found css
-/* From Uiverse.io by Praashoo7 */ 
+/* From Uiverse.io by Praashoo7 */
 /* Design Inspired by one of Stefan Devai's Design on Dribble */
 
 .main_wrapper {
@@ -469,11 +514,15 @@
   border-radius: 45%;
   transform: rotate(140deg);
   border: 4px solid transparent;
-  box-shadow: inset 0px 16px #a85103, inset 0px 16px 1px 1px #a85103;
-  -moz-box-shadow: inset 0px 16px #a85103, inset 0px 16px 1px 1px #a85103;
+  box-shadow:
+    inset 0px 16px #a85103,
+    inset 0px 16px 1px 1px #a85103;
+  -moz-box-shadow:
+    inset 0px 16px #a85103,
+    inset 0px 16px 1px 1px #a85103;
 }
 .antenna::after {
-  content: "";
+  content: '';
   position: absolute;
   margin-top: -9.4em;
   margin-left: 0.4em;
@@ -484,7 +533,7 @@
   background-color: #f69e50;
 }
 .antenna::before {
-  content: "";
+  content: '';
   position: absolute;
   margin-top: 0.2em;
   margin-left: 1.25em;
@@ -501,13 +550,7 @@
   width: 12em;
   height: 5.5em;
   border-radius: 50px;
-  background-image: linear-gradient(
-    #171717,
-    #171717,
-    #353535,
-    #353535,
-    #171717
-  );
+  background-image: linear-gradient(#171717, #171717, #353535, #353535, #171717);
   transform: rotate(-29deg);
   clip-path: polygon(50% 0%, 49% 100%, 52% 100%);
 }
@@ -531,24 +574,9 @@
   height: 4em;
   border-radius: 50px;
   background-color: #171717;
-  background-image: linear-gradient(
-    #171717,
-    #171717,
-    #353535,
-    #353535,
-    #171717
-  );
+  background-image: linear-gradient(#171717, #171717, #353535, #353535, #171717);
   margin-right: 5em;
-  clip-path: polygon(
-    47% 0,
-    47% 0,
-    34% 34%,
-    54% 25%,
-    32% 100%,
-    29% 96%,
-    49% 32%,
-    30% 38%
-  );
+  clip-path: polygon(47% 0, 47% 0, 34% 34%, 54% 25%, 32% 100%, 29% 96%, 49% 32%, 30% 38%);
   transform: rotate(-8deg);
 }
 .a2d {
@@ -585,15 +613,14 @@
   box-shadow: inset 0.2em 0.2em #e69635;
 }
 .tv::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 17em;
   height: 9em;
   border-radius: 15px;
-  background: repeating-radial-gradient(#d36604 0 0.0001%, #00000070 0 0.0002%)
-      50% 0/2500px 2500px,
-    repeating-conic-gradient(#d36604 0 0.0001%, #00000070 0 0.0002%) 60% 60%/2500px
-      2500px;
+  background:
+    repeating-radial-gradient(#d36604 0 0.0001%, #00000070 0 0.0002%) 50% 0/2500px 2500px,
+    repeating-conic-gradient(#d36604 0 0.0001%, #00000070 0 0.0002%) 60% 60%/2500px 2500px;
   background-blend-mode: difference;
   opacity: 0.09;
 }
@@ -631,10 +658,9 @@
   height: 7.85em;
   font-family: Montserrat;
   border: 2px solid #1d0e01;
-  background: repeating-radial-gradient(#000 0 0.0001%, #ffffff 0 0.0002%) 50% 0/2500px
-      2500px,
-    repeating-conic-gradient(#000 0 0.0001%, #ffffff 0 0.0002%) 60% 60%/2500px
-      2500px;
+  background:
+    repeating-radial-gradient(#000 0 0.0001%, #ffffff 0 0.0002%) 50% 0/2500px 2500px,
+    repeating-conic-gradient(#000 0 0.0001%, #ffffff 0 0.0002%) 60% 60%/2500px 2500px;
   background-blend-mode: difference;
   animation: b 0.2s infinite alternate;
   border-radius: 10px;
@@ -649,7 +675,9 @@
 }
 @keyframes b {
   100% {
-    background-position: 50% 0, 60% 50%;
+    background-position:
+      50% 0,
+      60% 50%;
   }
 }
 
@@ -734,11 +762,13 @@
   border-radius: 50%;
   background-color: #7f5934;
   border: 2px solid black;
-  box-shadow: inset 2px 2px 1px #b49577, -2px 0px #513721,
+  box-shadow:
+    inset 2px 2px 1px #b49577,
+    -2px 0px #513721,
     -2px 0px 0px 1px black;
 }
 .b1::before {
-  content: "";
+  content: '';
   position: absolute;
   margin-top: 1em;
   margin-left: 0.5em;
@@ -749,7 +779,7 @@
   background-color: #000000;
 }
 .b1::after {
-  content: "";
+  content: '';
   position: absolute;
   margin-top: 0.9em;
   margin-left: 0.8em;
@@ -760,7 +790,7 @@
   background-color: #000000;
 }
 .b1 div {
-  content: "";
+  content: '';
   position: absolute;
   margin-top: -0.1em;
   margin-left: 0.65em;
@@ -775,11 +805,13 @@
   border-radius: 50%;
   background-color: #7f5934;
   border: 2px solid black;
-  box-shadow: inset 2px 2px 1px #b49577, -2px 0px #513721,
+  box-shadow:
+    inset 2px 2px 1px #b49577,
+    -2px 0px #513721,
     -2px 0px 0px 1px black;
 }
 .b2::before {
-  content: "";
+  content: '';
   position: absolute;
   margin-top: 1.05em;
   margin-left: 0.8em;
@@ -790,7 +822,7 @@
   background-color: #000000;
 }
 .b2::after {
-  content: "";
+  content: '';
   position: absolute;
   margin-top: -0.1em;
   margin-left: 0.65em;
@@ -876,4 +908,58 @@
 }
 .text_4043 {
   transform: scaleY(24.5) scaleX(9);
+}
+
+.text-gradient-purple-coral {
+  background: -webkit-linear-gradient(-70deg, #8250df, #d42a32);
+  transition: all 1s ease-in-out;
+  transition-duration: 2s;
+  transition-delay: 0.5s;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #0000;
+  -webkit-box-decoration-break: clone;
+  &:hover {
+    transition: all 1s ease-in-out 0.5s;
+    transition-duration: 2s;
+    transition-delay: 0.5s;
+    background: -webkit-linear-gradient(-70deg, #f40915, #380d88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #0000;
+    -webkit-box-decoration-break: clone;
+  }
+}
+
+.text-gradient-purple-coral-dark {
+  background-image: linear-gradient(140deg, #d2a8ff 12.09%, #f778ba 42.58%, #ff7b72 84.96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: #0000;
+  -webkit-box-decoration-break: clone;
+  color: rgb(121, 192, 255);
+}
+
+.text-gradient-purple-light {
+  background: linear-gradient(92.05deg, #d2a8ff 12.09%, #f778ba 42.58%, #ff7b72 84.96%);
+  transition: all 1s ease-in-out;
+  transition-duration: 2s;
+  transition-delay: 0.5s;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #0000;
+}
+
+.bg-gradient-purple-coral {
+  background: linear-gradient(92.05deg, #d2a8ff 12.09%, #f778ba 42.58%, #ff7b72 84.96%);
+}
+
+.blog-hero::before {
+  content: "";
+  position: absolute;
+  bottom: -106px;
+  left: -11%;
+  right: -11%;
+  height: 360px;
+  width: 100%;
+  background: linear-gradient(93.23deg, #f778ba 2.35%, #79c0ff 76.99%);
+  filter: blur(120px);
+  opacity: 0.6;
 }
