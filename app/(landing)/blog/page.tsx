@@ -12,6 +12,8 @@ import {
 } from '@/graphql/queries/post.query';
 import BlogPlatform from '@/components/blog/BlogPlatform';
 
+export const revalidate = +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600);
+
 export const metadata: Metadata = {
   title: "Nick's Blog | Latest Posts",
   description:
@@ -42,7 +44,10 @@ export default async function BlogPage() {
     },
     context: {
       fetchOptions: {
-        next: { revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600) },
+        next: { 
+          tags: ['posts', 'all-posts'],
+          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600)
+        },
       },
     },
   });
@@ -51,6 +56,14 @@ export default async function BlogPage() {
   const postsByCategoryID = await client.query({
     query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
     variables: { category, author: 3, first: 5 },
+    context: {
+      fetchOptions: {
+        next: { 
+          tags: ['posts', `category-${category}`, 'category-posts'],
+          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600)
+        },
+      },
+    },
   });
 
   const posts: PostItem[] = postsResponse.data.posts.nodes;

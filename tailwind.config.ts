@@ -25,6 +25,9 @@ module.exports = {
       padding: '2rem'
     },
     extend: {
+      backgroundImage: {
+        'gradient-purple-coral': 'linear-gradient(92.05deg, #d2a8ff 12.09%, #f778ba 42.58%, #ff7b72 84.96%)',
+      },
       fontFamily: {
         'public-sans': ['var(--font-public-sans)'],
         'sharp-grotesk': ['var(--font-sharp-grotesk)'],
