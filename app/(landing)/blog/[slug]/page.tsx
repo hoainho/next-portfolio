@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -26,6 +27,7 @@ import {
 import ImageLoader from '@/components/loader/ImageLoader';
 import NotFoundPage from '@/app/not-found';
 import BlogCounterView from '@/components/blog/BlogCounterView';
+import { INCREMENT_POST_VIEWS_MUTATION } from '@/graphql/mutations/post.mutation';
 
 type BlogDetailProps = {
   params: {
@@ -43,9 +45,9 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
       query: POST_DETAIL_SEO_QUERY,
       variables: { slug: params.slug },
     });
-
+    
     const post: PostSEO = fetchPost.data.post;
-
+    
     if (!post) {
       return {
         title: 'Post Not Found',
@@ -99,7 +101,7 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
             type: 'image/png',
           },
         ],
-        site: 'Hoài Nhớ' || post.seo.opengraphSiteName,
+        site: post.seo.opengraphSiteName || 'Hoài Nhớ',
       },
     };
   } catch (error) {
@@ -118,7 +120,20 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
   }
 }
 
+export const getCounterView = async (postId: Number) => {
+	try {
+		const responseIncrement = await client.mutate({
+			mutation: INCREMENT_POST_VIEWS_MUTATION,
+			variables: { postId: postId },
+		});
+		return responseIncrement.data.incrementPostViews.postViews.total
+	} catch (error) {
+		console.error('Failed to increment view count:', JSON.stringify(error));
+	}
+}
+
 const BlogDetail = async ({ params }: BlogDetailProps) => {
+
   const fetchPost = await client.query({
     query: POST_DETAIL_QUERY,
     variables: { slug: params.slug },
@@ -126,6 +141,8 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
 
   const post: PostItem = fetchPost.data.post;
 
+  const counterView = await getCounterView(post.postId)
+  
   if (!post) {
     return <NotFoundPage />;
   }
@@ -206,7 +223,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
                   <p className='text-fg-muted tracking-wide font-thin'>{readingTime}</p>
                 </div>
                 <span className='hidden sm:block px-5'>|</span>
-                <BlogCounterView postId={post.postId} viewCount={post.postViews.total} />
+                <BlogCounterView view={counterView}/>
               </div>
             </div>
             <div className='flex justify-center items-center gap-3 flex-col sm:flex-row'>
