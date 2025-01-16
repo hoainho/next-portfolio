@@ -134,7 +134,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
 		variables: { postId: post.postId },
 	});
 
-  const counterView = await responseIncrement.data.incrementPostViews.postViews.total
+  const counterView = responseIncrement.data.incrementPostViews.postViews.total
   
   if (!post) {
     return <NotFoundPage />;
@@ -151,7 +151,6 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
   });
 
   const postRefFilter = await Promise.all(getPostsByCategory);
-
   const referencePosts = Object.values(
     postRefFilter
       .flatMap((p) => p.data.posts.nodes)
