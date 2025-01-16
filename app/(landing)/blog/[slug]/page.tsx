@@ -120,28 +120,21 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
   }
 }
 
-export const getCounterView = async (postId: Number) => {
-	try {
-		const responseIncrement = await client.mutate({
-			mutation: INCREMENT_POST_VIEWS_MUTATION,
-			variables: { postId: postId },
-		});
-		return responseIncrement.data.incrementPostViews.postViews.total
-	} catch (error) {
-		console.error('Failed to increment view count:', JSON.stringify(error));
-	}
-}
-
 const BlogDetail = async ({ params }: BlogDetailProps) => {
 
-  const fetchPost = await client.query({
-    query: POST_DETAIL_QUERY,
-    variables: { slug: params.slug },
-  });
+	const fetchPost = await client.query({
+		query: POST_DETAIL_QUERY,
+		variables: { slug: params.slug },
+	});
 
-  const post: PostItem = fetchPost.data.post;
+	const post: PostItem = fetchPost.data.post;
 
-  const counterView = await getCounterView(post.postId)
+	const responseIncrement = await client.mutate({
+		mutation: INCREMENT_POST_VIEWS_MUTATION,
+		variables: { postId: post.postId },
+	});
+
+  const counterView = await responseIncrement.data.incrementPostViews.postViews.total
   
   if (!post) {
     return <NotFoundPage />;
