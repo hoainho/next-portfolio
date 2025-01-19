@@ -132,6 +132,11 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
 	const responseIncrement = await client.mutate({
 		mutation: INCREMENT_POST_VIEWS_MUTATION,
 		variables: { postId: post.postId },
+    context: {
+      fetchOptions: {
+        cache: 'no-store',
+      },
+    },
 	});
 
   const counterView = responseIncrement.data.incrementPostViews.postViews.total

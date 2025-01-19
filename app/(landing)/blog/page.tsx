@@ -40,7 +40,7 @@ export default async function BlogPage() {
     query: POSTS_QUERY,
     variables: {
       author: 3,
-      first: 20,
+      first: 4
     },
     context: {
       fetchOptions: {

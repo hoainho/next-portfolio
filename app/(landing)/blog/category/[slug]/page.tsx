@@ -44,13 +44,13 @@ const BlogCategory = async ({ params }: Props) => {
   let variables: any = { author: 3, first: 20 };
   if (latestSlug) {
     query = POSTS_QUERY;
-    variables = { author: 3, first: 20 };
+    variables = { author: 3, first: 30 };
   } else if (popularSlug) {
     query = GET_POSTS_BY_TAGS_QUERY;
     variables = { tag: 'Popular', first: 20, author: 3 };
   } else {
     query = GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY;
-    variables = { category: category?.slug || params.slug, author: 3, first: 20 };
+    variables = { category: category?.slug || params.slug, author: 3, first: 30 };
   }
   const postsByCategoryID = await client.query({
     query,
