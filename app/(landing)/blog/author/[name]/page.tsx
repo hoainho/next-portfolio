@@ -19,7 +19,7 @@ const page = async ({ params }: AuthorProps) => {
     query: GET_POSTS_BY_AUTHOR_QUERY,
     variables: {
       author: params.name || 'hoainho',
-      first: 20,
+      first: 30,
     },
     context: {
       fetchOptions: {
