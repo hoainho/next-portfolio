@@ -29,6 +29,8 @@ import NotFoundPage from '@/app/not-found';
 import BlogCounterView from '@/components/blog/BlogCounterView';
 import { INCREMENT_POST_VIEWS_MUTATION } from '@/graphql/mutations/post.mutation';
 
+export const revalidate = 0
+
 type BlogDetailProps = {
   params: {
     blogId: string;
@@ -132,11 +134,6 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
 	const responseIncrement = await client.mutate({
 		mutation: INCREMENT_POST_VIEWS_MUTATION,
 		variables: { postId: post.postId },
-    context: {
-      fetchOptions: {
-        cache: 'no-store',
-      },
-    },
 	});
 
   const counterView = responseIncrement.data.incrementPostViews.postViews.total
