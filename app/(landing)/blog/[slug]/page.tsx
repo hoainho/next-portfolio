@@ -29,6 +29,8 @@ import NotFoundPage from '@/app/not-found';
 import BlogCounterView from '@/components/blog/BlogCounterView';
 import { INCREMENT_POST_VIEWS_MUTATION } from '@/graphql/mutations/post.mutation';
 
+export const revalidate = 0
+
 type BlogDetailProps = {
   params: {
     blogId: string;
