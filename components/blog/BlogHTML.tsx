@@ -1,6 +1,7 @@
+
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from "react-dom";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github-dark.css';
@@ -11,56 +12,69 @@ type BlogHTMLProps = {
 };
 
 const BlogHTML = ({ content }: BlogHTMLProps) => {
-	console.log(content)
+
 	useEffect(() => {
 		hljs.highlightAll();
 
 		const preBlocks = document.querySelectorAll('.wp-block-code') as NodeListOf<HTMLElement>
 
 		preBlocks.forEach((preBlock) => {
+			preBlock.style.position = 'relative'
 			const codeBlock = preBlock.querySelector('code')
 
 			if (codeBlock && !codeBlock.querySelector('.copy-icon-container')) {
 				const container = document.createElement("div");
 				container.className = "copy-icon-container";
-				container.style.display = 'flex'
-				container.style.width = '100%';
-				container.style.justifyContent = 'flex-end'
+				container.style.position = 'absolute'
+				container.style.bottom = '35px'
+				container.style.right = '10px'
+				container.style.width = 'max-content'
+				container.style.cursor = 'pointer'
 
 				codeBlock.appendChild(container);
 
 				const CopyIcon = () => {
-					const handleCopy = () => {
+					const handleCopy = async() => {
 						const code = codeBlock.textContent;
-						console.log(code)
 						if (code) {
-							const containerNotifi = document.createElement("div");
-							containerNotifi.className = 'notifi-container'
-							containerNotifi.style.position = 'absolute'
-							containerNotifi.style.top = '0'
-							containerNotifi.style.right = '0'
-							containerNotifi.innerText = 'Copied'
+							await navigator.clipboard.writeText(code);
+							const notification = document.createElement("div");
+							notification.textContent = "Copied";
+							notification.style.width = "50px";
+							notification.style.position = "absolute";
+							notification.style.bottom = "60px";
+							notification.style.right = "20px";
+							notification.style.background = "rgb(125 121 121)";
+							notification.style.color = "#fff";
+							notification.style.display = "flex";
+							notification.style.alignItems = "center";
+							notification.style.justifyContent = "center";
+							notification.style.padding = "5px 10px";
+							notification.style.borderRadius = "4px";
+							notification.style.fontSize = "12px";
+							notification.style.zIndex = "10";
+							notification.style.whiteSpace = "nowrap";
 
-							// navigator.clipboard.writeText(code).then(result => {
-							// 	const containerNotifi = document.createElement("div");
-							// 	containerNotifi.className = 'notifi-container'
-							// 	containerNotifi.style.position = 'absolute'
-							// 	containerNotifi.style.top = '0'
-							// 	container.style.right = '0'
-							// })
+							const parent = container.parentElement; 
+							if (parent) {
+								parent.appendChild(notification);
+							}
+
+							setTimeout(() => {
+								notification.remove();
+							}, 2000);
 						}
 					}
 					return (
-						<FaRegCopy
-							className="copy-icon w-14 text-xl relative"
-							style={{
-								width: '50px'
-							}}
-							onClick={handleCopy}
-						/>
+						<div className='relative'>
+							<FaRegCopy
+								className="copy-icon w-14 text-xl relative"
+								onClick={handleCopy}
+							/>
+						</div>
 					)
 				}
-				ReactDOM.render(<CopyIcon />, container);
+				ReactDOM.render(<CopyIcon />, container,);
 			}
 		})
 	}, [content]);
