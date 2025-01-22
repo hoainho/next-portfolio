@@ -17,7 +17,7 @@ const BlogByRating = async ({ posts }: Props) => {
     variables: { tag: "popular", first: 3, author: 3 },
   });
 
-  const popularPosts: PostItem[] = postsByPopular.data.posts.nodes;
+  const popularPosts: PostItem[] = postsByPopular?.data?.posts?.nodes;
   return (
     <div className="min-h-screen bg-white text-black">
       <div className="fade-in-start max-container-centre py-14 px-5 lg:py-10">

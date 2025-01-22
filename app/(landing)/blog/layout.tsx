@@ -15,7 +15,7 @@ export default async function BlogLayout({ children }: Props) {
   });
 
   const categoriesFilter: PostCategory[] =
-    categoriesResponse.data.categories.nodes;
+    categoriesResponse?.data?.categories?.nodes;
 
   const categoriesReq = categoriesFilter
     .filter((category) => !category.parent)
@@ -26,7 +26,7 @@ export default async function BlogLayout({ children }: Props) {
           variables: { category: category.slug, author: 3, first: 1 },
         });
 
-        const post: PostItem = fetchPost.data.posts.nodes[0];
+        const post: PostItem = fetchPost?.data?.posts?.nodes?.[0];
         return { ...category, post };
       }
       return category;

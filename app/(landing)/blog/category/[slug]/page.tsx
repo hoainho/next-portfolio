@@ -26,10 +26,10 @@ const BlogCategory = async ({ params }: Props) => {
   });
 
   const categoriesFilter: PostCategory[] =
-    categoriesResponse.data.categories.nodes;
+    categoriesResponse?.data?.categories?.nodes;
 
-  const category = categoriesFilter.find(
-    (category: PostCategory) => category.slug === params.slug,
+  const category = categoriesFilter?.find(
+    (category: PostCategory) => category?.slug === params?.slug,
   );
 
   const breadcrumb = [
@@ -73,11 +73,11 @@ const BlogCategory = async ({ params }: Props) => {
     },
   });
 
-  const postsByCategory = postsByCategoryID.data.posts.nodes;
+  const postsByCategory = postsByCategoryID?.data?.posts?.nodes;
 
-  const featuredPost: PostItem | undefined = postsByCategory.find(
+  const featuredPost: PostItem | undefined = postsByCategory?.find(
     (post: PostItem) =>
-      post.tags.nodes.some((tag: TagItem) => tag.name === "Popular"),
+      post?.tags?.nodes?.some((tag: TagItem) => tag?.name === "Popular"),
   );
 
   return (

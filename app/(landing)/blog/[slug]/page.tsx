@@ -47,7 +47,7 @@ export async function generateMetadata({
       variables: { slug: params.slug },
     });
 
-    const post: PostSEO = fetchPost.data.post;
+    const post: PostSEO = fetchPost?.data?.post;
 
     if (!post) {
       return {
@@ -135,11 +135,11 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
     variables: { slug: params.slug },
   });
 
-  const post: PostItem = fetchPost.data.post;
+  const post: PostItem = fetchPost?.data?.post;
 
   const responseIncrement = await client.mutate({
     mutation: INCREMENT_POST_VIEWS_MUTATION,
-    variables: { postId: post.postId },
+    variables: { postId: post?.postId },
     context: {
       fetchOptions: {
         cache: "no-store",
@@ -147,7 +147,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
     },
   });
 
-  const counterView = responseIncrement.data.incrementPostViews.postViews.total;
+  const counterView = responseIncrement?.data?.incrementPostViews?.postViews?.total;
 
   if (!post) {
     return <NotFoundPage />;
@@ -169,10 +169,10 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
   const postRefFilter = await Promise.all(getPostsByCategory);
   const referencePosts = Object.values(
     postRefFilter
-      .flatMap((p) => p.data.posts.nodes)
+      .flatMap((p) => p?.data?.posts?.nodes)
       .reduce((acc: PostItem[], post) => {
-        const exists = acc.some((p) => p.postId === post.postId);
-        if (!exists && post.postId !== params.slug) {
+        const exists = acc.some((p) => p?.postId === post?.postId);
+        if (!exists && post?.postId !== params?.slug) {
           acc.push(post);
         }
         return acc;
