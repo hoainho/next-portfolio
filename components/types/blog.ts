@@ -1,4 +1,3 @@
-
 export type BlogFrontmatter = {
   wordCount: number;
   readingTime: string;
@@ -13,13 +12,13 @@ export type BlogFrontmatter = {
   repost?: string;
 };
 
-export type ContentType = 'blog' | 'library' | 'projects';
+export type ContentType = "blog" | "library" | "projects";
 
-export type PickFrontmatter<T extends ContentType> = T extends 'blog'
+export type PickFrontmatter<T extends ContentType> = T extends "blog"
   ? BlogFrontmatter
-  : T extends 'library'
-  ? LibraryFrontmatter
-  : ProjectFrontmatter;
+  : T extends "library"
+    ? LibraryFrontmatter
+    : ProjectFrontmatter;
 
 export type InjectedMeta = { views?: number; likes?: number };
 

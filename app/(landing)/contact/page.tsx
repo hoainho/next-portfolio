@@ -28,7 +28,7 @@ const Contact = () => {
     event:
       | FocusEvent<HTMLInputElement>
       | FocusEvent<HTMLTextAreaElement>
-      | FocusEvent<HTMLButtonElement>
+      | FocusEvent<HTMLButtonElement>,
   ) => {
     if (event?.target?.name === "email") {
       setCurrentAnimation("walk.left");
@@ -56,7 +56,7 @@ const Contact = () => {
           to_email: "hoainho.work@gmail.com",
           message: form.message,
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ""
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "",
       )
       .then(
         () => {
@@ -87,7 +87,7 @@ const Contact = () => {
             text: "Regrettably, I have not yet received your message. Please try again 😢",
             type: "danger",
           });
-        }
+        },
       );
     return true;
   };

@@ -5,7 +5,6 @@ import React, { ReactNode } from "react";
 
 type LayoutOrderProps = { children: ReactNode };
 
-
 export const metadata: Metadata = {
   title:
     "Hoai Nho - Portfolio | Deep Javascript & TypeScript | Software Engineer | Open Source Contributor",
@@ -14,7 +13,6 @@ export const metadata: Metadata = {
   keywords:
     "Hoai Nho, Hoài Nhớ, Nguyễn Hoài Nhớ, Nhớ Nguyễn, portfolio, deep learning engineer, software engineer, NUS Technology, , javascript, fullstack developer",
 };
-
 
 function Layout({ children }: LayoutOrderProps) {
   return (

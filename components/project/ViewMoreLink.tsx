@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { ProjectType } from "@/app/types";
 import trackEvent from "@/hooks/useGAEventTracker";
 import Link from "next/link";
@@ -10,7 +10,6 @@ type ViewMoreLinkProps = {
 };
 
 const ViewMoreLink = ({ project }: ViewMoreLinkProps) => {
-  
   const handleTracking = (link: string) => {
     trackEvent(link);
   };

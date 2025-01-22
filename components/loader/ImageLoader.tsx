@@ -17,12 +17,12 @@ type ImageLoaderProps = {
 };
 
 const ImageLoader = ({
-  alt = 'image-loader',
-  width = 20 ,
+  alt = "image-loader",
+  width = 20,
   height = 20,
-  src = '',
-  className = '',
-  id = '',
+  src = "",
+  className = "",
+  id = "",
   priority = false,
   quality = 100,
   onClick,
@@ -37,7 +37,9 @@ const ImageLoader = ({
       id={id}
       priority={priority}
       onClick={onClick}
-      onError={(e) => { e.currentTarget.src = '/icons/logo.jpeg'; }}
+      onError={(e) => {
+        e.currentTarget.src = "/icons/logo.jpeg";
+      }}
       unoptimized
     />
   );

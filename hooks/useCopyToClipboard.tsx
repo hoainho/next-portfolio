@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 type CopiedValue = string | null;
 type CopyFn = (text: string) => Promise<boolean>; // Return success
@@ -10,7 +10,7 @@ export default function useCopyToClipboard(): [CopyFn, CopiedValue] {
   const copy: CopyFn = async (text) => {
     if (!navigator?.clipboard) {
       // eslint-disable-next-line no-console
-      console.warn('Clipboard not supported');
+      console.warn("Clipboard not supported");
       return false;
     }
 
@@ -21,7 +21,7 @@ export default function useCopyToClipboard(): [CopyFn, CopiedValue] {
       return true;
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.warn('Copy failed', error);
+      console.warn("Copy failed", error);
       setCopiedText(null);
       return false;
     }

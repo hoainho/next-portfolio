@@ -1,4 +1,4 @@
-import { AnimationAction } from 'three';
+import { AnimationAction } from "three";
 
 export type ActionModelType = {
   [x: string]: AnimationAction | null;
@@ -77,11 +77,11 @@ interface Links {
   about: Self[];
   author: Author2[];
   replies: Author2[];
-  'version-history': Versionhistory[];
-  'predecessor-version': Predecessorversion[];
-  'wp:featuredmedia': Author2[];
-  'wp:attachment': Self[];
-  'wp:term': Wpterm[];
+  "version-history": Versionhistory[];
+  "predecessor-version": Predecessorversion[];
+  "wp:featuredmedia": Author2[];
+  "wp:attachment": Self[];
+  "wp:term": Wpterm[];
   curies: Cury[];
 }
 
@@ -137,13 +137,13 @@ interface Yoastheadjson {
 }
 
 interface Schema {
-  '@context': string;
-  '@graph': Graph[];
+  "@context": string;
+  "@graph": Graph[];
 }
 
 interface Graph {
-  '@type': string;
-  '@id': string;
+  "@type": string;
+  "@id": string;
   isPartOf?: IsPartOf;
   author?: Author;
   headline?: string;
@@ -182,9 +182,9 @@ interface Graph {
 }
 
 interface Logo {
-  '@type': string;
+  "@type": string;
   inLanguage: string;
-  '@id': string;
+  "@id": string;
   url: string;
   contentUrl: string;
   width: number;
@@ -193,33 +193,33 @@ interface Logo {
 }
 
 interface ItemListElement {
-  '@type': string;
+  "@type": string;
   position: number;
   name: string;
   item?: string;
 }
 
 interface PotentialAction {
-  '@type': string;
+  "@type": string;
   name?: string;
   target: string[] | Target2;
-  'query-input'?: Queryinput;
+  "query-input"?: Queryinput;
 }
 
 interface Queryinput {
-  '@type': string;
+  "@type": string;
   valueRequired: boolean;
   valueName: string;
 }
 
 interface Target2 {
-  '@type': string;
+  "@type": string;
   urlTemplate: string;
 }
 
 interface Image {
-  '@id': string;
-  '@type'?: string;
+  "@id": string;
+  "@type"?: string;
   inLanguage?: string;
   url?: string;
   contentUrl?: string;
@@ -228,16 +228,16 @@ interface Image {
 
 interface Author {
   name: string;
-  '@id': string;
+  "@id": string;
 }
 
 interface IsPartOf {
-  '@id': string;
+  "@id": string;
 }
 
 interface Twittermisc {
-  'Written by': string;
-  'Est. reading time': string;
+  "Written by": string;
+  "Est. reading time": string;
 }
 
 interface Ogimage {
@@ -250,9 +250,9 @@ interface Ogimage {
 interface Robots {
   index: string;
   follow: string;
-  'max-snippet': string;
-  'max-image-preview': string;
-  'max-video-preview': string;
+  "max-snippet": string;
+  "max-image-preview": string;
+  "max-video-preview": string;
 }
 
 interface Meta {
@@ -286,9 +286,9 @@ export type AuthorType = {
 };
 
 interface AvatarUrls {
-  '24': string;
-  '48': string;
-  '96': string;
+  "24": string;
+  "48": string;
+  "96": string;
 }
 
 export type PostsGraphqlType = {
@@ -412,7 +412,7 @@ export interface PostCategory {
 }
 
 interface Children {
-  nodes: Omit<PostCategory, 'children'>[];
+  nodes: Omit<PostCategory, "children">[];
 }
 interface Parent {
   node: {

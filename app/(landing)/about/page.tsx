@@ -13,8 +13,7 @@ export const metadata: Metadata = {
   keywords: `Earthbrain - Smart Construction, Hoai Nho - About , Eyewa, Ringo App, Maqro, ThirdRockPix, Human Information Security Management, Multinational Security Systems, Construction Machinery Management, and E-commerce`,
   openGraph: {
     title: "About | Hoai-Nho | Portfolio",
-    description:
-      `My deep understanding of JavaScript fundamentals, coupled with a comprehensive
+    description: `My deep understanding of JavaScript fundamentals, coupled with a comprehensive
           knowledge of its ecosystem, equips me to tackle complex challenges and
           deliver top-notch solutions.`,
     url: `https://hoainho.info`,

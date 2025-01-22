@@ -25,7 +25,7 @@ const SkillWithType = ({ type = SKILL_TYPE.BACKEND }) => {
                 "btn justify-center items-center w-[max-content] h-[max-content]",
                 "inline-flex rounded-md bg-gray-50 px-2 py-1 text-xs font-medium",
                 "text-gray-600 ring-1 ring-inset ring-gray-500/10 whitespace-nowrap",
-                `btn-back-${getColorByDay()}`
+                `btn-back-${getColorByDay()}`,
               )}
             >
               {skill.yoe} year
@@ -37,7 +37,7 @@ const SkillWithType = ({ type = SKILL_TYPE.BACKEND }) => {
                 "rounded-xl btn z-10",
                 "flex justify-center items-center",
                 "w-[max-content] h-[max-content]",
-                `btn-back-${getColorByDay()}`
+                `btn-back-${getColorByDay()}`,
               )}
             >
               <p className="text-white font-semibold drop-shadow whitespace-nowrap">

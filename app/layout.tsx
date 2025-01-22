@@ -29,8 +29,8 @@ const fontPublicSans = localFont({
 
 export const viewport: Viewport = {
   initialScale: 1,
-  width: 'device-width'
-}
+  width: "device-width",
+};
 
 export const metadata: Metadata = {
   title:
@@ -76,7 +76,10 @@ export default function RootLayout({ children }: { children: ReactElement }) {
       <GoogleTagManager gtmId={GTM_TRACKING_ID} />
       <GoogleAnalytics gaId={GA_TRACKING_ID} />
 
-      <Script type="text/javascript" src="https://unpkg.com/default-passive-events"/>
+      <Script
+        type="text/javascript"
+        src="https://unpkg.com/default-passive-events"
+      />
     </html>
   );
 }

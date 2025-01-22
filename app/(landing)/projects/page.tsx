@@ -5,10 +5,8 @@ import ViewMoreLink from "@/components/project/ViewMoreLink";
 import ImageLoader from "@/components/loader/ImageLoader";
 
 export const metadata: Metadata = {
-  title:
-    "Projects | Hoai Nho",
-  description:
-    `Throughout my career, I have worked on a diverse range of projects,
+  title: "Projects | Hoai Nho",
+  description: `Throughout my career, I have worked on a diverse range of projects,
         including notable categories such as Travel, Stock Trading, Mapping,
         Financial Management, Human Information Security Management,
         Multinational Security Systems, Construction Machinery Management, and
@@ -33,7 +31,6 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-
 };
 
 const Projects = () => {

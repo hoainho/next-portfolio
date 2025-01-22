@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md,scss,css,json}\""
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
@@ -39,6 +40,7 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.1",
     "@types/lodash": "^4.17.10",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -48,6 +50,7 @@
     "@types/uuid": "^10.0.0",
     "babel-plugin-superjson-next": "^0.4.5",
     "postcss": "^8",
+    "prettier": "^3.4.2",
     "sass": "^1.77.2",
     "superjson": "^1.13.3",
     "tailwindcss": "^3.4.1",

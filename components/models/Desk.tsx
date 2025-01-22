@@ -76,7 +76,7 @@ export function Desk() {
       ? process.env.NEXT_PUBLIC_CLOUDFRONT_URL
       : "";
   const { nodes, materials, animations } = useGLTF(
-    `${cachedUrl}/3d/claw_gaming_laptop_setup.glb`
+    `${cachedUrl}/3d/claw_gaming_laptop_setup.glb`,
   ) as GLTFResult;
 
   // Preload the GLTF model to start loading immediately
@@ -87,44 +87,44 @@ export function Desk() {
 
   const calendarTexture = useLoader(
     TextureLoader,
-    `${cachedUrl}/images/code.png`
+    `${cachedUrl}/images/code.png`,
   );
   const calendarAspectRatio = texture.image.width / texture.image.height;
 
   const AWS_Solution_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/aws-knowledge-architecture.png`
+    `${cachedUrl}/certifications/aws-knowledge-architecture.png`,
   );
   const AWS_Solution_aspectRatio = texture.image.width / texture.image.height;
 
   const AWS_Essentials_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/aws-knowledge-cloud-essentials.png`
+    `${cachedUrl}/certifications/aws-knowledge-cloud-essentials.png`,
   );
   const AWS_Essentials_aspectRatio = texture.image.width / texture.image.height;
 
   const AWS_EKS_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/aws-knowledge-amazon-eks.png`
+    `${cachedUrl}/certifications/aws-knowledge-amazon-eks.png`,
   );
   const AWS_EKS_aspectRatio = texture.image.width / texture.image.height;
 
   const AWS_CloudQuest_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/aws-cloud-practitioner.png`
+    `${cachedUrl}/certifications/aws-cloud-practitioner.png`,
   );
   const AWS_CloudQuest_aspectRatio = texture.image.width / texture.image.height;
 
   const AWS_Data_Analysis_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/data-analysis-using-python.png`
+    `${cachedUrl}/certifications/data-analysis-using-python.png`,
   );
   const AWS_Data_Analysis_aspectRatio =
     texture.image.width / texture.image.height;
 
   const AWS_Data_Science_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/python-for-data-science.png`
+    `${cachedUrl}/certifications/python-for-data-science.png`,
   );
   const AWS_Data_Science_aspectRatio =
     texture.image.width / texture.image.height;
@@ -313,7 +313,7 @@ export function Desk() {
         deskRef.current.rotation.y += rotationSpeed.current;
         deskRef.current.rotation.y = Math.max(
           -0.8,
-          Math.min(0.8, deskRef.current.rotation.y + rotationSpeed.current)
+          Math.min(0.8, deskRef.current.rotation.y + rotationSpeed.current),
         );
       } else {
         // When rotating, determine the current stage based on desk's orientation
@@ -490,9 +490,7 @@ export function Desk() {
                     position={[-37, -26, 0]}
                   >
                     <mesh scale={10}>
-                      <boxGeometry
-                        args={[AWS_EKS_aspectRatio * 2, 2, 0.1]}
-                      />
+                      <boxGeometry args={[AWS_EKS_aspectRatio * 2, 2, 0.1]} />
                       <meshPhysicalMaterial
                         color="rgba(255, 255, 255, 0.9)"
                         roughness={0.1}
