@@ -38,7 +38,7 @@ const BlogByRating = async ({ posts }: Props) => {
               </div>
             </div>
             <div className="flex flex-col gap-5 w-full">
-              {posts.slice(0, 3).map((post, index) => (
+              {posts?.slice(0, 3)?.map((post, index) => (
                 <BlogItem post={post} key={index} isLight />
               ))}
             </div>
@@ -59,7 +59,7 @@ const BlogByRating = async ({ posts }: Props) => {
               </div>
             </div>
             <div className="flex flex-col gap-5 w-full">
-              {popularPosts.map((post, index) => (
+              {popularPosts?.map((post, index) => (
                 <BlogItem post={post} key={index} isLight />
               ))}
             </div>

@@ -47,7 +47,7 @@ const BlogPlatform = (props: Props) => {
           developer platform.
         </p>
         <div className="w-full flex justify-center gap-5 mt-10 flex-row flex-wrap">
-          {platforms.map((platform, index) => (
+          {platforms?.map((platform, index) => (
             <div
               key={index}
               className={clsx(

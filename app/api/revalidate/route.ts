@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
 
     // Handle tag-based revalidation
     if (tag) {
-      const tags = tag.split(",").map((t) => t.trim());
+      const tags = tag.split(",")?.map((t) => t.trim());
       console.log(
         `[${getTimestamp()}] Processing ${tags.length} tags for revalidation`,
       );
@@ -72,7 +72,7 @@ export async function GET(req: NextRequest) {
 
     // Handle path-based revalidation
     if (path) {
-      const paths = path.split(",").map((p) => p.trim());
+      const paths = path.split(",")?.map((p) => p.trim());
       console.log(
         `[${getTimestamp()}] Processing ${paths.length} paths for revalidation`,
       );

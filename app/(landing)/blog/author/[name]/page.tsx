@@ -34,11 +34,11 @@ const page = async ({ params }: AuthorProps) => {
 
   const posts: PostItem[] = author.user.posts.nodes;
 
-  const featuredPost = posts.find((post: PostItem) =>
+  const featuredPost = posts?.find((post: PostItem) =>
     post.tags.nodes.some((tag: TagItem) => tag.name === "Popular"),
   );
 
-  const postsWithoutFeatured = posts.filter(
+  const postsWithoutFeatured = posts?.filter(
     (post: PostItem) => post.postId !== featuredPost?.postId,
   );
   return (
@@ -80,10 +80,10 @@ const page = async ({ params }: AuthorProps) => {
               {featuredPost && <BlogFeatured post={featuredPost} isFullWidth />}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
                 {postsWithoutFeatured
-                  .filter(
+                  ?.filter(
                     (post: PostItem) => post.postId !== featuredPost?.postId,
                   )
-                  .map((post: PostItem, index: number) => (
+                  ?.map((post: PostItem, index: number) => (
                     <div
                       className="col-span-1 border-t border-gray-border-3 pt-5"
                       key={index}

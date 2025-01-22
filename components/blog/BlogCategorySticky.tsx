@@ -75,7 +75,7 @@ const BlogCategorySticky = ({ categories }: Props) => {
                       />
                     </div>
                     <div className="grid grid-cols-2 grid-flow-row gap-4">
-                      {category.children.nodes.map((child: any) => (
+                      {category.children.nodes?.map((child: any) => (
                         <div key={child.name} className="p-2 cursor-pointer">
                           <Link
                             href={`/blog/category/${child.slug}`}
