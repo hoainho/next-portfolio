@@ -1,6 +1,6 @@
 import { PostItem } from "@/app/types";
 import { Metadata } from "next";
-import client from "@/lib/apolloClient";
+import { isrClient } from "@/lib/apolloClient";
 import BlogItem from "@/components/blog/BlogItem";
 import BlogFeatured from "@/components/blog/BlogFeatured";
 import BlogSubscribers from "@/components/blog/BlogSubscribers";
@@ -46,42 +46,52 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   try {
-    const postsResponse = await client.query({
-      query: POSTS_QUERY,
-      variables: {
-        author: 3,
-        first: 4,
-      },
-      context: {
-        fetchOptions: {
-          next: {
-            tags: ["posts", "all-posts"],
-            revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+    const [postsResponse, postsByCategoryID] = await Promise.all([
+      isrClient.query({
+        query: POSTS_QUERY,
+        variables: {
+          author: 3,
+          first: 4,
+        },
+        context: {
+          fetchOptions: {
+            next: {
+              tags: ['posts', 'all-posts'],
+              revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+            },
           },
         },
-      },
-    });
-
-    const category = "javascript-typescript";
-    const postsByCategoryID = await client.query({
-      query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-      variables: { category, author: 3, first: 5 },
-      context: {
-        fetchOptions: {
-          next: {
-            tags: ["posts", `category-${category}`, "category-posts"],
-            revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+      }),
+      isrClient.query({
+        query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
+        variables: { 
+          category: "javascript-typescript", 
+          author: 3, 
+          first: 5 
+        },
+        context: {
+          fetchOptions: {
+            next: {
+              tags: ['posts', 'category-javascript-typescript'],
+              revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+            },
           },
         },
-      },
-    });
+      })
+    ]);
 
     const posts: PostItem[] = postsResponse?.data?.posts?.nodes || [];
-    const postsByCategory = postsByCategoryID?.data?.posts?.nodes || [];
+    const postsByCategory: PostItem[] = postsByCategoryID?.data?.posts?.nodes || [];
 
     if (!posts.length) {
-      console.error('No posts found');
-      return <div>No posts available</div>;
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <div className="max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">No Posts Available</h1>
+            <p className="text-gray-600">Check back later for new content.</p>
+          </div>
+        </div>
+      );
     }
 
     return (
@@ -106,7 +116,7 @@ export default async function BlogPage() {
           <BlogByCategory
             posts={postsByCategory}
             category="Javascript"
-            categorySlug={category}
+            categorySlug="javascript-typescript"
           />
         )}
         <BlogPlatform />

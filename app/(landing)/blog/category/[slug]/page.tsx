@@ -1,5 +1,5 @@
 import NotFoundPage from "@/app/not-found";
-import { PostCategory, PostItem, TagItem } from "@/app/types";
+import { PostItem, PostCategory, TagItem } from "@/app/types";
 import BlogFeatured from "@/components/blog/BlogFeatured";
 import BlogItem from "@/components/blog/BlogItem";
 import BlogPlatform from "@/components/blog/BlogPlatform";
@@ -11,7 +11,7 @@ import {
   GET_POSTS_BY_TAGS_QUERY,
   POSTS_QUERY,
 } from "@/graphql/queries/post.query";
-import client from "@/lib/apolloClient";
+import { isrClient } from "@/lib/apolloClient";
 import React from "react";
 
 interface Props {
@@ -20,13 +20,23 @@ interface Props {
   };
 }
 
+export const revalidate = +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600);
+
 const BlogCategory = async ({ params }: Props) => {
-  const categoriesResponse = await client.query({
+  const categoriesResponse = await isrClient.query({
     query: GET_CATEGORIES_QUERY,
+    context: {
+      fetchOptions: {
+        next: {
+          tags: ['categories'],
+          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+        },
+      },
+    },
   });
 
   const categoriesFilter: PostCategory[] =
-    categoriesResponse?.data?.categories?.nodes;
+    categoriesResponse?.data?.categories?.nodes || [];
 
   const category = categoriesFilter?.find(
     (category: PostCategory) => category?.slug === params?.slug,
@@ -61,14 +71,15 @@ const BlogCategory = async ({ params }: Props) => {
       first: 30,
     };
   }
-  const postsByCategoryID = await client.query({
+  const postsByCategoryID = await isrClient.query({
     query,
     variables,
     context: {
       fetchOptions: {
         next: {
-          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS ?? 600),
-        }, // 10 minutes
+          tags: ['posts', `category-${params.slug}`],
+          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+        },
       },
     },
   });

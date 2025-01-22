@@ -1,23 +1,23 @@
-import clsx from "clsx";
+import { PostItem } from "@/app/types";
 import Link from "next/link";
-import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import BlogItem from "./BlogItem";
-import { PostItem } from "@/app/types";
-import client from "@/lib/apolloClient";
+import { clsx } from "clsx";
 import { GET_POSTS_BY_TAGS_QUERY } from "@/graphql/queries/post.query";
+import { ssrClient } from "@/lib/apolloClient";
 
 interface Props {
   posts: PostItem[];
 }
 
 const BlogByRating = async ({ posts }: Props) => {
-  const postsByPopular = await client.query({
+  const postsByPopular = await ssrClient.query({
     query: GET_POSTS_BY_TAGS_QUERY,
     variables: { tag: "popular", first: 3, author: 3 },
   });
 
-  const popularPosts: PostItem[] = postsByPopular?.data?.posts?.nodes;
+  const popularPosts: PostItem[] = postsByPopular?.data?.posts?.nodes || [];
+
   return (
     <div className="min-h-screen bg-white text-black">
       <div className="fade-in-start max-container-centre py-14 px-5 lg:py-10">
