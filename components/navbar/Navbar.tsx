@@ -130,7 +130,7 @@ const Navbar = () => {
         )}
 
         <nav className="hidden md:flex items-center text-sm gap-4 font-medium uppercase">
-          {navbar.map((nav) => {
+          {navbar?.map((nav) => {
             return (
               <Link
                 key={nav.name}
@@ -183,7 +183,7 @@ const Navbar = () => {
                     className="h-20 w-20 object-cover rounded-full "
                   />
                 </Link>
-                {navbar.map((nav) => {
+                {navbar?.map((nav) => {
                   return (
                     <Link
                       key={nav.name}

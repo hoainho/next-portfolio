@@ -32,7 +32,7 @@ const BlogByCategory = ({
           <div className="flex flex-col lg:flex-row w-full gap-x-10">
             <BlogFeatured post={posts[0]} />
             <div className="flex flex-row w-full lg:w-1/2 flex-wrap">
-              {posts.slice(1).map((post, index) => (
+              {posts?.slice(1)?.map((post, index) => (
                 <div key={index} className="w-full lg:w-1/2 px-0 md:px-2">
                   <BlogItem post={post} isDark isReverse={true} />
                 </div>

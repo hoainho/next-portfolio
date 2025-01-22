@@ -12,7 +12,7 @@ const BlogBottomCategories = ({ tags }: BlogBottomCategoriesProps) => {
       <div className="flex gap-3 items-center flex-wrap">
         <h6>Tags: </h6>
         <div className="flex gap-3 flex-wrap">
-          {tags.map((tag: string) => (
+          {tags?.map((tag: string) => (
             <TagDetail key={tag}>{tag}</TagDetail>
           ))}
         </div>

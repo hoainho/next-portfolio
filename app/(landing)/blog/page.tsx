@@ -92,7 +92,7 @@ export default async function BlogPage() {
               <div className="flex flex-col lg:flex-row w-full gap-x-10">
                 {posts[0] && <BlogFeatured post={posts[0]} />}
                 <div className="flex flex-col w-full lg:w-1/2 gap-5">
-                  {posts.slice(1, 4).map((post, index) => (
+                  {posts?.slice(1, 4)?.map((post, index) => (
                     <BlogItem post={post} key={post.uri || index} isDark />
                   ))}
                 </div>

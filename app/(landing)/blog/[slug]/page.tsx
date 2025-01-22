@@ -158,7 +158,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
     emoji: false,
   });
 
-  const getPostsByCategory = post.categories.nodes.map((p: PostCategory) => {
+  const getPostsByCategory = post.categories.nodes?.map((p: PostCategory) => {
     const postsByCategoryID = client.query({
       query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
       variables: { category: p.slug, author: 3, first: 3 },
@@ -178,8 +178,8 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
         return acc;
       }, []),
   )
-    .filter((p) => p.postId !== post.postId)
-    .slice(0, 6);
+    ?.filter((p) => p.postId !== post.postId)
+    ?.slice(0, 6);
 
   let breadcrumbItems = [
     { label: "Home", href: "/" },
@@ -282,17 +282,17 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
           <div className="flex gap-10">
             <div className="xl:max-w-[calc(100%-224px)] flex flex-col gap-y-5 w-full">
               <BlogHTML content={post.content} />
-              <BlogBottomCategories tags={post.tags.nodes.map((t) => t.name)} />
+              <BlogBottomCategories tags={post.tags.nodes?.map((t) => t.name)} />
               <BlogAuthor author={post.author.node} />
             </div>
             <div className="hidden xl:flex flex-col gap-5 max-w-56">
               <div className="w-full flex flex-wrap gap-1">
-                {post.tags.nodes.map((tag: TagItem) => (
+                {post.tags.nodes?.map((tag: TagItem) => (
                   <TagDetail key={tag.id}>{tag.name}</TagDetail>
                 ))}
               </div>
               <GenerateTableOfContent
-                referencePosts={referencePosts.slice(0, 3)}
+                referencePosts={referencePosts?.slice(0, 3)}
               />
             </div>
           </div>

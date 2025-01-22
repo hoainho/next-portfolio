@@ -61,7 +61,7 @@ export default function SortListbox({
             leaveTo="opacity-0"
           >
             <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-300 bg-white py-1 text-base shadow-lg focus:outline-none dark:border-gray-600 dark:bg-dark dark:shadow-none sm:text-sm">
-              {options.map((opt) => (
+              {options?.map((opt) => (
                 <ListboxOption
                   key={opt.id}
                   className={({ selectedOption }) =>

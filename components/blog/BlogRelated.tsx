@@ -13,7 +13,7 @@ const BlogRelated = ({ posts }: Props) => {
       <h6 className="text-2xl font-bold">Related Posts</h6>
       <hr className="bg-overlay w-full h-[2px]" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
-        {posts.map((post) => (
+        {posts?.map((post) => (
           <div
             key={post.postId}
             className="flex flex-col gap-y-2 group cursor-pointer"
@@ -28,7 +28,7 @@ const BlogRelated = ({ posts }: Props) => {
               />
             </Link>
             <div className="flex flex-wrap gap-x-2 text-sm font-bold mt-4">
-              {post.tags.nodes.slice(0, 2).map((tag: TagItem) => (
+              {post.tags.nodes?.slice(0, 2)?.map((tag: TagItem) => (
                 <span
                   key={tag.id}
                   className="text-md text-gradient-purple-coral font-semibold"

@@ -18,8 +18,8 @@ export default async function BlogLayout({ children }: Props) {
     categoriesResponse?.data?.categories?.nodes;
 
   const categoriesReq = categoriesFilter
-    .filter((category) => !category.parent)
-    .map(async (category) => {
+    ?.filter((category) => !category.parent)
+    ?.map(async (category) => {
       if (category.children.nodes.length) {
         const fetchPost = await client.query({
           query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,

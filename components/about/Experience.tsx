@@ -24,7 +24,7 @@ const Experience = () => {
 
       <div className="mt-12 flex">
         <VerticalTimeline>
-          {experiences.map((experience, index) => (
+          {experiences?.map((experience, index) => (
             <VerticalTimelineElement
               visible={true}
               key={experience?.company_name}

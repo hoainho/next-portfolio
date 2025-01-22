@@ -43,7 +43,7 @@ export default function TableOfContents({ headings, referencePosts }: Props) {
     <aside className="table-of-content sticky top-20 h-fit w-56 overflow-y-auto mt-5">
       <h3 className="text-xl font-bold text-primary mb-4">Table of Contents</h3>
       <ul className="space-y-2">
-        {headings.map((heading) => (
+        {headings?.map((heading) => (
           <li
             key={heading.id}
             className={`py-2 px-4 ${

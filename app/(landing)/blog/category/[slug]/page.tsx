@@ -37,7 +37,7 @@ const BlogCategory = async ({ params }: Props) => {
     {
       label:
         category?.name ||
-        params.slug.charAt(0).toUpperCase() + params.slug.slice(1),
+        params.slug.charAt(0).toUpperCase() + params.slug?.slice(1),
       href: `/blog/category/${params.slug}`,
     },
   ];
@@ -87,7 +87,7 @@ const BlogCategory = async ({ params }: Props) => {
           <Breadcrumb items={breadcrumb} />
           <h1 className="font-extrabold font-sans text-5xl mt-3 text-fg-default">
             {category?.name ||
-              params.slug.charAt(0).toUpperCase() + params.slug.slice(1)}
+              params.slug.charAt(0).toUpperCase() + params.slug?.slice(1)}
           </h1>
           <div className="max-w-[600px] pb-5">
             <div
@@ -118,10 +118,10 @@ const BlogCategory = async ({ params }: Props) => {
                 )}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
                   {postsByCategory
-                    .filter(
+                    ?.filter(
                       (post: PostItem) => post.postId !== featuredPost?.postId,
                     )
-                    .map((post: PostItem, index: number) => (
+                    ?.map((post: PostItem, index: number) => (
                       <div
                         className="col-span-1 border-t border-gray-border-3 pt-5"
                         key={index}
@@ -144,7 +144,7 @@ const BlogCategory = async ({ params }: Props) => {
             </div>
             {postsByCategory.length ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
-                {postsByCategory.map((post: PostItem, index: number) => (
+                {postsByCategory?.map((post: PostItem, index: number) => (
                   <div className="col-span-1 pt-0 md:pt-5" key={index}>
                     <BlogItem post={post} key={index} isReverse />
                   </div>

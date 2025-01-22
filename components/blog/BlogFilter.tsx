@@ -44,7 +44,7 @@ const BlogFilter = ({ categories, posts }: BlogFilterProps) => {
   const clearSearch = () => setSearch("");
 
   useEffect(() => {
-    const results = posts.filter(
+    const results = posts?.filter(
       (post) =>
         post.title.rendered.toLowerCase().includes(search.toLowerCase()) ||
         post.excerpt.rendered.toLowerCase().includes(search.toLowerCase()) ||
@@ -77,7 +77,7 @@ const BlogFilter = ({ categories, posts }: BlogFilterProps) => {
       setSearch((s) =>
         s
           .split("  ")
-          .filter((t) => t !== tag)
+          ?.filter((t) => t !== tag)
           ?.join("  "),
       );
     } else {
@@ -119,7 +119,7 @@ const BlogFilter = ({ categories, posts }: BlogFilterProps) => {
       <div className="flex mt-2 flex-wrap gap-y-3">
         <span className="font-medium">Choose keyword:</span>
         <SkipNavTag>
-          {categories.map((category) => {
+          {categories?.map((category) => {
             const formatCategoryName = category.name.replaceAll("&amp;", "&");
             return (
               <Tag
@@ -141,7 +141,7 @@ const BlogFilter = ({ categories, posts }: BlogFilterProps) => {
 
       <ul className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {filteredPosts.length ? (
-          filteredPosts.map((post: BlogType) => (
+          filteredPosts?.map((post: BlogType) => (
             <BlogCard key={post.slug} post={post} />
           ))
         ) : (

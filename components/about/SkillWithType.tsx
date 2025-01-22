@@ -8,9 +8,9 @@ const SkillWithType = ({ type = SKILL_TYPE.BACKEND }) => {
   return (
     <>
       {skills
-        .filter((skill) => skill.type === type)
+        ?.filter((skill) => skill.type === type)
         .sort((a, b) => b.yoe - a.yoe)
-        .map((skill) => (
+        ?.map((skill) => (
           <div
             className="group relative block-container w-20 h-20"
             key={skill.name}

@@ -29,7 +29,7 @@ const Footer = () => {
             </p>
 
             <div className="flex gap-3 justify-center items-center">
-              {socialLinks.map((link) => (
+              {socialLinks?.map((link) => (
                 <Link
                   key={link.name}
                   href={link.link}

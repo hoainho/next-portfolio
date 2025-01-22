@@ -1,5 +1,5 @@
 export function classNames(...classes: string[]): string {
-  return classes.filter(Boolean).join(" ");
+  return classes?.filter(Boolean).join(" ");
 }
 
 type OpenGraphType = {
@@ -43,8 +43,8 @@ export function openGraph({
  * Remove `id-` prefix
  */
 export const cleanBlogPrefix = (slug: string) => {
-  if (slug.slice(0, 3) === "id-") {
-    return slug.slice(3);
+  if (slug?.slice(0, 3) === "id-") {
+    return slug?.slice(3);
   } else {
     return slug;
   }
