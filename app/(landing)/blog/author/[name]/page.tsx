@@ -30,7 +30,7 @@ const page = async ({ params }: AuthorProps) => {
     },
   });
 
-  const author: GetPostsByAuthorResponse = postsResponse.data;
+  const author: GetPostsByAuthorResponse = postsResponse?.data;
 
   const posts: PostItem[] = author.user.posts.nodes;
 
