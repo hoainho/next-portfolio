@@ -45,64 +45,75 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const postsResponse = await client.query({
-    query: POSTS_QUERY,
-    variables: {
-      author: 3,
-      first: 4,
-    },
-    context: {
-      fetchOptions: {
-        next: {
-          tags: ["posts", "all-posts"],
-          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+  try {
+    const postsResponse = await client.query({
+      query: POSTS_QUERY,
+      variables: {
+        author: 3,
+        first: 4,
+      },
+      context: {
+        fetchOptions: {
+          next: {
+            tags: ["posts", "all-posts"],
+            revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+          },
         },
       },
-    },
-  });
+    });
 
-  const category = "javascript-typescript";
-  const postsByCategoryID = await client.query({
-    query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-    variables: { category, author: 3, first: 5 },
-    context: {
-      fetchOptions: {
-        next: {
-          tags: ["posts", `category-${category}`, "category-posts"],
-          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+    const category = "javascript-typescript";
+    const postsByCategoryID = await client.query({
+      query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
+      variables: { category, author: 3, first: 5 },
+      context: {
+        fetchOptions: {
+          next: {
+            tags: ["posts", `category-${category}`, "category-posts"],
+            revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+          },
         },
       },
-    },
-  });
+    });
 
-  const posts: PostItem[] = postsResponse.data.posts.nodes;
+    const posts: PostItem[] = postsResponse?.data?.posts?.nodes || [];
+    const postsByCategory = postsByCategoryID?.data?.posts?.nodes || [];
 
-  const postsByCategory = postsByCategoryID.data.posts.nodes;
+    if (!posts.length) {
+      console.error('No posts found');
+      return <div>No posts available</div>;
+    }
 
-  return (
-    <div className="relative">
-      <div className="bg-dark text-white min-h-screen overflow-hidden">
-        <div className="fade-in-start max-container-centre py-2 px-5 lg:py-10">
-          <div className="relative blog-hero flex flex-col">
-            <div className="flex flex-col lg:flex-row w-full gap-x-10">
-              <BlogFeatured post={posts[0]} />
-              <div className="flex flex-col w-full lg:w-1/2 gap-5">
-                {posts.slice(1, 4).map((post, index) => (
-                  <BlogItem post={post} key={index} isDark />
-                ))}
+    return (
+      <div className="relative">
+        <div className="bg-dark text-white min-h-screen overflow-hidden">
+          <div className="fade-in-start max-container-centre py-2 px-5 lg:py-10">
+            <div className="relative blog-hero flex flex-col">
+              <div className="flex flex-col lg:flex-row w-full gap-x-10">
+                {posts[0] && <BlogFeatured post={posts[0]} />}
+                <div className="flex flex-col w-full lg:w-1/2 gap-5">
+                  {posts.slice(1, 4).map((post, index) => (
+                    <BlogItem post={post} key={post.uri || index} isDark />
+                  ))}
+                </div>
               </div>
+              <BlogSubscribers isDark />
             </div>
-            <BlogSubscribers isDark />
           </div>
         </div>
+        <BlogByRating posts={posts} />
+        {postsByCategory.length > 0 && (
+          <BlogByCategory
+            posts={postsByCategory}
+            category="Javascript"
+            categorySlug={category}
+          />
+        )}
+        <BlogPlatform />
       </div>
-      <BlogByRating posts={posts} />
-      <BlogByCategory
-        posts={postsByCategory}
-        category="Javascript"
-        categorySlug={category}
-      />
-      <BlogPlatform />
-    </div>
-  );
+    );
+  } catch (error) {
+    console.error('Error fetching blog data:', error);
+    return <div>Something went wrong loading the blog. Please try again later.</div>;
+  }
 }
