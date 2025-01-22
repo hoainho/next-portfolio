@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import { experiences } from "@/lib/constants";
@@ -25,65 +25,62 @@ const Experience = () => {
       <div className="mt-12 flex">
         <VerticalTimeline>
           {experiences.map((experience, index) => (
-              <VerticalTimelineElement
-                visible={true}
-                key={experience?.company_name}
-                date={experience?.date}
-                iconStyle={{ background: experience?.icon_bg }}
-                icon={
-                  <Link
-                    href={experience?.company_link}
-                    className="flex justify-center items-center w-full h-full cursor-pointer"
-                    target={
-                      experience?.company_link === "#" ? "_self" : "_blank"
-                    }
-                  >
-                    <ImageLoader
-                      src={experience?.icon}
-                      alt={experience?.company_name}
-                      width={20}
-                      height={20}
-                      className="w-[80%] h-[80%] object-contain"
-                    />
-                  </Link>
-                }
-                contentStyle={{
-                  borderBottom: "8px",
-                  borderStyle: "solid",
-                  borderBottomColor: experience?.icon_bg,
-                  boxShadow: "none",
-                }}
-              >
-                <div>
-                  <h3 className="text-black text-xl font-poppins font-semibold">
-                    {experience?.title}
-                  </h3>
-                  <Link
-                    href={experience?.company_link}
-                    className={`cursor-pointer hover:underline hover:underline-offset-2`}
-                    target={
-                      experience?.company_link === "#" ? "_self" : "_blank"
-                    }
-                  ><p
-                  className="text-black-500 font-medium text-base"
-                  style={{ margin: 0 }}
+            <VerticalTimelineElement
+              visible={true}
+              key={experience?.company_name}
+              date={experience?.date}
+              iconStyle={{ background: experience?.icon_bg }}
+              icon={
+                <Link
+                  href={experience?.company_link}
+                  className="flex justify-center items-center w-full h-full cursor-pointer"
+                  target={experience?.company_link === "#" ? "_self" : "_blank"}
                 >
-                  {experience?.company_name}
-                </p></Link>
-                  
-                </div>
+                  <ImageLoader
+                    src={experience?.icon}
+                    alt={experience?.company_name}
+                    width={20}
+                    height={20}
+                    className="w-[80%] h-[80%] object-contain"
+                  />
+                </Link>
+              }
+              contentStyle={{
+                borderBottom: "8px",
+                borderStyle: "solid",
+                borderBottomColor: experience?.icon_bg,
+                boxShadow: "none",
+              }}
+            >
+              <div>
+                <h3 className="text-black text-xl font-poppins font-semibold">
+                  {experience?.title}
+                </h3>
+                <Link
+                  href={experience?.company_link}
+                  className={`cursor-pointer hover:underline hover:underline-offset-2`}
+                  target={experience?.company_link === "#" ? "_self" : "_blank"}
+                >
+                  <p
+                    className="text-black-500 font-medium text-base"
+                    style={{ margin: 0 }}
+                  >
+                    {experience?.company_name}
+                  </p>
+                </Link>
+              </div>
 
-                <ul className="my-5 list-disc ml-5 space-y-2">
-                  {experience?.points?.map((point, index) => (
-                    <li
-                      key={`experience-point-${index}`}
-                      className="text-black-500/50 font-normal pl-1 text-sm"
-                    >
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </VerticalTimelineElement>
+              <ul className="my-5 list-disc ml-5 space-y-2">
+                {experience?.points?.map((point, index) => (
+                  <li
+                    key={`experience-point-${index}`}
+                    className="text-black-500/50 font-normal pl-1 text-sm"
+                  >
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </VerticalTimelineElement>
           ))}
         </VerticalTimeline>
       </div>

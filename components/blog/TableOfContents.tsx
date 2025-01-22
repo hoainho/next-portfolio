@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import BlogReferences from './BlogReferences';
-import { PostItem } from '@/app/types';
-import Link from 'next/link';
+import { useEffect, useState } from "react";
+import BlogReferences from "./BlogReferences";
+import { PostItem } from "@/app/types";
+import Link from "next/link";
 
 interface TOCItem {
   id: string;
@@ -34,20 +34,22 @@ export default function TableOfContents({ headings, referencePosts }: Props) {
         setActiveId(current);
       };
 
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
     }
   }, [headings]);
 
   return (
-    <aside className='table-of-content sticky top-20 h-fit w-56 overflow-y-auto mt-5'>
-      <h3 className='text-xl font-bold text-primary mb-4'>Table of Contents</h3>
-      <ul className='space-y-2'>
+    <aside className="table-of-content sticky top-20 h-fit w-56 overflow-y-auto mt-5">
+      <h3 className="text-xl font-bold text-primary mb-4">Table of Contents</h3>
+      <ul className="space-y-2">
         {headings.map((heading) => (
           <li
             key={heading.id}
             className={`py-2 px-4 ${
-              activeId === heading.id ? 'font-bold rounded-xl bg-[#eff2ff]' : 'font-normal hover:text-indigo-700'
+              activeId === heading.id
+                ? "font-bold rounded-xl bg-[#eff2ff]"
+                : "font-normal hover:text-indigo-700"
             }`}
           >
             <Link
@@ -59,7 +61,9 @@ export default function TableOfContents({ headings, referencePosts }: Props) {
           </li>
         ))}
       </ul>
-      {referencePosts?.length ? <BlogReferences posts={referencePosts} /> : null}
+      {referencePosts?.length ? (
+        <BlogReferences posts={referencePosts} />
+      ) : null}
     </aside>
   );
 }

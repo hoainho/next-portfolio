@@ -2,12 +2,7 @@
 
 import React, { Suspense } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import {
-  Decal,
-  Float,
-  OrbitControls,
-  Preload,
-} from "@react-three/drei";
+import { Decal, Float, OrbitControls, Preload } from "@react-three/drei";
 import { TextureLoader, DoubleSide } from "three";
 
 import CanvasLoader from "@/components/loader/LoaderWithProgressPercent";
