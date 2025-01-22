@@ -30,10 +30,12 @@ const defaultOptions: DefaultOptions = {
 };
 
 // Create a client for SSR
+const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_WORDPRESS_API_URL || 'https://blog.thnkandgrow.com/graphql';
+
 export const ssrClient = new ApolloClient({
   ssrMode: true,
   link: new HttpLink({
-    uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
+    uri: GRAPHQL_ENDPOINT,
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_WORDPRESS_AUTH_REFRESH_TOKEN}`,
       Origin: "https://dev01.thnkandgrow.com",
