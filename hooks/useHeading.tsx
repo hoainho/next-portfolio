@@ -11,7 +11,7 @@ export function useHeadings(): TOCItem[] {
 
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll("h2"));
-    const tocItems = elements.map((el) => ({
+    const tocItems = elements?.map((el) => ({
       id: el.id,
       text: el.innerText,
     }));

@@ -8,7 +8,7 @@
  * And get the code. And then add the rest of the things.
  * YOU DON'T HAVE TO WRITE EVERYTHING FROM SCRATCH
  */
-'use client'
+"use client";
 
 import React, { useRef, useEffect } from "react";
 
@@ -44,10 +44,12 @@ interface ExtendedGLTF extends GLTF {
 // 3D Model from: https://sketchfab.com/3d-models/fox-f372c04de44640fbb6a4f9e4e5845c78
 export function Fox({ currentAnimation, ...props }: FoxModelProps) {
   const group = useRef<Group>(null);
-  const { nodes, materials, animations } = useGLTF("/3d/fox.glb") as unknown as ExtendedGLTF;
+  const { nodes, materials, animations } = useGLTF(
+    "/3d/fox.glb",
+  ) as unknown as ExtendedGLTF;
   const { actions }: { actions: ActionModelType } = useAnimations(
     animations,
-    group
+    group,
   );
 
   // This effect will run whenever the currentAnimation prop changes
@@ -101,4 +103,4 @@ export function Fox({ currentAnimation, ...props }: FoxModelProps) {
   );
 }
 
-useGLTF.preload('/3d/fox.glb');
+useGLTF.preload("/3d/fox.glb");

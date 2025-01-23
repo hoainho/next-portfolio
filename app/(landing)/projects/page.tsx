@@ -5,10 +5,8 @@ import ViewMoreLink from "@/components/project/ViewMoreLink";
 import ImageLoader from "@/components/loader/ImageLoader";
 
 export const metadata: Metadata = {
-  title:
-    "Projects | Hoai Nho",
-  description:
-    `Throughout my career, I have worked on a diverse range of projects,
+  title: "Projects | Hoai Nho",
+  description: `Throughout my career, I have worked on a diverse range of projects,
         including notable categories such as Travel, Stock Trading, Mapping,
         Financial Management, Human Information Security Management,
         Multinational Security Systems, Construction Machinery Management, and
@@ -33,7 +31,6 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-
 };
 
 const Projects = () => {
@@ -59,7 +56,7 @@ const Projects = () => {
       </p>
 
       <div className="flex flex-wrap my-20 gap-16">
-        {projects.map((project) => (
+        {projects?.map((project) => (
           <div className="lg:w-[400px] w-full" key={project.name}>
             <div className="block-container w-12 h-12">
               <div className={`btn-back rounded-xl ${project.theme}`} />
@@ -79,7 +76,7 @@ const Projects = () => {
                 {project.name}
               </h2>
               <ul>
-                {project.descriptions.map((description) => (
+                {project.descriptions?.map((description) => (
                   <li
                     className="text-black mt-2 leading-relaxed"
                     key={description}

@@ -1,5 +1,5 @@
-import throttle from 'lodash/throttle';
-import * as React from 'react';
+import throttle from "lodash/throttle";
+import * as React from "react";
 
 // originally based on
 // https://github.com/NotionX/react-notion-x/blob/master/packages/react-notion-x/src/block.tsx#L128-L161
@@ -9,7 +9,7 @@ export default function useScrollSpy() {
   const throttleMs = 100;
 
   const actionSectionScrollSpy = throttle(() => {
-    const sections = document.getElementsByClassName('hash-anchor');
+    const sections = document.getElementsByClassName("hash-anchor");
 
     let prevBBox = null;
     let currentSectionId = activeSection;
@@ -18,7 +18,7 @@ export default function useScrollSpy() {
       const section = sections[i];
 
       if (!currentSectionId) {
-        currentSectionId = section.getAttribute('href')?.split('#')[1] ?? null;
+        currentSectionId = section.getAttribute("href")?.split("#")[1] ?? null;
       }
 
       const bbox = section.getBoundingClientRect();
@@ -27,7 +27,7 @@ export default function useScrollSpy() {
 
       // GetBoundingClientRect returns values relative to viewport
       if (bbox.top - offset < 0) {
-        currentSectionId = section.getAttribute('href')?.split('#')[1] ?? null;
+        currentSectionId = section.getAttribute("href")?.split("#")[1] ?? null;
 
         prevBBox = bbox;
         continue;
@@ -41,12 +41,12 @@ export default function useScrollSpy() {
   }, throttleMs);
 
   React.useEffect(() => {
-    window.addEventListener('scroll', actionSectionScrollSpy);
+    window.addEventListener("scroll", actionSectionScrollSpy);
 
     actionSectionScrollSpy();
 
     return () => {
-      window.removeEventListener('scroll', actionSectionScrollSpy);
+      window.removeEventListener("scroll", actionSectionScrollSpy);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

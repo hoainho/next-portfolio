@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const POSTS_QUERY = gql`
   query GetPosts($author: Int!, $first: Int!) {
@@ -193,7 +193,11 @@ export const GET_CATEGORIES_QUERY = gql`
 `;
 
 export const GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY = gql`
-  query GetPostsByCategoryAndAuthor($category: String!, $author: Int!, $first: Int!) {
+  query GetPostsByCategoryAndAuthor(
+    $category: String!
+    $author: Int!
+    $first: Int!
+  ) {
     posts(where: { categoryName: $category, author: $author }, first: $first) {
       nodes {
         author {

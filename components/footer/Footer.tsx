@@ -24,12 +24,12 @@ const Footer = () => {
 
           <div className="footer-container">
             <p>
-              © {new Date().getFullYear()} <strong>Hoai Nho</strong>. All rights
-              reserved.
+              © {new Date().getFullYear()} <strong>Hoai Nho</strong>. All
+              rights reserved.
             </p>
 
             <div className="flex gap-3 justify-center items-center">
-              {socialLinks.map((link) => (
+              {socialLinks?.map((link) => (
                 <Link
                   key={link.name}
                   href={link.link}
