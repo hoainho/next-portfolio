@@ -17,19 +17,22 @@ const BlogHTML = ({ content }: BlogHTMLProps) => {
 		preBlocks.forEach((preBlock) => {
 			preBlock.style.position = 'relative';
 			const codeBlock = preBlock.querySelector('code');
-			
+
 			if (codeBlock) {
-				const textBlock = codeBlock.textContent || '';
-				const CopyBlockComponent = (
-					<CopyBlock
-						text={textBlock}
-						theme={dracula}
-						language="jsx"
-						codeBlock
-						showLineNumbers={false}
-					/>
-				);
-				ReactDOM.render(CopyBlockComponent, preBlock);
+				const textBlock = codeBlock.textContent;
+
+				if (textBlock) {
+					const CopyBlockComponent = (
+						<CopyBlock
+							text={textBlock}
+							theme={dracula}
+							language="jsx"
+							codeBlock
+							showLineNumbers={false}
+						/>
+					);
+					ReactDOM.render(CopyBlockComponent, preBlock);
+				}
 			}
 		});
 	}, [content]);
