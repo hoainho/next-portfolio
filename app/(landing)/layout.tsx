@@ -20,7 +20,7 @@ function Layout({ children }: LayoutOrderProps) {
       <main>
         <Navbar />
         <div className="min-h-[calc(100dvh-var(--compose-navbar-height)-var(--compose-footer-height))]">
-          {children}
+        {children}
         </div>
       </main>
       <footer>

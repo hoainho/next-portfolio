@@ -27,6 +27,7 @@ import ImageLoader from "@/components/loader/ImageLoader";
 import NotFoundPage from "@/app/not-found";
 import BlogCounterView from "@/components/blog/BlogCounterView";
 import { INCREMENT_POST_VIEWS_MUTATION } from "@/graphql/mutations/post.mutation";
+import SkeletonLoader from "@/components/skeleton/skeleton";
 
 type BlogDetailProps = {
   params: {
@@ -203,14 +204,18 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
             className="text-[#ADBAA7] text-base mb-10"
             dangerouslySetInnerHTML={{ __html: post.excerpt }}
           />
-          <div className="relative min-h-[180px] xs:min-h-[250px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[550px] xl:min-h-[600px] h-full w-full z-10">
-            <ImageLoader
-              width={1200}
-              height={480}
-              src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
-              alt={post.featuredImage.node.altText ?? post.title}
-              className="aspect-[4/2.4] rounded-md h-fit w-full absolute top-0 left-0 right-0 z-1"
-            />
+					<div className="relative min-h-[180px] xs:min-h-[250px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[550px] xl:min-h-[600px] h-full w-full z-10">
+						{post.featuredImage.node.sourceUrl ? (
+							<ImageLoader
+								width={1200}
+								height={480}
+								src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
+								alt={post.featuredImage.node.altText ?? post.title}
+								className="aspect-[4/2.4] rounded-md h-fit w-full absolute top-0 left-0 right-0 z-1"
+							/>
+						) : (
+							<SkeletonLoader count={1} height={480} />
+						)}
           </div>
           <div className="bg-white h-24 w-full absolute bottom-0 left-0 right-0"></div>
         </div>

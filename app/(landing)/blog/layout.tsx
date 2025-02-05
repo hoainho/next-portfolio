@@ -5,6 +5,7 @@ import {
   GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
 } from "@/graphql/queries/post.query";
 import client from "@/lib/apolloClient";
+import { Suspense } from "react";
 interface Props {
   children: React.ReactNode;
 }
