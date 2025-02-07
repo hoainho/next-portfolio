@@ -193,6 +193,21 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
     href: `/blog/${post.slug}`,
   });
 
+  const linkItem = [
+    {
+      href: `https://www.reddit.com/submit?url=${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${post.slug}`,
+      icon: <IoLogoReddit className="inline-block text-base" />
+    },
+    {
+      href: `https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${post.slug}`,
+      icon: <FaXTwitter className="inline-block text-base" />
+    },
+    {
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${post.slug}`,
+      icon: <LuLinkedin className="inline-block text-base" />
+    }
+  ]
+
   return (
     <div className="blog">
       <div className="blog-title relative bg-bg-default">
@@ -257,27 +272,18 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
             <div className="flex justify-center items-center gap-3 flex-col sm:flex-row">
               <h6 className="text-primary">Share:</h6>
               <div className="flex gap-3 justify-center items-center">
-                <Link
-                  target="_blank"
-                  href={`https://www.reddit.com/submit?url=${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${post.slug}`}
-                  className="flex items-center p-2 border rounded-full "
-                >
-                  <IoLogoReddit className="inline-block text-base" />
-                </Link>
-                <Link
-                  target="_blank"
-                  href={`https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${post.slug}`}
-                  className="flex items-center p-2 border rounded-full"
-                >
-                  <FaXTwitter className="inline-block text-base" />
-                </Link>
-                <Link
-                  target="_blank"
-                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${post.slug}`}
-                  className="flex items-center p-2 border rounded-full gap-1"
-                >
-                  <LuLinkedin className="inline-block text-base" />
-                </Link>
+                {post?.slug ? (
+                  linkItem.map((item, index) => (
+                    <Link
+                      key={index}
+                      target="_blank"
+                      href={item.href}
+                      className="flex items-center p-2 border rounded-full"
+                    >
+                      {item.icon}
+                    </Link>
+                  ))
+                ) : null}
                 <ButtonCopyURL slug={post.slug} />
               </div>
             </div>
