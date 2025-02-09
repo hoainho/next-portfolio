@@ -10,7 +10,8 @@ type BlogHTMLProps = {
 };
 
 const BlogHTML = ({ content }: BlogHTMLProps) => {
-
+	console.log('🌈 HTML Content', content);
+	
 	useEffect(() => {
 		const preBlocks = document.querySelectorAll('.wp-block-code') as NodeListOf<HTMLElement>;
 
