@@ -1,17 +1,18 @@
+'use client'
+
 import Link from "next/link";
-import { headers } from "next/headers";
 import { LuLinkedin } from "react-icons/lu";
 import { IoLogoReddit } from "react-icons/io";
 import { FaXTwitter } from "react-icons/fa6";
+import { useEffect, useState } from "react";
 
 interface BlogShareButtonsProps {
   slug: string;
 }
 
 const BlogShareButtons = ({ slug }: BlogShareButtonsProps) => {
-  const headersList = headers();
-  const hostName = headersList.get('host');
-  const encodedURL = encodeURIComponent(`https://${hostName}/blog/${slug}`);
+  const [locationInfo, setLocationInfo] = useState('');
+  const encodedURL = encodeURIComponent(`https://${locationInfo}/blog/${slug}`);
 
   const linkItem = [
     {
@@ -27,6 +28,12 @@ const BlogShareButtons = ({ slug }: BlogShareButtonsProps) => {
       icon: <LuLinkedin className="inline-block text-base" />
     }
   ]
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setLocationInfo(window.location.hostname);
+    }
+  }, [])
 
   return (
     <>

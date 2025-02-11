@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../buttons/Button"
 import { FaLink } from "react-icons/fa";
 
@@ -10,9 +10,10 @@ type ButtonCopyProps = {
 
 const ButtonCopyURL = ({ slug }: ButtonCopyProps) => {
   const [isShowCopy, setIsShowCopy] = useState(false)
+  const [locationInfo, setLocationInfo] = useState('');
 
   const handleCopyLink = async () => {
-    const url = `${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${slug}`
+    const url = `https://${locationInfo}/blog/${slug}`;
     await navigator.clipboard.writeText(url);
     setIsShowCopy(true)
 
@@ -20,6 +21,12 @@ const ButtonCopyURL = ({ slug }: ButtonCopyProps) => {
       setIsShowCopy(false)
     }, 2000)
   }
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setLocationInfo(window.location.hostname);
+    }
+  }, [])
 
   return (
     <div className="relative">
