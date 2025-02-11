@@ -5,9 +5,7 @@ import readingDuration from "reading-duration";
 import "./style.scss";
 import { format } from "date-fns";
 import { HiCalendar, HiOutlineClock } from "react-icons/hi";
-import { LuDot, LuLinkedin } from "react-icons/lu";
-import { IoLogoReddit } from "react-icons/io";
-import { FaXTwitter } from "react-icons/fa6";
+import { LuDot } from "react-icons/lu";
 import { PostCategory, PostItem, PostSEO, TagItem } from "@/app/types";
 import BlogHTML from "@/components/blog/BlogHTML";
 import ScrollToTop from "@/components/buttons/ButtonScrollToTop";
@@ -29,6 +27,7 @@ import NotFoundPage from "@/app/not-found";
 import BlogCounterView from "@/components/blog/BlogCounterView";
 import { INCREMENT_POST_VIEWS_MUTATION } from "@/graphql/mutations/post.mutation";
 import ButtonCopyURL from "@/components/blog/ButtonCopyURL";
+import BlogShareButtons from "@/components/blog/BlogShareButtons";
 
 type BlogDetailProps = {
   params: {
@@ -193,21 +192,6 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
     href: `/blog/${post.slug}`,
   });
 
-  const linkItem = [
-    {
-      href: `https://www.reddit.com/submit?url=${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${post.slug}`,
-      icon: <IoLogoReddit className="inline-block text-base" />
-    },
-    {
-      href: `https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${post.slug}`,
-      icon: <FaXTwitter className="inline-block text-base" />
-    },
-    {
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_PORTFOLIO_URL}/blog/${post.slug}`,
-      icon: <LuLinkedin className="inline-block text-base" />
-    }
-  ]
-
   return (
     <div className="blog">
       <div className="blog-title relative bg-bg-default">
@@ -272,18 +256,9 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
             <div className="flex justify-center items-center gap-3 flex-col sm:flex-row">
               <h6 className="text-primary">Share:</h6>
               <div className="flex gap-3 justify-center items-center">
-                {post?.slug ? (
-                  linkItem.map((item, index) => (
-                    <Link
-                      key={index}
-                      target="_blank"
-                      href={item.href}
-                      className="flex items-center p-2 border rounded-full"
-                    >
-                      {item.icon}
-                    </Link>
-                  ))
-                ) : null}
+                {post?.slug && (
+                  <BlogShareButtons slug={post.slug} />
+                )}
                 <ButtonCopyURL slug={post.slug} />
               </div>
             </div>
