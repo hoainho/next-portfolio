@@ -5,8 +5,7 @@ import readingDuration from "reading-duration";
 import "./style.scss";
 import { format } from "date-fns";
 import { HiCalendar, HiOutlineClock } from "react-icons/hi";
-import { LuDot, LuGithub, LuLinkedin } from "react-icons/lu";
-import { FaMediumM } from "react-icons/fa";
+import { LuDot } from "react-icons/lu";
 import { PostCategory, PostItem, PostSEO, TagItem } from "@/app/types";
 import BlogHTML from "@/components/blog/BlogHTML";
 import ScrollToTop from "@/components/buttons/ButtonScrollToTop";
@@ -27,6 +26,8 @@ import ImageLoader from "@/components/loader/ImageLoader";
 import NotFoundPage from "@/app/not-found";
 import BlogCounterView from "@/components/blog/BlogCounterView";
 import { INCREMENT_POST_VIEWS_MUTATION } from "@/graphql/mutations/post.mutation";
+import ButtonCopyURL from "@/components/blog/ButtonCopyURL";
+import BlogShareButtons from "@/components/blog/BlogShareButtons";
 
 type BlogDetailProps = {
   params: {
@@ -255,27 +256,10 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
             <div className="flex justify-center items-center gap-3 flex-col sm:flex-row">
               <h6 className="text-primary">Share:</h6>
               <div className="flex gap-3 justify-center items-center">
-                <Link
-                  target="_blank"
-                  href="https://github.com/hoainho"
-                  className="flex items-center p-2 border rounded-full "
-                >
-                  <LuGithub className="inline-block text-base" />
-                </Link>
-                <Link
-                  target="_blank"
-                  href={"https://medium.com/@hoainho.work/"}
-                  className="flex items-center p-2 border rounded-full"
-                >
-                  <FaMediumM className="inline-block text-base" />
-                </Link>
-                <Link
-                  target="_blank"
-                  href={"https://www.linkedin.com/in/hoai-nho/"}
-                  className="flex items-center p-2 border rounded-full gap-1"
-                >
-                  <LuLinkedin className="inline-block text-base" />
-                </Link>
+                {post?.slug && (
+                  <BlogShareButtons slug={post.slug} />
+                )}
+                <ButtonCopyURL slug={post.slug} />
               </div>
             </div>
           </div>
