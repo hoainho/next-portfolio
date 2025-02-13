@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Modern Portfolio Website
 
-## Getting Started
+[![Next.js](https://img.shields.io/badge/Next.js-14.2.3-black)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.1-38B2AC)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-First, run the development server:
+A modern, responsive portfolio website built with Next.js 14, React 18, TypeScript, and Tailwind CSS. Features a sleek design, blog functionality, 3D elements with Three.js, and smooth animations.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌟 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Modern Design**: Clean and responsive UI with dark/light mode
+- **3D Elements**: Interactive 3D components using Three.js
+- **Blog Platform**: Integrated blog functionality
+- **Performance Optimized**: Built with Next.js 14 for optimal performance
+- **Analytics Ready**: Google Analytics 4 integration
+- **Email Integration**: Contact form with EmailJS
+- **Timeline View**: Interactive vertical timeline component
+- **Code Highlighting**: Syntax highlighting for code blocks
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Demo
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[Live Demo](https://hoainho.info/blog) - Replace with your deployed site URL
 
-## Learn More
+![Portfolio Preview](https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/blog-cover-image.webp)
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Framework**: Next.js 14
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS, SASS
+- **3D Graphics**: Three.js, React Three Fiber
+- **UI Components**: Headless UI, Radix UI
+- **Data Fetching**: Apollo Client, GraphQL
+- **Analytics**: Google Analytics 4
+- **Email**: EmailJS
+- **Code Quality**: ESLint, Prettier
+- **Development Tools**: Sharp, Prisma JSON Schema Generator
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🚀 Getting Started
 
-## Deploy on Vercel
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/hoainho/next-portfolio.git
+   cd next-portfolio
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   Fill in your environment variables in `.env.local`
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. **Open [http://localhost:3000](http://localhost:3000)**
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+Please read our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📧 Contact
+
+Hoai Nho - [@hoainho](https://www.linkedin.com/in/hoai-nho/) - hoainho.work@gmail.com
+
+Project Link: [https://github.com/hoainho/next-portfolio](https://github.com/hoainho/next-portfolio)
+
+---
+
+⭐️ If you like this project, please give it a star!
