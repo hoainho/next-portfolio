@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import 'react-loading-skeleton/dist/skeleton.css'
 
 type CardLoadingProp = {
   cardKey?: number,
