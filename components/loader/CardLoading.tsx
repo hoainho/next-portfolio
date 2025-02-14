@@ -18,7 +18,7 @@ const CardLoading = ({
       <div className={`${flex ? ' w-1/3' : 'w-full md:h-48'} h-28 bg-[#2d333b] rounded animate-pulse`}></div>
       <div className="w-full flex flex-col gap-4">
         {[...Array(countItem)].map((_, i) => (
-          <div className={` ${flex ? 'w-4/5' : 'w-full'} h-3 bg-[#2d333b] rounded animate-pulse`} key={i}></div>
+          <div className=" w-full h-3 bg-[#2d333b] rounded animate-pulse" key={i}></div>
         ))}
       </div>
     </div>
