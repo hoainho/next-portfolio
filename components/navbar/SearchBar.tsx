@@ -1,22 +1,23 @@
 'use client'
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
 const SearchBar = () => {
   const [isShow, setIsShow] = useState(false)
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const pathname = usePathname()
+  const router = useRouter()
   const searchParams = useSearchParams()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-
     if (inputRef.current) {
-      console.log(inputRef.current.value)
-      // inputRef.current.value = "";
+      const params = new URLSearchParams(searchParams.toString())
+      params.set('s', inputRef.current.value)
+      router.push(`?${params.toString()}`);
+      inputRef.current.value = "";
     }
   };
 

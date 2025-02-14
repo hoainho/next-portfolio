@@ -366,3 +366,57 @@ export const GET_POSTS_BY_AUTHOR_QUERY = gql`
     }
   }
 `;
+
+export const GET_POST_BY_SEARCH = gql`
+  query SearchPosts($search: String!) {
+    posts(where: { search: $search }) {
+     nodes {
+        author {
+          node {
+            avatar {
+              url
+              extraAttr
+              width
+              height
+            }
+            description
+            firstName
+            lastName
+            name
+            slug
+          }
+        }
+        content
+        categories {
+          nodes {
+            id
+            name
+            slug
+          }
+        }
+        date
+        desiredSlug
+        excerpt
+        featuredImage {
+          node {
+            altText
+            srcSet
+            sourceUrl
+          }
+        }
+        link
+        postId
+        slug
+        tags {
+          nodes {
+            description
+            id
+            name
+          }
+        }
+        title
+        uri
+      }
+    }
+  }
+` 
