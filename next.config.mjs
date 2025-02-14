@@ -10,8 +10,8 @@ const nextConfig = {
     includePaths: [path.join(process.env.PWD, "styles")],
   },
   images: {
-    loaderFile: './lib/cloudfront-loader.ts',
-    domains: ['d25ajqv6ijzi49.cloudfront.net'],
+    loaderFile: isProd ? './lib/cloudfront-loader.ts' : undefined,
+    domains: isProd ? ['d25ajqv6ijzi49.cloudfront.net'] : [],
   },
   logging: {
     fetches: {
