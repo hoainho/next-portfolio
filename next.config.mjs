@@ -9,16 +9,11 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(process.env.PWD, "styles")],
   },
-  images: {
-    loaderFile: isProd ? './lib/cloudfront-loader.ts' : undefined,
-    domains: isProd ? ['d25ajqv6ijzi49.cloudfront.net'] : [],
-  },
   logging: {
     fetches: {
       fullUrl: true,
     },
   },
-  assetPrefix: isProd ? process.env.NEXT_PUBLIC_CLOUDFRONT_URL : undefined,
   productionBrowserSourceMaps: true
 };
 
