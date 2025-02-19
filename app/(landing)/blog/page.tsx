@@ -9,7 +9,7 @@ import BlogByCategory from "@/components/blog/BlogByCategory";
 import {
   POSTS_QUERY,
   GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-  GET_POST_BY_SEARCH,
+  FETCH_POSTS_BY_QUERY,
 } from "@/graphql/queries/post.query";
 import BlogPlatform from "@/components/blog/BlogPlatform";
 import BlogSearch from "@/components/blog/BlogSearch";
@@ -48,12 +48,11 @@ export const metadata: Metadata = {
 
 export default async function BlogPage({
   searchParams }: {
-    searchParams: { [key: string]: string | string[] | undefined }
+    searchParams:  Promise<{ [key: string]: string | string[] | undefined }>
   }) {
 
-  const contentSearch = searchParams.s;
-
-
+  const contentSearch = (await searchParams).s;
+  
   try {
     const [postsResponse, postsByCategoryID] = await Promise.all([
       isrClient.query({
@@ -93,7 +92,7 @@ export default async function BlogPage({
 
     if (contentSearch) {
       postBySearch = await isrClient.query({
-        query: GET_POST_BY_SEARCH,
+        query: FETCH_POSTS_BY_QUERY,
         variables: {
           search: contentSearch,
           first: 5,
@@ -102,13 +101,13 @@ export default async function BlogPage({
           fetchOptions: {
             next: {
               tags: ["search", "posts"],
-              revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_SEARCH || 3600),
+              revalidate: revalidate,
             },
           },
         },
       });
     }
-
+    
     const posts: PostItem[] = postsResponse?.data?.posts?.nodes || [];
     const postsByCategory: PostItem[] = postsByCategoryID?.data?.posts?.nodes || [];
     const postBySearchQuery: PostItem[] = postBySearch?.data?.posts.nodes || [];
@@ -126,7 +125,7 @@ export default async function BlogPage({
 
     return (
       <>
-        {contentSearch ? (
+        {Object.keys(searchParams).length > 0 ? (
           <BlogSearch posts={postBySearchQuery} content={contentSearch} />
         ) : (
           <div className="relative">

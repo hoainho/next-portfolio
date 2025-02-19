@@ -367,7 +367,7 @@ export const GET_POSTS_BY_AUTHOR_QUERY = gql`
   }
 `;
 
-export const GET_POST_BY_SEARCH = gql`
+export const FETCH_POSTS_BY_QUERY = gql`
   query SearchPosts($search: String!) {
     posts(where: { search: $search }) {
      nodes {

@@ -130,7 +130,7 @@ const Navbar = () => {
           </Link>
         )}
         <nav className="flex-1 justify-end hidden md:flex items-center text-sm font-medium uppercase relative gap-4">
-          {pathname.includes("blog") && <SearchBar/>}
+          {(pathname.includes("/blog/") || pathname === "/blog")  && <SearchBar/>}
           {navbar?.map((nav) => {
             return (
               <Link

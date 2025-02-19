@@ -7,18 +7,18 @@ import { FaSearch } from "react-icons/fa";
 const SearchBar = () => {
   const [isShow, setIsShow] = useState(false)
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [inputValue, setInputValue] = useState('')
   const router = useRouter()
   const searchParams = useSearchParams()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (inputRef.current) {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set('s', inputRef.current.value)
-      router.push(`?${params.toString()}`);
-      inputRef.current.value = "";
-    }
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('s', inputValue)
+    router.push(`/blog?${params.toString()}`)
+    
+   setInputValue('')
   };
 
   useEffect(() => {
@@ -46,6 +46,8 @@ const SearchBar = () => {
             name='search'
             className="outline-none text-black flex-1 transition-discrete w-full h-full"
             ref={inputRef}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
           />
           <button className="h-full text-gray-600 hover:text-black p-3" type="submit" onMouseDown={(e) => e.preventDefault()}>
             <FaSearch className="text-base" />
