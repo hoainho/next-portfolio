@@ -8,7 +8,7 @@ import clsx from "clsx";
 import { pageview } from "@/lib/gtag";
 import ImageLoader from "@/components/loader/ImageLoader";
 import { useGlobalContext } from "@/context/GlobalContext";
-import SearchBar from "./SearchBar";
+import { SearchBar } from "./SearchBar";
 
 const Navbar = () => {
   const pathname = usePathname();
