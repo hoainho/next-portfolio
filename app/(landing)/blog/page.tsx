@@ -52,7 +52,7 @@ export default async function BlogPage({
   }) {
 
   const contentSearch = (await searchParams).s;
-  
+
   try {
     const [postsResponse, postsByCategoryID] = await Promise.all([
       isrClient.query({
@@ -65,7 +65,7 @@ export default async function BlogPage({
           fetchOptions: {
             next: {
               tags: ['posts', 'all-posts'],
-              revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+              revalidate: revalidate,
             },
           },
         },
@@ -81,7 +81,7 @@ export default async function BlogPage({
           fetchOptions: {
             next: {
               tags: ['posts', 'category-javascript-typescript'],
-              revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
+              revalidate: revalidate,
             },
           },
         },
@@ -111,7 +111,7 @@ export default async function BlogPage({
     const posts: PostItem[] = postsResponse?.data?.posts?.nodes || [];
     const postsByCategory: PostItem[] = postsByCategoryID?.data?.posts?.nodes || [];
     const postBySearchQuery: PostItem[] = postBySearch?.data?.posts.nodes || [];
-
+    
     if (!posts.length) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -122,7 +122,7 @@ export default async function BlogPage({
         </div>
       );
     }
-
+    
     return (
       <>
         {Object.keys(searchParams).length > 0 ? (
@@ -134,18 +134,20 @@ export default async function BlogPage({
                 <div className="relative blog-hero flex flex-col">
                   <div className="flex flex-col lg:flex-row w-full gap-x-10">
                     {posts[0] && <BlogFeatured post={posts[0]} />}
-                    <div className="flex flex-col w-full lg:w-1/2 gap-5">
-                      {posts?.slice(1, 4)?.map((post, index) => (
-                        <BlogItem post={post} key={post.uri || index} isDark />
-                      ))}
-                    </div>
+                      {posts?.length > 1 && (
+                        <div className="flex flex-col w-full lg:w-1/2 gap-5">
+                          {posts?.slice(1, 4)?.map((post, index) => (
+                            <BlogItem post={post} key={post.uri || index} isDark />
+                          ))}
+                        </div>
+                      )}
                   </div>
                   <BlogSubscribers isDark />
                 </div>
               </div>
 
             </div>
-            <BlogByRating posts={posts} />
+            {posts?.length > 0 && <BlogByRating posts={posts} />}
             {postsByCategory.length > 0 && (
               <BlogByCategory
                 posts={postsByCategory}
