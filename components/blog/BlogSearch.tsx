@@ -1,19 +1,10 @@
-import { PostItem } from "@/app/types"
-import BlogItem from "./BlogItem"
 import Breadcrumb from "../breadcrumb/Breadcrumb";
-import NotFoundPage from "@/app/not-found";
 import BlogPlatform from "./BlogPlatform";
+import { Suspense } from "react";
+import ListItemSearch from "./ListItemSearch";
+import CardLoading from "../loader/CardLoading";
 
-type BlogSearchProp = {
-  posts: PostItem[];
-  content: string | string[] | undefined,
-};
-
-const BlogSearch = ({
-  posts,
-  content,
-}:
-  BlogSearchProp) => {
+export default async function BlogSearch({ content }: { content: string | string[] | undefined }) {
 
   const breadcrumb = [
     { label: "Blog", href: "/blog" },
@@ -21,6 +12,22 @@ const BlogSearch = ({
       label: "Blog Search", href: ''
     },
   ];
+
+  const loadingItemSearch = () => {
+    return (
+      <div className="flex flex-col gap-y-5 ">
+        <div className="w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
+            {[...Array(9)].map((_, i) => (
+              <div className="col-span-1 pt-0 md:pt-5">
+                <CardLoading />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -34,23 +41,14 @@ const BlogSearch = ({
       </div>
       <div className="max-container-blog py-5">
         <div className="flex flex-col gap-y-5">
-          <div className="w-full">
-            {posts.length ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
-                {posts?.map((post: PostItem, index: number) => (
-                  <div className="col-span-1 pt-0 md:pt-5" key={index}>
-                    <BlogItem post={post} key={index} isReverse />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <NotFoundPage />
-            )}
-          </div>
+          {typeof content === "string" && (
+            <Suspense key={content} fallback={loadingItemSearch()}>
+              <ListItemSearch content={content} />
+            </Suspense>
+          )}
         </div>
       </div>
       <BlogPlatform />
     </div>
   );
 }
-export default BlogSearch
