@@ -248,7 +248,7 @@ export const GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY = gql`
   }
 `;
 
-export const GET_POSTS_BY_TAGS_QUERY = gql`
+export const GET_POSTS_BY_TAG_QUERY  = gql`
   query GetPostsByTags($tag: String!, $first: Int!, $author: Int!) {
     posts(where: { author: $author, tag: $tag }, first: $first) {
       nodes {
