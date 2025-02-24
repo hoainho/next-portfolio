@@ -51,7 +51,7 @@ export default async function BlogPage({
     searchParams:  Promise<{ [key: string]: string | string[] | undefined }>
   }) {
 
-  const contentSearch = (await searchParams).s;
+  const searchContent = (await searchParams).s
 
   try {
     const [postsResponse, postsByCategoryID] = await Promise.all([
@@ -88,29 +88,8 @@ export default async function BlogPage({
       }),
     ]);
 
-    let postBySearch = null;
-
-    if (contentSearch) {
-      postBySearch = await isrClient.query({
-        query: FETCH_POSTS_BY_QUERY,
-        variables: {
-          search: contentSearch,
-          first: 5,
-        },
-        context: {
-          fetchOptions: {
-            next: {
-              tags: ["search", "posts"],
-              revalidate: revalidate,
-            },
-          },
-        },
-      });
-    }
-    
     const posts: PostItem[] = postsResponse?.data?.posts?.nodes || [];
     const postsByCategory: PostItem[] = postsByCategoryID?.data?.posts?.nodes || [];
-    const postBySearchQuery: PostItem[] = postBySearch?.data?.posts.nodes || [];
     
     if (!posts.length) {
       return (
@@ -126,7 +105,7 @@ export default async function BlogPage({
     return (
       <>
         {Object.keys(searchParams).length > 0 ? (
-          <BlogSearch posts={postBySearchQuery} content={contentSearch} />
+          <BlogSearch content={searchContent}/>
         ) : (
           <div className="relative">
             <div className="bg-dark text-white min-h-screen overflow-hidden">
