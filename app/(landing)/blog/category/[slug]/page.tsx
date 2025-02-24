@@ -8,7 +8,7 @@ import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 import {
   GET_CATEGORIES_QUERY,
   GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-  GET_POSTS_BY_TAGS_QUERY,
+  GET_POSTS_BY_TAG_QUERY ,
   POSTS_QUERY,
 } from "@/graphql/queries/post.query";
 import { isrClient } from "@/lib/apolloClient";
@@ -61,7 +61,7 @@ const BlogCategory = async ({ params }: Props) => {
     query = POSTS_QUERY;
     variables = { author: 3, first: 30 };
   } else if (popularSlug) {
-    query = GET_POSTS_BY_TAGS_QUERY;
+    query = GET_POSTS_BY_TAG_QUERY ;
     variables = { tag: "Popular", first: 20, author: 3 };
   } else {
     query = GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY;
