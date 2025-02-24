@@ -5,13 +5,10 @@ export default function Loading() {
     <div>
       <div className="pt-10 px-6 !pb-0 bg-bg-default">
         <div className="max-container-blog !min-h-fit flex flex-col gap-y-3 ">
-          <div className="h-4 w-16 bg-[#2d333b] rounded animate-pulse mb-16"></div>
-          <div className="mt-3 text-fg-default bg-[#2d333b] rounded animate-pulse w-12">
-          </div>
-          <div className="max-w-[300px] pb-5 bg-[#2d333b] rounded animate-pulse h-11">
-          </div>
-          <div className="bg-[#2d333b] rounded animate-pulse h-5 max-w-[600px]">
-          </div>
+          <div className="h-4 w-16 bg-[#2d333b] rounded animate-pulse mb-16"/>
+          <div className="mt-3 text-fg-default bg-[#2d333b] rounded animate-pulse w-12"/>
+          <div className="max-w-[300px] pb-5 bg-[#2d333b] rounded animate-pulse h-11"/>
+          <div className="bg-[#2d333b] rounded animate-pulse h-5 max-w-[600px]"/>
         </div>
       </div>
       <div className="max-container-blog py-5">

@@ -3,7 +3,7 @@ import { PostItem } from "@/app/types";
 import BlogItem from "@/components/blog/BlogItem";
 import BlogPlatform from "@/components/blog/BlogPlatform";
 import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
-import { GET_POSTS_BY_TAGS_QUERY } from "@/graphql/queries/post.query";
+import { GET_POSTS_BY_TAG_QUERY  } from "@/graphql/queries/post.query";
 import { isrClient } from "@/lib/apolloClient";
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 const BlogTag = async({params}: Props) => {
 
   const postsByTagID = await isrClient.query({
-    query : GET_POSTS_BY_TAGS_QUERY,
+    query : GET_POSTS_BY_TAG_QUERY ,
     variables: { tag: params.slug, first: 10, author: 3 },
   });
 
@@ -43,7 +43,7 @@ const BlogTag = async({params}: Props) => {
       <div className="max-container-blog py-5">
         <div className="flex flex-col gap-y-5">
           <div className="w-full">
-            {postsByTag.length ? (
+            {postsByTag.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
                 {postsByTag?.map((post: PostItem, index: number) => (
                   <div className="col-span-1 pt-0 md:pt-5" key={index}>
