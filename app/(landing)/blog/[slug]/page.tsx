@@ -134,6 +134,13 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
   const fetchPost = await client.query({
     query: POST_DETAIL_QUERY,
     variables: { slug: params.slug },
+    context: {
+      fetchOptions: {
+        next: {
+          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 600),
+        },
+      },
+    },
   });
 
   const post: PostItem = fetchPost?.data?.post;
