@@ -7,11 +7,10 @@ export function TagDetail({
   className,
   ...rest
 }: React.ComponentPropsWithoutRef<"a">) {
-  const formatSlug = (children as string).replace(/\s+/g, "-").toLowerCase();
   
   return (
     <Link
-      href={`/blog/tag/${formatSlug}`}
+      href={`/blog/tags/${children}`}
       className={clsx(
         className,
         "border rounded-full px-4 text-center text-[14px] text-fg-default font-medium font-mono",

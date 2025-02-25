@@ -1,6 +1,6 @@
 import NotFoundPage from "@/app/not-found";
 import { PostItem } from "@/app/types";
-import { FETCH_POSTS_BY_QUERY } from "@/graphql/queries/post.query";
+import { FETCH_POSTS_BY_QUERY, POSTS_QUERY } from "@/graphql/queries/post.query";
 import { isrClient } from "@/lib/apolloClient";
 import BlogItem from "./BlogItem";
 
@@ -9,17 +9,17 @@ type ListItemProps = {
 }
 
 const fetchPostsBySearch = async (content: string) => {
-  if (!content) return []
+  const query = content ? FETCH_POSTS_BY_QUERY : POSTS_QUERY
+  const variables = content ? {search: content} : {author: 3, first: 30}
+  const tags = content ?  ["search", "posts"] : ['post']
+
   const postBySearch = await isrClient.query({
-    query: FETCH_POSTS_BY_QUERY,
-    variables: {
-      search: content,
-      first: 5,
-    },
+    query: query,
+    variables: {...variables},
     context: {
       fetchOptions: {
         next: {
-          tags: ["search", "posts"],
+          tags: tags,
           revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
         },
       },

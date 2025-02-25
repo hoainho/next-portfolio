@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import ListItemSearch from "./ListItemSearch";
 import CardLoading from "../loader/CardLoading";
 
-export default async function BlogSearch({ content }: { content: string | string[] | undefined }) {
+export default async function BlogSearch({ content }: { content: string}) {
 
   const breadcrumb = [
     { label: "Blog", href: "/blog" },
@@ -41,11 +41,9 @@ export default async function BlogSearch({ content }: { content: string | string
       </div>
       <div className="max-container-blog py-5">
         <div className="flex flex-col gap-y-5">
-          {typeof content === "string" && (
-            <Suspense key={content} fallback={loadingItemSearch()}>
-              <ListItemSearch content={content} />
-            </Suspense>
-          )}
+          <Suspense key={content} fallback={loadingItemSearch()}>
+            <ListItemSearch content={content} />
+          </Suspense>
         </div>
       </div>
       <BlogPlatform />

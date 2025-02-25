@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 
 export default async function BlogPage({
   searchParams }: {
-    searchParams:  Promise<{ [key: string]: string | string[] | undefined }>
+    searchParams:  Promise<{ [key: string]: string}>
   }) {
 
   const searchContent = (await searchParams).s
@@ -65,7 +65,7 @@ export default async function BlogPage({
           fetchOptions: {
             next: {
               tags: ['posts', 'all-posts'],
-              revalidate: revalidate,
+              revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
             },
           },
         },
@@ -81,7 +81,7 @@ export default async function BlogPage({
           fetchOptions: {
             next: {
               tags: ['posts', 'category-javascript-typescript'],
-              revalidate: revalidate,
+              revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
             },
           },
         },
