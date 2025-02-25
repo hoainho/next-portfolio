@@ -1,47 +1,28 @@
+
 import NotFoundPage from "@/app/not-found";
-import { PostItem } from "@/app/types";
-import { FETCH_POSTS_BY_QUERY, POSTS_QUERY } from "@/graphql/queries/post.query";
-import { isrClient } from "@/lib/apolloClient";
-import BlogItem from "./BlogItem";
+import PaginatedPostList from "./PaginatedPostList";
+import { GetDataSearchQuery } from "@/lib/api";
 
 type ListItemProps = {
   content: string
 }
 
-const fetchPostsBySearch = async (content: string) => {
-  const query = content ? FETCH_POSTS_BY_QUERY : POSTS_QUERY
-  const variables = content ? {search: content} : {author: 3, first: 30}
-  const tags = content ?  ["search", "posts"] : ['post']
-
-  const postBySearch = await isrClient.query({
-    query: query,
-    variables: {...variables},
-    context: {
-      fetchOptions: {
-        next: {
-          tags: tags,
-          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
-        },
-      },
-    },
-  });
-  return postBySearch?.data?.posts.nodes || []
-}
-
 const ListItemSearch = async ({ content }: ListItemProps) => {
-  const posts = await fetchPostsBySearch(content);
-  if (!posts.length) return <NotFoundPage />;
+  try {
+    const posts = await GetDataSearchQuery(content);
+    if (!posts.nodes.length || posts.nodes.length < 1) return <NotFoundPage />;
 
-  return (
-    <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
-        {posts.map((post: PostItem, index: number) => (
-          <div className="col-span-1 pt-0 md:pt-5" key={index}>
-            <BlogItem post={post} isReverse />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+    return (
+      <PaginatedPostList
+        posts={posts.nodes}
+        content={content}
+        initCursor={posts.pageInfo.endCursor}
+        initHasNextPage={posts.pageInfo.hasNextPage}
+      />
+    );
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return <NotFoundPage />;
+  }
 }
 export default ListItemSearch;

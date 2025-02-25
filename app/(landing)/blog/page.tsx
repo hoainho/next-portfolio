@@ -9,7 +9,6 @@ import BlogByCategory from "@/components/blog/BlogByCategory";
 import {
   POSTS_QUERY,
   GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-  FETCH_POSTS_BY_QUERY,
 } from "@/graphql/queries/post.query";
 import BlogPlatform from "@/components/blog/BlogPlatform";
 import BlogSearch from "@/components/blog/BlogSearch";
