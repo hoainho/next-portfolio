@@ -1,6 +1,6 @@
 import { PostItem } from "@/app/types";
 import { Metadata } from "next";
-import { isrClient } from "@/lib/apolloClient";
+import { ssrClient } from "@/lib/apolloClient";
 import BlogItem from "@/components/blog/BlogItem";
 import BlogFeatured from "@/components/blog/BlogFeatured";
 import BlogSubscribers from "@/components/blog/BlogSubscribers";
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   try {
     const [postsResponse, postsByCategoryID] = await Promise.all([
-      isrClient.query({
+      ssrClient.query({
         query: POSTS_QUERY,
         variables: {
           author: 3,
@@ -62,7 +62,7 @@ export default async function BlogPage() {
           },
         },
       }),
-      isrClient.query({
+      ssrClient.query({
         query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
         variables: { 
           category: "javascript-typescript", 
