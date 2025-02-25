@@ -12,7 +12,7 @@ export default function Loading() {
               </div>
               <div className="flex flex-col w-full lg:w-1/2 gap-7">
                 {[...Array(3)].map((_, i) => (
-                  <CardLoading flex />
+                  <CardLoading flex key={i}/>
                 ))}
               </div>
             </div>

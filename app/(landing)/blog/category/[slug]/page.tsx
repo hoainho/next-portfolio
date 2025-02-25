@@ -12,6 +12,7 @@ import {
   POSTS_QUERY,
 } from "@/graphql/queries/post.query";
 import { isrClient } from "@/lib/apolloClient";
+import { getAuthorId } from "@/lib/helpers";
 import React from "react";
 
 interface Props {
@@ -56,18 +57,18 @@ const BlogCategory = async ({ params }: Props) => {
   const popularSlug = params.slug === "popular";
 
   let query = POSTS_QUERY;
-  let variables: any = { author: 3, first: 20 };
+  let variables: any = { author: getAuthorId(), first: 20 };
   if (latestSlug) {
     query = POSTS_QUERY;
-    variables = { author: 3, first: 30 };
+    variables = { author: getAuthorId(), first: 30 };
   } else if (popularSlug) {
     query = GET_POSTS_BY_TAGS_QUERY;
-    variables = { tag: "Popular", first: 20, author: 3 };
+    variables = { tag: "Popular", first: 20, author: getAuthorId() };
   } else {
     query = GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY;
     variables = {
       category: category?.slug || params.slug,
-      author: 3,
+      author: getAuthorId(),
       first: 30,
     };
   }

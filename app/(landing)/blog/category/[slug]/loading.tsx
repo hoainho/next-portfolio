@@ -19,7 +19,7 @@ export default function Loading() {
           <div className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
               {[...Array(9)].map((_, i) => (
-                <div className="col-span-1 pt-0 md:pt-5">
+                <div className="col-span-1 pt-0 md:pt-5" key={i}>
                   <CardLoading  />
                 </div>
               ))}

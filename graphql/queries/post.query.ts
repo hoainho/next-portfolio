@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const POSTS_QUERY = gql`
-  query GetPosts($author: Int!, $first: Int!) {
+  query GetPosts($author: Int, $first: Int!) {
     posts(where: { author: $author }, first: $first) {
       nodes {
         author {
@@ -195,7 +195,7 @@ export const GET_CATEGORIES_QUERY = gql`
 export const GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY = gql`
   query GetPostsByCategoryAndAuthor(
     $category: String!
-    $author: Int!
+    $author: Int
     $first: Int!
   ) {
     posts(where: { categoryName: $category, author: $author }, first: $first) {
@@ -249,7 +249,7 @@ export const GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY = gql`
 `;
 
 export const GET_POSTS_BY_TAGS_QUERY = gql`
-  query GetPostsByTags($tag: String!, $first: Int!, $author: Int!) {
+  query GetPostsByTags($tag: String!, $first: Int!, $author: Int) {
     posts(where: { author: $author, tag: $tag }, first: $first) {
       nodes {
         author {

@@ -6,6 +6,7 @@ import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { GA_TRACKING_ID, GTM_TRACKING_ID } from "@/lib/gtag";
 import { GlobalContext, GlobalProvider } from "@/context/GlobalContext";
 import Script from "next/script";
+
 const fontPublicSans = localFont({
   src: [
     {
@@ -27,6 +28,8 @@ const fontPublicSans = localFont({
   variable: "--font-public-sans",
 });
 
+const brandName = process.env.NEXT_PUBLIC_BLOG_BRAND || 'hoainho';
+
 export const viewport: Viewport = {
   initialScale: 1,
   width: "device-width",
@@ -34,32 +37,48 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title:
-    "Hoai Nho - Portfolio | Deep Javascript & TypeScript | Software Engineer | Open Source Contributor",
+    "Thnkandgrow - Advanced Web Development Blog | Expert Insights & Technical Excellence",
   description:
-    "I'm Software Engineer from Viet Nam with over 4 year of experience. I'm passionate about developing and maintaining high quality software. I love my work and I'm always looking for new challenges. I'm open for any collaboration. Let's work together!",
+    "Dive deep into expert-level web development with Thnkandgrow. Discover comprehensive tutorials, best practices, and cutting-edge insights on JavaScript, TypeScript, React, and modern web technologies. Written by industry professionals for ambitious developers.",
   keywords:
-    "Hoai Nho, Hoài Nhớ, Nguyễn Hoài Nhớ, Nhớ Nguyễn, portfolio, deep learning engineer, software engineer, open source contributor, javascript, fullstack developer",
+    "web development blog, javascript tutorials, typescript guides, react best practices, web architecture, software engineering, coding tutorials, frontend development, backend development, full stack development, web performance, software design patterns",
   openGraph: {
-    title: "Hoai-Nho | Portfolio",
+    title: "Thnkandgrow | Advanced Web Development Blog",
     description:
-      "Deep Javascript & TypeScript | Software Engineer | Open Source Contributor",
-    url: `https://hoainho.info`,
-    siteName: "Hoai-Nho | Portfolio",
+      "Expert-level web development insights, in-depth tutorials, and industry best practices. Level up your development skills with comprehensive guides on modern web technologies.",
+    url: "https://thnkandgrow.com",
+    siteName: "Thnkandgrow",
     images: [
       {
-        url:
-          process.env.NEXT_PUBLIC_LOGO ||
-          "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
-        alt: "Hoai-Nho | Portfolio",
-        width: 200,
-        height: 200,
+        url: "https://d1gj38atnczo72.cloudfront.net/wp-content/uploads/2024/04/18114102/cropped-thnkandgrow-logo-192x192.jpg",
+        alt: "Thnkandgrow Logo",
+        width: 192,
+        height: 192,
       },
     ],
     locale: "en_US",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Thnkandgrow | Advanced Web Development",
+    description: "Expert web development insights and comprehensive tutorials for modern developers",
+    creator: "@thnkandgrow",
+    images: ["https://d1gj38atnczo72.cloudfront.net/wp-content/uploads/2024/04/18114102/cropped-thnkandgrow-logo-192x192.jpg"],
+  },
   icons: {
-    icon: "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+    icon: "https://d1gj38atnczo72.cloudfront.net/wp-content/uploads/2024/04/18114102/cropped-thnkandgrow-logo-192x192.jpg",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 

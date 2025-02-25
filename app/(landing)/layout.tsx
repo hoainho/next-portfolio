@@ -2,16 +2,19 @@ import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
 import { Metadata } from "next";
 import React, { ReactNode } from "react";
+import { getAuthorId } from "@/lib/helpers";
 
 type LayoutOrderProps = { children: ReactNode };
 
+const brandName = process.env.NEXT_PUBLIC_BLOG_BRAND || 'hoainho';
+
 export const metadata: Metadata = {
   title:
-    "Hoai Nho - Portfolio | Deep Javascript & TypeScript | Software Engineer | Open Source Contributor",
+    `${brandName} - Tech Blog | Advanced Web Development | Expert Tips & Tricks`,
   description:
-    "I'm Software Engineer from Viet Nam with over 4 year of experience. I'm passionate about developing and maintaining high quality software. I love my work and I'm always looking for new challenges. I'm open for any collaboration. Let's work together!",
+    `${brandName} - Software Engineer from Viet Nam with over 4 year of experience. Passionate about developing and maintaining high quality software.`,
   keywords:
-    "Hoai Nho, Hoài Nhớ, Nguyễn Hoài Nhớ, Nhớ Nguyễn, portfolio, deep learning engineer, software engineer, NUS Technology, , javascript, fullstack developer",
+    `${brandName}, Portfolio, deep learning engineer, software engineer, open source contributor, javascript, fullstack developer`,
 };
 
 function Layout({ children }: LayoutOrderProps) {

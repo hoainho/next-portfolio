@@ -52,20 +52,24 @@ const Navbar = () => {
     {
       name: "About",
       link: "/about",
+      showInBlogOnly: false,
     },
     {
       name: "Projects",
       link: "/projects",
+      showInBlogOnly: false,
     },
     {
       name: "Blog",
       link: "/blog",
+      showInBlogOnly: true,
     },
     {
       name: "Contact",
       link: "/contact",
+      showInBlogOnly: false,
     },
-  ];
+  ].filter(item => !process.env.NEXT_PUBLIC_BLOG_ONLY_MODE || item.showInBlogOnly);
 
   const handleNavbarMobile = () => {
     setHiddenScrollBar(isOpenNavbarMobile);
@@ -105,12 +109,12 @@ const Navbar = () => {
       >
         {isDetailPost || isCentrePost ? (
           <div className="flex items-center gap-2 !min-h-fit !py-3 !px-0">
-            <Link href="/" className="cursor-pointer">
+            <Link href={process.env.NEXT_PUBLIC_BLOG_ONLY_MODE === 'true' ? "/blog" : "/"} className="cursor-pointer">
               <ImageLoader
                 width={40}
                 height={40}
-                src={"/icons/logo.jpeg"}
-                alt="Hoai-Nho-Logo"
+                src={"https://d1gj38atnczo72.cloudfront.net/wp-content/uploads/2024/04/18114102/cropped-thnkandgrow-logo-192x192.jpg"}
+                alt="Thnkandgrow-Logo"
                 className="h-10 w-10 object-cover rounded-full "
               />
             </Link>
@@ -118,12 +122,12 @@ const Navbar = () => {
             <h1 className="text-xl font-semibold text-fg-default"> Blog</h1>
           </div>
         ) : (
-          <Link href="/" className="cursor-pointer">
+          <Link href={process.env.NEXT_PUBLIC_BLOG_ONLY_MODE === 'true' ? "/blog" : "/"} className="cursor-pointer">
             <ImageLoader
               width={40}
               height={40}
-              src={"/icons/logo.jpeg"}
-              alt="Hoai-Nho-Logo"
+              src={"https://d1gj38atnczo72.cloudfront.net/wp-content/uploads/2024/04/18114102/cropped-thnkandgrow-logo-192x192.jpg"}
+              alt="Thnkandgrow-Logo"
               className="h-20 w-20 object-cover rounded-full "
             />
           </Link>
@@ -167,14 +171,14 @@ const Navbar = () => {
             )}
           ></div>
           <div
-            className={`w-fit fixed inset-0 z-40 hidden h-fit bg-black/50 backdrop-blur-sm peer-checked:block`}
+            className={`w-fit fixed inset-0 z-40 h-fit bg-black/50 backdrop-blur-sm peer-checked:block`}
           >
             &nbsp;
           </div>
           <div className="fixed top-0 right-0 z-40 h-screen w-full translate-x-full overflow-y-auto overscroll-y-none transition duration-500 peer-checked:translate-x-0">
             <div className="float-right min-h-full w-[85%] bg-bg-default px-6 py-8 shadow-2xl">
               <menu className="h-fit py-10 px-2 flex flex-col items-start justify-center gap-4">
-                <Link href="/" className="cursor-pointer">
+                <Link href={process.env.NEXT_PUBLIC_BLOG_ONLY_MODE === 'true' ? "/blog" : "/"} className="cursor-pointer">
                   <ImageLoader
                     width={40}
                     height={40}

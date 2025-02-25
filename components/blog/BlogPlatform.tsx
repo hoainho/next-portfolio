@@ -10,30 +10,28 @@ interface Props {}
 const BlogPlatform = (props: Props) => {
   const platforms = [
     {
-      name: "Th?nkAndGrow",
+      name: "ThinkAndGrow",
       icon: <DiYeoman />,
-      href: "https://blogs.thnkandgrow.com/author/hoainho/",
-      description:
-        "Share insightful perspectives, useful knowledge, and life wisdom with the world",
+      href: process.env.NEXT_PUBLIC_BLOG_LINK,
+      description: process.env.NEXT_PUBLIC_BLOG_DESC,
     },
     {
       name: "Linkedin",
       icon: <FiLinkedin />,
-      href: "https://linkedin.com/in/hoainho",
-      description: "Connect with me on LinkedIn",
+      href: process.env.NEXT_PUBLIC_LINKEDIN_LINK,
+      description: process.env.NEXT_PUBLIC_LINKEDIN_DESC,
     },
     {
       name: "Medium",
       icon: <FaMediumM />,
-      href: "https://medium.com/@hoainho.work",
-      description: "Get the latest news, resources, and insights",
+      href: process.env.NEXT_PUBLIC_MEDIUM_LINK,
+      description: process.env.NEXT_PUBLIC_MEDIUM_DESC,
     },
     {
       name: "Dev.to",
       icon: <FaDev />,
-      href: "https://dev.to/hoainhoblogdev",
-      description:
-        "A constructive and inclusive social network for software developers",
+      href: process.env.NEXT_PUBLIC_DEVTO_LINK,
+      description: process.env.NEXT_PUBLIC_DEVTO_DESC,
     },
   ];
   return (
@@ -63,7 +61,7 @@ const BlogPlatform = (props: Props) => {
                 <p className="text-sm text-fg-subtle">{platform.description}</p>
               </div>
               <Link
-                href={platform.href}
+                href={platform.href || "/blog"}
                 className="flex items-center gap-x-1 text-active mt-8"
               >
                 <p className="text-sm">Go to Docs</p>

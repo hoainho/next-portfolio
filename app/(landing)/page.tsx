@@ -1,6 +1,7 @@
 import Audio from "@/components/home/Audio";
 import LayoutIsland from "@/components/home/LayoutIsland";
 import { Metadata } from "next";
+import { getAuthorId } from "@/lib/helpers";
 
 export const metadata: Metadata = {
   title: "Overview | Hoai Nho - Portfolio",

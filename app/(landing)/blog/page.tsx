@@ -1,6 +1,7 @@
 import { PostItem } from "@/app/types";
 import { Metadata } from "next";
 import { ssrClient } from "@/lib/apolloClient";
+import { getAuthorId } from "@/lib/helpers";
 import BlogItem from "@/components/blog/BlogItem";
 import BlogFeatured from "@/components/blog/BlogFeatured";
 import BlogSubscribers from "@/components/blog/BlogSubscribers";
@@ -15,42 +16,45 @@ import BlogPlatform from "@/components/blog/BlogPlatform";
 export const revalidate = +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600);
 
 export const metadata: Metadata = {
-  title: "Nick's Blog | Latest Posts",
+  title: "Thnkandgrow | Advanced Web Development Blog",
   description:
-    "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
+    "Explore expert-curated content on modern web development. From in-depth JavaScript tutorials to advanced system design patterns, discover professional insights that will elevate your development skills. Join our community of skilled developers sharing knowledge and best practices.",
   keywords:
-    "blog, articles, insights, technology, lifestyle, trends, tips, Nick's Blog, latest posts",
+    "web development blog, javascript tutorials, typescript guides, react patterns, system design, coding best practices, software architecture, web optimization, development tutorials, technical blog",
   openGraph: {
-    title: "Nick's Blog | Latest Posts",
+    title: "Thnkandgrow | Advanced Web Development Blog",
     description:
-      "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
-    url: "https://hoainho.info/blog",
+      "Expert-curated content for modern web developers. Advanced tutorials, professional insights, and industry best practices from experienced developers.",
+    url: "https://thnkandgrow.com/blog",
+    siteName: "Thnkandgrow",
     images: [
       {
-        url:
-          process.env.NEXT_PUBLIC_LOGO ||
-          "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+        url: "https://d1gj38atnczo72.cloudfront.net/wp-content/uploads/2024/04/18114102/cropped-thnkandgrow-logo-192x192.jpg",
+        width: 192,
+        height: 192,
+        alt: "Thnkandgrow Blog",
       },
     ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nick's Blog | Latest Posts",
+    title: "Thnkandgrow | Web Development Excellence",
     description:
-      "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
-    images:
-      process.env.NEXT_PUBLIC_LOGO ||
-      "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+      "Discover expert insights and advanced tutorials in modern web development. Level up your skills with our comprehensive guides.",
+    creator: "@thnkandgrow",
+    images: ["https://d1gj38atnczo72.cloudfront.net/wp-content/uploads/2024/04/18114102/cropped-thnkandgrow-logo-192x192.jpg"],
   },
 };
 
 export default async function BlogPage() {
   try {
-    const [postsResponse, postsByCategoryID] = await Promise.all([
+    const [posts, jsPosts] = await Promise.all([
       ssrClient.query({
         query: POSTS_QUERY,
         variables: {
-          author: 3,
+          author: getAuthorId(),
           first: 4,
         },
         context: {
@@ -66,7 +70,7 @@ export default async function BlogPage() {
         query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
         variables: { 
           category: "javascript-typescript", 
-          author: 3, 
+          author: getAuthorId(), 
           first: 5 
         },
         context: {
@@ -77,13 +81,13 @@ export default async function BlogPage() {
             },
           },
         },
-      })
+      }),
     ]);
 
-    const posts: PostItem[] = postsResponse?.data?.posts?.nodes || [];
-    const postsByCategory: PostItem[] = postsByCategoryID?.data?.posts?.nodes || [];
+    const postsData: PostItem[] = posts?.data?.posts?.nodes || [];
+    const postsByCategory: PostItem[] = jsPosts?.data?.posts?.nodes || [];
 
-    if (!posts.length) {
+    if (!postsData.length) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
@@ -100,9 +104,9 @@ export default async function BlogPage() {
           <div className="fade-in-start max-container-centre py-2 px-5 lg:py-10">
             <div className="relative blog-hero flex flex-col">
               <div className="flex flex-col lg:flex-row w-full gap-x-10">
-                {posts[0] && <BlogFeatured post={posts[0]} />}
+                {postsData[0] && <BlogFeatured post={postsData[0]} />}
                 <div className="flex flex-col w-full lg:w-1/2 gap-5">
-                  {posts?.slice(1, 4)?.map((post, index) => (
+                  {postsData?.slice(1, 4)?.map((post, index) => (
                     <BlogItem post={post} key={post.uri || index} isDark />
                   ))}
                 </div>
@@ -111,7 +115,7 @@ export default async function BlogPage() {
             </div>
           </div>
         </div>
-        <BlogByRating posts={posts} />
+        <BlogByRating posts={postsData} />
         {postsByCategory.length > 0 && (
           <BlogByCategory
             posts={postsByCategory}

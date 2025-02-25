@@ -5,6 +5,7 @@ import BlogItem from "./BlogItem";
 import { clsx } from "clsx";
 import { GET_POSTS_BY_TAGS_QUERY } from "@/graphql/queries/post.query";
 import { ssrClient } from "@/lib/apolloClient";
+import { getAuthorId } from "@/lib/helpers";
 
 interface Props {
   posts: PostItem[];
@@ -13,7 +14,12 @@ interface Props {
 const BlogByRating = async ({ posts }: Props) => {
   const postsByPopular = await ssrClient.query({
     query: GET_POSTS_BY_TAGS_QUERY,
-    variables: { tag: "popular", first: 3, author: 3 },
+    variables: { tag: "popular", first: 3, author: getAuthorId() },
+    context: {
+      fetchOptions: {
+        revalidate: 3600
+      },
+    },
   });
 
   const popularPosts: PostItem[] = postsByPopular?.data?.posts?.nodes || [];
