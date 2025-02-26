@@ -211,19 +211,19 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
             className="text-[#ADBAA7] text-base mb-10"
             dangerouslySetInnerHTML={{ __html: post.excerpt }}
           />
-          <div className="relative min-h-[180px] xs:min-h-[250px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[550px] xl:min-h-[600px] h-full w-full z-10">
+          <div className="relative h-full w-full z-10">
             <ImageLoader
               width={1200}
               height={480}
               src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
               alt={post.featuredImage.node.altText ?? post.title}
-              className="aspect-[4/2.4] rounded-md h-fit w-full absolute top-0 left-0 right-0 z-1"
+              className="object-cover rounded-md h-full w-full z-1"
             />
           </div>
           <div className="bg-white h-24 w-full absolute bottom-0 left-0 right-0"></div>
         </div>
       </div>
-      <div className="bg-white pt-2 md:pt-5 xl:pt-10">
+      <div className="bg-white pt-2">
         <div className="max-container-blog bg-white px-0">
           <div className="flex justify-between items-center py-5 border-b-2 border-[#545df0] mt-4 mb-8 text-sm text-gray-600 dark:text-gray-300">
             <div className="flex flex-col gap-3 !font-mono">
@@ -245,7 +245,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
                   <span className="text-fg-muted tracking-wide font-thin">
                     {format(
                       new Date(post.modified ?? post.date),
-                      "MMMM dd, yyyy",
+                      "MMMM dd, yyyy"
                     )}
                   </span>
                 </div>
@@ -263,9 +263,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
             <div className="flex justify-center items-center gap-3 flex-col sm:flex-row">
               <h6 className="text-primary">Share:</h6>
               <div className="flex gap-3 justify-center items-center">
-                {post?.slug && (
-                  <BlogShareButtons slug={post.slug} />
-                )}
+                {post?.slug && <BlogShareButtons slug={post.slug} />}
                 <ButtonCopyURL slug={post.slug} />
               </div>
             </div>
@@ -273,7 +271,9 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
           <div className="flex gap-10">
             <div className="xl:max-w-[calc(100%-224px)] flex flex-col gap-y-5 w-full">
               <BlogHTML content={post.content} />
-              <BlogBottomCategories tags={post.tags.nodes?.map((t) => t.name)} />
+              <BlogBottomCategories
+                tags={post.tags.nodes?.map((t) => t.name)}
+              />
               <BlogAuthor author={post.author.node} />
             </div>
             <div className="hidden xl:flex flex-col gap-5 max-w-56">
