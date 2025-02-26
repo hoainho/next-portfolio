@@ -197,8 +197,9 @@ export const GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY = gql`
     $category: String!
     $author: Int
     $first: Int!
+    $after: String
   ) {
-    posts(where: { categoryName: $category, author: $author }, first: $first) {
+    posts(where: { categoryName: $category, author: $author }, first: $first, after: $after) {
       nodes {
         author {
           node {
@@ -243,14 +244,18 @@ export const GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY = gql`
         title
         uri
         modified
+      }
+        pageInfo {
+        hasNextPage
+        endCursor
       }
     }
   }
 `;
 
 export const GET_POSTS_BY_TAGS_QUERY = gql`
-  query GetPostsByTags($tag: String!, $first: Int!, $author: Int) {
-    posts(where: { author: $author, tag: $tag }, first: $first) {
+  query GetPostsByTags($tag: String!, $first: Int!, $author: Int, $after: String) {
+    posts(where: { author: $author, tag: $tag }, first: $first, after: $after) {
       nodes {
         author {
           node {
@@ -296,12 +301,16 @@ export const GET_POSTS_BY_TAGS_QUERY = gql`
         uri
         modified
       }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
     }
   }
 `;
 
 export const GET_POSTS_BY_AUTHOR_QUERY = gql`
-  query GetPostsByAuthor($author: ID!, $first: Int!) {
+  query GetPostsByAuthor($author: ID!, $first: Int!, $after: String) {
     user(id: $author, idType: SLUG) {
       description
       name
@@ -315,7 +324,7 @@ export const GET_POSTS_BY_AUTHOR_QUERY = gql`
         width
         extraAttr
       }
-      posts(first: $first) {
+      posts(first: $first, after: $after) {
         nodes {
           author {
             node {
@@ -366,3 +375,62 @@ export const GET_POSTS_BY_AUTHOR_QUERY = gql`
     }
   }
 `;
+
+export const FETCH_POSTS_BY_QUERY = gql`
+  query SearchPosts($search: String!, $first: Int!, $after: String) {
+    posts(where: { search: $search }, first: $first, after: $after) {
+     nodes {
+        author {
+          node {
+            avatar {
+              url
+              extraAttr
+              width
+              height
+            }
+            description
+            firstName
+            lastName
+            name
+            slug
+          }
+        }
+        content
+        categories {
+          nodes {
+            id
+            name
+            slug
+          }
+        }
+        date
+        desiredSlug
+        excerpt
+        featuredImage {
+          node {
+            altText
+            srcSet
+            sourceUrl
+          }
+        }
+        link
+        postId
+        slug
+        tags {
+          nodes {
+            description
+            id
+            name
+          }
+        }
+        title
+        uri
+        
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+` 
