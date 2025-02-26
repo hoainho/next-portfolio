@@ -1,19 +1,16 @@
-import NotFoundPage from "@/app/not-found";
 import { PostItem, PostCategory, TagItem } from "@/app/types";
 import BlogFeatured from "@/components/blog/BlogFeatured";
 import BlogItem from "@/components/blog/BlogItem";
 import BlogPlatform from "@/components/blog/BlogPlatform";
 import BlogSubscribers from "@/components/blog/BlogSubscribers";
+import ListItemWithLoadMore from "@/components/blog/list-container/ListItemWithLoadMore";
 import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 import {
   GET_CATEGORIES_QUERY,
-  GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-  GET_POSTS_BY_TAG_QUERY ,
-  POSTS_QUERY,
 } from "@/graphql/queries/post.query";
+import { getPostByCategoryId } from "@/lib/api";
 import { isrClient } from "@/lib/apolloClient";
 import React from "react";
-
 interface Props {
   params: {
     slug: string;
@@ -55,38 +52,9 @@ const BlogCategory = async ({ params }: Props) => {
   const latestSlug = params.slug === "latest";
   const popularSlug = params.slug === "popular";
 
-  let query = POSTS_QUERY;
-  let variables: any = { author: 3, first: 20 };
-  if (latestSlug) {
-    query = POSTS_QUERY;
-    variables = { author: 3, first: 30 };
-  } else if (popularSlug) {
-    query = GET_POSTS_BY_TAG_QUERY ;
-    variables = { tag: "Popular", first: 20, author: 3 };
-  } else {
-    query = GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY;
-    variables = {
-      category: category?.slug || params.slug,
-      author: 3,
-      first: 30,
-    };
-  }
-  const postsByCategoryID = await isrClient.query({
-    query,
-    variables,
-    context: {
-      fetchOptions: {
-        next: {
-          tags: ['posts', `category-${params.slug}`],
-          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
-        },
-      },
-    },
-  });
+  const postsByCategory = await getPostByCategoryId(params.slug, category?.slug) 
 
-  const postsByCategory = postsByCategoryID?.data?.posts?.nodes;
-
-  const featuredPost: PostItem | undefined = postsByCategory?.find(
+  const featuredPost: PostItem | undefined = postsByCategory?.posts?.nodes.find(
     (post: PostItem) =>
       post?.tags?.nodes?.some((tag: TagItem) => tag?.name === "Popular"),
   );
@@ -128,7 +96,7 @@ const BlogCategory = async ({ params }: Props) => {
                   <BlogFeatured post={featuredPost} isFullWidth />
                 )}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
-                  {postsByCategory
+                  {postsByCategory?.posts.nodes
                     ?.filter(
                       (post: PostItem) => post.postId !== featuredPost?.postId,
                     )
@@ -153,17 +121,11 @@ const BlogCategory = async ({ params }: Props) => {
             <div className="flex items-center justify-between py-5 border-b border-gray-border mb-5">
               <h2 className="text-2xl font-bold text-default">Latest</h2>
             </div>
-            {postsByCategory.length ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
-                {postsByCategory?.map((post: PostItem, index: number) => (
-                  <div className="col-span-1 pt-0 md:pt-5" key={index}>
-                    <BlogItem post={post} key={index} isReverse />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <NotFoundPage />
-            )}
+            <ListItemWithLoadMore
+              posts={postsByCategory}
+              actionGetList={getPostByCategoryId}
+              filterKey={params.slug}
+            />
           </div>
         </div>
       </div>

@@ -1,10 +1,10 @@
 import Breadcrumb from "../breadcrumb/Breadcrumb";
 import BlogPlatform from "./BlogPlatform";
 import { Suspense } from "react";
-import ListItemSearch from "./ListItemSearch";
 import CardLoading from "../loader/CardLoading";
+import SearchPostList from "./SearchPostList";
 
-export default async function BlogSearch({ content }: { content: string}) {
+export default async function BlogSearch({ content }: { content: string }) {
 
   const breadcrumb = [
     { label: "Blog", href: "/blog" },
@@ -42,7 +42,7 @@ export default async function BlogSearch({ content }: { content: string}) {
       <div className="max-container-blog py-5">
         <div className="flex flex-col gap-y-5">
           <Suspense key={content} fallback={loadingItemSearch()}>
-            <ListItemSearch content={content} />
+            <SearchPostList content={content} />
           </Suspense>
         </div>
       </div>

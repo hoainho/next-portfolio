@@ -8,6 +8,8 @@ import BlogSubscribers from "@/components/blog/BlogSubscribers";
 import BlogPlatform from "@/components/blog/BlogPlatform";
 import Link from "next/link";
 import ImageLoader from "@/components/loader/ImageLoader";
+import { getPostByAuthor } from "@/lib/api";
+import ListItemWithLoadMore from "@/components/blog/list-container/ListItemWithLoadMore";
 interface AuthorProps {
   params: {
     name: string;
@@ -15,32 +17,18 @@ interface AuthorProps {
 }
 
 const page = async ({ params }: AuthorProps) => {
-  const postsResponse = await client.query({
-    query: GET_POSTS_BY_AUTHOR_QUERY,
-    variables: {
-      author: params.name || "hoainho",
-      first: 30,
-    },
-    context: {
-      fetchOptions: {
-        next: {
-          revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
-        },
-      },
-    },
-  });
-
+  const postsResponse = await getPostByAuthor(params.name)
   const author: GetPostsByAuthorResponse = postsResponse?.data;
 
   const posts: PostItem[] = author.user.posts.nodes;
-
   const featuredPost = posts?.find((post: PostItem) =>
     post.tags.nodes.some((tag: TagItem) => tag.name === "Popular"),
   );
 
   const postsWithoutFeatured = posts?.filter(
     (post: PostItem) => post.postId !== featuredPost?.postId,
-  );
+  )
+
   return (
     <div>
       <div className="pt-10 px-6 !pb-0 bg-bg-default">
