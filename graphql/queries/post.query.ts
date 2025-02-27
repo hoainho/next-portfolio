@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const POSTS_QUERY = gql`
-  query GetPosts($author: Int, $first: Int!) {
-    posts(where: { author: $author }, first: $first) {
+  query GetPosts($author: Int, $first: Int!, $after: String) {
+    posts(where: { author: $author }, first: $first, after: $after) {
       nodes {
         author {
           node {
@@ -49,6 +49,10 @@ export const POSTS_QUERY = gql`
         }
         title
         uri
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
       }
     }
   }

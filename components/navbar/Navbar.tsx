@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { pageview } from "@/lib/gtag";
 import ImageLoader from "@/components/loader/ImageLoader";
 import { useGlobalContext } from "@/context/GlobalContext";
+import { SearchBar } from "./SearchBar";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -102,7 +103,7 @@ const Navbar = () => {
     >
       <div
         className={clsx(
-          "header h-fit",
+          "header h-fit gap-2",
           isDetailPost ? "!px-10 !mx-0 !min-w-full" : "",
           isCentrePost ? "!max-w-7xl w-full !px-3 !mx-auto" : "",
         )}
@@ -133,7 +134,8 @@ const Navbar = () => {
           </Link>
         )}
 
-        <nav className="hidden md:flex items-center text-sm gap-4 font-medium uppercase">
+        <nav className="flex-1 justify-end hidden md:flex items-center text-sm font-medium uppercase relative gap-4">
+        {(pathname.includes("/blog/") || pathname === "/blog")  && <SearchBar/>}
           {navbar?.map((nav) => {
             return (
               <Link

@@ -12,6 +12,7 @@ import {
   GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
 } from "@/graphql/queries/post.query";
 import BlogPlatform from "@/components/blog/BlogPlatform";
+import BlogSearch from "@/components/blog/BlogSearch";
 
 export const revalidate = +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600);
 
@@ -48,7 +49,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function BlogPage() {
+export default async function BlogPage({
+  searchParams }: {
+    searchParams: Promise<{ [key: string]: string }>
+  }) {
+
+  const searchContent = (await searchParams).s
+
   try {
     const [posts, jsPosts] = await Promise.all([
       ssrClient.query({
@@ -68,10 +75,10 @@ export default async function BlogPage() {
       }),
       ssrClient.query({
         query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-        variables: { 
-          category: "javascript-typescript", 
-          author: getAuthorId(), 
-          first: 5 
+        variables: {
+          category: "javascript-typescript",
+          author: getAuthorId(),
+          first: 5
         },
         context: {
           fetchOptions: {
@@ -99,32 +106,38 @@ export default async function BlogPage() {
     }
 
     return (
-      <div className="relative">
-        <div className="bg-dark text-white min-h-screen overflow-hidden">
-          <div className="fade-in-start max-container-centre py-2 px-5 lg:py-10">
-            <div className="relative blog-hero flex flex-col">
-              <div className="flex flex-col lg:flex-row w-full gap-x-10">
-                {postsData[0] && <BlogFeatured post={postsData[0]} />}
-                <div className="flex flex-col w-full lg:w-1/2 gap-5">
-                  {postsData?.slice(1, 4)?.map((post, index) => (
-                    <BlogItem post={post} key={post.uri || index} isDark />
-                  ))}
+      <>
+        {Object.keys(searchParams).length > 0 ? (
+          <BlogSearch content={searchContent} />
+        ) : (
+          <div className="relative">
+            <div className="bg-dark text-white min-h-screen overflow-hidden">
+              <div className="fade-in-start max-container-centre py-2 px-5 lg:py-10">
+                <div className="relative blog-hero flex flex-col">
+                  <div className="flex flex-col lg:flex-row w-full gap-x-10">
+                    {postsData[0] && <BlogFeatured post={postsData[0]} />}
+                    <div className="flex flex-col w-full lg:w-1/2 gap-5">
+                      {postsData?.slice(1, 4)?.map((post, index) => (
+                        <BlogItem post={post} key={post.uri || index} isDark />
+                      ))}
+                    </div>
+                  </div>
+                  <BlogSubscribers isDark />
                 </div>
               </div>
-              <BlogSubscribers isDark />
             </div>
+            <BlogByRating posts={postsData} />
+            {postsByCategory.length > 0 && (
+              <BlogByCategory
+                posts={postsByCategory}
+                category="Javascript"
+                categorySlug="javascript-typescript"
+              />
+            )}
+            <BlogPlatform />
           </div>
-        </div>
-        <BlogByRating posts={postsData} />
-        {postsByCategory.length > 0 && (
-          <BlogByCategory
-            posts={postsByCategory}
-            category="Javascript"
-            categorySlug="javascript-typescript"
-          />
         )}
-        <BlogPlatform />
-      </div>
+      </>
     );
   } catch (error) {
     console.error('Error fetching blog data:', error);
