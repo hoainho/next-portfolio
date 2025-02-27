@@ -34,8 +34,8 @@ const BlogItem = ({
       >
         <Link href={`/blog/${post.slug}`} className="w-full h-full">
           <ImageLoader
-            src={decodeURIComponent(post.featuredImage.node.sourceUrl)}
-            alt={post.featuredImage.node.altText}
+            src={decodeURIComponent(post.featuredImage?.node.sourceUrl)}
+            alt={post.featuredImage?.node.altText}
             width={24}
             height={24}
             className={clsx(

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 import BlogItem from "./BlogItem";
 import { clsx } from "clsx";
-import { GET_POSTS_BY_TAGS_QUERY } from "@/graphql/queries/post.query";
+import { GET_POSTS_BY_TAG_QUERY  } from "@/graphql/queries/post.query";
 import { ssrClient } from "@/lib/apolloClient";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 
 const BlogByRating = async ({ posts }: Props) => {
   const postsByPopular = await ssrClient.query({
-    query: GET_POSTS_BY_TAGS_QUERY,
+    query: GET_POSTS_BY_TAG_QUERY ,
     variables: { tag: "popular", first: 3, author: 3 },
   });
 

@@ -315,8 +315,12 @@ interface Data {
   posts: Posts;
 }
 
-interface Posts {
+export interface Posts {
   nodes: PostItem[];
+  pageInfo: {
+    endCursor: string;
+    hasNextPage: boolean;
+  };
 }
 
 export interface PostItem {

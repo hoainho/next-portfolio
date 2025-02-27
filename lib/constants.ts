@@ -389,9 +389,9 @@ export const socialLinks = [
     link: "/contact",
   },
   {
-    name: "GitHub",
-    icon_url: "/icons/github.svg",
-    link: "https://github.com/hoainho",
+    name: "Daily.dev",
+    icon_url: "/icons/daily-dev.svg",
+    link: "https://app.daily.dev/squads/faqsinterview?cid=squad&userid=sAnreL24q5LH7f9XxP9xZ",
   },
   {
     name: "LinkedIn",

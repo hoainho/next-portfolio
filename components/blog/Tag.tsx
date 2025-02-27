@@ -7,6 +7,7 @@ export function TagDetail({
   className,
   ...rest
 }: React.ComponentPropsWithoutRef<"a">) {
+  
   return (
     <Link
       href={`/blog/tags/${children}`}
