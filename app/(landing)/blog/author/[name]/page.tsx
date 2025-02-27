@@ -9,7 +9,7 @@ import BlogPlatform from "@/components/blog/BlogPlatform";
 import Link from "next/link";
 import ImageLoader from "@/components/loader/ImageLoader";
 import { getPostByAuthor } from "@/lib/api";
-import ListItemWithLoadMore from "@/components/blog/list-container/ListItemWithLoadMore";
+import ListItemWithLoadMore from "@/components/blog/list-pagination/ListItemWithLoadMore";
 interface AuthorProps {
   params: {
     name: string;
@@ -18,9 +18,9 @@ interface AuthorProps {
 
 const page = async ({ params }: AuthorProps) => {
   const postsResponse = await getPostByAuthor(params.name)
-  const author: GetPostsByAuthorResponse = postsResponse?.data;
-
+  const author: GetPostsByAuthorResponse = postsResponse.data;
   const posts: PostItem[] = author.user.posts.nodes;
+
   const featuredPost = posts?.find((post: PostItem) =>
     post.tags.nodes.some((tag: TagItem) => tag.name === "Popular"),
   );
@@ -66,20 +66,17 @@ const page = async ({ params }: AuthorProps) => {
                 </h2>
               </div>
               {featuredPost && <BlogFeatured post={featuredPost} isFullWidth />}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 mt-4">
-                {postsWithoutFeatured
-                  ?.filter(
-                    (post: PostItem) => post.postId !== featuredPost?.postId,
-                  )
-                  ?.map((post: PostItem, index: number) => (
-                    <div
-                      className="col-span-1 border-t border-gray-border-3 pt-5"
-                      key={index}
-                    >
-                      <BlogItem post={post} key={index} isReverse />
-                    </div>
-                  ))}
-              </div>
+              <ListItemWithLoadMore
+                posts={{
+                  nodes: postsWithoutFeatured,
+                  pageInfo: {
+                    endCursor: author.user.posts.pageInfo?.endCursor ?? "",
+                    hasNextPage: author.user.posts.pageInfo?.hasNextPage ?? false,
+                  }
+                }}
+                filterKey={params.name}
+                actionGetList={getPostByAuthor}
+              />
             </div>
           </div>
         </div>

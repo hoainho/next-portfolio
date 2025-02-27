@@ -1,16 +1,8 @@
-import { PostItem } from "@/app/types";
+import { PostItem, Posts } from "@/app/types";
 import PaginationList from "./PaginationList";
 
-type PostItemProp = {
-  nodes: PostItem[];
-  pageInfo: {
-    endCursor: string;
-    hasNextPage: boolean;
-  };
-};
-
 type ListItemProp = {
-  posts: PostItemProp,
+  posts: Posts,
   filterKey: string,
   actionGetList?: (filterKey: string, cursor: string) => Promise<{
     nodes: PostItem[];

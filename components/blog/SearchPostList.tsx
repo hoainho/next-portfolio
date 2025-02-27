@@ -1,6 +1,6 @@
 
 import { getDataSearchQuery } from "@/lib/api";
-import ListItemWithLoadMore from "./list-container/ListItemWithLoadMore";
+import ListItemWithLoadMore from "./list-pagination/ListItemWithLoadMore";
 
 type SearchPostListProps = {
   content: string

@@ -3,7 +3,7 @@ import BlogFeatured from "@/components/blog/BlogFeatured";
 import BlogItem from "@/components/blog/BlogItem";
 import BlogPlatform from "@/components/blog/BlogPlatform";
 import BlogSubscribers from "@/components/blog/BlogSubscribers";
-import ListItemWithLoadMore from "@/components/blog/list-container/ListItemWithLoadMore";
+import ListItemWithLoadMore from "@/components/blog/list-pagination/ListItemWithLoadMore";
 import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 import {
   GET_CATEGORIES_QUERY,
@@ -124,7 +124,7 @@ const BlogCategory = async ({ params }: Props) => {
             <ListItemWithLoadMore
               posts={postsByCategory}
               actionGetList={getPostByCategoryId}
-              filterKey={params.slug}
+              filterKey={category?.slug || params.slug}
             />
           </div>
         </div>

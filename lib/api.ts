@@ -40,7 +40,6 @@ async function getPostByCategoryId(params: string, cursor?: string) {
   else {
     query = GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY;
     variables = {
-      // category: categorySlug || params,
       category: params,
       author: 3,
       first: 6,
@@ -63,12 +62,13 @@ async function getPostByCategoryId(params: string, cursor?: string) {
   return postsByCategoryID.data.posts
 }
 
-async function getPostByAuthor(params: string) {
+async function getPostByAuthor(params: string, cursor?: string) {
   const postsResponse = await isrClient.query({
     query: GET_POSTS_BY_AUTHOR_QUERY,
     variables: {
       author: params || "hoainho",
-      first: 30,
+      first: 6,
+      after: cursor,
     },
     context: {
       fetchOptions: {
@@ -78,7 +78,16 @@ async function getPostByAuthor(params: string) {
       },
     },
   });
-  return postsResponse
+  const data = postsResponse.data;
+  
+  return {
+    data: data,
+    nodes: data?.user.posts?.nodes || [],
+    pageInfo: {
+      endCursor: data?.user.posts?.pageInfo?.endCursor || "",
+      hasNextPage: data?.user.posts?.pageInfo?.hasNextPage || false,
+    },
+  };
 }
 
 export {
