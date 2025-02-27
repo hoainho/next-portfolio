@@ -384,14 +384,14 @@ export const experiences: ExperienceType[] = [
 
 export const socialLinks = [
   {
+    name: "Daily.dev",
+    icon_url: "/icons/daily-dev.svg",
+    link: "https://app.daily.dev/squads/faqsinterview?cid=squad&userid=sAnreL24q5LH7f9XxP9xZ",
+  },
+  {
     name: "Contact",
     icon_url: "/icons/contact.svg",
     link: "/contact",
-  },
-  {
-    name: "GitHub",
-    icon_url: "/icons/github.svg",
-    link: "https://github.com/hoainho",
   },
   {
     name: "LinkedIn",
