@@ -13,6 +13,30 @@ export const SKILL_TYPE = {
   OTHER: "Other",
 };
 
+export const products = [
+  {
+    name: "ArtGen",
+    badge: "/images/products/artgen.png",
+    link: "https://artgen.example.com",
+    description: "AI-powered art generation platform with advanced style transfer capabilities",
+    tag: "Special"
+  },
+  {
+    name: "Prompt-Generator",
+    badge: "/images/products/prompt-generator.png",
+    link: "https://prompt-generator.example.com",
+    description: "Smart prompt engineering tool for optimizing AI interactions",
+    tag: "New"
+  },
+  {
+    name: "Morph",
+    badge: "/images/products/morph.png",
+    link: "https://morph.example.com",
+    description: "Advanced image morphing technology with real-time editing capabilities",
+    tag: "Feature"
+  }
+]
+
 export const skills = [
   {
     image_url: "/icons/nextjs.svg",
