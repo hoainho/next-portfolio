@@ -17,21 +17,21 @@ export const products = [
   {
     name: "ArtGen",
     badge: "/images/products/artgen.png",
-    link: "https://artgen.example.com",
+    link: "https://artgen.hoainho.info",
     description: "AI-powered art generation platform with advanced style transfer capabilities",
     tag: "Special"
   },
   {
     name: "Prompt-Generator",
     badge: "/images/products/prompt-generator.png",
-    link: "https://prompt-generator.example.com",
+    link: "https://prompt-generator.hoainho.info",
     description: "Smart prompt engineering tool for optimizing AI interactions",
     tag: "New"
   },
   {
     name: "Morph",
     badge: "/images/products/morph.png",
-    link: "https://morph.example.com",
+    link: "https://morph.hoainho.info",
     description: "Advanced image morphing technology with real-time editing capabilities",
     tag: "Feature"
   }
@@ -357,12 +357,44 @@ export const skills = [
 
 export const experiences: ExperienceType[] = [
   {
+    title: "Frontend Technical Lead",
+    company_name: "GearGames • HCMC",
+    company_link: "https://geargames.com/",
+    icon: "/images/companies/geargames_y.jpg",
+    icon_bg: "#FFFFFF",
+    date: "April 2025 - Present",
+    points: [
+      "Performance Optimization: Reduced load times by 70% and improved Core Web Vitals by 45% through strategic caching, lazy loading, and bundle optimization, significantly increasing user engagement.",
+      "Frontend Architecture: Enhanced UI rendering efficiency with reusable custom hooks and modular design system, improving code quality and reducing development cycles.",
+      "System Stabilization: Resolved critical API integration issues causing excessive calls, implementing efficient caching solutions that reduced backend load and prevented outages.",
+      "Technical Leadership: Led migration to React 18 and Redux-Saga while implementing monitoring systems that reduced incident resolution time by 80%.",
+      "Security Enhancement: Deployed multi-layered security with CSP, CSRF protection, and encryption, eliminating 95% of identified vulnerabilities.",
+      "3D Development: Created immersive WebGL/Three.js experiences with optimized performance, increasing user retention by 35%.",
+      "Team Leadership: Guided six engineers to 100% on-time milestone delivery while optimizing Agile processes, reducing time-to-market by 40%.",
+    ],
+  },
+  {
+    title: "Senior Software Engineer",
+    company_name: "GearGames • HCMC",
+    company_link: "https://geargames.com/",
+    icon: "/images/companies/geargames_y.jpg",
+    icon_bg: "#FFFFFF",
+    date: "December 2024 - April 2025",
+    points: [
+      "Performance Optimization: Engineered caching solutions and lazy loading techniques that reduced load times by 70% and improved Core Web Vitals metrics.",
+      "Frontend Development: Improved UI rendering and code quality through custom React hooks and strategic component refactoring.",
+      "System Stability: Resolved critical API integration issues causing excessive calls, significantly reducing backend load.",
+      "Architecture Planning: Contributed to React 18 and Redux-Saga migration planning while developing effective monitoring solutions.",
+      "Security Implementation: Designed robust security measures with CSP, CSRF protection, and encryption, eliminating 95% of vulnerabilities.",
+    ],
+  },
+  {
     title: "Full Stack Developer",
     company_name: "NUS Technology • HCMC",
     company_link: "https://nustechnology.com/",
     icon: "/images/companies/NUS.png",
     icon_bg: "#accbe1",
-    date: "December 2021 - Present",
+    date: "December 2021 - December 2024",
     points: [
       "Diverse Project Experience: Contributed to over 10 projects across various industries, including E-commerce, Travel, Construction, Education, Stock, CMS, Security, and Logistics",
       "CI/CD System Construction: Established a CI/CD system on GitHub, streamlining code quality analysis and saving significant development time by assisting teammates in code quality evaluation and improvement strategies",

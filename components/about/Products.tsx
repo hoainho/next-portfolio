@@ -1,9 +1,9 @@
 'use client'
 
+import { useState } from "react";
+import Link from "next/link";
 import { products } from "@/lib/constants";
 import BallCanvas from "@/components/models/Ball";
-import Link from "next/link";
-import { useState } from "react";
 
 type Props = {};
 
@@ -28,10 +28,10 @@ const Products = (props: Props) => {
       <h3 className="subhead-text">My Products</h3>
 
       <div className="relative bg-linear-black-to-white py-12 px-4 flex-center flex-row flex-wrap gap-[30px] mt-16">
-        <div className="bg-linear-back"></div>
+        <div className="bg-linear-back__top"></div>
         {products?.map((product, index) => (
           <div
-            className="w-full max-w-[350px] flex flex-col items-center transition-all duration-300 ease-in-out transform hover:scale-105 bg-[rgba(255,255,255,0.05)] backdrop-blur-sm rounded-xl p-6 border border-[rgba(255,255,255,0.1)]"
+            className="w-full max-w-[250px] flex flex-col items-center transition-all duration-300 ease-in-out transform hover:scale-105 bg-[rgba(255,255,255,0.05)] backdrop-blur-sm rounded-xl p-6 border border-[rgba(255,255,255,0.1)]"
             key={product.name}
             onMouseEnter={() => setHoveredProduct(product.name)}
             onMouseLeave={() => setHoveredProduct(null)}
