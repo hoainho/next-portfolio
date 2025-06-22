@@ -435,6 +435,21 @@
   background: linear-gradient(135deg, #000000 0%, transparent 120%);
 }
 
+.bg-linear-back__top {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: inherit;
+  height: inherit;
+  transition: 250ms;
+  transform-style: preserve-3d;
+  will-change: transform;
+  box-shadow: 16px 0 40px #9eb6d7;
+  transform: rotateZ(10deg);
+  transform-origin: right top;
+  background: linear-gradient(135deg, #000000 0%, transparent 120%);
+}
+
 .bg-linear-black-to-white {
   background: linear-gradient(0deg, #000000 -100%, transparent 80%);
   inset: 0;

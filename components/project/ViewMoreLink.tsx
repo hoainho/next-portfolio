@@ -27,7 +27,7 @@ const ViewMoreLink = ({ project }: ViewMoreLinkProps) => {
       <ImageLoader
         width={20}
         height={20}
-        src={"/icons/arrow.svg"}
+        src={"https://res.cloudinary.com/dgzdswdgg/image/upload/v1750576216/arrow_uswkzu.svg"}
         alt="arrow"
         className="w-4 h-4 object-contain"
       />

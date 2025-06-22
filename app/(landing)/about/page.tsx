@@ -3,6 +3,7 @@ import Experience from "@/components/about/Experience";
 import Introduce from "@/components/about/Introduce";
 import CTA from "@/components/cta/CTA";
 import Certifications from "@/components/about/Certifications";
+import Products from "@/components/about/Products";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,8 +22,7 @@ export const metadata: Metadata = {
     images: [
       {
         url:
-          process.env.NEXT_PUBLIC_LOGO ||
-          "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+          "https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png",
         alt: "About | Hoai-Nho | Portfolio",
         width: 200,
         height: 200,
@@ -36,6 +36,8 @@ const AboutPage = () => {
   return (
     <section className="max-container">
       <Introduce />
+
+      <Products />
 
       <Certifications />
 

@@ -81,6 +81,15 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "shimmer": "shimmer 2s linear infinite",
+      },
+      keyframes: {
+        shimmer: {
+          '0%': { opacity: '0.7' },
+          '50%': { opacity: '1' },
+          '100%': { opacity: '0.7' },
+        },
       },
       boxShadow: {
         "inner-border": "0px 0px 0px 2px var(--color-basics-gray-border) inset",

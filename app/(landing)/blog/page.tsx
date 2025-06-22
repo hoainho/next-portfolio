@@ -1,6 +1,6 @@
 import { PostItem } from "@/app/types";
 import { Metadata } from "next";
-import { isrClient } from "@/lib/apolloClient";
+import { ssrClient } from "@/lib/apolloClient";
 import BlogItem from "@/components/blog/BlogItem";
 import BlogFeatured from "@/components/blog/BlogFeatured";
 import BlogSubscribers from "@/components/blog/BlogSubscribers";
@@ -29,8 +29,7 @@ export const metadata: Metadata = {
     images: [
       {
         url:
-          process.env.NEXT_PUBLIC_LOGO ||
-          "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+          "https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png",
       },
     ],
   },
@@ -40,8 +39,7 @@ export const metadata: Metadata = {
     description:
       "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
     images:
-      process.env.NEXT_PUBLIC_LOGO ||
-      "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+      "https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png",
   },
 };
 
@@ -54,7 +52,7 @@ export default async function BlogPage({
 
   try {
     const [postsResponse, postsByCategoryID] = await Promise.all([
-      isrClient.query({
+      ssrClient.query({
         query: POSTS_QUERY,
         variables: {
           author: 3,
@@ -69,7 +67,7 @@ export default async function BlogPage({
           },
         },
       }),
-      isrClient.query({
+      ssrClient.query({
         query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
         variables: {
           category: "javascript-typescript",
