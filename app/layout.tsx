@@ -48,8 +48,7 @@ export const metadata: Metadata = {
     images: [
       {
         url:
-          process.env.NEXT_PUBLIC_LOGO ||
-          "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+          "https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png",
         alt: "Hoai-Nho | Portfolio",
         width: 200,
         height: 200,
@@ -59,7 +58,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/logo.jpeg",
+    icon: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png",
   },
 };
 

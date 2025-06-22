@@ -82,49 +82,49 @@ export function Desk() {
   // Preload the GLTF model to start loading immediately
   useGLTF.preload(`${cachedUrl}/3d/claw_gaming_laptop_setup.glb`);
 
-  const texture = useLoader(TextureLoader, `${cachedUrl}/images/terminal.png`);
+  const texture = useLoader(TextureLoader, `https://res.cloudinary.com/dgzdswdgg/image/upload/v1750580361/terminal_a0pxxa.png`);
   const aspectRatio = texture.image.width / texture.image.height;
 
   const calendarTexture = useLoader(
     TextureLoader,
-    `${cachedUrl}/images/code.png`,
+    `https://res.cloudinary.com/dgzdswdgg/image/upload/v1750580359/code_hmd43n.png`,
   );
   const calendarAspectRatio = texture.image.width / texture.image.height;
 
   const AWS_Solution_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/aws-knowledge-architecture.png`,
+    `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576254/aws-knowledge-architecture_vcirkv.png`,
   );
   const AWS_Solution_aspectRatio = texture.image.width / texture.image.height;
 
   const AWS_Essentials_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/aws-knowledge-cloud-essentials.png`,
+    `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576256/aws-knowledge-cloud-essentials_jlyzh8.png`,
   );
   const AWS_Essentials_aspectRatio = texture.image.width / texture.image.height;
 
   const AWS_EKS_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/aws-knowledge-amazon-eks.png`,
+    `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576254/aws-knowledge-amazon-eks_teuo3v.png`,
   );
   const AWS_EKS_aspectRatio = texture.image.width / texture.image.height;
 
   const AWS_CloudQuest_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/aws-cloud-practitioner.png`,
+    `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576256/aws-cloud-practitioner_zx56w9.png`,
   );
   const AWS_CloudQuest_aspectRatio = texture.image.width / texture.image.height;
 
   const AWS_Data_Analysis_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/data-analysis-using-python.png`,
+    `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576256/data-analysis-using-python_myxdlp.png`,
   );
   const AWS_Data_Analysis_aspectRatio =
     texture.image.width / texture.image.height;
 
   const AWS_Data_Science_texture = useLoader(
     TextureLoader,
-    `${cachedUrl}/certifications/python-for-data-science.png`,
+    `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576257/python-for-data-science_yz2b0y.png`,
   );
   const AWS_Data_Science_aspectRatio =
     texture.image.width / texture.image.height;

@@ -109,9 +109,9 @@ const Navbar = () => {
               <ImageLoader
                 width={40}
                 height={40}
-                src={"/icons/logo.jpeg"}
+                src={"https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png"}
                 alt="Hoai-Nho-Logo"
-                className="h-10 w-10 object-cover rounded-full "
+                className="h-10 w-10 object-cover "
               />
             </Link>
             <h1 className="text-xl font-semibold text-fg-default"> / </h1>
@@ -122,9 +122,9 @@ const Navbar = () => {
             <ImageLoader
               width={40}
               height={40}
-              src={"/icons/logo.jpeg"}
+              src={"https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png"}
               alt="Hoai-Nho-Logo"
-              className="h-20 w-20 object-cover rounded-full "
+              className="h-20 w-20 object-cover "
             />
           </Link>
         )}
@@ -178,9 +178,9 @@ const Navbar = () => {
                   <ImageLoader
                     width={40}
                     height={40}
-                    src={"/icons/logo.jpeg"}
+                    src={"https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png"}
                     alt="Hoai-Nho-Logo"
-                    className="h-20 w-20 object-cover rounded-full "
+                    className="h-20 w-20 object-cover "
                   />
                 </Link>
                 {navbar?.map((nav) => {

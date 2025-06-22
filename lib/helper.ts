@@ -16,7 +16,7 @@ export function openGraph({
   templateTitle,
   description,
   banner,
-  logo = "https://og.clarence.link/images/logo.jpg",
+  logo = "https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png",
   isBlog = false,
   tags,
 }: OpenGraphType): string {
