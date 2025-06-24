@@ -447,7 +447,7 @@ export const socialLinks = [
   {
     name: "GitHub",
     icon_url: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576221/github_z8hpoh.svg`,
-    link: "https://github.com/hoainho",
+    link: "https://app.daily.dev/squads/faqsinterview?cid=squad&userid=sAnreL24q5LH7f9XxP9xZ",
   },
   {
     name: "LinkedIn",

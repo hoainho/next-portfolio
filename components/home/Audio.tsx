@@ -23,7 +23,7 @@ const Audio = (props: Props) => {
   return (
     <div className="absolute bottom-2 left-2">
       <ImageLoader
-        src={!isPlayingMusic ? "/icons/soundoff.png" : "/icons/soundon.png"}
+        src={!isPlayingMusic ? `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576214/soundoff_uuhfxk.png` : `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576239/soundon_uome4w.png`}
         alt="jukebox"
         id="sound-icon"
         onClick={() => setIsPlayingMusic(!isPlayingMusic)}

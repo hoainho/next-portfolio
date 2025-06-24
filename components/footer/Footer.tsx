@@ -24,7 +24,7 @@ const Footer = () => {
 
           <div className="footer-container">
             <p>
-              © {new Date().getFullYear()} <strong>Hoai Nho</strong>. All
+              © {new Date().getFullYear()} <strong>Hoai-Nho</strong>. All
               rights reserved.
             </p>
 
@@ -45,7 +45,7 @@ const Footer = () => {
                     className="w-6 h-6 object-contain"
                   />
                 </Link>
-              ))}
+              )).slice(0,2)}
             </div>
           </div>
         </footer>
