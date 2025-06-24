@@ -45,7 +45,7 @@ interface ExtendedGLTF extends GLTF {
 export function Fox({ currentAnimation, ...props }: FoxModelProps) {
   const group = useRef<Group>(null);
   const { nodes, materials, animations } = useGLTF(
-    "/3d/fox.glb",
+    "https://res.cloudinary.com/dgzdswdgg/image/upload/v1750576259/fox_i9zrbb.glb",
   ) as unknown as ExtendedGLTF;
   const { actions }: { actions: ActionModelType } = useAnimations(
     animations,
@@ -103,4 +103,4 @@ export function Fox({ currentAnimation, ...props }: FoxModelProps) {
   );
 }
 
-useGLTF.preload("/3d/fox.glb");
+useGLTF.preload("https://res.cloudinary.com/dgzdswdgg/image/upload/v1750576259/fox_i9zrbb.glb");

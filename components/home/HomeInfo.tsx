@@ -29,7 +29,7 @@ const HomeInfo = () => {
         Let's swipe or drag left/right on the screen to explore my work
         <div className="bg-white p-2 rounded-full animate-bounce">
           <ImageLoader
-            src={"/icons/swipe.png"}
+            src={`${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576231/swipe_mnp8lo.png`}
             alt="swipe"
             className=" w-10 h-10 object-contain"
           />
@@ -50,7 +50,7 @@ const HomeInfo = () => {
           <ImageLoader
             width={20}
             height={20}
-            src={"/icons/arrow.svg"}
+            src={`${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576216/arrow_uswkzu.svg`}
             alt="arrow"
             className="w-4 h-4 object-contain"
           />
@@ -72,7 +72,7 @@ const HomeInfo = () => {
           <ImageLoader
             width={24}
             height={24}
-            src={"/icons/arrow.svg"}
+            src={`${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576216/arrow_uswkzu.svg`}
             alt="explore-new-space"
             className="w-4 h-4 object-contain"
           />
@@ -93,7 +93,7 @@ const HomeInfo = () => {
           <ImageLoader
             width={24}
             height={24}
-            src={"/icons/arrow.svg"}
+            src={`${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576216/arrow_uswkzu.svg`}
             alt="explore-new-space"
             className="w-4 h-4 object-contain"
           />

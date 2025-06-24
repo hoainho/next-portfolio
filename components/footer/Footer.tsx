@@ -24,7 +24,7 @@ const Footer = () => {
 
           <div className="footer-container">
             <p>
-              © {new Date().getFullYear()} <strong>Th?nkAndGrow</strong>. All
+              © {new Date().getFullYear()} <strong>Hoai-Nho</strong>. All
               rights reserved.
             </p>
 
