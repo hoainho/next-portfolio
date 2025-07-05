@@ -15,6 +15,13 @@ export const SKILL_TYPE = {
 
 export const products = [
   {
+    name: "MoodTrip",
+    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1751732691/logo_jkab5l.png`,
+    link: "https://moodtrip.hoainho.info",
+    description: "Travel itinerary generator based on mood and preferences",
+    tag: "New"
+  },
+  {
     name: "ArtGen",
     badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750572858/artgen_ll8cg8.png`,
     link: "https://artgen.hoainho.info",
