@@ -47,10 +47,6 @@ const Products = (props: Props) => {
               <div className="h-[180px] w-[180px]">
                 <BallCanvas 
                   icon={product.badge} 
-                  enhancedLighting={true} 
-                  // Each product gets unique random rotation parameters
-                  customRotationSpeed={undefined} // Let the component generate random values
-                  customMaxAngle={undefined} // Let the component generate random values
                 />
               </div>
             </div>
