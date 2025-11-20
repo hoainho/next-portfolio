@@ -16,6 +16,9 @@ interface AuthorProps {
   };
 }
 
+// Force dynamic rendering to avoid Cloudflare 403 errors during build
+export const dynamic = 'force-dynamic';
+
 const page = async ({ params }: AuthorProps) => {
   const postsResponse = await getPostByAuthor(params.name)
   const author: GetPostsByAuthorResponse = postsResponse.data;

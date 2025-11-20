@@ -17,6 +17,8 @@ interface Props {
   };
 }
 
+// Force dynamic rendering to avoid Cloudflare 403 errors during build
+export const dynamic = 'force-dynamic';
 export const revalidate = +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600);
 
 const BlogCategory = async ({ params }: Props) => {

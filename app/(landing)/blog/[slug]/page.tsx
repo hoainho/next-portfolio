@@ -29,6 +29,9 @@ import { INCREMENT_POST_VIEWS_MUTATION } from "@/graphql/mutations/post.mutation
 import ButtonCopyURL from "@/components/blog/ButtonCopyURL";
 import BlogShareButtons from "@/components/blog/BlogShareButtons";
 
+// Force dynamic rendering to avoid Cloudflare 403 errors during build
+export const dynamic = 'force-dynamic';
+
 type BlogDetailProps = {
   params: {
     blogId: string;

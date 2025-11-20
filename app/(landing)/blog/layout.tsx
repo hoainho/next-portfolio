@@ -5,6 +5,10 @@ import {
   GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
 } from "@/graphql/queries/post.query";
 import client from "@/lib/apolloClient";
+
+// Force dynamic rendering to avoid Cloudflare 403 errors during build
+export const dynamic = 'force-dynamic';
+
 interface Props {
   children: React.ReactNode;
 }
