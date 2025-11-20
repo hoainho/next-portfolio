@@ -465,6 +465,36 @@ export const socialLinks = [
 
 export const projects = [
   {
+    icon_url: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1763646858/Winzone-Logo_mycbys.webp`,
+    theme: "btn-back-purple",
+    name: "TheWinZone",
+    descriptions: [
+      `<div style="font-family: Arial, sans-serif; line-height: 1.6;">
+          <h2 style="color: #2c3e50; margin-bottom: 20px;">TheWinZone - Gaming Platform</h2>
+          
+          <p style="font-size: 16px; margin-bottom: 15px;">
+              <strong>The Application:</strong> A comprehensive gaming platform designed to provide an engaging and immersive experience for users. The platform features modern web technologies and optimized performance for seamless gameplay and user interaction.
+          </p>
+          
+          <h3 style="color: #34495e; margin-bottom: 15px;">Key Features:</h3>
+          <ul style="font-size: 16px; list-style-type: disc; margin-left: 20px; margin-bottom: 20px;">
+              <li>Interactive Gaming Experience</li>
+              <li>User Management System</li>
+              <li>Real-time Updates</li>
+              <li>Responsive Design</li>
+              <li>Performance Optimization</li>
+              <li>Secure Authentication</li>
+          </ul>
+          
+          <h3 style="color: #34495e; margin-bottom: 15px;">Technologies Used:</h3>
+          <p style="font-size: 16px;">
+              <strong><em>Modern Web Technologies</em></strong>, <strong><em>Responsive Design</em></strong>, <strong><em>Cloud Infrastructure</em></strong>
+          </p>
+      </div>`,
+    ],
+    link: "https://www.thewinzone.com/",
+  },
+  {
     icon_url: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576153/uride_ofbwxd.png`,
     theme: "btn-back-orange",
     name: "Uride - Ridesharing Services",
