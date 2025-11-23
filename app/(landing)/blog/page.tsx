@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     images: [
       {
         url:
-          "https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png",
+          "https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png",
       },
     ],
   },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     description:
       "Discover the latest posts and articles on Nick's Blog. Stay updated with trending topics, tips, and insights.",
     images:
-      "https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png",
+      "https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png",
   },
 };
 

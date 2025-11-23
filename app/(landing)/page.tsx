@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     images: [
       {
         url:
-          "https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png",
+          "https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png",
         alt: "Hoai-Nho | Portfolio",
         width: 200,
         height: 200,

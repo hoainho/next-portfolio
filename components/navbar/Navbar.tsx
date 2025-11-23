@@ -110,7 +110,7 @@ const Navbar = () => {
               <ImageLoader
                 width={40}
                 height={40}
-                src={"https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png"}
+                src={"https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png"}
                 alt="Hoai-Nho-Logo"
                 className="h-10 w-10 object-cover "
               />
@@ -123,7 +123,7 @@ const Navbar = () => {
             <ImageLoader
               width={40}
               height={40}
-              src={"https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png"}
+              src={"https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png"}
               alt="Hoai-Nho-Logo"
               className="h-20 w-20 object-cover "
             />
@@ -178,7 +178,7 @@ const Navbar = () => {
                   <ImageLoader
                     width={40}
                     height={40}
-                    src={"https://res.cloudinary.com/dgzdswdgg/image/upload/v1750582494/HN_logo_kceqae.png"}
+                    src={"https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png"}
                     alt="Hoai-Nho-Logo"
                     className="h-20 w-20 object-cover "
                   />
