@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import ImageLoader from "../loader/ImageLoader";
@@ -13,26 +13,65 @@ type Props = {
 };
 
 const BlogCategorySticky = ({ categories }: Props) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (containerRef.current) {
+        const itemContainer = containerRef.current;
+        const items = Array.from(itemContainer.children) as HTMLElement[];
+
+        if (items.length === 0) return;
+
+        // Reset display to measure correctly
+        items.forEach((item) => {
+          item.style.display = "";
+        });
+
+        const firstRowTop = items[0].offsetTop;
+        let isWrapped = false;
+
+        items.forEach((item) => {
+          // Once we detect a wrapped item, hide it and all subsequent items
+          if (isWrapped || item.offsetTop > firstRowTop + 10) {
+            isWrapped = true;
+            item.style.display = "none";
+          }
+        });
+      }
+    };
+
+    // Run on mount and category change
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [categories.length]);
+
   const pathname = usePathname();
 
   const isDark = pathname === "/blog";
   return (
     <div
       className={clsx(
-        "z-[100] hidden sticky top-0 w-full h-fit xl:flex justify-center items-center",
+        "z-[100] hidden sticky top-0 w-full h-[80px] xl:flex justify-center items-center",
         "border-b border-separate border-fg-border z-20",
         isDark ? "bg-dark border-fg-border" : "bg-bg-default border-overlay",
       )}
     >
       <div
+        ref={containerRef}
         className={clsx(
           "w-full flex flex-wrap justify-between items-center gap-12 mx-auto",
           isDark
-            ? "bg-dark max-w-7xl px-0"
-            : "max-w-[1200px] px-12 bg-bg-default",
+            ? "bg-dark max-w-7xl 2xl:max-w-screen-2xl px-0"
+            : "max-w-[1200px] 2xl:max-w-screen-2xl px-12 bg-bg-default",
         )}
       >
-        {categories?.slice(0, 7)?.map((category: any) => (
+        {categories?.map((category: any) => (
           <div key={category.name} className="group p-2 py-4 flex gap-2">
             <div className="w-full h-full">
               <p className="text-white flex gap-2 cursor-pointer hover:underline">

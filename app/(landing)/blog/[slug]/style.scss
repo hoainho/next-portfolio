@@ -5,6 +5,7 @@ html {
 .blog {
   --blog-border-primary: #007bff;
   --blog-divider: #545df0;
+
   .blog-html {
     font-family:
       system-ui,
@@ -19,13 +20,16 @@ html {
       "Helvetica Neue",
       sans-serif !important;
   }
+
   .blog-title {
     font-family: Arial, Helvetica, sans-serif !important;
   }
+
   .table-of-content {
     font-family: Arial, Helvetica, sans-serif !important;
   }
 }
+
 .wp-block-pullquote {
   box-sizing: border-box;
   margin: 0 0 1em;
@@ -134,21 +138,21 @@ blockquote {
   }
 }
 
-.bloglo-entry .wp-block-quote > p,
-blockquote > p {
+.bloglo-entry .wp-block-quote>p,
+blockquote>p {
   font-size: inherit;
   line-height: inherit;
   font-style: normal;
 }
 
-.bloglo-entry .wp-block-quote > p:first-child,
-blockquote > p:first-child {
+.bloglo-entry .wp-block-quote>p:first-child,
+blockquote>p:first-child {
   margin-top: 0;
   margin-bottom: 1.6rem;
 }
 
-.bloglo-entry .wp-block-quote > p:last-child,
-blockquote > p:last-child {
+.bloglo-entry .wp-block-quote>p:last-child,
+blockquote>p:last-child {
   margin-bottom: 0;
 }
 
@@ -204,6 +208,7 @@ blockquote cite {
   box-sizing: border-box;
   width: 100%;
 }
+
 .blog-html *:has(.table-of-content, .wp-block-table *) {
   overflow-x: scroll;
 }
@@ -237,7 +242,8 @@ blockquote cite {
 
 .wp-block-table {
   overflow-x: auto;
-  .has-fixed-layout {
+
+  table {
     width: 100%;
     border-collapse: collapse;
     margin: 30px 0;
@@ -266,11 +272,9 @@ blockquote cite {
         background-color: rgba(255, 255, 255, 0.8);
 
         &:hover {
-          background: linear-gradient(
-            90deg,
-            rgba(37, 117, 252, 0.1),
-            rgba(106, 17, 203, 0.1)
-          );
+          background: linear-gradient(90deg,
+              rgba(37, 117, 252, 0.1),
+              rgba(106, 17, 203, 0.1));
         }
 
         td {
@@ -357,6 +361,7 @@ figure.wp-block-image {
   -webkit-background-clip: text;
   -webkit-text-fill-color: #0000;
   -webkit-box-decoration-break: clone;
+
   &:hover {
     transition: all 1s ease-in-out 0.5s;
     transition-duration: 2s;
@@ -369,12 +374,10 @@ figure.wp-block-image {
 }
 
 .text-gradient-purple-light {
-  background: linear-gradient(
-    92.05deg,
-    #d2a8ff 12.09%,
-    #f778ba 42.58%,
-    #ff7b72 84.96%
-  );
+  background: linear-gradient(92.05deg,
+      #d2a8ff 12.09%,
+      #f778ba 42.58%,
+      #ff7b72 84.96%);
   transition: all 1s ease-in-out;
   transition-duration: 2s;
   transition-delay: 0.5s;
@@ -383,17 +386,14 @@ figure.wp-block-image {
 }
 
 .bg-gradient-purple-coral {
-  background: linear-gradient(
-    92.05deg,
-    #d2a8ff 12.09%,
-    #f778ba 42.58%,
-    #ff7b72 84.96%
-  );
+  background: linear-gradient(92.05deg,
+      #d2a8ff 12.09%,
+      #f778ba 42.58%,
+      #ff7b72 84.96%);
 }
 
 //Subscribe form
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview {
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
@@ -403,35 +403,27 @@ figure.wp-block-image {
   border-radius: 6px !important;
   box-shadow: 0 5px 25px rgba(34, 60, 47, 0.25) !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview,
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  * {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview,
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview * {
   box-sizing: border-box !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-heading {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-heading {
   width: 100% !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-heading
-  h5 {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-heading h5 {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-input-field {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field {
   margin-top: 20px !important;
   width: 100% !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-input-field
-  input {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input {
   width: 100% !important;
   height: 40px !important;
   border-radius: 6px !important;
@@ -439,10 +431,8 @@ figure.wp-block-image {
   background-color: #fff;
   outline: none !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-input-field
-  input {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input {
   color: #000000 !important;
   font-family: "Montserrat" !important;
   font-size: 14px;
@@ -450,51 +440,38 @@ figure.wp-block-image {
   line-height: 20px;
   text-align: center;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-input-field
-  input::placeholder {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input::placeholder {
   color: #000000 !important;
   opacity: 1 !important;
 }
 
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-input-field
-  input:-ms-input-placeholder {
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input:-ms-input-placeholder {
   color: #000000 !important;
 }
 
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-input-field
-  input::-ms-input-placeholder {
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input::-ms-input-placeholder {
   color: #000000 !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-submit-button {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-submit-button {
   margin-top: 10px !important;
   width: 100% !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-submit-button
-  button {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-submit-button button {
   width: 100% !important;
   height: 40px !important;
   border: 0 !important;
   border-radius: 6px !important;
   line-height: 0px !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .form-preview
-  .preview-submit-button
-  button:hover {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-submit-button button:hover {
   cursor: pointer !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .powered-by-line {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .powered-by-line {
   color: #231f20 !important;
   font-family: "Montserrat" !important;
   font-size: 13px !important;
@@ -508,9 +485,8 @@ figure.wp-block-image {
   align-items: center !important;
   margin-top: 10px !important;
 }
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f]
-  .powered-by-line
-  img {
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .powered-by-line img {
   margin-left: 10px !important;
   height: 1.13em !important;
   max-height: 1.13em !important;
