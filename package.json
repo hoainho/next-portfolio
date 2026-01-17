@@ -16,10 +16,13 @@
     "@next/third-parties": "^14.2.3",
     "@plaiceholder/next": "^3.0.0",
     "@radix-ui/react-progress": "^1.1.0",
+    "@react-spring/core": "^10.0.3",
+    "@react-spring/shared": "^10.0.3",
     "@react-three/drei": "^9.105.6",
     "@react-three/fiber": "^8.16.6",
     "cloudinary-build-url": "^0.2.4",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "envsafe": "^2.0.3",
     "graphql": "^16.9.0",
     "highlight.js": "^11.10.0",
@@ -58,5 +61,6 @@
     "prettier": "^3.4.2",
     "superjson": "^1.13.3",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "yarn@4.5.0"
 }
