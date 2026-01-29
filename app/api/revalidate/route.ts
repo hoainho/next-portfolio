@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 const getTimestamp = () => new Date().toISOString();
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const secret = searchParams.get("secret");
+    const secret = req.nextUrl.searchParams.get("secret");
     const paths =
-      searchParams
+      req.nextUrl.searchParams
         .get("paths")
         ?.split(",")
         .map((p) => p.trim()) || [];
