@@ -3,7 +3,7 @@ type = "javascript"
 account_id = "9ad5709ddd1c460ff00287228de7535e"
 workers_dev = true
 route = ""
-zone_id = ""
+zone_id = "c722490aabb1d36f9ec312cf7959b287"
 
 build = { command = "npm run build", cwd = "." }
 main = "server.js"
