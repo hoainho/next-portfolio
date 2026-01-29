@@ -2,10 +2,12 @@
 
 import path from "path";
 import withPlaiceholder from "@plaiceholder/next";
-const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig = {
-  transpilePackages: ['highlight.js'],
+  images: {
+    unoptimized: true,
+  },
+  transpilePackages: ["highlight.js"],
   sassOptions: {
     includePaths: [path.join(process.env.PWD, "styles")],
   },
@@ -14,7 +16,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-  productionBrowserSourceMaps: true
+  productionBrowserSourceMaps: false,
 };
 
 export default withPlaiceholder(nextConfig);

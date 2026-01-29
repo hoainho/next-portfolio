@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/api/graphql",
+    "/api/revalidate",
+    "/favicon.ico",
+    "/robots.txt",
+    "/sitemap.xml",
+    "/_next/*",
+    "/static/*"
+  ]
+}

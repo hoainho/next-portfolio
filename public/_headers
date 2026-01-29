@@ -1,0 +1,29 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/api/*
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/api/graphql
+  Cache-Control: no-store
+
+/api/revalidate
+  Cache-Control: no-store
+
+/blog/*
+  Cache-Control: public, max-age=3600
+
+/*js
+  Cache-Control: public, max-age=31536000, immutable
+
+/*css
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=86400
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

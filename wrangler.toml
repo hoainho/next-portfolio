@@ -1,0 +1,17 @@
+name = "next-portfolio"
+type = "javascript"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+
+build = { command = "npm run build", cwd = "." }
+main = "server.js"
+
+[env.production]
+name = "next-portfolio-prod"
+vars = { ENVIRONMENT = "production" }
+
+[env.staging]
+name = "next-portfolio-staging"
+vars = { ENVIRONMENT = "staging" }
