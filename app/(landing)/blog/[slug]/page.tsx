@@ -25,7 +25,6 @@ import {
 import ImageLoader from "@/components/loader/ImageLoader";
 import NotFoundPage from "@/app/not-found";
 import BlogCounterView from "@/components/blog/BlogCounterView";
-import { INCREMENT_POST_VIEWS_MUTATION } from "@/graphql/mutations/post.mutation";
 import ButtonCopyURL from "@/components/blog/ButtonCopyURL";
 import BlogShareButtons from "@/components/blog/BlogShareButtons";
 
@@ -147,19 +146,6 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
 
   const post: PostItem = fetchPost?.data?.post;
 
-  const responseIncrement = await client.mutate({
-    mutation: INCREMENT_POST_VIEWS_MUTATION,
-    variables: { postId: post?.postId },
-    context: {
-      fetchOptions: {
-        cache: "no-store",
-      },
-    },
-  });
-
-  const counterView =
-    responseIncrement?.data?.incrementPostViews?.postViews?.total;
-
   if (!post) {
     return <NotFoundPage />;
   }
@@ -260,7 +246,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
                   </p>
                 </div>
                 <span className="hidden sm:block px-5">|</span>
-                <BlogCounterView view={counterView} />
+                <BlogCounterView postId={post.postId} />
               </div>
             </div>
             <div className="flex justify-center items-center gap-3 flex-col sm:flex-row">
