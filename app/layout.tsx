@@ -6,6 +6,8 @@ import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { GA_TRACKING_ID, GTM_TRACKING_ID } from "@/lib/gtag";
 import { GlobalContext, GlobalProvider } from "@/context/GlobalContext";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 const fontPublicSans = localFont({
   src: [
     {
@@ -47,8 +49,7 @@ export const metadata: Metadata = {
     siteName: "Hoai-Nho | Portfolio",
     images: [
       {
-        url:
-          "https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png",
+        url: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png",
         alt: "Hoai-Nho | Portfolio",
         width: 200,
         height: 200,
@@ -70,6 +71,8 @@ export default function RootLayout({ children }: { children: ReactElement }) {
         cz-shortcut-listen="false"
       >
         <GlobalProvider>{children}</GlobalProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
 
       <GoogleTagManager gtmId={GTM_TRACKING_ID} />
