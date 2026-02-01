@@ -5,9 +5,7 @@ import BlogPlatform from "@/components/blog/BlogPlatform";
 import BlogSubscribers from "@/components/blog/BlogSubscribers";
 import ListItemWithLoadMore from "@/components/blog/list-pagination/ListItemWithLoadMore";
 import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
-import {
-  GET_CATEGORIES_QUERY,
-} from "@/graphql/queries/post.query";
+import { GET_CATEGORIES_QUERY } from "@/graphql/queries/post.query";
 import { getPostByCategoryId } from "@/lib/api";
 import { isrClient } from "@/lib/apolloClient";
 import React from "react";
@@ -17,9 +15,7 @@ interface Props {
   };
 }
 
-// Force dynamic rendering to avoid Cloudflare 403 errors during build
-export const dynamic = 'force-dynamic';
-export const revalidate = +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600);
+export const revalidate = 3600;
 
 const BlogCategory = async ({ params }: Props) => {
   const categoriesResponse = await isrClient.query({
@@ -27,7 +23,7 @@ const BlogCategory = async ({ params }: Props) => {
     context: {
       fetchOptions: {
         next: {
-          tags: ['categories'],
+          tags: ["categories"],
           revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
         },
       },
@@ -54,7 +50,10 @@ const BlogCategory = async ({ params }: Props) => {
   const latestSlug = params.slug === "latest";
   const popularSlug = params.slug === "popular";
 
-  const postsByCategory = await getPostByCategoryId(params.slug, category?.slug) 
+  const postsByCategory = await getPostByCategoryId(
+    params.slug,
+    category?.slug,
+  );
 
   const featuredPost: PostItem | undefined = postsByCategory?.posts?.nodes.find(
     (post: PostItem) =>

@@ -29,8 +29,7 @@ import { INCREMENT_POST_VIEWS_MUTATION } from "@/graphql/mutations/post.mutation
 import ButtonCopyURL from "@/components/blog/ButtonCopyURL";
 import BlogShareButtons from "@/components/blog/BlogShareButtons";
 
-// Force dynamic rendering to avoid Cloudflare 403 errors during build
-export const dynamic = 'force-dynamic';
+export const revalidate = 600;
 
 type BlogDetailProps = {
   params: {
@@ -158,7 +157,8 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
     },
   });
 
-  const counterView = responseIncrement?.data?.incrementPostViews?.postViews?.total;
+  const counterView =
+    responseIncrement?.data?.incrementPostViews?.postViews?.total;
 
   if (!post) {
     return <NotFoundPage />;
@@ -248,7 +248,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
                   <span className="text-fg-muted tracking-wide font-thin">
                     {format(
                       new Date(post.modified ?? post.date),
-                      "MMMM dd, yyyy"
+                      "MMMM dd, yyyy",
                     )}
                   </span>
                 </div>

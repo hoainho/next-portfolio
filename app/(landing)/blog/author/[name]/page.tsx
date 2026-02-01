@@ -16,11 +16,10 @@ interface AuthorProps {
   };
 }
 
-// Force dynamic rendering to avoid Cloudflare 403 errors during build
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 const page = async ({ params }: AuthorProps) => {
-  const postsResponse = await getPostByAuthor(params.name)
+  const postsResponse = await getPostByAuthor(params.name);
   const author: GetPostsByAuthorResponse = postsResponse.data;
   const posts: PostItem[] = author.user.posts.nodes;
 
@@ -30,7 +29,7 @@ const page = async ({ params }: AuthorProps) => {
 
   const postsWithoutFeatured = posts?.filter(
     (post: PostItem) => post.postId !== featuredPost?.postId,
-  )
+  );
 
   return (
     <div>
@@ -74,8 +73,9 @@ const page = async ({ params }: AuthorProps) => {
                   nodes: postsWithoutFeatured,
                   pageInfo: {
                     endCursor: author.user.posts.pageInfo?.endCursor ?? "",
-                    hasNextPage: author.user.posts.pageInfo?.hasNextPage ?? false,
-                  }
+                    hasNextPage:
+                      author.user.posts.pageInfo?.hasNextPage ?? false,
+                  },
                 }}
                 filterKey={params.name}
                 actionGetList={getPostByAuthor}

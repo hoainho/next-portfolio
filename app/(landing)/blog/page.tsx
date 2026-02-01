@@ -13,9 +13,7 @@ import {
 import BlogPlatform from "@/components/blog/BlogPlatform";
 import BlogSearch from "@/components/blog/BlogSearch";
 
-// Force dynamic rendering to avoid Cloudflare 403 errors during build
-export const dynamic = 'force-dynamic';
-export const revalidate = +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600);
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Nick's Blog | Latest Posts",
@@ -30,8 +28,7 @@ export const metadata: Metadata = {
     url: "https://hoainho.info/blog",
     images: [
       {
-        url:
-          "https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png",
+        url: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png",
       },
     ],
   },
@@ -46,11 +43,11 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage({
-  searchParams }: {
-    searchParams:  Promise<{ [key: string]: string}>
-  }) {
-
-  const searchContent = (await searchParams).s
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
+  const searchContent = (await searchParams).s;
 
   try {
     const [postsResponse, postsByCategoryID] = await Promise.all([
@@ -63,7 +60,7 @@ export default async function BlogPage({
         context: {
           fetchOptions: {
             next: {
-              tags: ['posts', 'all-posts'],
+              tags: ["posts", "all-posts"],
               revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
             },
           },
@@ -74,12 +71,12 @@ export default async function BlogPage({
         variables: {
           category: "javascript-typescript",
           author: 3,
-          first: 5
+          first: 5,
         },
         context: {
           fetchOptions: {
             next: {
-              tags: ['posts', 'category-javascript-typescript'],
+              tags: ["posts", "category-javascript-typescript"],
               revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
             },
           },
@@ -88,23 +85,26 @@ export default async function BlogPage({
     ]);
 
     const posts: PostItem[] = postsResponse?.data?.posts?.nodes || [];
-    const postsByCategory: PostItem[] = postsByCategoryID?.data?.posts?.nodes || [];
-    
+    const postsByCategory: PostItem[] =
+      postsByCategoryID?.data?.posts?.nodes || [];
+
     if (!posts.length) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
-            <h1 className="text-2xl font-bold text-gray-800 mb-4">No Posts Available</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">
+              No Posts Available
+            </h1>
             <p className="text-gray-600">Check back later for new content.</p>
           </div>
         </div>
       );
     }
-    
+
     return (
       <>
         {Object.keys(searchParams).length > 0 ? (
-          <BlogSearch content={searchContent}/>
+          <BlogSearch content={searchContent} />
         ) : (
           <div className="relative">
             <div className="bg-dark text-white min-h-screen overflow-hidden">
@@ -112,18 +112,21 @@ export default async function BlogPage({
                 <div className="relative blog-hero flex flex-col">
                   <div className="flex flex-col lg:flex-row w-full gap-x-10">
                     {posts[0] && <BlogFeatured post={posts[0]} />}
-                      {posts?.length > 1 && (
-                        <div className="flex flex-col w-full lg:w-1/2 gap-5">
-                          {posts?.slice(1, 4)?.map((post, index) => (
-                            <BlogItem post={post} key={post.uri || index} isDark />
-                          ))}
-                        </div>
-                      )}
+                    {posts?.length > 1 && (
+                      <div className="flex flex-col w-full lg:w-1/2 gap-5">
+                        {posts?.slice(1, 4)?.map((post, index) => (
+                          <BlogItem
+                            post={post}
+                            key={post.uri || index}
+                            isDark
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <BlogSubscribers isDark />
                 </div>
               </div>
-
             </div>
             {posts?.length > 0 && <BlogByRating posts={posts} />}
             {postsByCategory.length > 0 && (
@@ -139,7 +142,9 @@ export default async function BlogPage({
       </>
     );
   } catch (error) {
-    console.error('Error fetching blog data:', error);
-    return <div>Something went wrong loading the blog. Please try again later.</div>;
+    console.error("Error fetching blog data:", error);
+    return (
+      <div>Something went wrong loading the blog. Please try again later.</div>
+    );
   }
 }
