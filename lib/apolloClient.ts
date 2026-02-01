@@ -1,4 +1,9 @@
-import { ApolloClient, InMemoryCache, HttpLink, DefaultOptions } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  DefaultOptions,
+} from "@apollo/client";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -21,11 +26,11 @@ const cache = new InMemoryCache({
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
-    fetchPolicy: 'no-cache',
-    nextFetchPolicy: 'no-cache',
+    fetchPolicy: "network-only",
+    nextFetchPolicy: "cache-first",
   },
   query: {
-    fetchPolicy: 'no-cache',
+    fetchPolicy: "network-only",
   },
 };
 
@@ -39,7 +44,8 @@ export const ssrClient = new ApolloClient({
       Origin: "https://dev01.thnkandgrow.com",
       Referer: "https://dev01.thnkandgrow.com",
       "Content-Type": "application/json",
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     },
   }),
   cache: new InMemoryCache(),
@@ -48,7 +54,7 @@ export const ssrClient = new ApolloClient({
 
 // Create a client for ISR
 export const isrClient = new ApolloClient({
-  ssrMode: typeof window === 'undefined',
+  ssrMode: typeof window === "undefined",
   link: new HttpLink({
     uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
     headers: {
@@ -56,7 +62,8 @@ export const isrClient = new ApolloClient({
       Origin: "https://dev01.thnkandgrow.com",
       Referer: "https://dev01.thnkandgrow.com",
       "Content-Type": "application/json",
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     },
   }),
   cache,
