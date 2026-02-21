@@ -13,8 +13,60 @@ const INCREMENT_POST_VIEWS_MUTATION = `
   }
 `;
 
+const ALLOWED_ORIGINS = [
+  'https://hoainho.info',
+  'https://www.hoainho.info',
+  process.env.NEXT_PUBLIC_SITE_URL,
+].filter(Boolean);
+
+const viewedPosts = new Map<string, number>();
+const VIEW_COOLDOWN_MS = 30 * 60 * 1000;
+
+function hasRecentlyViewed(clientId: string, postId: string | number): boolean {
+  const key = `${clientId}:${postId}`;
+  const lastViewed = viewedPosts.get(key);
+  
+  if (!lastViewed) return false;
+  
+  const isWithinCooldown = Date.now() - lastViewed < VIEW_COOLDOWN_MS;
+  if (!isWithinCooldown) {
+    viewedPosts.delete(key);
+  }
+  return isWithinCooldown;
+}
+
+function recordView(clientId: string, postId: string | number): void {
+  const key = `${clientId}:${postId}`;
+  
+  if (viewedPosts.size > 10000) {
+    const oldestKey = viewedPosts.keys().next().value;
+    if (oldestKey) viewedPosts.delete(oldestKey);
+  }
+  
+  viewedPosts.set(key, Date.now());
+}
+
+function getClientId(request: NextRequest): string {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+             request.headers.get("x-real-ip") ||
+             "unknown";
+  const ua = request.headers.get("user-agent") || "";
+  return `${ip}:${ua.slice(0, 50)}`;
+}
+
 export async function POST(request: NextRequest) {
   try {
+    const origin = request.headers.get('origin');
+    const referer = request.headers.get('referer');
+    
+    const isValidRequest = ALLOWED_ORIGINS.some(allowed => 
+      origin === allowed || (referer && referer.startsWith(allowed || ''))
+    ) || (origin?.endsWith('.vercel.app') || referer?.includes('.vercel.app'));
+
+    if (!isValidRequest && process.env.NODE_ENV === 'production') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
     const { postId } = await request.json();
 
     if (!postId) {
@@ -22,6 +74,16 @@ export async function POST(request: NextRequest) {
         { error: "postId is required" },
         { status: 400 },
       );
+    }
+
+    const clientId = getClientId(request);
+    
+    if (hasRecentlyViewed(clientId, postId)) {
+      return NextResponse.json({ 
+        success: true, 
+        views: 0,
+        cached: true 
+      });
     }
 
     const response = await fetch(process.env.NEXT_PUBLIC_WORDPRESS_API_URL!, {
@@ -48,6 +110,8 @@ export async function POST(request: NextRequest) {
         { status: 500 },
       );
     }
+
+    recordView(clientId, postId);
 
     const total = data?.data?.incrementPostViews?.postViews?.total ?? 0;
 
