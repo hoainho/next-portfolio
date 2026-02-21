@@ -116,11 +116,11 @@ function cleanupExpiredEntries() {
   if (now - lastCleanup < CLEANUP_INTERVAL) return;
 
   lastCleanup = now;
-  for (const [key, entry] of rateLimitStore.entries()) {
+  rateLimitStore.forEach((entry, key) => {
     if (entry.resetTime < now) {
       rateLimitStore.delete(key);
     }
-  }
+  });
 }
 
 function checkRateLimit(
