@@ -15,11 +15,25 @@ export const SKILL_TYPE = {
 
 export const products = [
   {
+    name: "Gear PR Review",
+    badge: "https://raw.githubusercontent.com/hoainho/pr-review-bot/main/public/icon.svg",
+    link: "https://pr-reviewer.hoainho.info",
+    description: "AI-powered code review tool with deep context analysis, Jira/Linear integration & progressive learning",
+    tag: "New"
+  },
+  {
+    name: "React Debugger",
+    badge: "https://raw.githubusercontent.com/hoainho/react-debugger-extension/main/public/icons/icon128.png",
+    link: "https://www.npmjs.com/package/@nhonh/react-debugger",
+    description: "Chrome DevTools extension for React debugging, performance analysis, memory monitoring & CLS tracking",
+    tag: "Feature"
+  },
+  {
     name: "MoodTrip",
     badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1751732691/logo_jkab5l.png`,
     link: "https://moodtrip.hoainho.info",
     description: "Travel itinerary generator based on mood and preferences",
-    tag: "New"
+    tag: "Feature"
   },
   {
     name: "ArtGen",
@@ -454,7 +468,17 @@ export const socialLinks = [
   {
     name: "GitHub",
     icon_url: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750576221/github_z8hpoh.svg`,
-    link: "https://app.daily.dev/squads/faqsinterview?cid=squad&userid=sAnreL24q5LH7f9XxP9xZ",
+    link: "https://github.com/hoainho",
+  },
+  {
+    name: "Thnk & Grow",
+    icon_url: "https://cdn.prod.website-files.com/5e0a5d9d743608d0f3ea6753/5f350958935a5ccf103429ce_daily.dev%20-%2032.png",
+    link: "https://app.daily.dev/squads/thnkandgrow",
+  },
+  {
+    name: "FAQs Interview",
+    icon_url: "https://cdn.prod.website-files.com/5e0a5d9d743608d0f3ea6753/5f350958935a5ccf103429ce_daily.dev%20-%2032.png",
+    link: "https://app.daily.dev/squads/faqsinterview",
   },
   {
     name: "LinkedIn",

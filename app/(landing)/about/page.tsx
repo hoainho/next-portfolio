@@ -1,6 +1,6 @@
-import Skill from "@/components/about/Skill";
-import Experience from "@/components/about/Experience";
-import Introduce from "@/components/about/Introduce";
+import HeroSection from "@/components/about/HeroSection";
+import SkillTabs from "@/components/about/SkillTabs";
+import Timeline from "@/components/about/Timeline";
 import CTA from "@/components/cta/CTA";
 import Certifications from "@/components/about/Certifications";
 import Products from "@/components/about/Products";
@@ -35,15 +35,15 @@ export const metadata: Metadata = {
 const AboutPage = () => {
   return (
     <section className="max-container">
-      <Introduce />
+      <HeroSection />
 
       <Products />
 
       <Certifications />
 
-      <Skill />
+      <SkillTabs />
 
-      <Experience />
+      <Timeline />
 
       <hr className="border-slate-200" />
 

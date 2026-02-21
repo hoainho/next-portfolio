@@ -5,13 +5,13 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Overview | Hoai Nho - Portfolio",
   description:
-    "I'm Software Engineer from Viet Nam with over 4 year of experience. I'm passionate about developing and maintaining high quality software. I love my work and I'm always looking for new challenges. I'm open for any collaboration. Let's work together!",
+    "Senior Software Engineer & Frontend Tech Lead from Vietnam with over 5 years of experience. Passionate about developing high-quality software, leading frontend teams, and open source contribution.",
   keywords:
-    "Software Engineer, VietNam, Hoài Nhớ, Nguyễn Hoài Nhớ, Nhớ Nguyễn, portfolio, full stack developer, software engineer, open source contributor, javascript, fullstack developer",
+    "Senior Software Engineer, Frontend Tech Lead, VietNam, Hoài Nhớ, Nguyễn Hoài Nhớ, Nhớ Nguyễn, portfolio, fullstack developer, open source contributor, javascript, typescript",
   openGraph: {
     title: "Hoai-Nho | Portfolio",
     description:
-      "Deep Javascript & TypeScript | Software Engineer | Open Source Contributor",
+      "Senior Software Engineer | Frontend Tech Lead | Open Source Contributor",
     url: `https://hoainho.info`,
     siteName: "Hoai-Nho | Portfolio",
     images: [

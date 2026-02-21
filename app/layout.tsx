@@ -36,15 +36,15 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title:
-    "Hoai Nho - Portfolio | Deep Javascript & TypeScript | Software Engineer | Open Source Contributor",
+    "Hoai Nho - Portfolio | Senior Software Engineer | Frontend Tech Lead",
   description:
-    "I'm Software Engineer from Viet Nam with over 4 year of experience. I'm passionate about developing and maintaining high quality software. I love my work and I'm always looking for new challenges. I'm open for any collaboration. Let's work together!",
+    "Senior Software Engineer & Frontend Tech Lead from Vietnam with over 5 years of experience. Passionate about developing high-quality software, leading frontend teams, and open source contribution.",
   keywords:
-    "Hoai Nho, Hoài Nhớ, Nguyễn Hoài Nhớ, Nhớ Nguyễn, portfolio, deep learning engineer, software engineer, open source contributor, javascript, fullstack developer",
+    "Hoai Nho, Hoài Nhớ, Nguyễn Hoài Nhớ, Nhớ Nguyễn, portfolio, senior software engineer, frontend tech lead, open source contributor, javascript, typescript, fullstack developer",
   openGraph: {
     title: "Hoai-Nho | Portfolio",
     description:
-      "Deep Javascript & TypeScript | Software Engineer | Open Source Contributor",
+      "Senior Software Engineer | Frontend Tech Lead | Open Source Contributor",
     url: `https://hoainho.info`,
     siteName: "Hoai-Nho | Portfolio",
     images: [

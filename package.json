@@ -23,6 +23,7 @@
     "cloudinary-build-url": "^0.2.4",
     "clsx": "^2.1.1",
     "envsafe": "^2.0.3",
+    "framer-motion": "^12.34.3",
     "graphql": "^16.9.0",
     "highlight.js": "^11.10.0",
     "lodash": "^4.17.21",

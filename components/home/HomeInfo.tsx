@@ -14,7 +14,7 @@ const HomeInfo = () => {
         Hi, I'm
         <span className="font-semibold mx-2 text-white">Hoài Nhớ</span>
         👋
-        <br />A Software Engineer from VietNam 🇻🇳
+        <br />Senior Software Engineer | Frontend Tech Lead 🇻🇳
       </h1>
     );
   if (currentStage === 1)
