@@ -15,6 +15,13 @@ export const SKILL_TYPE = {
 
 export const products = [
   {
+    name: "Rive Playground",
+    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1774976984/rive-playground-logo.png`,
+    link: "https://hoainho.github.io/rive-playground/",
+    description: "Inspect, control & ship Rive .riv animations — CLI, MCP server & visual playground for teams building with Rive at scale",
+    tag: "New"
+  },
+  {
     name: "MCP Console Hub",
     badge: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1774955315/logo_oxnan0.png",
     link: "https://nano-step.github.io/mcp-console-hub",
