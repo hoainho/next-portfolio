@@ -15,6 +15,41 @@ export const SKILL_TYPE = {
 
 export const products = [
   {
+    name: "MCP Console Hub",
+    badge: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1774955315/logo_oxnan0.png",
+    link: "https://nano-step.github.io/mcp-console-hub",
+    description: "MCP server that streams browser DevTools — console, network, storage & performance — live to your IDE's AI agent",
+    tag: "New"
+  },
+  {
+    name: "Browser Lens MCP",
+    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1774956818/browser-lens-logo.png`,
+    link: "https://nano-step.github.io/mcp-browser-lens",
+    description: "MCP server giving your IDE's AI agent real-time DOM inspection, CSS analysis, screenshots & Figma comparison",
+    tag: "New"
+  },
+  {
+    name: "Cortex",
+    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1774956820/cortex-logo.png`,
+    link: "https://hoainho.github.io/cortex-landing",
+    description: "Desktop AI assistant with persistent memory, multi-agent orchestration & full codebase indexing — not a ChatGPT wrapper",
+    tag: "Special"
+  },
+  {
+    name: "CrashSense",
+    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1774956822/crashsense-logo.png`,
+    link: "https://www.npmjs.com/package/@crashsense/core",
+    description: "Intelligent crash diagnosis SDK for React & Vue — root cause classification with AI-powered fix suggestions",
+    tag: "Feature"
+  },
+  {
+    name: "DevLens",
+    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1774956824/devlens-logo.png`,
+    link: "https://www.npmjs.com/package/@devlens/core",
+    description: "Zero-config runtime error detection for JS/TS — catches null access, API failures & hung promises with X-Ray Mode",
+    tag: "Feature"
+  },
+  {
     name: "Gear PR Review",
     badge: "https://raw.githubusercontent.com/hoainho/pr-review-bot/main/public/icon.svg",
     link: "https://pr-reviewer.hoainho.info",

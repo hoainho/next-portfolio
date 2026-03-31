@@ -3,209 +3,159 @@
 import React, { Suspense, useRef, useEffect } from "react";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { Float, OrbitControls, Preload } from "@react-three/drei";
-import { TextureLoader, FrontSide, Group } from "three";
+import { TextureLoader, FrontSide, Group, SpotLight as ThreeSpotLight, Object3D } from "three";
 
 import CanvasLoader from "@/components/loader/LoaderWithProgressPercent";
 
 type BallCanvasProps = {
   icon: string;
-  rotateTexture?: number; // Optional rotation for texture in radians
-  enhancedLighting?: boolean; // Option to use enhanced lighting for products
-  customRotationSpeed?: number; // Optional custom rotation speed
-  customMaxAngle?: number; // Optional custom maximum rotation angle
+  rotateTexture?: number;
+  enhancedLighting?: boolean;
+  customRotationSpeed?: number;
+  customMaxAngle?: number;
 };
 
 type GlassBlockProps = {
   imageUrl: string;
-  rotateTexture?: number; // Optional rotation for texture in radians
-  enhancedLighting?: boolean; // Option to use enhanced lighting for products
-  customRotationSpeed?: number; // Optional custom rotation speed
-  customMaxAngle?: number; // Optional custom maximum rotation angle
+  rotateTexture?: number;
+  enhancedLighting?: boolean;
+  customRotationSpeed?: number;
+  customMaxAngle?: number;
 };
 
-const GlassBlock = ({ 
-  imageUrl, 
-  rotateTexture = 0, 
-  enhancedLighting = false,
+const WAYPOINTS: [number, number][] = [
+  [-2.8,  2.2],
+  [ 2.8,  2.2],
+  [ 2.8, -2.2],
+  [-2.8, -2.2],
+];
+
+const GlassBlock = ({
+  imageUrl,
+  rotateTexture = 0,
   customRotationSpeed,
-  customMaxAngle
+  customMaxAngle,
 }: GlassBlockProps) => {
   const texture = useLoader(TextureLoader, imageUrl);
   const aspectRatio = texture.image.width / texture.image.height;
-  
-  // Apply rotation to texture if specified
+
   if (rotateTexture) {
-    texture.center.set(0.5, 0.5); // Set rotation center to middle of texture
+    texture.center.set(0.5, 0.5);
     texture.rotation = rotateTexture;
   }
-  
-  // Reference for gentle limited back-and-forth rotation with randomization
+
   const groupRef = useRef<Group>(null);
-  const rotationDirection = useRef<number>(1); // 1 for clockwise, -1 for counter-clockwise
-  
-  // Use custom values or generate random ones if not provided
-  const rotationSpeed = useRef<number>(customRotationSpeed || (0.0007 + Math.random() * 0.000013)); // Even slower rotation
-  const maxAngle = useRef<number>(customMaxAngle || (Math.PI / 12 + Math.random() * Math.PI / 6)); // Random between 15 and 45 degrees
-  
-  // Random initial rotation to ensure each product starts at a different position
-  const initialRotation = useRef<number>(Math.random() * (maxAngle.current * 2) - maxAngle.current);
-  
-  // References for point light random movement
-  const pointLightRef = useRef<any>(null);
-  const pointLightPosition = useRef<{
-    x: number;
-    y: number;
-    z: number;
-    targetX: number;
-    targetY: number;
-    targetZ: number;
-    speed: number;
-  }>({ 
-    x: 0, 
-    y: 0, 
-    z: 5, 
-    targetX: (Math.random() * 4) - 2, // Random target between -2 and 2
-    targetY: (Math.random() * 4) - 2, // Random target between -2 and 2
-    targetZ: 4 + (Math.random() * 2), // Random target between 4 and 6
-    speed: 0.005 + (Math.random()) // Very slow random speed
+  const rotationDirection = useRef(1);
+  const rotationSpeed = useRef(customRotationSpeed || 0.0007 + Math.random() * 0.000013);
+  const maxAngle = useRef(customMaxAngle || Math.PI / 12 + Math.random() * (Math.PI / 6));
+  const initialRotation = useRef(Math.random() * maxAngle.current * 2 - maxAngle.current);
+
+  const spotRef = useRef<ThreeSpotLight>(null);
+  const spotTarget = useRef(new Object3D());
+
+  const sweep = useRef({
+    seg: Math.floor(Math.random() * WAYPOINTS.length),
+    progress: Math.random() * 0.5,
+    cx: 0,
+    cy: 0,
   });
-  
-  // Set initial rotation on first render
+
   useEffect(() => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = initialRotation.current;
-    }
+    if (groupRef.current) groupRef.current.rotation.y = initialRotation.current;
+    if (spotRef.current) spotRef.current.target = spotTarget.current;
+    spotTarget.current.position.set(0, 0, 0);
+    const [ax, ay] = WAYPOINTS[sweep.current.seg];
+    sweep.current.cx = ax;
+    sweep.current.cy = ay;
   }, []);
-  
-  // Animation frame update
+
   useFrame(() => {
-    // Update group rotation
     if (groupRef.current) {
-      // Change direction when reaching the max angle in either direction
-      if (groupRef.current.rotation.y >= maxAngle.current) {
-        rotationDirection.current = -1;
-      } else if (groupRef.current.rotation.y <= -maxAngle.current) {
-        rotationDirection.current = 1;
-      }
-      
-      // Apply rotation based on current direction and custom speed
+      if (groupRef.current.rotation.y >= maxAngle.current) rotationDirection.current = -1;
+      else if (groupRef.current.rotation.y <= -maxAngle.current) rotationDirection.current = 1;
       groupRef.current.rotation.y += rotationSpeed.current * rotationDirection.current;
     }
-    
-    // Update point light position with smooth movement
-    if (pointLightRef.current) {
-      const p = pointLightPosition.current;
-      
-      // Move current position slightly toward target position
-      p.x += (p.targetX - p.x) * p.speed;
-      p.y += (p.targetY - p.y) * p.speed;
-      p.z += (p.targetZ - p.z) * p.speed;
-      
-      // Update point light position
-      pointLightRef.current.position.set(p.x, p.y, p.z);
-      
-      // Generate new random target when close to current target
-      const distanceToTarget = Math.sqrt(
-        Math.pow(p.x - p.targetX, 2) + 
-        Math.pow(p.y - p.targetY, 2) + 
-        Math.pow(p.z - p.targetZ, 2)
-      );
-      
-      if (distanceToTarget < 0.1) {
-        p.targetX = (Math.random() * 4) - 2; // Random between -2 and 2
-        p.targetY = (Math.random() * 4) - 2; // Random between -2 and 2
-        p.targetZ = 4 + (Math.random() * 2); // Random between 4 and 6
+
+    if (spotRef.current) {
+      const s = sweep.current;
+      s.progress += 0.003;
+      if (s.progress >= 1) {
+        s.progress = 0;
+        s.seg = (s.seg + 1) % WAYPOINTS.length;
       }
+
+      const [ax, ay] = WAYPOINTS[s.seg];
+      const [bx, by] = WAYPOINTS[(s.seg + 1) % WAYPOINTS.length];
+      const p = s.progress;
+      const ease = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+
+      s.cx = ax + (bx - ax) * ease;
+      s.cy = ay + (by - ay) * ease;
+
+      spotRef.current.position.set(s.cx * 0.5, s.cy * 0.5, 1.8);
+      spotTarget.current.position.set(s.cx * 0.48, s.cy * 0.48, 0);
+      spotTarget.current.updateMatrixWorld();
     }
   });
 
   return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={1}>
-      {/* Enhanced lighting setup for products */}
-      {enhancedLighting && (
-        <>
-          <ambientLight intensity={1.0} />
-          <directionalLight position={[5, 5, 5]} intensity={1.5} color="#ffffff" />
-          <directionalLight position={[-5, 5, 5]} intensity={1.2} color="#a0d8ef" />
-          
-          {/* Enhanced center spotlight with random movement */}
-          <pointLight 
-            ref={pointLightRef}
-            position={[0, 0, 5]} 
-            intensity={10} 
-            color="#ffffff" 
-            distance={50} 
-            decay={0.8} 
-          />
-          
-          {/* Main spotlight with tighter focus */}
-          <spotLight 
-            position={[0, 5, 5]} 
-            angle={0.25} 
-            penumbra={0.8} 
-            intensity={2.0} 
-            castShadow 
-            color="#ffffff"
-            distance={10}
-            decay={1}
-          />
-          
-          {/* Additional spotlight directly from front for better center illumination - larger and softer */}
-          <spotLight 
-            position={[0, 0, 5]} 
-            angle={0.9} /* Even larger angle for wider coverage */
-            penumbra={0.9} /* Increased penumbra for much softer edges */
-            intensity={3.0} /* Slightly reduced intensity for softer effect */
-            castShadow 
-            color="#ffffff"
-            distance={15} /* Increased distance for larger coverage */
-            decay={2.0} /* Increased decay for more gradual falloff */
-          />
-          
-          {/* Top light for additional brightness */}
-          <spotLight 
-            position={[0, 5, 0]} 
-            angle={0.5} 
-            penumbra={0.5} 
-            intensity={2.0} 
-            castShadow 
-            color="#ffffff"
-            distance={10}
-            decay={1}
-          />
-        </>
-      )}
-      
+    <Float speed={1.2} rotationIntensity={0.5} floatIntensity={0.6}>
+      <ambientLight intensity={0.75} color="#ffffff" />
+
+      <primitive object={spotTarget.current} />
+      <spotLight
+        ref={spotRef}
+        position={[0, 1.1, 1.8]}
+        angle={0.45}
+        penumbra={0.99}
+        intensity={22}
+        color="#ffffff"
+        distance={12}
+        decay={2.4}
+        castShadow={false}
+      />
+
+      <spotLight
+        position={[-3, 3, -2]}
+        angle={0.6}
+        penumbra={1}
+        intensity={4}
+        color="#3366ff"
+        distance={12}
+        decay={2}
+        castShadow={false}
+      />
+
+      <spotLight
+        position={[3, -2, -2]}
+        angle={0.5}
+        penumbra={1}
+        intensity={3}
+        color="#ff3388"
+        distance={10}
+        decay={2}
+        castShadow={false}
+      />
+
       <group ref={groupRef} scale={2.5}>
-        {/* Front face */}
-        <mesh position={[0, 0, 0.051]} castShadow receiveShadow>
+        <mesh position={[0, 0, 0.04]}>
           <planeGeometry args={[aspectRatio * 2, 2]} />
-          <meshPhysicalMaterial
-            color="rgba(255, 255, 255, 0.1)"
-            roughness={0.1}
-            metalness={0.5}
-            envMapIntensity={enhancedLighting ? 3 : 2}
+          <meshStandardMaterial
             map={texture}
+            roughness={0.55}
+            metalness={0.05}
             transparent
             side={FrontSide}
-            clearcoat={enhancedLighting ? 1 : 0}
-            clearcoatRoughness={0.1}
           />
         </mesh>
-        
-        {/* Back face - using the same texture but flipped */}
-        <mesh position={[0, 0, -0.051]} rotation={[0, Math.PI, 0]} castShadow receiveShadow>
+        <mesh position={[0, 0, -0.04]} rotation={[0, Math.PI, 0]}>
           <planeGeometry args={[aspectRatio * 2, 2]} />
-          <meshPhysicalMaterial
-            color="rgba(255, 255, 255, 0.1)"
-            roughness={0.1}
-            metalness={0.5}
-            envMapIntensity={enhancedLighting ? 3 : 2}
-            map={texture} 
+          <meshStandardMaterial
+            map={texture}
+            roughness={0.55}
+            metalness={0.05}
             transparent
             side={FrontSide}
-            clearcoat={enhancedLighting ? 1 : 0}
-            clearcoatRoughness={0.1}
           />
         </mesh>
       </group>
@@ -213,49 +163,33 @@ const GlassBlock = ({
   );
 };
 
-const GlassesBlockCanvas = ({ icon, rotateTexture, enhancedLighting = false, customRotationSpeed, customMaxAngle }: BallCanvasProps) => {
-  // Generate random values for each instance if not provided
+const GlassesBlockCanvas = ({
+  icon,
+  rotateTexture,
+  enhancedLighting = false,
+  customRotationSpeed,
+  customMaxAngle,
+}: BallCanvasProps) => {
   const randomRotationSpeed = useRef<number | undefined>(customRotationSpeed || undefined);
   const randomMaxAngle = useRef<number | undefined>(customMaxAngle || undefined);
-  
+
   return (
     <Canvas
       frameloop="always"
       dpr={[1, 2]}
-      gl={{ 
-        preserveDrawingBuffer: true,
-        alpha: true // Enable transparency for the canvas background
-      }}
+      gl={{ preserveDrawingBuffer: true, alpha: true }}
       shadows
     >
       <Suspense fallback={<CanvasLoader />}>
-        {/* Base lighting only used when enhanced lighting is off */}
-        {!enhancedLighting && (
-          <>
-            <ambientLight intensity={0.8} /> 
-            <directionalLight position={[0, 10, 0]} intensity={1.2} />
-            <pointLight position={[0, 0, 20]} intensity={5.0} color="#ffffff" distance={50} decay={0.8} />
-            <spotLight 
-              position={[0, 5, 0]} 
-              angle={0.5} 
-              penumbra={0.5} 
-              intensity={1.8} 
-              color="#ffffff"
-              distance={10}
-              decay={1}
-            />
-          </>
-        )}
         <OrbitControls enableZoom={false} />
-        <GlassBlock 
-          imageUrl={icon} 
-          rotateTexture={rotateTexture} 
+        <GlassBlock
+          imageUrl={icon}
+          rotateTexture={rotateTexture}
           enhancedLighting={enhancedLighting}
           customRotationSpeed={randomRotationSpeed.current}
           customMaxAngle={randomMaxAngle.current}
         />
       </Suspense>
-
       <Preload all />
     </Canvas>
   );
