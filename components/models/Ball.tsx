@@ -211,9 +211,7 @@ const GlassesBlockCanvas = ({
           </Suspense>
           <Preload all />
         </Canvas>
-      ) : (
-        <CanvasLoader />
-      )}
+      ) : null}
     </div>
   );
 };
