@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useRef, useEffect } from "react";
+import React, { Suspense, useRef, useEffect, useState, useCallback } from "react";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { Float, OrbitControls, Preload } from "@react-three/drei";
 import { TextureLoader, FrontSide, Group, SpotLight as ThreeSpotLight, Object3D } from "three";
@@ -174,28 +174,47 @@ const GlassesBlockCanvas = ({
   customRotationSpeed,
   customMaxAngle,
 }: BallCanvasProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const randomRotationSpeed = useRef<number | undefined>(customRotationSpeed || undefined);
   const randomMaxAngle = useRef<number | undefined>(customMaxAngle || undefined);
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <Canvas
-      frameloop="always"
-      dpr={[1, 2]}
-      gl={{ preserveDrawingBuffer: true, alpha: true }}
-      shadows
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls enableZoom={false} />
-        <GlassBlock
-          imageUrl={icon}
-          rotateTexture={rotateTexture}
-          enhancedLighting={enhancedLighting}
-          customRotationSpeed={randomRotationSpeed.current}
-          customMaxAngle={randomMaxAngle.current}
-        />
-      </Suspense>
-      <Preload all />
-    </Canvas>
+    <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
+      {isVisible ? (
+        <Canvas
+          frameloop="always"
+          dpr={[1, 2]}
+          gl={{ preserveDrawingBuffer: true, alpha: true }}
+          shadows
+        >
+          <Suspense fallback={<CanvasLoader />}>
+            <OrbitControls enableZoom={false} />
+            <GlassBlock
+              imageUrl={icon}
+              rotateTexture={rotateTexture}
+              enhancedLighting={enhancedLighting}
+              customRotationSpeed={randomRotationSpeed.current}
+              customMaxAngle={randomMaxAngle.current}
+            />
+          </Suspense>
+          <Preload all />
+        </Canvas>
+      ) : (
+        <CanvasLoader />
+      )}
+    </div>
   );
 };
 
