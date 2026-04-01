@@ -147,6 +147,7 @@ const GlassBlock = ({
             roughness={0.55}
             metalness={0.05}
             transparent
+            alphaTest={0.01}
             side={FrontSide}
           />
         </mesh>
@@ -157,6 +158,7 @@ const GlassBlock = ({
             roughness={0.55}
             metalness={0.05}
             transparent
+            alphaTest={0.01}
             side={FrontSide}
           />
         </mesh>
