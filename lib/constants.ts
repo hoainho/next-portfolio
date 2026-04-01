@@ -16,7 +16,7 @@ export const SKILL_TYPE = {
 export const products = [
   {
     name: "Rive Playground",
-    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1774976984/rive-playground-logo.png`,
+    badge: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1774976984/rive-playground-logo.png",
     link: "https://hoainho.github.io/rive-playground/",
     description: "Inspect, control & ship Rive .riv animations — CLI, MCP server & visual playground for teams building with Rive at scale",
     tag: "New"
@@ -30,28 +30,28 @@ export const products = [
   },
   {
     name: "Browser Lens MCP",
-    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1774956818/browser-lens-logo.png`,
+    badge: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1774956818/browser-lens-logo.png",
     link: "https://nano-step.github.io/mcp-browser-lens",
     description: "MCP server giving your IDE's AI agent real-time DOM inspection, CSS analysis, screenshots & Figma comparison",
     tag: "New"
   },
   {
     name: "Cortex",
-    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1774956820/cortex-logo.png`,
+    badge: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1774956820/cortex-logo.png",
     link: "https://hoainho.github.io/cortex-landing",
     description: "Desktop AI assistant with persistent memory, multi-agent orchestration & full codebase indexing — not a ChatGPT wrapper",
     tag: "Special"
   },
   {
     name: "CrashSense",
-    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1774956822/crashsense-logo.png`,
+    badge: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1774956822/crashsense-logo.png",
     link: "https://www.npmjs.com/package/@crashsense/core",
     description: "Intelligent crash diagnosis SDK for React & Vue — root cause classification with AI-powered fix suggestions",
     tag: "Feature"
   },
   {
     name: "DevLens",
-    badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1774956824/devlens-logo.png`,
+    badge: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1774956824/devlens-logo.png",
     link: "https://www.npmjs.com/package/@devlens/core",
     description: "Zero-config runtime error detection for JS/TS — catches null access, API failures & hung promises with X-Ray Mode",
     tag: "Feature"
