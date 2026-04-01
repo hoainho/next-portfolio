@@ -36,7 +36,9 @@ const GlassBlock = ({
   customRotationSpeed,
   customMaxAngle,
 }: GlassBlockProps) => {
-  const texture = useLoader(TextureLoader, imageUrl);
+  const texture = useLoader(TextureLoader, imageUrl, (loader) => {
+    loader.crossOrigin = "anonymous";
+  });
   const aspectRatio = texture.image.width / texture.image.height;
 
   if (rotateTexture) {
