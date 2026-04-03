@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { projects } from "@/lib/constants";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
@@ -14,77 +14,84 @@ interface Project {
   link: string;
 }
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.06,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-  },
-};
-
-type CardVariant = "featured" | "large" | "medium" | "small";
-
-const getCardVariant = (index: number): CardVariant => {
-  if (index === 0) return "featured";
-  if (index === 1 || index === 2) return "large";
-  return "medium";
-};
-
-const getGridClasses = (index: number): string => {
-  if (index === 0) return "md:col-span-2";
-  return "";
-};
+type CardVariant = "featured" | "large" | "medium";
+const getVariant = (i: number): CardVariant =>
+  i === 0 ? "featured" : i < 3 ? "large" : "medium";
 
 const ProjectGrid = () => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  const handleOpenModal = (project: Project) => {
-    setSelectedProject(project);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProject(null);
-  };
+  const [selected, setSelected] = useState<Project | null>(null);
 
   return (
-    <section className="pb-8">
+    <section>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-[11px] text-slate-700 tracking-[0.2em] uppercase">
+            &mdash; {new Date().getFullYear()}
+          </span>
+          <span className="h-px w-12 bg-gradient-to-r from-slate-700 to-transparent" />
+        </div>
+        <span className="font-mono text-[11px] text-slate-700">
+          {projects.length} projects
+        </span>
+      </div>
+
       <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+        className="space-y-4"
       >
-        {projects.map((project, index) => (
-          <motion.div
-            key={project.name}
-            variants={itemVariants}
-            className={getGridClasses(index)}
-          >
-            <ProjectCard
-              project={project}
-              variant={getCardVariant(index)}
-              index={index}
-              onClick={() => handleOpenModal(project)}
-            />
-          </motion.div>
-        ))}
+        <ProjectCard
+          project={projects[0]}
+          variant="featured"
+          index={0}
+          onClick={() => setSelected(projects[0])}
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {projects.slice(1, 3).map((p, i) => (
+            <motion.div
+              key={p.name}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.42, delay: i * 0.06 }}
+            >
+              <ProjectCard
+                project={p}
+                variant="large"
+                index={i + 1}
+                onClick={() => setSelected(p)}
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {projects.slice(3).map((p, i) => (
+            <motion.div
+              key={p.name}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.38, delay: i * 0.04 }}
+            >
+              <ProjectCard
+                project={p}
+                variant="medium"
+                index={i + 3}
+                onClick={() => setSelected(p)}
+              />
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
 
       <ProjectModal
-        project={selectedProject}
-        isOpen={selectedProject !== null}
-        onClose={handleCloseModal}
+        project={selected}
+        isOpen={selected !== null}
+        onClose={() => setSelected(null)}
       />
     </section>
   );

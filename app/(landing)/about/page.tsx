@@ -8,21 +8,16 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About | Hoai Nho",
-  description: `My deep understanding of JavaScript fundamentals, coupled with a comprehensive
-          knowledge of its ecosystem, equips me to tackle complex challenges and
-          deliver top-notch solutions.`,
-  keywords: `Earthbrain - Smart Construction, Hoai Nho - About , Eyewa, Ringo App, Maqro, ThirdRockPix, Human Information Security Management, Multinational Security Systems, Construction Machinery Management, and E-commerce`,
+  description: `Senior Software Engineer & Frontend Tech Lead from Vietnam.`,
+  keywords: `Earthbrain - Smart Construction, Hoai Nho - About, Eyewa, Ringo App, Maqro, ThirdRockPix`,
   openGraph: {
     title: "About | Hoai-Nho | Portfolio",
-    description: `My deep understanding of JavaScript fundamentals, coupled with a comprehensive
-          knowledge of its ecosystem, equips me to tackle complex challenges and
-          deliver top-notch solutions.`,
+    description: `Senior Software Engineer & Frontend Tech Lead from Vietnam.`,
     url: `https://hoainho.info`,
     siteName: "About | Hoai-Nho | Portfolio",
     images: [
       {
-        url:
-          "https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png",
+        url: "https://res.cloudinary.com/dgzdswdgg/image/upload/v1763897121/portfolio-logo_rpnmp9.png",
         alt: "About | Hoai-Nho | Portfolio",
         width: 200,
         height: 200,
@@ -32,24 +27,26 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-const AboutPage = () => {
-  return (
-    <section className="max-container">
+
+const AboutPage = () => (
+  <div className="ds-page">
+    <div className="ds-mesh" />
+    <div className="relative z-[1]">
       <HeroSection />
-
+      <div className="ds-section-divider" />
       <Products />
-
-      <Certifications />
-
+      <div className="ds-section-divider" />
       <SkillTabs />
-
+      <div className="ds-section-divider" />
       <Timeline />
-
-      <hr className="border-slate-200" />
-
-      <CTA />
-    </section>
-  );
-};
+      <div className="ds-section-divider" />
+      <Certifications />
+      <div className="ds-section-divider" />
+      <div className="ds-section-wrap">
+        <CTA />
+      </div>
+    </div>
+  </div>
+);
 
 export default AboutPage;

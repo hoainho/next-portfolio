@@ -1,91 +1,111 @@
-'use client'
+"use client";
 
-import { useRef, memo } from "react";
+import { memo } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { products } from "@/lib/constants";
 import BallCanvas from "@/components/models/Ball";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 
-const getTagColor = (tag: string) => {
-  switch (tag) {
-    case "Special": return "bg-gradient-to-r from-purple-500 to-indigo-600";
-    case "New":     return "bg-gradient-to-r from-green-400 to-teal-500";
-    case "Feature": return "bg-gradient-to-r from-orange-400 to-pink-500";
-    default:        return "bg-gradient-to-r from-gray-400 to-gray-600";
-  }
+type TagKey = "Special" | "New" | "Feature";
+
+const TAG_CONFIG: Record<TagKey, { color: string; border: string; bg: string; glow: string }> = {
+  Special: { color: "text-purple-300",  border: "border-purple-500/25", bg: "bg-purple-500/[0.08]",  glow: "rgba(168,85,247,0.18)"  },
+  New:     { color: "text-emerald-300", border: "border-emerald-500/25",bg: "bg-emerald-500/[0.08]", glow: "rgba(52,211,153,0.18)"  },
+  Feature: { color: "text-orange-300",  border: "border-orange-500/25", bg: "bg-orange-500/[0.08]",  glow: "rgba(249,115,22,0.18)"  },
 };
 
-const HoverDivider = () => {
-  const ref = useRef<HTMLDivElement>(null);
+const Tag = ({ tag }: { tag: string }) => {
+  const cfg = TAG_CONFIG[tag as TagKey];
+  if (!cfg) return null;
   return (
-    <div
-      ref={ref}
-      className="w-full h-0.5 mt-4 bg-[rgba(255,255,255,0.1)] transition-all duration-500"
-      onMouseEnter={() => {
-        if (ref.current) ref.current.className = "w-full h-0.5 mt-4 bg-gradient-to-r from-transparent via-[#60efff] to-transparent transition-all duration-500";
-      }}
-      onMouseLeave={() => {
-        if (ref.current) ref.current.className = "w-full h-0.5 mt-4 bg-[rgba(255,255,255,0.1)] transition-all duration-500";
-      }}
-    />
+    <span className={`font-mono text-[10px] font-medium tracking-[0.12em] uppercase px-2 py-0.5 rounded-full border ${cfg.color} ${cfg.border} ${cfg.bg}`}>
+      {tag}
+    </span>
   );
 };
 
-const ProductCard = memo(({ product, index }: { product: typeof products[0]; index: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="flex-shrink-0 w-[280px] md:w-full snap-center"
-  >
-    <div className="h-full flex flex-col items-center transition-all duration-300 ease-out bg-[rgba(255,255,255,0.05)] backdrop-blur-sm rounded-xl p-6 border border-[rgba(255,255,255,0.1)] hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-500/10">
-      <div className="relative w-full flex justify-center mb-4">
-        {product.tag && (
-          <div className="absolute -top-3 -right-3 z-10">
-            <div className={`${getTagColor(product.tag)} text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse-slow flex items-center justify-center`}>
-              <span className="animate-shimmer inline-block">{product.tag}</span>
+const ProductCard = memo(({ product, index }: { product: (typeof products)[0]; index: number }) => {
+  const cfg = TAG_CONFIG[product.tag as TagKey];
+  const glow = cfg?.glow ?? "rgba(139,92,246,0.15)";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.06 }}
+      whileHover={{ y: -3, transition: { duration: 0.16 } }}
+      className="group"
+    >
+      <Link href={product.link} target="_blank">
+        <div
+          className="relative flex flex-col rounded-xl overflow-hidden transition-all duration-200"
+          style={{
+            background: "#0c0e13",
+            border: "1px solid rgba(255,255,255,0.06)",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.11)";
+            (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${glow}`;
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "none";
+          }}
+        >
+          <div
+            className="w-full h-[100px] flex-shrink-0"
+            style={{ background: "rgba(255,255,255,0.02)" }}
+          >
+            <BallCanvas icon={product.badge} />
+          </div>
+
+          <div className="px-4 pb-4 pt-3 flex flex-col flex-1">
+            <div className="flex items-start justify-between gap-2 mb-1.5">
+              <h3 className="text-[#c8d0e0] font-semibold text-[13px] leading-snug group-hover:text-white transition-colors">
+                {product.name}
+              </h3>
+              {product.tag && <Tag tag={product.tag} />}
+            </div>
+            <p className="text-[#3d4a5c] text-[11px] leading-relaxed line-clamp-2 flex-1">
+              {product.description}
+            </p>
+            <div className="flex items-center gap-1 mt-3 font-mono text-[10px] text-slate-700 group-hover:text-violet-400 transition-colors">
+              <span>Explore</span>
+              <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </div>
           </div>
-        )}
-        <div className="h-[160px] w-[160px] lg:h-[140px] lg:w-[140px]">
-          <BallCanvas icon={product.badge} />
         </div>
-      </div>
-
-      <Link href={product.link} target="_blank" className="cursor-pointer group w-full">
-        <h3 className="text-white text-center text-lg font-bold capitalize leading-tight tracking-wider group-hover:text-[#60efff] transition-colors duration-300">
-          {product.name}
-        </h3>
       </Link>
-
-      <p className="text-slate-300 text-center mt-3 text-sm leading-relaxed flex-grow">
-        {product.description}
-      </p>
-
-      <HoverDivider />
-
-      <Link href={product.link} target="_blank" className="mt-4 text-sm text-[#60efff] hover:text-white transition-colors duration-300 flex items-center group">
-        <span>Explore</span>
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </Link>
-    </div>
-  </motion.div>
-));
+    </motion.div>
+  );
+});
 
 ProductCard.displayName = "ProductCard";
 
 const Products = () => (
-  <AnimatedSection className="py-10 flex flex-col">
-    <h3 className="subhead-text">My Products</h3>
-    <div className="relative bg-linear-black-to-white py-12 px-4 mt-16 rounded-2xl overflow-hidden">
-      <div className="bg-linear-back__top"></div>
-      <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
-        {products?.map((product, index) => (
-          <ProductCard key={product.name} product={product} index={index} />
+  <AnimatedSection className="ds-section">
+    <div className="ds-section-header mb-12">
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <p className="font-mono text-xs text-violet-400/80 tracking-[0.25em] uppercase mb-2">
+            Open Source
+          </p>
+          <h3 className="text-3xl md:text-4xl font-black text-white">My Products</h3>
+        </div>
+        <span className="font-mono text-xs text-slate-700 border border-slate-800 px-3 py-1.5 rounded-full flex-shrink-0">
+          {products.length} shipped
+        </span>
+      </div>
+    </div>
+
+    <div className="ds-section-wrap pt-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        {products.map((product, i) => (
+          <ProductCard key={product.name} product={product} index={i} />
         ))}
       </div>
     </div>
