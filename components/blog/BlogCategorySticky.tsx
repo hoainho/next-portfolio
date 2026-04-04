@@ -132,27 +132,29 @@ const BlogCategorySticky = ({ categories }: Props) => {
                       ))}
                     </div>
                   </div>
-                  <div className="max-w-[300px] w-fit p-5 flex flex-col gap-y-2 items-center justify-center">
-                    <Link href={`/blog/${category.post.slug}`}>
-                      <ImageLoader
-                        width={250}
-                        height={200}
-                        src={category.post.featuredImage.node.sourceUrl}
-                        alt={category.post.featuredImage.node.altText}
-                        className="aspect-[4/2.4] rounded-md z-1"
-                      />
+                  {category.post && (
+                    <div className="max-w-[300px] w-fit p-5 flex flex-col gap-y-2 items-center justify-center">
+                      <Link href={`/blog/${category.post.slug}`}>
+                        <ImageLoader
+                          width={250}
+                          height={200}
+                          src={category.post.featuredImage?.node?.sourceUrl}
+                          alt={category.post.featuredImage?.node?.altText}
+                          className="aspect-[4/2.4] rounded-md z-1"
+                        />
 
-                      <h3 className="text-primary font-bold text-md cursor-pointer line-clamp-2 hover:underline">
-                        {category.post.title}
-                      </h3>
-                    </Link>
-                    <div
-                      className="text-sm text-fg-subtle line-clamp-4"
-                      dangerouslySetInnerHTML={{
-                        __html: category.post.excerpt,
-                      }}
-                    />
-                  </div>
+                        <h3 className="text-primary font-bold text-md cursor-pointer line-clamp-2 hover:underline">
+                          {category.post.title}
+                        </h3>
+                      </Link>
+                      <div
+                        className="text-sm text-fg-subtle line-clamp-4"
+                        dangerouslySetInnerHTML={{
+                          __html: category.post.excerpt,
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               ) : null}
             </div>
