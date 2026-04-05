@@ -323,6 +323,11 @@ export interface Posts {
   };
 }
 
+export interface PostLanguage {
+  code: string;
+  name: string;
+}
+
 export interface PostItem {
   author: Author;
   content: string;
@@ -339,6 +344,7 @@ export interface PostItem {
   tags: Tags;
   title: string;
   uri: string;
+  language?: PostLanguage;
 }
 
 export interface PostSEO {

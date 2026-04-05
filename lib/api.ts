@@ -1,12 +1,28 @@
-"use server"
+"use server";
 
-import { FETCH_POSTS_BY_QUERY, GET_POSTS_BY_AUTHOR_QUERY, GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY, GET_POSTS_BY_TAG_QUERY, POSTS_QUERY } from "@/graphql/queries/post.query";
+import {
+  FETCH_POSTS_BY_QUERY,
+  GET_POSTS_BY_AUTHOR_QUERY,
+  GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
+  GET_POSTS_BY_TAG_QUERY,
+  POSTS_QUERY,
+} from "@/graphql/queries/post.query";
 import { isrClient } from "@/lib/apolloClient";
+import { CATEGORY_SLUG_TO_ID } from "@/lib/categories";
+
+const DEFAULT_LANGUAGE_CODE = "EN";
 
 async function getDataSearchQuery(content: string, cursor?: string) {
-  const query = content ? FETCH_POSTS_BY_QUERY : POSTS_QUERY
-  const variables = content ? { search: content, first: 6, after: cursor } : { author: 3, first: 6, after: cursor }
-  const tags = content ? ["search", "posts"] : ['post']
+  const query = content ? FETCH_POSTS_BY_QUERY : POSTS_QUERY;
+  const variables = content
+    ? { search: content, first: 6, after: cursor }
+    : {
+        author: 3,
+        first: 6,
+        after: cursor,
+        languageCode: DEFAULT_LANGUAGE_CODE,
+      };
+  const tags = content ? ["search", "posts"] : ["post"];
 
   const postBySearch = await isrClient.query({
     query: query,
@@ -21,45 +37,60 @@ async function getDataSearchQuery(content: string, cursor?: string) {
     },
   });
 
-  return postBySearch?.data?.posts
+  return postBySearch?.data?.posts;
 }
 
 async function getPostByCategoryId(params: string, cursor?: string) {
   const latestSlug = params === "latest";
   const popularSlug = params === "popular";
 
+  const categoryId = CATEGORY_SLUG_TO_ID[params];
+
   let query = POSTS_QUERY;
-  let variables: any = { author: 3, first: 6, after: cursor };
+  let variables: Record<string, unknown> = {
+    author: 3,
+    first: 6,
+    after: cursor,
+    languageCode: DEFAULT_LANGUAGE_CODE,
+  };
+
   if (latestSlug) {
     query = POSTS_QUERY;
-    variables = { author: 3, first: 6 };
+    variables = { author: 3, first: 6, languageCode: DEFAULT_LANGUAGE_CODE };
   } else if (popularSlug) {
     query = GET_POSTS_BY_TAG_QUERY;
-    variables = { tag: "Popular", first: 6, author: 3, after: cursor };
-  }
-  else {
+    variables = {
+      tag: "Popular",
+      first: 6,
+      author: 3,
+      after: cursor,
+      languageCode: DEFAULT_LANGUAGE_CODE,
+    };
+  } else if (categoryId) {
     query = GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY;
     variables = {
-      category: params,
+      categoryId,
       author: 3,
       first: 6,
-      after: cursor
+      after: cursor,
+      languageCode: DEFAULT_LANGUAGE_CODE,
     };
   }
+
   const postsByCategoryID = await isrClient.query({
     query,
     variables,
     context: {
       fetchOptions: {
         next: {
-          tags: ['posts', `category-${params}`],
+          tags: ["posts", `category-${params}`],
           revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
         },
       },
     },
   });
 
-  return postsByCategoryID.data.posts
+  return postsByCategoryID.data.posts;
 }
 
 async function getPostByAuthor(params: string, cursor?: string) {
@@ -79,7 +110,7 @@ async function getPostByAuthor(params: string, cursor?: string) {
     },
   });
   const data = postsResponse.data;
-  
+
   return {
     data: data,
     nodes: data?.user.posts?.nodes || [],
@@ -90,8 +121,4 @@ async function getPostByAuthor(params: string, cursor?: string) {
   };
 }
 
-export {
-  getDataSearchQuery,
-  getPostByCategoryId,
-  getPostByAuthor
-}
+export { getDataSearchQuery, getPostByCategoryId, getPostByAuthor };

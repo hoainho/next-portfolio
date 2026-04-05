@@ -1,10 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import React, { useEffect, useRef } from "react";
-import { FaArrowRight } from "react-icons/fa";
-import { MdKeyboardArrowDown } from "react-icons/md";
-import ImageLoader from "../loader/ImageLoader";
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -13,153 +10,50 @@ type Props = {
 };
 
 const BlogCategorySticky = ({ categories }: Props) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (containerRef.current) {
-        const itemContainer = containerRef.current;
-        const items = Array.from(itemContainer.children) as HTMLElement[];
-
-        if (items.length === 0) return;
-
-        // Reset display to measure correctly
-        items.forEach((item) => {
-          item.style.display = "";
-        });
-
-        const firstRowTop = items[0].offsetTop;
-        let isWrapped = false;
-
-        items.forEach((item) => {
-          // Once we detect a wrapped item, hide it and all subsequent items
-          if (isWrapped || item.offsetTop > firstRowTop + 10) {
-            isWrapped = true;
-            item.style.display = "none";
-          }
-        });
-      }
-    };
-
-    // Run on mount and category change
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [categories.length]);
-
   const pathname = usePathname();
-
   const isDark = pathname === "/blog";
+
+  const activeSlug = pathname.startsWith("/blog/category/")
+    ? pathname.replace("/blog/category/", "")
+    : null;
+
   return (
     <div
       className={clsx(
-        "z-[100] hidden sticky top-0 w-full h-[80px] xl:flex justify-center items-center",
-        "border-b border-separate border-fg-border z-20",
-        isDark ? "bg-dark border-fg-border" : "bg-bg-default border-overlay",
+        "hidden xl:block sticky top-[60px] z-[48] w-full h-[48px]",
+        "border-b overflow-hidden",
+        isDark
+          ? "bg-[#0d1117] border-fg-border/60"
+          : "bg-bg-default border-fg-border/40",
       )}
     >
       <div
-        ref={containerRef}
         className={clsx(
-          "w-full flex flex-wrap justify-between items-center gap-12 mx-auto",
+          "h-full flex flex-nowrap items-center overflow-x-auto scrollbar-none gap-x-1 px-6 mx-auto",
           isDark
-            ? "bg-dark max-w-7xl 2xl:max-w-screen-2xl px-0"
-            : "max-w-[1200px] 2xl:max-w-screen-2xl px-12 bg-bg-default",
+            ? "max-w-7xl 2xl:max-w-screen-2xl"
+            : "max-w-[1200px] 2xl:max-w-screen-2xl",
         )}
       >
-        {categories?.map((category: any) => (
-          <div key={category.name} className="group p-2 py-4 flex gap-2">
-            <div className="w-full h-full">
-              <p className="text-white flex gap-2 cursor-pointer hover:underline">
-                <Link
-                  className="without-style no-underline"
-                  href={`/blog/category/${category.slug}`}
-                >
-                  {category.name}
-                </Link>
-                {category.children.nodes.length ? (
-                  <MdKeyboardArrowDown className="inline-block" />
-                ) : null}
-              </p>
-              {category.children.nodes.length ? (
-                <div
-                  className={`max-w-[1200px] select-all invisible opacity-0 z-10 bg-white text-primary rounded-lg p-5 -translate-x-1/2 absolute w-full h-auto 
-                                top-0 left-1/2 translate-y-20 gap-2 transition-opacity delay-100 duration-200 ease-in-out
-                                group-hover:flex group-hover:opacity-100 group-hover:select-none group-hover:visible group-hover:translate-y-[56px] group-hover:transition-all group-hover:delay-100 group-hover:duration-200 group-hover:ease-in-out
-                              `}
-                >
-                  <div className="w-full flex flex-col gap-y-2 items-center">
-                    <div className="w-full flex flex-col gap-y-2 items-start justify-center px-2">
-                      <div className="flex gap-x-2 items-center cursor-pointer">
-                        <Link
-                          href={`/blog/category/${category.slug}`}
-                          className="without-style no-underline text-md font-semibold hover:underline"
-                        >
-                          {category.name}
-                        </Link>
-                        <FaArrowRight className="inline-block size-3" />
-                      </div>
-                      <div
-                        className={clsx(
-                          "flex gap-5 text-sm text-fg-subtle",
-                          "[&>img]:w-fit [&>img]:max-w-[100px] [&>img]:h-[90px] [&>img]:rounded-md [&>img]:object-contain",
-                        )}
-                        dangerouslySetInnerHTML={{
-                          __html: category.description,
-                        }}
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 grid-flow-row gap-4">
-                      {category.children.nodes?.map((child: any) => (
-                        <div key={child.name} className="p-2 cursor-pointer">
-                          <Link
-                            href={`/blog/category/${child.slug}`}
-                            className="without-style no-underline hover:underline text-md font-semibold"
-                          >
-                            {child.name}
-                          </Link>
-                          <div
-                            className="text-sm text-fg-subtle"
-                            dangerouslySetInnerHTML={{
-                              __html: child.description,
-                            }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  {category.post && (
-                    <div className="max-w-[300px] w-fit p-5 flex flex-col gap-y-2 items-center justify-center">
-                      <Link href={`/blog/${category.post.slug}`}>
-                        <ImageLoader
-                          width={250}
-                          height={200}
-                          src={category.post.featuredImage?.node?.sourceUrl}
-                          alt={category.post.featuredImage?.node?.altText}
-                          className="aspect-[4/2.4] rounded-md z-1"
-                        />
-
-                        <h3 className="text-primary font-bold text-md cursor-pointer line-clamp-2 hover:underline">
-                          {category.post.title}
-                        </h3>
-                      </Link>
-                      <div
-                        className="text-sm text-fg-subtle line-clamp-4"
-                        dangerouslySetInnerHTML={{
-                          __html: category.post.excerpt,
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-              ) : null}
-            </div>
-          </div>
-        ))}
+        {categories?.map((category: any) => {
+          const isActive = activeSlug === category.slug;
+          return (
+            <Link
+              key={category.slug}
+              href={`/blog/category/${category.slug}`}
+              className={clsx(
+                "relative shrink-0 px-3 h-[48px] flex items-center",
+                "font-mono text-[11px] tracking-[0.08em] uppercase transition-colors duration-150 whitespace-nowrap",
+                "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:rounded-t-full",
+                isActive
+                  ? "text-fg-default after:bg-gradient-to-r after:from-[#00c6ff] after:to-[#0072ff]"
+                  : "text-fg-muted hover:text-fg-default after:bg-transparent",
+              )}
+            >
+              {category.name}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

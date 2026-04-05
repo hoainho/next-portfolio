@@ -75,8 +75,8 @@ const Navbar = () => {
     <header
       className={clsx(
         isLightTheme || isDarkPage ? "header-primary" : "header-secondary",
-        isDetailPost ? "!relative bg-bg-default" : "",
-        isCentrePost ? "!relative bg-dark" : "",
+        isDetailPost ? "!sticky !top-0 !z-[49] bg-bg-default" : "",
+        isCentrePost ? "!sticky !top-0 !z-[49] bg-dark" : "",
         isDarkPage
           ? clsx(
               "border-b transition-all duration-300",

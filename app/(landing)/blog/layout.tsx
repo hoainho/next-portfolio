@@ -1,42 +1,35 @@
-import { PostCategory, PostItem } from "@/app/types";
+import { PostCategory } from "@/app/types";
 import BlogCategorySticky from "@/components/blog/BlogCategorySticky";
-import {
-  GET_CATEGORIES_QUERY,
-  GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-} from "@/graphql/queries/post.query";
+import { GET_EN_POSTS_WITH_CATEGORIES_QUERY } from "@/graphql/queries/post.query";
 import client from "@/lib/apolloClient";
 
-// Force dynamic rendering to avoid Cloudflare 403 errors during build
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export default async function BlogLayout({ children }: Props) {
-  const categoriesResponse = await client.query({
-    query: GET_CATEGORIES_QUERY,
+  const postsResponse = await client.query({
+    query: GET_EN_POSTS_WITH_CATEGORIES_QUERY,
+    variables: { author: 3, first: 100 },
   });
 
-  const categoriesFilter: PostCategory[] =
-    categoriesResponse?.data?.categories?.nodes;
+  const posts: { categories: { nodes: PostCategory[] } }[] =
+    postsResponse?.data?.posts?.nodes ?? [];
 
-  const categoriesReq = categoriesFilter
-    ?.filter((category) => !category.parent)
-    ?.map(async (category) => {
-      if (category.children.nodes.length) {
-        const fetchPost = await client.query({
-          query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-          variables: { category: category.slug, author: 3, first: 1 },
-        });
+  const seenSlugs = new Set<string>();
+  const categories: PostCategory[] = [];
 
-        const post: PostItem = fetchPost?.data?.posts?.nodes?.[0];
-        return { ...category, post };
+  for (const post of posts) {
+    for (const cat of post.categories.nodes) {
+      if (!seenSlugs.has(cat.slug) && !cat.parent) {
+        seenSlugs.add(cat.slug);
+        categories.push(cat);
       }
-      return category;
-    });
+    }
+  }
 
-  const categories = await Promise.all(categoriesReq);
   return (
     <div className="relative">
       <BlogCategorySticky categories={categories} />

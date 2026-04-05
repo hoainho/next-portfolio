@@ -1,8 +1,17 @@
 import { gql } from "@apollo/client";
 
 export const POSTS_QUERY = gql`
-  query GetPosts($author: Int!, $first: Int!, $after: String) {
-    posts(where: { author: $author }, first: $first, after: $after) {
+  query GetPosts(
+    $author: Int!
+    $first: Int!
+    $after: String
+    $languageCode: String
+  ) {
+    posts(
+      where: { author: $author, languageCode: $languageCode }
+      first: $first
+      after: $after
+    ) {
       nodes {
         author {
           node {
@@ -49,6 +58,10 @@ export const POSTS_QUERY = gql`
         }
         title
         uri
+        language {
+          code
+          name
+        }
       }
       pageInfo {
         hasNextPage
@@ -174,7 +187,7 @@ export const POST_DETAIL_SEO_QUERY = gql`
 
 export const GET_CATEGORIES_QUERY = gql`
   query GetCategories {
-    categories(where: { hideEmpty: true }, first: 15) {
+    categories(where: { hideEmpty: true }, first: 100) {
       nodes {
         children {
           nodes {
@@ -196,14 +209,53 @@ export const GET_CATEGORIES_QUERY = gql`
   }
 `;
 
+export const GET_EN_POSTS_WITH_CATEGORIES_QUERY = gql`
+  query GetEnPostsWithCategories($author: Int!, $first: Int!) {
+    posts(where: { author: $author, languageCode: "EN" }, first: $first) {
+      nodes {
+        categories {
+          nodes {
+            id
+            name
+            slug
+            description
+            databaseId
+            children {
+              nodes {
+                name
+                description
+                slug
+              }
+            }
+            parent {
+              node {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY = gql`
   query GetPostsByCategoryAndAuthor(
-    $category: String!
+    $categoryId: Int!
     $author: Int!
     $first: Int!
     $after: String
+    $languageCode: String
   ) {
-    posts(where: { categoryName: $category, author: $author }, first: $first, after: $after) {
+    posts(
+      where: {
+        categoryId: $categoryId
+        author: $author
+        languageCode: $languageCode
+      }
+      first: $first
+      after: $after
+    ) {
       nodes {
         author {
           node {
@@ -248,8 +300,12 @@ export const GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY = gql`
         title
         uri
         modified
+        language {
+          code
+          name
+        }
       }
-        pageInfo {
+      pageInfo {
         hasNextPage
         endCursor
       }
@@ -257,9 +313,19 @@ export const GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY = gql`
   }
 `;
 
-export const GET_POSTS_BY_TAG_QUERY  = gql`
-  query GetPostsByTags($tag: String!, $first: Int!, $author: Int!, $after: String) {
-    posts(where: { author: $author, tag: $tag }, first: $first, after: $after) {
+export const GET_POSTS_BY_TAG_QUERY = gql`
+  query GetPostsByTags(
+    $tag: String!
+    $first: Int!
+    $author: Int!
+    $after: String
+    $languageCode: String
+  ) {
+    posts(
+      where: { author: $author, tag: $tag, languageCode: $languageCode }
+      first: $first
+      after: $after
+    ) {
       nodes {
         author {
           node {
@@ -304,6 +370,10 @@ export const GET_POSTS_BY_TAG_QUERY  = gql`
         title
         uri
         modified
+        language {
+          code
+          name
+        }
       }
       pageInfo {
         hasNextPage
@@ -387,7 +457,7 @@ export const GET_POSTS_BY_AUTHOR_QUERY = gql`
 export const FETCH_POSTS_BY_QUERY = gql`
   query SearchPosts($search: String!, $first: Int!, $after: String) {
     posts(where: { search: $search }, first: $first, after: $after) {
-     nodes {
+      nodes {
         author {
           node {
             avatar {
@@ -433,7 +503,6 @@ export const FETCH_POSTS_BY_QUERY = gql`
         }
         title
         uri
-        
       }
       pageInfo {
         hasNextPage
@@ -441,4 +510,4 @@ export const FETCH_POSTS_BY_QUERY = gql`
       }
     }
   }
-` 
+`;

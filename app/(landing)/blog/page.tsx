@@ -56,6 +56,7 @@ export default async function BlogPage({
         variables: {
           author: 3,
           first: 4,
+          languageCode: "EN",
         },
         context: {
           fetchOptions: {
@@ -69,14 +70,15 @@ export default async function BlogPage({
       ssrClient.query({
         query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
         variables: {
-          category: "javascript-typescript",
+          categoryId: 926,
           author: 3,
           first: 5,
+          languageCode: "EN",
         },
         context: {
           fetchOptions: {
             next: {
-              tags: ["posts", "category-javascript-typescript"],
+              tags: ["posts", "category-ai-machine-learning-en"],
               revalidate: +(process.env.NEXT_PUBLIC_REVALIDATE_POSTS || 3600),
             },
           },
@@ -132,8 +134,8 @@ export default async function BlogPage({
             {postsByCategory.length > 0 && (
               <BlogByCategory
                 posts={postsByCategory}
-                category="Javascript"
-                categorySlug="javascript-typescript"
+                category="AI & Machine Learning"
+                categorySlug="ai-machine-learning-en"
               />
             )}
             <BlogPlatform />
