@@ -40,10 +40,19 @@ const defaultOptions: DefaultOptions = {
   },
 };
 
+const WORDPRESS_API_URL =
+  process.env.NEXT_PUBLIC_WORDPRESS_API_URL ||
+  "https://blog.thnkandgrow.com/graphql";
+
+const WORDPRESS_AUTH_TOKEN =
+  process.env.NEXT_PUBLIC_WORDPRESS_AUTH_REFRESH_TOKEN || "";
+
 const httpLinkConfig = {
-  uri: process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
+  uri: WORDPRESS_API_URL,
   headers: {
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_WORDPRESS_AUTH_REFRESH_TOKEN}`,
+    ...(WORDPRESS_AUTH_TOKEN
+      ? { Authorization: `Bearer ${WORDPRESS_AUTH_TOKEN}` }
+      : {}),
     Origin: "https://dev01.thnkandgrow.com",
     Referer: "https://dev01.thnkandgrow.com",
     "Content-Type": "application/json",
