@@ -158,7 +158,7 @@ const BlogDetail = async ({ params }: BlogDetailProps) => {
   const getPostsByCategory = post.categories.nodes?.map((p: PostCategory) => {
     const postsByCategoryID = client.query({
       query: GET_POSTS_BY_CATEGORY_AND_AUTHOR_QUERY,
-      variables: { category: p.slug, author: 3, first: 3 },
+      variables: { categoryId: p.databaseId, author: 3, first: 3 },
     });
     return postsByCategoryID;
   });

@@ -413,6 +413,7 @@ interface Categories {
 
 export interface PostCategory {
   id: string;
+  databaseId: number;
   name: string;
   slug: string;
   uri: string;

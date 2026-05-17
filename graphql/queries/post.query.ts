@@ -93,6 +93,7 @@ export const POST_DETAIL_QUERY = gql`
       categories {
         nodes {
           id
+          databaseId
           name
           slug
           uri
