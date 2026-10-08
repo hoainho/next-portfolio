@@ -61,7 +61,7 @@ const Timeline = () => {
                   }}
                 >
                   <div className="absolute left-[10px] top-[17px] hidden md:block z-10">
-                    {idx === 0 ? (
+                    {exp.is_current ? (
                       <span className="relative flex h-6 w-6">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-25" />
                         <span
@@ -131,7 +131,7 @@ const Timeline = () => {
                           >
                             {exp.date}
                           </span>
-                          {idx === 0 && (
+                          {exp.is_current && (
                             <span
                               className="font-mono text-[10px] text-emerald-400 px-2.5 py-0.5 rounded-full tracking-wider uppercase"
                               style={{

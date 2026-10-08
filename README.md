@@ -6,22 +6,24 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.1-38B2AC)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-A modern, responsive portfolio website built with Next.js 14, React 18, TypeScript, and Tailwind CSS. Features a sleek design, blog functionality, 3D elements with Three.js, and smooth animations.
+A modern, responsive portfolio website built with Next.js 14, React 18, TypeScript, and Tailwind CSS. Features a sleek design, project showcase, 3D elements with Three.js, and smooth animations.
 
 ## 🌟 Features
 
 - **Modern Design**: Clean and responsive UI with dark/light mode
 - **3D Elements**: Interactive 3D components using Three.js
-- **Blog Platform**: Integrated blog functionality
+- **Blog Platform**: Temporarily hidden while under maintenance.
 - **Performance Optimized**: Built with Next.js 14 for optimal performance
 - **Analytics Ready**: Google Analytics 4 integration
 - **Email Integration**: Contact form with EmailJS
 - **Timeline View**: Interactive vertical timeline component
+- **About profile**: CV-backed career history, PixiJS (2+ years), AI workflow skills, X and YouTube social links, education, and learning records.
+- **Project showcase**: Includes img2threejs, an open-source AI image-to-3D workflow with deterministic quality gates and a separate optional plugin harness.
 - **Code Highlighting**: Syntax highlighting for code blocks
 
 ## 🚀 Demo
 
-[Live Demo](https://hoainho.info/blog) - Replace with your deployed site URL
+[Live Demo](https://hoainho.info)
 
 ![Portfolio Preview](https://hn-portfolio.s3.ap-southeast-1.amazonaws.com/blog-cover-image.webp)
 

@@ -17,6 +17,21 @@ const TABS = [
   { key: SKILL_TYPE.VERSION_CONTROL, label: "Git" },
 ];
 
+const AI_WORKFLOW_SKILLS = [
+  "Agentic Workflows",
+  "Multi-model Orchestration",
+  "MCP Tool Integration",
+  "Context Engineering",
+  "Multimodal Analysis",
+  "Structured Outputs",
+  "Model Routing & Fallback Strategies",
+  "Deterministic Validation & Quality Gates",
+  "LLM Evaluation",
+  "Human-in-the-Loop Delivery",
+  "Token & Cost Optimization",
+];
+
+
 const MASTERY = [
   {
     min: 4,
@@ -114,6 +129,12 @@ const SkillTabs = () => {
             {filtered.map((skill, i) => {
               const mastery = getMastery(skill.yoe);
               const pct = Math.min((skill.yoe / 5) * 100, 100);
+              const experienceLabel =
+                "yoeLabel" in skill ? `${skill.yoeLabel}y` : `${skill.yoe}y`;
+              const experienceTitle =
+                "yoeLabel" in skill
+                  ? `${skill.yoeLabel} years of experience`
+                  : `${skill.yoe} years of experience`;
               return (
                 <motion.div
                   key={skill.name}
@@ -191,10 +212,11 @@ const SkillTabs = () => {
                       />
                     </div>
                     <span
-                      className="font-mono text-[10px] w-5 text-right flex-shrink-0 tabular-nums"
+                      className="font-mono text-[10px] min-w-5 text-right flex-shrink-0 tabular-nums"
+                      title={experienceTitle}
                       style={{ color: mastery.color, opacity: 0.7 }}
                     >
-                      {skill.yoe}y
+                      {experienceLabel}
                     </span>
                   </div>
                 </motion.div>
@@ -202,6 +224,28 @@ const SkillTabs = () => {
             })}
           </motion.div>
         </AnimatePresence>
+        <div className="mt-12 border-t border-slate-800/70 pt-8">
+          <div className="flex flex-wrap items-baseline justify-between gap-3 mb-4">
+            <h4 className="text-xl md:text-2xl font-bold text-white">
+              AI Workflow Engineering
+            </h4>
+            <span className="font-mono text-xs text-violet-300">2+ years</span>
+          </div>
+          <p className="max-w-3xl text-sm leading-relaxed text-slate-400 mb-6">
+            Production workflows spanning coding agents, multimodal models, MCP
+            tools, validation, evaluation, and human review.
+          </p>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3">
+            {AI_WORKFLOW_SKILLS.map((skill) => (
+              <li
+                key={skill}
+                className="border-b border-slate-800/70 pb-2 text-xs leading-relaxed text-slate-300"
+              >
+                {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </AnimatedSection>
   );

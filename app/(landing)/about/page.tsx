@@ -1,3 +1,4 @@
+import Education from "@/components/about/Education";
 import HeroSection from "@/components/about/HeroSection";
 import SkillTabs from "@/components/about/SkillTabs";
 import Timeline from "@/components/about/Timeline";
@@ -7,12 +8,15 @@ import Products from "@/components/about/Products";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About | Hoai Nho",
-  description: `Senior Software Engineer & Frontend Tech Lead from Vietnam.`,
-  keywords: `Earthbrain - Smart Construction, Hoai Nho - About, Eyewa, Ringo App, Maqro, ThirdRockPix`,
+  title: "About | Hoai-Nho Nguyen",
+  description:
+    "Software Engineering Lead and AI Product Engineer with 7+ years in software engineering and 2+ years in AI workflow engineering; Frontend Technical Lead at Gear Games and Founder & Lead Maintainer of img2threejs.",
+  keywords:
+    "Hoai-Nho Nguyen, Software Engineering Lead, AI Product Engineer, AI workflow engineering, img2threejs, portfolio",
   openGraph: {
-    title: "About | Hoai-Nho | Portfolio",
-    description: `Senior Software Engineer & Frontend Tech Lead from Vietnam.`,
+    title: "About | Hoai-Nho Nguyen",
+    description:
+      "Software Engineering Lead and AI Product Engineer with 7+ years in software engineering and 2+ years in AI workflow engineering.",
     url: `https://hoainho.info`,
     siteName: "About | Hoai-Nho | Portfolio",
     images: [
@@ -39,6 +43,7 @@ const AboutPage = () => (
       <SkillTabs />
       <div className="ds-section-divider" />
       <Timeline />
+      <Education />
       <div className="ds-section-divider" />
       <Certifications />
       <div className="ds-section-divider" />

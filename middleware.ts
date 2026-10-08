@@ -219,6 +219,12 @@ function isEmptyOrSuspiciousUserAgent(userAgent: string | null): boolean {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Temporarily disable public blog routes while the blog is under maintenance.
+  if (pathname === "/blog" || pathname.startsWith("/blog/")) {
+    return new NextResponse("Not Found", { status: 404 });
+  }
+
   const userAgent = request.headers.get("user-agent");
   const clientIP = getClientIP(request);
 

@@ -8,7 +8,6 @@ import clsx from "clsx";
 import { pageview } from "@/lib/gtag";
 import ImageLoader from "@/components/loader/ImageLoader";
 import { useGlobalContext } from "@/context/GlobalContext";
-import { SearchBar } from "./SearchBar";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -48,7 +47,6 @@ const Navbar = () => {
   const navbar = [
     { name: "About", link: "/about" },
     { name: "Projects", link: "/projects" },
-    { name: "Blog", link: "/blog" },
     { name: "Contact", link: "/contact" },
   ];
 
@@ -139,9 +137,6 @@ const Navbar = () => {
         )}
 
         <nav className="flex-1 justify-end hidden md:flex items-center relative gap-1">
-          {(pathname.includes("/blog/") || pathname === "/blog") && (
-            <SearchBar />
-          )}
           {navbar?.map((nav) => {
             const isActive = pathname === nav.link;
             return (

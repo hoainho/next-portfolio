@@ -8,7 +8,11 @@ const cloudfrontLoader = ({
   const isDev = process.env.NODE_ENV !== "production";
   const baseUrl = isDev ? "" : process.env.NEXT_PUBLIC_CLOUDFRONT_URL;
 
-  // If baseUrl is empty (local development), prepend it with a leading slash
+  // Keep root-relative public assets on the app origin when CloudFront is not configured.
+  if (!isDev && !baseUrl && src.startsWith("/") && !src.startsWith("//")) {
+    return src;
+  }
+
   const url = isDev ? `${baseUrl}${src}` : new URL(src, baseUrl).href;
 
   // Construct the URL with width and quality parameters if not in development
