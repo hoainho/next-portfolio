@@ -17,6 +17,8 @@ A modern, responsive portfolio website built with Next.js 14, React 18, TypeScri
 - **Analytics Ready**: Google Analytics 4 integration
 - **Email Integration**: Contact form with EmailJS
 - **Timeline View**: Interactive vertical timeline component
+- **About profile**: CV-backed career history, PixiJS (2+ years), AI workflow skills, X and YouTube social links, education, and learning records.
+- **Project showcase**: Includes img2threejs, an open-source AI image-to-3D workflow with deterministic quality gates and a separate optional plugin harness.
 - **Code Highlighting**: Syntax highlighting for code blocks
 
 ## 🚀 Demo

@@ -38,6 +38,7 @@ const TECH_PATTERNS = [
   "GraphQL",
   "TailwindCSS",
   "Python",
+  "Three.js",
   "Django",
   "Jest",
   "MySQL",

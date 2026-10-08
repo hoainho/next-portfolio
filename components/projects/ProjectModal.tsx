@@ -23,7 +23,7 @@ const extractTechStack = (html: string): string[] => {
   const techPatterns = [
     "React", "Next.js", "Vue", "Node.js", "NestJS", "Golang", "TypeScript",
     "PostgreSQL", "Redis", "Docker", "AWS", "GCP", "Firebase", "Socket.io",
-    "Kafka", "GraphQL", "TailwindCSS", "Python", "Django", "Jest", "MySQL",
+    "Kafka", "GraphQL", "TailwindCSS", "Python", "Three.js", "Django", "Jest", "MySQL",
     "DynamoDB", "ElasticSearch", "Lambda", "EC2", "CloudFront"
   ];
   

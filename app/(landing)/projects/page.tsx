@@ -6,13 +6,13 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Projects | Hoai Nho",
   description:
-    "Portfolio of selected work spanning gaming, fintech, e-commerce, construction, and travel.",
+    "Selected work across software products, including img2threejs, an open-source AI image-to-3D workflow built with deterministic quality harnesses.",
   keywords:
-    "Earthbrain, Eyewa, Ringo App, Maqro, ThirdRockPix, portfolio, projects",
+    "img2threejs, AI image-to-3D, Three.js, deterministic harnesses, portfolio, projects",
   openGraph: {
     title: "Projects | Hoai-Nho | Portfolio",
     description:
-      "Senior Software Engineer | Frontend Tech Lead | Open Source Contributor",
+      "Selected work includes img2threejs, an open-source AI image-to-3D workflow with deterministic quality harnesses.",
     url: "https://hoainho.info/projects",
     siteName: "Projects | Hoai-Nho | Portfolio",
     images: [

@@ -5,15 +5,6 @@ import Link from "next/link";
 import { socialLinks } from "@/lib/constants";
 import ImageLoader from "@/components/loader/ImageLoader";
 
-const calcYoe = () => {
-  const now = new Date();
-  return (
-    Math.floor(
-      (((now.getFullYear() - 2019) * 12 + now.getMonth() + 1 - 6) / 12) * 10,
-    ) / 10
-  );
-};
-
 const container: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -32,32 +23,32 @@ const item: Variants = {
 
 const stats = [
   {
-    value: (yoe: number) => `${yoe}+`,
-    label: "Yrs Exp",
+    value: "7+",
+    label: "Yrs Eng.",
     accent: "text-violet-300",
     border: "border-violet-500/25",
     bg: "bg-violet-500/[0.06]",
     glow: "rgba(139,92,246,0.18)",
   },
   {
-    value: () => "🇻🇳",
-    label: "Vietnam",
+    value: "2+",
+    label: "Yrs AI",
     accent: "text-slate-300",
     border: "border-slate-700/40",
     bg: "bg-slate-800/20",
     glow: "transparent",
   },
   {
-    value: () => "6+",
-    label: "Industries",
+    value: "17K+",
+    label: "GitHub Stars",
     accent: "text-cyan-300",
     border: "border-cyan-500/25",
     bg: "bg-cyan-500/[0.06]",
     glow: "rgba(56,189,248,0.18)",
   },
   {
-    value: () => "50+",
-    label: "Projects",
+    value: "1.4K+",
+    label: "Forks",
     accent: "text-emerald-300",
     border: "border-emerald-500/25",
     bg: "bg-emerald-500/[0.06]",
@@ -66,7 +57,6 @@ const stats = [
 ];
 
 const HeroSection = () => {
-  const yoe = calcYoe();
 
   return (
     <motion.section
@@ -103,7 +93,7 @@ const HeroSection = () => {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
               </span>
               <span className="font-mono text-[11px] text-emerald-400 tracking-[0.22em] uppercase font-medium">
-                Available for opportunities
+                Founder & Lead Maintainer · img2threejs
               </span>
             </motion.div>
 
@@ -122,7 +112,7 @@ const HeroSection = () => {
                 </span>
               </h1>
               <h2 className="text-[clamp(15px,2.5vw,22px)] font-medium text-slate-500 tracking-tight">
-                Senior Software Engineer · Frontend Tech Lead
+                Software Engineering Lead · AI Product Engineer
               </h2>
             </motion.div>
 
@@ -138,7 +128,7 @@ const HeroSection = () => {
                   <span
                     className={`text-xl font-black ${s.accent} leading-none tabular-nums`}
                   >
-                    {s.value(yoe)}
+                    {s.value}
                   </span>
                   <span className="font-mono text-[10px] text-slate-600 uppercase tracking-[0.14em]">
                     {s.label}
@@ -151,23 +141,14 @@ const HeroSection = () => {
               variants={item}
               className="text-[#8892a4] text-[clamp(15px,1.8vw,17px)] leading-relaxed max-w-[540px] mb-9"
             >
-              Software engineer from Vietnam with{" "}
-              <span className="text-violet-300 font-semibold">{yoe} years</span>{" "}
-              building scalable products across fintech, gaming, construction,
-              and logistics. Deep JavaScript roots, full-stack reach, and a
-              passion for{" "}
-              <span
-                className="font-semibold"
-                style={{
-                  background: "linear-gradient(90deg, #38bdf8, #34d399)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                open-source contribution
-              </span>
-              .
+              Software engineering lead and AI product engineer in Ho Chi Minh
+              City, Vietnam, with{" "}
+              <span className="text-violet-300 font-semibold">
+                7+ years in software engineering
+              </span>{" "}
+              and 2+ years designing production AI-assisted workflows that
+              combine multimodal reasoning, coding agents, deterministic
+              validation, and human review.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap gap-2">
@@ -236,14 +217,16 @@ const HeroSection = () => {
                     <span className="text-slate-400">role</span>
                     <span className="text-[#3d4a5c]">:</span>{" "}
                     <span style={{ color: "#34d399" }}>
-                      &quot;Senior SWE&quot;
+                      &quot;Engineering Lead + AI Product Engineer&quot;
                     </span>
                     <span className="text-[#3d4a5c]">,</span>
                   </p>
                   <p className="pl-5">
-                    <span className="text-slate-400">yoe</span>
+                    <span className="text-slate-400">experience</span>
                     <span className="text-[#3d4a5c]">:</span>{" "}
-                    <span style={{ color: "#f7cc51" }}>{yoe}</span>
+                    <span style={{ color: "#f7cc51" }}>
+                      &quot;7+ years · 2+ AI workflows&quot;
+                    </span>
                     <span className="text-[#3d4a5c]">,</span>
                   </p>
                   <p className="pl-5">
@@ -251,7 +234,7 @@ const HeroSection = () => {
                     <span className="text-[#3d4a5c]">:</span>{" "}
                     <span className="text-[#3d4a5c]">[</span>
                   </p>
-                  {["React", "Next.js", "TypeScript", "Node.js"].map((t) => (
+                  {["TypeScript", "MCP", "Three.js"].map((t) => (
                     <p key={t} className="pl-10">
                       <span style={{ color: "#34d399" }}>&quot;{t}&quot;</span>
                       <span className="text-[#3d4a5c]">,</span>
@@ -270,10 +253,10 @@ const HeroSection = () => {
                     <span className="text-[#3d4a5c]">,</span>
                   </p>
                   <p className="pl-5">
-                    <span className="text-slate-400">status</span>
+                    <span className="text-slate-400">focus</span>
                     <span className="text-[#3d4a5c]">:</span>{" "}
                     <span style={{ color: "#34d399" }}>
-                      &quot;open_to_work&quot;
+                      &quot;production AI workflows&quot;
                     </span>
                   </p>
                   <p>

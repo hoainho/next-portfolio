@@ -30,6 +30,7 @@ export type ExperienceType = {
   icon: string;
   icon_bg: string;
   date: string;
+  is_current: boolean;
   points: string[];
 };
 
