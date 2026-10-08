@@ -19,6 +19,7 @@ export const products = [
     badge: "/products/img2threejs.svg",
     link: "https://img2threejs.io/",
     description: "Open-source image-to-3D system for rebuilding reference images as structured, editable, animation-ready Three.js models",
+    isNew: true,
     tag: "Special"
   },
 
@@ -27,49 +28,49 @@ export const products = [
     badge: "/products/rive-playground.png",
     link: "https://hoainho.github.io/rive-playground/",
     description: "Inspect, control & ship Rive .riv animations — CLI, MCP server & visual playground for teams building with Rive at scale",
-    tag: "New"
+    tag: "Feature"
   },
   {
     name: "MCP Console Hub",
     badge: "/products/mcp-console-hub.png",
     link: "https://nano-step.github.io/mcp-console-hub",
     description: "MCP server that streams browser DevTools — console, network, storage & performance — live to your IDE's AI agent",
-    tag: "New"
+    tag: "Utility"
   },
   {
     name: "Browser Lens MCP",
     badge: "/products/browser-lens.png",
     link: "https://nano-step.github.io/mcp-browser-lens",
     description: "MCP server giving your IDE's AI agent real-time DOM inspection, CSS analysis, screenshots & Figma comparison",
-    tag: "New"
+    tag: "Utility"
   },
   {
     name: "Cortex",
     badge: "/products/cortex.png",
     link: "https://hoainho.github.io/cortex-landing",
     description: "Desktop AI assistant with persistent memory, multi-agent orchestration & full codebase indexing — not a ChatGPT wrapper",
-    tag: "Special"
+    tag: "Utility"
   },
   {
     name: "CrashSense",
     badge: "/products/crashsense.png",
     link: "https://www.npmjs.com/package/@crashsense/core",
     description: "Intelligent crash diagnosis SDK for React & Vue — root cause classification with AI-powered fix suggestions",
-    tag: "Feature"
+    tag: "Utility"
   },
   {
     name: "DevLens",
     badge: "/products/devlens.png",
     link: "https://www.npmjs.com/package/@devlens/core",
     description: "Zero-config runtime error detection for JS/TS — catches null access, API failures & hung promises with X-Ray Mode",
-    tag: "Feature"
+    tag: "Utility"
   },
   {
     name: "Gear PR Review",
     badge: "https://raw.githubusercontent.com/hoainho/pr-review-bot/main/public/icon.svg",
     link: "https://pr-reviewer.hoainho.info",
     description: "AI-powered code review tool with deep context analysis, Jira/Linear integration & progressive learning",
-    tag: "New"
+    tag: "Utility"
   },
   {
     name: "React Debugger",
@@ -90,21 +91,21 @@ export const products = [
     badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750572858/artgen_ll8cg8.png`,
     link: "https://artgen.hoainho.info",
     description: "AI-powered art generation platform with advanced style transfer capabilities",
-    tag: "Special"
+    tag: "Utility"
   },
   {
     name: "Prompt-Generator",
     badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750572858/prompt-generator_pu2u4w.png`,
     link: "https://prompt-generator.hoainho.info",
     description: "Smart prompt engineering tool for optimizing AI interactions",
-    tag: "New"
+    tag: "Utility"
   },
   {
     name: "Morph",
     badge: `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_URL}/v1750572858/morph_hbireh.png`,
     link: "https://morph.hoainho.info",
     description: "Advanced image morphing technology with real-time editing capabilities",
-    tag: "Feature"
+    tag: "Utility"
   }
 ]
 
