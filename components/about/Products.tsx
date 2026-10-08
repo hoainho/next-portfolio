@@ -8,7 +8,7 @@ import BallCanvas from "@/components/models/Ball";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 
 type ProductItem = (typeof products)[number];
-type TagKey = "Special" | "New" | "Feature";
+type TagKey = "Special" | "Feature" | "Utility";
 
 interface TagConfig {
   hoverColor: string;
@@ -24,11 +24,11 @@ const TAG_CONFIG: Record<TagKey, TagConfig> = {
     glowColor: "rgba(168,85,247,0.15)",
     indexGlow: "rgba(168,85,247,0.12)",
   },
-  New: {
-    hoverColor: "#6ee7b7",
-    dotColor: "#34d399",
-    glowColor: "rgba(52,211,153,0.12)",
-    indexGlow: "rgba(52,211,153,0.08)",
+  Utility: {
+    hoverColor: "#94a3b8",
+    dotColor: "#64748b",
+    glowColor: "rgba(100,116,139,0.10)",
+    indexGlow: "rgba(100,116,139,0.06)",
   },
   Feature: {
     hoverColor: "#fdba74",
@@ -38,19 +38,20 @@ const TAG_CONFIG: Record<TagKey, TagConfig> = {
   },
 };
 
-const TAG_ORDER: TagKey[] = ["Special", "New", "Feature"];
+const TAG_ORDER: TagKey[] = ["Special", "Feature", "Utility"];
+const NEW_TAG_COLOR = "#34d399";
 
 const NAME_STYLES: Record<TagKey, string> = {
   Special: "text-xl font-black tracking-[-0.01em]",
-  New: "text-[17px] font-bold tracking-[-0.005em]",
   Feature: "text-[15px] font-semibold",
+  Utility: "text-[14px] font-medium",
 };
 
 function getSortedProducts(): ProductItem[] {
   const grouped: Record<TagKey, ProductItem[]> = {
     Special: [],
-    New: [],
     Feature: [],
+    Utility: [],
   };
   for (const p of products) {
     const tag = p.tag as TagKey;
@@ -174,7 +175,19 @@ const ProductRow = memo(
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-4 flex-shrink-0">
+                  <div className="flex items-center gap-3 flex-shrink-0">
+                    {product.isNew && (
+                      <span
+                        className="font-mono text-[10px] tracking-[0.08em] uppercase flex items-center gap-1.5"
+                        style={{ color: NEW_TAG_COLOR }}
+                      >
+                        <span
+                          className="w-1 h-1 rounded-full inline-block"
+                          style={{ backgroundColor: NEW_TAG_COLOR }}
+                        />
+                        New
+                      </span>
+                    )}
                     <span
                       className="font-mono text-[10px] tracking-[0.08em] uppercase flex items-center gap-1.5"
                       style={{ color: cfg.dotColor }}
